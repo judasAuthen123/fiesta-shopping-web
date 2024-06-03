@@ -1,0 +1,97 @@
+.container {
+    height: auto;
+    display: block;
+    justify-content: center;
+    height: 320px;
+    background: #f5f5f5;
+    align-items: center;
+    position: relative;
+}
+
+.productImg:hover {
+    background-color: rgb(227, 227, 227);
+}
+
+.accessOptions {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: block;
+}
+
+.productImg {
+    height: 75%;
+    width: 100%;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: url('../../../assets/images/th.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.productImg:hover .accessOptions>button {
+    bottom: 10px;
+}
+.productImg:hover .accessOptions .iconView {
+    right: 10%;
+}
+.productImg:hover .accessOptions {
+    transform: translateX(0); /* Di chuyển vào vị trí gốc khi hover */
+  }
+.accessOptions>button {
+    position: absolute;
+    bottom: -100%;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 16px;
+    padding: 8px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: white;
+    transition: bottom 0.1s ease-in-out;
+}
+
+.iconView {
+    display: block;
+    align-items: center;
+    position: absolute;
+    right: -100%;
+    transition: right 0.3s ease-in-out;
+    top: 10%;
+}
+
+.itemIconView {
+    background-color: white;
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.icon {
+    font-size: 16px;
+}
+
+.infoProduct {
+    background: white;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.infoProduct>p {
+    padding-bottom: 5px;
+    font-size: 14px;
+}
+
+.infoProduct .brand {
+    font-weight: bold;
+}

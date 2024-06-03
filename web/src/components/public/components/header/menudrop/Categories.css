@@ -1,0 +1,16 @@
+ul li {
+    list-style-type: none;
+    margin-right: 25px;
+}
+ul {
+    margin-top: 10px;
+}
+li>a {
+    font-size: 12px; 
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+}
+li>a:hover {
+    color: rgb(163, 161, 161);
+}

@@ -1,0 +1,84 @@
+.container {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+.box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 70px;
+    margin-top: 70px;
+}
+.box .title {
+    width: 75%;
+    display: flex;
+    align-items: center;
+}
+.box .title .icon {
+    font-size: 15px;
+}
+.box .layoutContent {
+    width: 75%;
+    display: grid;
+    grid-template-columns: 20% 75%;
+    column-gap: 5%;
+}
+.line {
+    width: 100%;
+    border-top: 0.002px solid grey;
+    opacity: 0.1;
+    margin-top: 15px;
+    margin-bottom: 17px;
+}
+.box .layoutContent .boxProducts {
+    display: block;
+}
+.box .layoutContent .boxProducts .viewProducts {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
+    column-gap: 3.5%;
+    row-gap: 3.5%;
+}
+.layoutContent .layoutShowing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 23px;
+}
+.layoutContent .layoutShowing>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+.layoutContent .layoutShowing .layoutShowing1 .iconView {
+    width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+.layoutContent .layoutShowing .layoutShowing1 .iconView .icon{
+    font-size: 25px;
+}
+.layoutContent .layoutShowing .layoutShowing2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.layoutContent .layoutShowing .layoutShowing2 .icon{
+    margin-left: 10px;
+}
+.boxFilter>button {
+    background: black;
+    color: white;
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+}

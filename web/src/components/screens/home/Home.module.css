@@ -1,0 +1,126 @@
+.container {
+  display: block;
+  width: 100%;
+  height: 100vh;
+}
+
+.box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+
+.headBanner {
+  display: flex;
+  width: 89%;
+  height: 600px;
+  background: #F3F3F3;
+  align-items: center;
+}
+
+.boxText {
+  padding: 30px;
+  display: block;
+  width: 100%;
+  padding-left: 150px;
+}
+
+.boxText>p {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.text1 {
+  font-size: 25px;
+}
+
+.text2 {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.text3 {
+  font-size: 25px;
+}
+
+.boxText button {
+  font-weight: 400;
+  width: 120px;
+  height: 40px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 7px;
+  background: black;
+  color: rgb(220, 220, 220);
+  border: none;
+  outline: none;
+  font-size: 14px;
+  /* Fix typo */
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.categories {
+  display: block;
+  width: 75%;
+  margin-bottom: 70px;
+}
+
+.headCategories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+.headCategories .titleHeadCategories {
+  font-size: 25px;
+}
+.headCategories .viewPagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90px;
+}
+.headCategories .viewPagination>button {
+  font-weight: 400;
+  width: 40px;
+  height: 38px;
+  border-radius: 7px;
+  background: black;
+  color: rgb(220, 220, 220);
+  border: none;
+  outline: none;
+  font-size: 14px;
+  /* Fix typo */
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.viewCategories {
+  display: grid;
+  grid-template-columns: 22% 22% 22% 22%;
+  column-gap: 4%;
+  margin-top: 30px;
+}
+.products {
+  width: 75%;
+  margin-bottom: 70px;
+}
+.headProducts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.titleHeadProducts {
+  font-size: 25px;
+}
+.viewProducts {
+  display: grid;
+  grid-template-columns: 22% 22% 22% 22%;
+  column-gap: 4%;
+  row-gap: 30px;
+  margin-top: 30px;
+}

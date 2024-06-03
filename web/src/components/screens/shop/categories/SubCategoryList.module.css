@@ -1,0 +1,39 @@
+.container {
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+.viewSubCategory {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.viewSubCategory>div input {
+    margin-right: 10px;
+}
+.container>div>input[type="checkbox"]:checked {
+    background-color: black;
+}
+.container>div label {
+    font-size: 15px;
+}
+
+.boxLabel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.iconView {
+    display: flex;
+    align-items: center;
+}
+.viewCategory {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.iconView:hover {
+    border-radius: 50%;
+    background: #f0f0f0;
+}

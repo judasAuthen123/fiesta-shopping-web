@@ -1,0 +1,20 @@
+.container {
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.boxFilter {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-out;
+}

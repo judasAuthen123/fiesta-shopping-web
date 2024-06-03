@@ -1,0 +1,92 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    color: white;
+}
+
+.contentLayout {
+    display: block;
+    width: 75%;
+}
+
+.infoAndOptions {
+    display: grid;
+    grid-template-columns: 30% 20% 20% 30%;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.infoAndOptions a {
+    text-decoration: none;
+    color: white;
+    opacity: 0.8;
+}
+.infoAndOptions a:hover {
+    text-decoration: none;
+    color: white;
+    opacity: 0.9;
+}
+
+.infoAndOptions p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.infoAndOptions .viewOwnerInfo .item {
+    font-size: 15px;
+    width: 80%;
+    margin-top: 18px;
+    opacity: 0.8;
+    display: flex;
+    align-items: self-start;
+}
+
+.infoAndOptions .viewOwnerInfo .item .icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.infoAndOptions .viewSubEmail p {
+    opacity: 0.8;
+}
+
+.infoAndOptions .viewSubEmail .emailForm {
+    opacity: 0.8;
+    border: 1px solid white;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    margin-top: 10px;
+}
+.infoAndOptions .viewSubEmail .emailForm .icon {
+    opacity: 1;
+    margin-right: 10px;
+    font-size: 20px;
+}
+.bottomFooter {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top:  1.5px solid rgba(255, 255, 255, 0.2);
+    display: grid;
+    grid-template-columns: 15% 77% 8%;
+}
+.bottomFooter .contact {
+    display: flex;
+    justify-content: space-between;
+}
+.bottomFooter .contact .icon {
+    font-size: 20px;
+}
+.bottomFooter .payment {
+    display: flex;
+    justify-content: space-between;
+}
+.bottomFooter .payment .icon {
+    font-size: 20px;
+}
+.bottomFooter .title {
+    text-align: center;
+}

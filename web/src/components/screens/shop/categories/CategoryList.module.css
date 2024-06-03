@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 30px;
+}
+
+.container>div>input[type="checkbox"]:checked {
+    background-color: black;
+}
+.container>div>input {
+    margin-right: 10px;
+}
+.container>div label {
+    font-size: 15px;
+}
+
+.boxLabel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
