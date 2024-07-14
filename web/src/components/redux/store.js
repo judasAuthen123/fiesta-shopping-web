@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import slideSlice from '../screens/shop/filters/slideSlice'
 import filtersSlice from "../screens/shop/filters/filtersSlice";
+import productsSlice from "../public/components/product/productsSlice";
 const store = configureStore({
     reducer: {
-        slide: slideSlice.reducer,
-        filter: filtersSlice.reducer
+        filter: filtersSlice.reducer,
+        productList: productsSlice.reducer
     }
 })
 export default store;

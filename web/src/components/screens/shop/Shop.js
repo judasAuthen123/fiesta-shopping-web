@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styles from './Shop.module.css'
 import Header from '../../public/components/header/Header'
 import Footer from '../../public/components/footer/Footer'
@@ -6,17 +6,40 @@ import { GrNext } from "react-icons/gr";
 import { CiGrid41 } from "react-icons/ci";
 import { PiChartBarHorizontalThin } from "react-icons/pi";
 import BoxFilter from './filters/BoxFilter';
-import ItemProduct, { products } from '../../public/components/product/ItemProduct';
-import { IoIosArrowDown } from 'react-icons/io';
+import ItemProduct from '../../public/components/product/ItemProduct';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterSelected } from '../../redux/selector';
+import { currentFilterSelected, filterSelected } from '../../redux/selector';
 import filtersSlice from './filters/filtersSlice';
-export default function Shop() {
-    const dispatch = useDispatch();
-    const selector = useSelector(filterSelected);
-    const onChangeName = () => {
-        console.log(selector);
-    }
+import _ from 'lodash';
+import AxiosInstance from './../../../util/AxiosInstance';
+function Shop() {
+    const [documents, setDocuments] = useState(null)
+    const [productList, setProductList] = useState([])
+    const filters = useSelector(filterSelected)
+    const currentFilters = useSelector(currentFilterSelected)
+    // const productList = useSelector(productListSelected)
+    const dispatch = useDispatch()
+    const searchProduct = useCallback(async () => {
+        const response = await AxiosInstance.get(`/productApi/searchProducts`, {
+            params: filters
+        })
+        console.table(response.data);
+        if (response.data) {
+            setProductList(response.data)
+            setDocuments(response.documents)
+        }
+    }, [filters])
+
+    const onChangeFilters = useCallback(async () => {
+        dispatch(filtersSlice.actions.onApplySearchFields())
+    }, [dispatch])
+
+    useEffect(() => {
+        searchProduct();
+    }, [searchProduct, filters]);
+
+    const isFilterChange =  _.isEqual(filters, currentFilters)
+
     return (
         <div className={styles.container}>
             <Header />
@@ -30,37 +53,45 @@ export default function Shop() {
                     <div className={styles.boxFilter}>
                         <BoxFilter label={'Filter by Categories'} filterMethod={'categories'} />
                         <div className={styles.line} />
-                        <BoxFilter label={'Filter by Price'} filterMethod={'price'}/>
+                        <BoxFilter label={'Filter by Price'} filterMethod={'price'} />
                         <div className={styles.line} />
                         <BoxFilter label={'Filter by Color'} />
                         <div className={styles.line} />
                         <BoxFilter label={'Filter by Size'} />
                         <div className={styles.line} />
-                        <button>Apply</button>
+                        <button onClick={onChangeFilters} disabled={isFilterChange}
+                            style={
+                                isFilterChange ?
+                                    { background: 'grey' } :
+                                    { background: 'black' }
+                            }>Apply
+                        </button>
                     </div>
                     <div className={styles.boxProducts}>
                         <div className={styles.headBoxProducts}>
                             <div className={styles.layoutShowing}>
                                 <div className={styles.layoutShowing1}>
                                     <div className={styles.iconView}>
-                                        <CiGrid41 className={styles.icon}/>
-                                        <PiChartBarHorizontalThin className={styles.icon}/>
+                                        <CiGrid41 className={styles.icon} />
+                                        <PiChartBarHorizontalThin className={styles.icon} />
                                     </div>
                                     <div>
-                                        Showing 1-16 of 72 results
+                                        Showing 16 items of {documents} results
                                     </div>
                                 </div>
                                 <div className={styles.layoutShowing2}>
-                                    Sort by latest <IoIosArrowDown className={styles.icon}/>
+
                                 </div>
                             </div>
                             <div className={styles.viewProducts}>
                                 {
-                                    products && products.length > 0 ?
-                                        products.map(item =>
+                                    productList && productList.length > 0 ?
+                                        productList.map(item =>
                                             <ItemProduct
+                                                key={item._id}
+                                                id={item._id}
                                                 name={item.name}
-                                                brand={item.brand}
+                                                brand={item.Description}
                                                 price={item.price}
                                             />
                                         ) : null
@@ -74,3 +105,4 @@ export default function Shop() {
         </div>
     )
 }
+export default React.memo(Shop)

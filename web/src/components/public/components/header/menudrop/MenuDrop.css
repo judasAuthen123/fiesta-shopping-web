@@ -25,4 +25,6 @@
 }
 .dropdown .dropdown-toggle {
     margin-right: 25px;
+    color: black;
+    text-decoration: none;
  }

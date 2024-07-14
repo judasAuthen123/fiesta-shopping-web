@@ -2,7 +2,8 @@ import React from 'react'
 import './MenuDrop.css'
 import { HiOutlineChevronDown } from "react-icons/hi2";
 import CategoryList from './Categories';
-export default function MenuDrop() {
+import { Link } from 'react-router-dom';
+function MenuDrop() {
     const getCategoriesForSubCategory = (subCategoryId) => {
         return category.filter(category => category.idSubCategory.includes(subCategoryId));
     };
@@ -20,15 +21,15 @@ export default function MenuDrop() {
     // }
     return (
         <div className="dropdown">
-            <div className="dropdown-toggle">Shop <HiOutlineChevronDown className='icon' /></div>
+            <Link to='/shop' className="dropdown-toggle">Shop <HiOutlineChevronDown className='icon' /></Link>
             <div className="dropdown-menu">
                 {
                     subCategory && category ?
                         subCategory.map(subCatItem =>
                             <div key={subCatItem.id} style={{ margin: 20, width: 150 }}>
-                                <text style={{ fontWeight: '550', fontSize: 16 }}>
+                                <div style={{ fontWeight: '550', fontSize: 16 }}>
                                     {subCatItem.name}
-                                </text>
+                                </div>
                                 <CategoryList categories={getCategoriesForSubCategory(subCatItem.id)} />
                             </div>
                         ) : <></>
@@ -37,7 +38,7 @@ export default function MenuDrop() {
         </div>
     )
 }
-
+export default React.memo(MenuDrop)
 export const subCategory = [
     {
         id: "abc",

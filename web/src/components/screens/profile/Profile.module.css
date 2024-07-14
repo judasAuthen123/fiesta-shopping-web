@@ -1,0 +1,67 @@
+.container {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+button {
+    cursor: pointer;
+}
+
+.box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.box .title {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 400;
+}
+.boxAccess {
+    width: 75%;
+    display: grid;
+    grid-template-columns: 25% 70%;
+    column-gap: 5%; 
+}
+.boxUser {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(221, 220, 220, 0.5);
+    height: max-content;
+}
+.boxInfUser {
+    display: flex;
+    /* Hai cột với chiều rộng bằng nhau */
+    column-gap: 15px;
+    /* Khoảng cách giữa các phần tử */
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(221, 220, 220, 0.5);
+}
+.viewHello {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    font-size: 13px;
+}
+.boxUser .item3 {
+    font-size: 15px;
+    font-weight: 600;
+}
+.boxUser .item1 {
+    display: flex;
+    align-items: center;
+    
+}
+.boxUser .item1>img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

@@ -1,0 +1,56 @@
+.container {
+    width: 130px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.selection {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    justify-content: space-between;
+    transition: border-radius 0.4s ease-in-out;
+}
+
+.options {
+    position: absolute;
+    width: 100%;
+    max-height: 0;
+    transition: max-height 0.2s ease-in-out;
+    overflow: hidden;
+    border: 1px solid black;
+    font-size: 12px;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: none;
+    background: white;
+    z-index: 1000;
+}
+
+.listOption {
+    display: flex;
+    flex-direction: column;
+    padding-top: 6px;
+}
+.listOption>div:hover {
+    background-color: #f5f5f5;
+}
+.listOption>div {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+.listOption .icon {
+    margin-top: 2px;
+}

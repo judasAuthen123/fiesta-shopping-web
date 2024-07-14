@@ -1,0 +1,151 @@
+.container {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+button {
+    cursor: pointer;
+}
+
+.box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.box .title {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.box .layoutContent {
+    width: 75%;
+    display: grid;
+    grid-template-columns: 62% 30%;
+    column-gap: 8%;
+}
+
+.viewFromCheckout {
+    border: 1px solid rgba(221, 220, 220, 0.5);
+    padding: 13px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    height: max-content;
+}
+
+.viewFromCheckout .viewSubtotal {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(221, 220, 220, 0.5);
+    padding-bottom: 15px;
+    padding-top: 5px;
+    font-size: 13px;
+}
+
+.viewCodeDiscout>label {
+    font-size: 12px;
+}
+
+.enterCodeDiscout {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.enterCodeDiscout>input {
+    border: none;
+    outline: none;
+    font-size: 17px;
+    padding: 10px;
+}
+
+.enterCodeDiscout>button {
+    border: none;
+    outline: none;
+    background-color: black;
+    color: white;
+    padding: 15px;
+}
+
+.boxText {
+    margin-top: 20px;
+}
+
+.boxText>h4 {
+    font-size: 13px;
+}
+
+.boxText>p {
+    font-size: 11px;
+}
+
+.boxAddress {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    column-gap: 10%;
+    row-gap: 10px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(70, 70, 70, 0.1);
+}
+
+.layoutContent>div>form {
+    margin-top: 20px;
+}
+
+.viewInput {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.viewInput>input {
+    border: 1px solid black;
+    border-radius: 8px;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.viewInput>label {
+    font-size: 10px;
+}
+
+.boxInput {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.viewDefault {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.viewDefault>label {
+    font-size: 12px;
+}
+
+.boxInput>button {
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    width: 240px;
+    padding: 14px;
+    font-size: 12px;
+    color: rgb(214, 214, 214);
+}

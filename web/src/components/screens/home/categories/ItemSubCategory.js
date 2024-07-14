@@ -4,9 +4,9 @@ export default function ItemSubCategory({name}) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <text>
+        <div>
             {name}
-        </text>
+        </div>
       </div>
     </div>
   )

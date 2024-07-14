@@ -1,0 +1,17 @@
+.container {
+    display: block;
+}
+
+.viewSize {
+    display: flex;
+    column-gap: 7px;
+    align-items: center;
+    height: 40px;
+}
+.itemSize {
+    border: 1.55px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

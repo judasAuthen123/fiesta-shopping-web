@@ -25,13 +25,12 @@
     display: grid;
     grid-template-columns: 20% 75%;
     column-gap: 5%;
+    user-select: none;
 }
 .line {
     width: 100%;
     border-top: 0.002px solid grey;
     opacity: 0.1;
-    margin-top: 15px;
-    margin-bottom: 17px;
 }
 .box .layoutContent .boxProducts {
     display: block;
@@ -40,7 +39,7 @@
     display: grid;
     grid-template-columns: 31% 31% 31%;
     column-gap: 3.5%;
-    row-gap: 3.5%;
+    row-gap: 30px;
 }
 .layoutContent .layoutShowing {
     display: flex;
@@ -72,6 +71,11 @@
 .layoutContent .layoutShowing .layoutShowing2 .icon{
     margin-left: 10px;
 }
+.boxFilter {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
 .boxFilter>button {
     background: black;
     color: white;
@@ -81,4 +85,9 @@
     border-radius: 8px;
     font-weight: bold;
     border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.boxFilter>button:hover {
+   transform: translate(0.2);
 }

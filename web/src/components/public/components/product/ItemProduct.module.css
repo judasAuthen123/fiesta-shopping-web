@@ -2,10 +2,11 @@
     height: auto;
     display: block;
     justify-content: center;
-    height: 320px;
+    height: 360px;
     background: #f5f5f5;
     align-items: center;
     position: relative;
+    overflow: hidden;
 }
 
 .productImg:hover {
@@ -24,21 +25,28 @@
     width: 100%;
     position: relative;
     display: block;
-    overflow: hidden;
-    background: url('../../../assets/images/th.png') no-repeat;
-    background-size: cover;
-    background-position: center;
+    text-decoration: none;
+    color: black;
+}
+
+.productImg>img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .productImg:hover .accessOptions>button {
     bottom: 10px;
 }
+
 .productImg:hover .accessOptions .iconView {
     right: 10%;
 }
-.productImg:hover .accessOptions {
-    transform: translateX(0); /* Di chuyển vào vị trí gốc khi hover */
-  }
+
+
 .accessOptions>button {
     position: absolute;
     bottom: -100%;
@@ -80,11 +88,12 @@
 }
 
 .infoProduct {
+    height: 25%;
     background: white;
     position: absolute;
     bottom: 0px;
     width: 100%;
-    margin-top: 10px;
+    padding-top: 20px;
 }
 
 .infoProduct>p {

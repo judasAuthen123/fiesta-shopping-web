@@ -3,7 +3,6 @@ import styles from './Home.module.css'
 import Header from '../../public/components/header/Header'
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import { subCategory } from '../../public/components/header/menudrop/MenuDrop';
-import { appReviews } from './reviews/ItemAppReview';
 import ItemProduct, { products } from '../../public/components/product/ItemProduct';
 import ItemSubCategory from './categories/ItemSubCategory';
 import Footer from '../../public/components/footer/Footer';
@@ -24,7 +23,7 @@ export default function Home() {
       <div className={styles.box}>
         <div className={styles.categories}>
           <div className={styles.headCategories}>
-            <text className={styles.titleHeadCategories}>Shop by Categories</text>
+            <div className={styles.titleHeadCategories}>Shop by Categories</div>
             <div className={styles.viewPagination}>
               <button>
                 <GrLinkPrevious />
@@ -47,15 +46,15 @@ export default function Home() {
       <div className={styles.box}>
         <div className={styles.products}>
           <div className={styles.headProducts}>
-            <text className={styles.titleHeadProducts}>
+            <div className={styles.titleHeadProducts}>
               Our Bestsellers
-            </text>
+            </div>
           </div>
           <div className={styles.viewProducts}>
             {
               products ?
                 products.map(item =>
-                  <ItemProduct name={item.name} brand={item.brand} price={item.price} />
+                  <ItemProduct key={item.id} name={item.name} brand={item.brand} price={item.price} id={item.id}/>
                 ) : <div />
             }
           </div>
@@ -64,7 +63,7 @@ export default function Home() {
       <div className={styles.box}>
         <div className={styles.categories}>
           <div className={styles.headCategories}>
-            <text className={styles.titleHeadCategories}>What our Customer say's</text>
+            <div className={styles.titleHeadCategories}>What our Customer say's</div>
             <div className={styles.viewPagination}>
               <button>
                 <GrLinkPrevious />

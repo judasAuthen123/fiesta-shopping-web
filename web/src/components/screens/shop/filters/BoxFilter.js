@@ -1,43 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './BoxFilter.module.css'
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import SubCategoryList from '../categories/SubCategoryList';
-import { useDispatch, useSelector } from 'react-redux';
-import { slideSelected } from '../../../redux/selector';
-import slideSlice from './slideSlice';
 import PriceRanged from '../price/PriceRanged';
-export default function BoxFilter({ label, filterMethod }) {
-  const dispatch = useDispatch();
-  const selecter = useSelector(slideSelected);
+function BoxFilter({ label, filterMethod }) {
   const [expanded, setExpanded] = useState(false);
   const boxFilterRef = useRef(null);
-
-  // kiểm tra trạng thái đóng mở của slide
   const toggleExpanded = () => {
     setExpanded(prevExpanded => !prevExpanded);
   };
-
-  // hàm sửa đổi giá trị chiều cao cho slide trên redux store
-  const slideHandler = (height) => {
-    dispatch(slideSlice.actions.onHeightChange(height))
-  }
-
-  // sử dụng ref để truy cập đến các phần tử DOM, gọi ra giá trị chiều cao thanh cuộn
   useEffect(() => {
     if (expanded) {
-      const scrollHeight = boxFilterRef.current.scrollHeight;
-      boxFilterRef.current.style.maxHeight = `700px`
-      slideHandler(scrollHeight)
+      // const scrollHeight = boxFilterRef.current.scrollHeight
+      boxFilterRef.current.style.maxHeight = `400px`;
     } else {
-      boxFilterRef.current.style.maxHeight = `0px`
-      slideHandler(0)
+      boxFilterRef.current.style.maxHeight = `0px`;
     }
   }, [expanded]);
-
-  // sửa chiều cao cho slide với giá trị trên redux store
-  // useEffect(() => {
-  //     boxFilterRef.current.style.maxHeight = `${selecter.height}px`;
-  // }, [selecter.height]);
 
   let filterComponent;
   switch (filterMethod) {
@@ -48,7 +27,7 @@ export default function BoxFilter({ label, filterMethod }) {
       filterComponent = null;
       break;
     case 'price':
-      filterComponent = <PriceRanged/>;
+      filterComponent = <PriceRanged />;
       break;
     default:
       filterComponent = null;
@@ -65,3 +44,4 @@ export default function BoxFilter({ label, filterMethod }) {
     </div>
   )
 }
+export default React.memo(BoxFilter)

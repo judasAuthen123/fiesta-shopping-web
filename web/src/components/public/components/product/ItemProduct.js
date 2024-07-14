@@ -3,10 +3,13 @@ import styles from './ItemProduct.module.css'
 import { CiStar } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
 import { BsArrowsMove } from "react-icons/bs";
-export default function ItemProduct({ name, brand, price }) {
+import image from '../../../assets/images/th.png'
+import { Link } from 'react-router-dom';
+export default function ItemProduct({ name, brand, price, id }) {
     return (
         <div className={styles.container}>
-            <div className={styles.productImg}>
+            <Link to={`/productDetail/${id}`} className={styles.productImg}>
+                <img alt='' src={image} loading='lazy' />
                 <div className={styles.accessOptions}>
                     <div className={styles.iconView}>
                         <div className={styles.itemIconView}>
@@ -21,7 +24,7 @@ export default function ItemProduct({ name, brand, price }) {
                     </div>
                     <button>Add to Cart</button>
                 </div>
-            </div>
+            </Link>
             <div className={styles.infoProduct}>
                 <p className={styles.brand}>
                     {brand}

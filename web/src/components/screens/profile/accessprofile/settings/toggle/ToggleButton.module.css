@@ -1,0 +1,25 @@
+.container {
+    width: 40px;
+    padding: 3px;
+    background-color: #d7d7d7;
+    border-radius: 13px;
+    display: flex;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.on {
+    padding-left: 20px;
+    background-color: rgb(74, 75, 75);
+}
+
+.off {
+    padding-left: 3px;
+    background-color: #d7d7d7;
+}

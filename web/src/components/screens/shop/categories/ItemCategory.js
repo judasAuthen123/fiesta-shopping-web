@@ -1,13 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { currentMainCategoryFilterSelected } from '../../../redux/selector';
+export default function ItemCategory({ id, name, mainCategoryID }) {
+    // const dispatch = useDispatch()
+    const currentMainCategory = useSelector(currentMainCategoryFilterSelected)
+    const [isChecked, setIsChecked] = useState(currentMainCategory === mainCategoryID);
+    useEffect(() => {
+        setIsChecked(currentMainCategory === id)
+    }, [currentMainCategory, id])
 
-export default function ItemCategory({id, name}) {
-    const [isChecked, setIsChecked] = useState(false);
+    // const handleCheckboxChange = () => {
+    //     setIsChecked(prevChecked => !prevChecked);
+    //     if (!isChecked) {
+            
+    //     } else {
+           
+    //     }
+    // };
     const toggleCheckox = () => {
         setIsChecked(prevCheck => !prevCheck)
-      }
+    }
     return (
         <>
-            <input type='checkbox' checked={isChecked} onClick={toggleCheckox} /> <label>{name}</label>
+            <input type='checkbox' checked={isChecked} onChange={toggleCheckox} /> <label>{name}</label>
         </>
     )
 }

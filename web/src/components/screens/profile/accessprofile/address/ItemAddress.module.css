@@ -1,0 +1,47 @@
+.container {
+    border-bottom: 1px solid rgba(221, 220, 220, 0.5);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.boxAddress {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding-bottom: 20px;
+}
+.boxAddress>p {
+    font-size: 12px;
+}
+.boxAddress>p:nth-child(1) {
+    font-size: 15px;
+    font-weight: 600;
+}
+.buttonView {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.buttonView>button {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 6px;
+    column-gap: 4px;
+}
+.buttonView .btnEdit{
+    background-color: #efefef;
+}
+.buttonView .btnDelete{
+    background-color: #FAECEC;
+    color: #FCB0A8;
+}
+.buttonView  .text{
+    font-size: 12px;
+}
+.buttonView .btnDelete .icon{
+    color: #ee8276;
+}

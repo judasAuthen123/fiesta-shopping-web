@@ -4,7 +4,7 @@ import { CiMail } from "react-icons/ci";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import styles from './Footer.module.css'
-export default function Footer() {
+function Footer() {
     return (
         <div className={styles.container}>
             <div className={styles.contentLayout}>
@@ -93,3 +93,4 @@ export default function Footer() {
         </div>
     )
 }
+export default React.memo(Footer)

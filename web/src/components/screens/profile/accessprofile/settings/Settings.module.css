@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 17px;
+}
+.container>div {
+    padding-bottom: 17px;
+    border-bottom: 1px solid rgba(221, 220, 220, 0.5);
+}
+.container>div:last-child {
+    border: none;
+}

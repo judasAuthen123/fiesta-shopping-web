@@ -1,0 +1,32 @@
+.container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+.viewItem {
+    margin: 0;
+    padding: 0;
+}
+.active {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    column-gap: 15px;
+    margin: 0;
+    background-color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+.inActive {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    column-gap: 15px;
+    margin: 0;
+    background-color: white;
+}
+   
+.viewItem .icon {
+    font-size: 20px;
+    font-weight: 100;
+}
