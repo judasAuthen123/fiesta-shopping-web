@@ -1,13 +1,103 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import styles from './Checkout.module.css'
 import Header from '../../public/components/header/Header'
 import Footer from '../../public/components/footer/Footer'
-import styles from './Checkout.module.css'
-import { products } from '../../public/components/product/ItemProduct'
-import ItemCheckout from './ItemCheckout'
+import { useLocation } from 'react-router-dom'
+import ArticleCheckout from './ArticleCheckout'
+import StepCheckout from './step/StepOrder'
+import PolicyFooter from '../../public/components/footer/PolicyFooter'
+import { SlLocationPin } from "react-icons/sl";
+import { MdOutlinePayments } from "react-icons/md";
+import { FaGifts } from "react-icons/fa";
+import AxiosInstance from '../../../util/AxiosInstance'
+import { AppContext } from '../../../util/AppContext'
+import { paymentMethods } from './methodbox/paymentmethod'
+import PaymentSubmit from './dialog/PaymentSubmit'
+import CircleLoading from '../../public/components/loading/CircleLoading'
+import OrderSuccess from './dialog/OrderSuccess'
 export default function Checkout() {
+    const location = useLocation()
+    const { dataUser } = useContext(AppContext)
+    const [stateCheckout, setStateCheckout] = useState('order')
+    const [address, setAddress] = useState(null)
+    const [paymentMethod, setPaymentMethod] = useState(null)
+    const { selectedItems, productTotal, total, totalItem } = location.state || {}
+    const [cartData, setCartData] = useState([])
+    const [formattedCartData, setFormattedCartDatta] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [paymentSubmitVisible, setPaymentSubmitVisible] = useState(false)
+    const [orderSuccessVisbilem, setOrderSuccessVisible] = useState(false)
+    useEffect(() => {
+        try {
+            if (dataUser && selectedItems) {
+                const getCartByIds = async () => {
+                    const response = await AxiosInstance.get('/cart/getCartByIds', {
+                        params: {
+                            getFields: selectedItems,
+                            userId: dataUser?._id
+                        }
+                    })
+                    if (response.statusCode === 200) {
+                        setCartData(response.data)
+                    }
+                }
+                getCartByIds()
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }, [])
+
+    useEffect(() => {
+        if (cartData.length > 0) {
+            const newData = cartData.map(item => {
+                let newItem = { ...item, productId: item.products._id }
+                delete newItem.products
+                return newItem
+            })
+            setFormattedCartDatta(newData)
+        }
+    }, [cartData])
+
+    const placeOrder = async () => {
+        setLoading(true)
+        if (paymentMethod === paymentMethods.DEBIT_CREDIT_CARD) {
+            setPaymentSubmitVisible(true)
+            setLoading(false)
+        } else if (paymentMethod === paymentMethods.CASH_ON_DELIVERY) {
+            const response = await AxiosInstance.post('order/createOrder', {
+                userId: dataUser?._id,
+                payments: {
+                    method: paymentMethods.CASH_ON_DELIVERY,
+                    amount: total,
+                    TransactionId: null
+                },
+                shipping: address,
+                products: formattedCartData
+            })
+            if (response.statusCode === 200) {
+                setLoading(false)
+                setOrderSuccessVisible(true)
+            }
+        }
+    }
     return (
         <div>
             <Header />
+            <PaymentSubmit
+                loading={false}
+                isVisible={paymentSubmitVisible}
+                onCancel={setPaymentSubmitVisible}
+                userId={dataUser?._id}
+                amount={total}
+                products={formattedCartData} 
+                address={address}
+                onOpenOrderSuccess={setOrderSuccessVisible}/>
+            <OrderSuccess 
+            isVisible={orderSuccessVisbilem} 
+            onClose={setOrderSuccessVisible} 
+            completeCheckout={setStateCheckout}
+            />
             <div className={styles.box}>
                 <div className={styles.title}>
                     Checkout
@@ -15,59 +105,71 @@ export default function Checkout() {
             </div>
             <div className={styles.box}>
                 <div className={styles.layoutContent}>
-                    <table cellPadding="5" cellSpacing="0" border="1">
-                        <thead>
-                            <tr>
-                                <th>Products</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {products && products.length > 0 ?
-                                products.map(item =>
-                                    <ItemCheckout data={item}/>
-                                ) : null
-                            }
-                        </tbody>
-                    </table>
+                    <div className={styles.layoutDetailCheckout}>
+                        <StepCheckout state={stateCheckout} />
+                        <ArticleCheckout
+                            keyrender={stateCheckout}
+                            data={selectedItems}
+                            nextStep={setStateCheckout}
+                            onChangeAddress={setAddress}
+                            onChangeMethod={setPaymentMethod} />
+                    </div>
                     <div className={styles.viewFromCheckout}>
                         <div className={styles.viewSubtotal}>
                             <p>
-                                Subtotal
-                            </p>
-                            <p>
-                                $200.00
+                                Order Details
                             </p>
                         </div>
-                        <div className={styles.viewCodeDiscout}>
-                            <label>Enter discount code</label>
-                            <div className={styles.enterCodeDiscout}>
-                                <input/>
-                                <button>Apply</button>
+                        <div className={styles.viewSubtotal}>
+                            <p style={{ fontWeight: 400 }}>
+                                Products Quantity: {productTotal}
+                            </p>
+                            <p style={{ fontWeight: 400 }}>
+                                Total item: {totalItem}
+                            </p>
+                        </div>
+                        <div className={styles.viewSubtotal}>
+                            <p style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
+                                <SlLocationPin size={15} /> Delivery Address
+                            </p>
+                            <div style={{ fontWeight: 400 }}>
+                                {
+                                    address ? <div>
+                                        <p>{address?.name} | (84+) {address.phoneNumber}</p>
+                                        <p>{address?.street}</p>
+                                        <p>{address?.ward}, {address?.district}, {address?.city}</p>
+                                    </div> : <div>(Not filled)</div>
+                                }
                             </div>
                         </div>
-                        <div className={styles.viewSubtotal} style={{fontWeight:'normal'}}>
-                            <p>
-                                Delivery charge
+                        <div className={styles.viewSubtotal}>
+                            <p style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
+                                <MdOutlinePayments size={15} /> Payment Method
                             </p>
-                            <p>
-                                $5.00
-                            </p>
+                            <div style={{ fontWeight: 400 }}>
+                                {
+                                    paymentMethod ? <div> {paymentMethod} </div> : <div>(Not filled)</div>
+                                }
+                            </div>
                         </div>
-                        <div className={styles.viewSubtotal} style={{borderBottomWidth: 0}}>
+                        <div className={styles.viewSubtotal} style={{ borderBottomWidth: 0 }}>
                             <p>
                                 Grand Total
                             </p>
-                            <p>
-                                $205.00
+                            <p style={{ fontWeight: 400, fontSize: 16 }}>
+                                ${total ? total : 'N/A'}
                             </p>
                         </div>
-                        <button>Proceed to Checkout</button>
+                        {
+                            address && paymentMethod && stateCheckout !== 'done' ? <button onClick={placeOrder}>{
+                                loading ? <CircleLoading boderColor={'white'} /> : <>Place Order <FaGifts size={16} /></>
+                            }</button> : null
+                        }
+
                     </div>
                 </div>
             </div>
+            <PolicyFooter />
             <Footer />
         </div>
     )

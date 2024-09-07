@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux';
-import { currentMainCategoryFilterSelected } from '../../../redux/selector';
-export default function ItemCategory({ id, name, mainCategoryID }) {
-    // const dispatch = useDispatch()
-    const currentMainCategory = useSelector(currentMainCategoryFilterSelected)
-    const [isChecked, setIsChecked] = useState(currentMainCategory === mainCategoryID);
-    useEffect(() => {
-        setIsChecked(currentMainCategory === id)
-    }, [currentMainCategory, id])
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { currentSubCategorySelected } from '../../../redux/selector';
+import filtersSlice from '../filters/filtersSlice';
 
-    // const handleCheckboxChange = () => {
-    //     setIsChecked(prevChecked => !prevChecked);
-    //     if (!isChecked) {
-            
-    //     } else {
-           
-    //     }
-    // };
+export default function ItemCategory({ name, id }) {
+    const subCategory = useSelector(currentSubCategorySelected)
+    const dispatch = useDispatch()
+    const [isChecked, setIsChecked] = useState(subCategory.includes(id));
+
+    useEffect(() => {
+        if (isChecked) {
+            dispatch(filtersSlice.actions.onSubCategoryCurrentChange(id));
+        } else {
+            dispatch(filtersSlice.actions.onSubCategoryCurrentChange(id));
+        }
+    }, [isChecked, dispatch, id]);
+
     const toggleCheckox = () => {
         setIsChecked(prevCheck => !prevCheck)
     }
     return (
-        <>
-            <input type='checkbox' checked={isChecked} onChange={toggleCheckox} /> <label>{name}</label>
-        </>
+        <div style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
+            <input type='checkbox' checked={isChecked} onChange={toggleCheckox} style={{cursor: 'pointer'}}/> <label>{name}</label>
+        </div>
     )
 }

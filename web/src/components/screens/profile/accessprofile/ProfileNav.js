@@ -7,11 +7,9 @@ import { PiMapPin } from 'react-icons/pi';
 import { IoCardOutline } from 'react-icons/io5'
 import { PiBellRingingLight } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
-export default function ProfileNav({onChange}) {
-    const [selectedItem, setselectedItem] = useState(1)
+export default function ProfileNav({onChange, keyRender}) {
     const onChangeId = (id) => {
         onChange(id)
-        setselectedItem(id)
     }
     const navList = [
         {
@@ -55,7 +53,7 @@ export default function ProfileNav({onChange}) {
             <ul className={styles.viewItem}>
                 {
                     navList.map(item => {
-                        const active = item.id === selectedItem ? true : false
+                        const active = item.id === keyRender ? true : false
                         return (
                             <li key={item.id} 
                             className={active ? styles.active : styles.inActive}

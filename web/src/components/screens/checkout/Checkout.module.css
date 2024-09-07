@@ -14,7 +14,11 @@ button {
     margin-bottom: 50px;
     margin-top: 50px;
 }
-
+.line {
+    width: 100%;
+    border-top: 0.002px solid grey;
+    opacity: 0.1;
+}
 .box .title {
     width: 75%;
     display: flex;
@@ -26,42 +30,22 @@ button {
 .box .layoutContent {
     width: 75%;
     display: grid;
-    grid-template-columns: 65% 30%;
-    column-gap: 5%;
-}
-table {
-    border-collapse: collapse;
-    width: 100%;
+    grid-template-columns: 67% 30%;
+    column-gap: 3%;
+    transition: width 0.3s ease-in-out;
 }
 
-table, th {
-    border-top: none;
-    border-bottom: none;
-    border-left: none;
-    border-right: none;
-}
-th {
-    text-align: start;
-    height: 50px;
-    font-weight: 400;
-    font-size: 15px;
-}
-td {
-    border-left: none;
-    border-right: none;
-    border-top-width: 1px;
-    max-width: 150px;
-}
 .viewFromCheckout {
     border: 1px solid rgba(221, 220, 220, 0.5);
     padding: 13px;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 5px;
     height: max-content;
 }
 .viewFromCheckout .viewSubtotal {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     align-items: center;
     justify-content: space-between;
@@ -76,29 +60,57 @@ td {
 }
 .viewFromCheckout>button {
     border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
     outline: none;
     background-color: black;
     color: white;
-    padding: 15px;
-    border-radius: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    height: 38px;
+    border-radius: 4px;
+    transition: font-size 0.1s ease-in-out;
+    animation: btnPlaceOrder 1s forwards;
 }
-.enterCodeDiscout {
-    display: grid;
-    grid-template-columns: 70% 30%;
-    border: 1px solid black;
-    border-radius: 10px;
+.viewFromCheckout>button:hover {
+    font-size: 16.5px;
+}
+@keyframes btnPlaceOrder {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.viewPaymentMethod {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.viewPaymentMethod>label {
+    font-size: 13px;
+    font-weight: 550;
+}
+.viewBoxPayment {
+    display: flex;
+    flex-direction: column;
+    row-gap: 13px;
+}
+.layoutDetailCheckout {
     overflow: hidden;
 }
-.enterCodeDiscout>input {
-    border: none;
-    outline: none;
-    font-size: 17px;
-    padding: 10px;
+@media (max-width: 1200px) {
+    .box .layoutContent {
+        width: 98%;
+    }
 }
-.enterCodeDiscout>button {
-    border: none;
-    outline: none;
-    background-color: black;
-    color: white;
-    padding: 15px;
+@media (max-width: 900px) {
+    .box .layoutContent {
+        grid-template-columns: 1fr;
+        row-gap: 10px;
+    }
 }

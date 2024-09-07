@@ -1,0 +1,18 @@
+.container {
+    display: block;
+}
+.viewCheckbox {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+}
+.viewCheckbox>label {
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+}
+.viewContent {
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+}

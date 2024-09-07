@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.container>ul {
+    display: flex;
+    column-gap: 13px;
+    align-items: center;
+}
+
+.inActive {
+    border-radius: 3px;
+    padding: 5px;
+    margin: 0;
+    width: 37px;
+    height: 28px;
+    display: flex;
+    margin: 4px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.active {
+    border-radius: 3px;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    margin: 0;
+    margin: 4px;
+    width: 37px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

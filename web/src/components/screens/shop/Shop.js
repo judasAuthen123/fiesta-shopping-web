@@ -8,28 +8,28 @@ import { PiChartBarHorizontalThin } from "react-icons/pi";
 import BoxFilter from './filters/BoxFilter';
 import ItemProduct from '../../public/components/product/ItemProduct';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentFilterSelected, filterSelected } from '../../redux/selector';
+import { currentFilterSelectedForShopByCategory, filterSelectedForShopByCategory } from '../../redux/selector';
 import filtersSlice from './filters/filtersSlice';
 import _ from 'lodash';
 import AxiosInstance from './../../../util/AxiosInstance';
+import PaginationsBar from './pagination/PaginationsBar';
 function Shop() {
     const [documents, setDocuments] = useState(null)
     const [productList, setProductList] = useState([])
-    const filters = useSelector(filterSelected)
-    const currentFilters = useSelector(currentFilterSelected)
-    // const productList = useSelector(productListSelected)
+    const filters = useSelector(filterSelectedForShopByCategory)
+    const currentFilters = useSelector(currentFilterSelectedForShopByCategory)
     const dispatch = useDispatch()
     const searchProduct = useCallback(async () => {
+        const {category, ...destroyCategory} = filters
         const response = await AxiosInstance.get(`/productApi/searchProducts`, {
-            params: filters
+            params: destroyCategory
         })
-        console.table(response.data);
         if (response.data) {
             setProductList(response.data)
             setDocuments(response.documents)
         }
     }, [filters])
-
+    const pages = (Math.ceil(documents/filters.limit));
     const onChangeFilters = useCallback(async () => {
         dispatch(filtersSlice.actions.onApplySearchFields())
     }, [dispatch])
@@ -38,20 +38,20 @@ function Shop() {
         searchProduct();
     }, [searchProduct, filters]);
 
-    const isFilterChange =  _.isEqual(filters, currentFilters)
+    const isFilterChange = _.isEqual(filters, currentFilters)
 
     return (
         <div className={styles.container}>
             <Header />
             <div className={styles.box}>
                 <div className={styles.title}>
-                    Shop <GrNext className={styles.icon} />
+                    Home <GrNext className={styles.icon} /> Shop 
                 </div>
             </div>
             <div className={styles.box}>
                 <div className={styles.layoutContent}>
                     <div className={styles.boxFilter}>
-                        <BoxFilter label={'Filter by Categories'} filterMethod={'categories'} />
+                        <BoxFilter label={'Product Categories'} filterMethod={'categories'} />
                         <div className={styles.line} />
                         <BoxFilter label={'Filter by Price'} filterMethod={'price'} />
                         <div className={styles.line} />
@@ -97,6 +97,7 @@ function Shop() {
                                         ) : null
                                 }
                             </div>
+                            <PaginationsBar pages={pages} />
                         </div>
                     </div>
                 </div>

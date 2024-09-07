@@ -1,0 +1,39 @@
+
+/* Trạng thái khi component bắt đầu xuất hiện từ phải sang trái */
+.slideEnter {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+/* Trạng thái khi component bắt đầu xuất hiện từ trái sang phải */
+.slideLeftToRightEnter {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+/* Trạng thái khi component đang hiện lên */
+.slideEnterActive {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Trạng thái khi component bắt đầu biến mất */
+.slideExit {
+    transform: translateX(0);
+    opacity: 0
+}
+
+/* Trạng thái khi component đang biến mất về phía phải */
+.slideExitActive {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Trạng thái khi component đang biến mất về phía trái */
+.slideLeftToRightExitActive {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}

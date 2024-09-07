@@ -1,0 +1,50 @@
+.container {
+    height: max-content;
+    width: 100%;
+}
+.addressView {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #efeff05a;
+    margin-top: 20px;
+}
+.addressView .checkboxView {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 400;
+}
+.addressView .addressInfo {
+    font-size: 13px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.addressView .buttonView {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    column-gap: 10%;
+}
+.addressView .buttonView>button {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 6px;
+    column-gap: 4px;
+}
+.addressView .buttonView .btnEdit{
+    background-color: #efefef;
+}
+.addressView .buttonView .btnDelete{
+    background-color: #FAECEC;
+    color: #FCB0A8;
+}
+.addressView .buttonView  .text{
+    font-size: 12px;
+}
+.addressView .buttonView .btnDelete .icon{
+    color: #ee8276;
+}

@@ -6,6 +6,7 @@ import { subCategory } from '../../public/components/header/menudrop/MenuDrop';
 import ItemProduct, { products } from '../../public/components/product/ItemProduct';
 import ItemSubCategory from './categories/ItemSubCategory';
 import Footer from '../../public/components/footer/Footer';
+import BackToTopButton from '../../public/components/button/BackToTopButton';
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -80,6 +81,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <BackToTopButton />
       <Footer />
     </div>
   )

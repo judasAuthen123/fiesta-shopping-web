@@ -1,0 +1,79 @@
+.container {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    opacity: 1;
+}
+
+.container2 {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;  
+    animation: opac 1s forwards;
+    
+}
+
+@keyframes opac {
+    from {
+        opacity: 0.25;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.masterCardView {
+    width: 50px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid rgba(82, 82, 82, 0.088);
+    background-color: #0A2540;
+}
+
+.masterCardView>div {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+.masterCardView .masterCard1 {
+    background-color: #ED0006;
+}
+
+.masterCardView .masterCard2 {
+    background: #f9a200be;
+    margin-left: -7.3px;
+}
+
+
+.visaCardView {
+    background-color: rgba(243, 243, 243, 0.2);
+    width: 50px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid rgba(82, 82, 82, 0.211);
+}
+
+.visaIcon {
+    color: #1434CB;
+}
+
+.defaultView {
+    color: rgba(4, 243, 4, 0.508);
+    font-size: 12px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    column-gap: 2px;
+    letter-spacing: normal;
+}

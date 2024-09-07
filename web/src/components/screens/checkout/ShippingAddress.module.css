@@ -1,0 +1,114 @@
+button {
+    cursor: pointer;
+}
+
+.layoutContent {
+    margin-top: 20px;
+    animation: fade 1s forwards;
+}
+
+
+.boxText {
+    margin-top: 20px;
+}
+
+.boxText>h4 {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.boxText>p {
+    font-size: 11px;
+}
+
+.boxAddress {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 10px;
+    border-bottom: 1px solid rgba(70, 70, 70, 0.1);
+    padding-bottom: 20px;
+}
+
+.layoutContent>div>form {
+    margin-top: 20px;
+}
+
+.viewInput {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.viewInput>input {
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.viewInput>label {
+    font-size: 10px;
+}
+
+.boxInput {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.viewDefault {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.viewDefault>label {
+    font-size: 12px;
+}
+
+.boxInput>button {
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    width: 240px;
+    padding: 14px;
+    font-size: 12px;
+    color: rgb(214, 214, 214);
+}
+
+.viewTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.viewTitle>label {
+    font-size: 16px;
+    font-weight: 550;
+}
+.boxButton {
+    display: flex;
+    column-gap: 10px;
+}
+.viewTitle .boxButton>button {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    width: 85px;
+    border: none;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    justify-content: center;
+    column-gap: 5px;
+    font-size: 15px;
+    border: 1px solid black;
+    transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;
+}
+.viewTitle .boxButton>button:hover {
+    background-color: black;
+    color: white
+}

@@ -1,11 +1,11 @@
 .container {
     display: block;
+    user-select: none;
 }
 
 .viewColor {
     display: flex;
     column-gap: 7px;
     align-items: center;
-    height: 40px;
     cursor: pointer;
 }

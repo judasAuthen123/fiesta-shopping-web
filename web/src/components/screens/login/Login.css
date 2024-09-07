@@ -1,17 +1,17 @@
 .container {
-    background: url('../../assets/images/bg2.jpg') no-repeat;
     background-size: cover;
     background-position: center;
     min-height: 100vh;
     justify-content: center;
     align-items: center;
     display: flex;
+    user-select: none;
 }
 
 .wrapper {
     width: 450px;
     background: transparent;
-    color: #fff;
+    color: black;
     padding: 30px 40px;
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 10px;
@@ -34,17 +34,16 @@
 .input-box input {
     width: 100%;
     height: 100%;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid rgba(0, 0, 0, 0.2);
     outline: none;
     border-radius: 40px;
     font-size: 16px;
-    color: #fff;
+    color: black;
     padding: 20px 45px 20px 20px;
 }
 
 .input-box input::placeholder {
-    color: #fff;
+    color: black;
 }
 
 .input-box .icon {
@@ -63,12 +62,12 @@
 }
 
 .remember-forgot label input {
-    accent-color: #fff;
+    accent-color: black;
     margin-right: 4px;
 }
 
 .remember-forgot a {
-    color: #fff;
+    color: black;
     text-decoration: none;
 }
 
@@ -79,14 +78,14 @@
 .wrapper .buttonLogin {
     width: 100%;
     height: 40px;
-    background: #fff;
+    background: black;
     border: none;
     outline: none;
     border-radius: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 16px;
-    color: #333;
+    color: #f9f9f9;
     font-weight: 700;
 }
 
@@ -97,7 +96,7 @@
 }
 
 .register-link p a {
-    color: #fff;
+    color: black;
     text-decoration: none;
     font-weight: 600;
 }

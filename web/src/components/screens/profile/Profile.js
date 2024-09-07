@@ -1,15 +1,19 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from '../../public/components/header/Header'
 import Footer from '../../public/components/footer/Footer'
 import styles from './Profile.module.css'
 import { PiHandWavingFill } from "react-icons/pi";
 import ProfileNav from './accessprofile/ProfileNav';
 import ArticleProfile from './accessprofile/ArticleProfile';
+import { useLocation } from 'react-router-dom';
 export default function Profile() {
-  const imgUrl = 'http://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-1/250994442_869319317289922_2551880571191379996_n.jpg?stp=dst-jpg_p200x200&_nc_cat=110&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=uY56iNhsJWQQ7kNvgEu2aNY&_nc_ht=scontent.fsgn8-3.fna&gid=ARKFolf-NPpNeGgI_iiTuHh&oh=00_AYClQ83dCfjK6P9RhP6F1BzkpIC9OdpP5YgOuNfYl4zwyA&oe=668ACE0A'
-  const [selectedId, setselectedId] = useState(1);
+  const imgUrl = 'https://scontent.fsgn8-1.fna.fbcdn.net/v/t39.30808-6/250994442_869319317289922_2551880571191379996_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGFSfwq0EAqWxr2NYGofnwRNwS7zghzlYI3BLvOCHOVgqkq93Kazbd2Dl2mwf-rJB34UzILbJow3Oz4APMIW2gx&_nc_ohc=_gckPQlK5noQ7kNvgFtOPOd&_nc_ht=scontent.fsgn8-1.fna&oh=00_AYDiqVq3Ag9uFqTeoyp4rt5KZwg93qavii8y5PGChv4KPA&oe=66DC7DD0'
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+  const type = queryParams.get('type') 
+  const [selectedId, setSelectedId] = useState(type ? parseInt(type, 10) : 1);
   const onChangeId = (id) => {
-    setselectedId(id)
+    setSelectedId(id)
   }
   return (
     <div className={styles.container}>
@@ -33,7 +37,7 @@ export default function Profile() {
                 <div className={`${styles.item3} ${styles.item}`}>Tin Nguyễn</div>
               </div>
             </div>
-            <ProfileNav onChange={onChangeId}/>
+            <ProfileNav onChange={onChangeId} keyRender={selectedId}/>
           </div>
           <div className={styles.layoutContent}>
             <ArticleProfile keyRender={selectedId}/>

@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ReactSlider from 'react-slider';
 import styles from './PriceRanged.module.css'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import filtersSlice from '../filters/filtersSlice';
-import { currentFilterSelected } from '../../../redux/selector';
 export default function PriceRanged() {
-    const selector = useSelector(currentFilterSelected)
-    const [range, setRange] = useState([
-        parseFloat(selector.priceRange.min), 
-        parseFloat(selector.priceRange.max)
-    ]);
+    const [range, setRange] = useState([0, 2000]);
     const [previousRange, setPreviousRange] = useState([0, 2000]); 
     const dispatch = useDispatch();
     const handleChange = (newRange) => {
@@ -30,7 +25,7 @@ export default function PriceRanged() {
                 className={styles.horizontalSlider}
                 thumbClassName={styles.thumb}
                 trackClassName={styles.track}
-                step={1}
+                step={10}
                 min={0}
                 max={2000}
                 value={range}

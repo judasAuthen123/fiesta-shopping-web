@@ -1,0 +1,73 @@
+button {
+    cursor: pointer;
+}
+
+.line {
+    width: 100%;
+    border-top: 0.002px solid grey;
+    opacity: 0.1;
+}
+
+
+.viewPaymentMethod {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+}
+
+
+
+
+
+.viewPaymentMethod>label {
+    font-size: 16px;
+    font-weight: 550;
+}
+
+.viewBoxPayment {
+    display: flex;
+    flex-direction: column;
+    row-gap: 13px;
+}
+
+.viewTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.viewTitle>label {
+    font-size: 16px;
+    font-weight: 550;
+}
+
+.viewTitle>button {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    width: 85px;
+    border: none;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    justify-content: center;
+    column-gap: 5px;
+    font-size: 15px;
+    border: 1px solid black;
+    transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;
+}
+.viewTitle>button:hover {
+    background-color: black;
+    color: white
+}
+.viewSubTotal {
+    display: flex;
+    justify-content: right;
+}
+
+.viewSubTotal>p {
+    font-size: 15px;
+    padding: 15px;
+}

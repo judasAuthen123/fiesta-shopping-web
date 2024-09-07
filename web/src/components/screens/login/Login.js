@@ -1,13 +1,59 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { FaUser, FaLock } from "react-icons/fa";
 import { FcGoogle } from 'react-icons/fc';
 import './Login.css'
 import FacebookLogin from 'react-facebook-login'
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
-import axios from 'axios';
+import AxiosInstance from '../../../util/AxiosInstance';
+import { AppContext } from '../../../util/AppContext';
+import { useNavigate } from 'react-router-dom';
 export default function Login() {
     const [userData, setUserData] = useState([])
     const [profile, setProfile] = useState([])
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const { setIsLogin, setDataUser } = useContext(AppContext)
+    const navigate = useNavigate()
+    const onUserNameHandler = (e) => {
+        setUserName(e.target.value)
+    }
+    const onPasswordHandler = (e) => {
+        setPassword(e.target.value)
+    }
+    const appLogin = (e) => {
+        e.preventDefault()
+        const dbLogin = async () => {
+            try {
+                const request = await AxiosInstance.post('/userApi/login', {
+                    userName: userName,
+                    password: password
+                })
+                if (request.statusCode === 200) {
+                    const user = request.data.user
+                    const token = request.data.token
+                    if (user && token) {
+                        localStorage.setItem('token', JSON.stringify(token));
+                        localStorage.setItem('user', JSON.stringify(user));
+                        setIsLogin(true)
+                        setDataUser(user)
+                        navigate('/home')
+                    }
+
+                } else {
+                    alert('Login failed!')
+                }
+            } catch (e) {
+                console.log(e);
+            }
+
+        }
+        dbLogin()
+    }
+
+
+    useEffect(() => {
+        console.log(profile);
+    }, [profile])
     const responseFacebook = (response) => {
         console.log(response);
     }
@@ -18,7 +64,7 @@ export default function Login() {
     useEffect(
         () => {
             if (userData) {
-                axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userData.access_token}`, {
+                AxiosInstance.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userData.access_token}`, {
                     headers: {
                         Authorization: `Bearer ${userData.access_token}`,
                         Accept: 'application/json'
@@ -40,24 +86,24 @@ export default function Login() {
     return (
         <div className='container'>
             <div className='wrapper'>
-                <form action=''>
+                <form action='' onSubmit={appLogin}>
                     <h1>Login</h1>
                     <div className='input-box'>
-                        <input type='text' placeholder='Username' required />
+                        <input type='text' placeholder='Username' onChange={onUserNameHandler} />
                         <FaUser className='icon' />
                     </div>
                     <div className='input-box'>
-                        <input type='password' placeholder='Password' required />
+                        <input type='password' placeholder='Password' onChange={onPasswordHandler} />
                         <FaLock className='icon' />
                     </div>
                     <div className='remember-forgot'>
                         <label> <input type='checkbox' />Remember me</label>
                         <a href='#'>Forgot password?</a>
                     </div>
-                    <button type='submit' className='buttonLogin'>Login</button>
+                    <button type='submit' className='buttonLogin' >Login</button>
                     <FacebookLogin
                         appId='3532223907038486'
-                        autoLoad={true}
+                        autoLoad={false}
                         fields="name,email,picture"
                         callback={responseFacebook}
                         icon="fa-facebook"

@@ -1,0 +1,53 @@
+.container{
+    width: 100%;
+}
+.container>td {
+    border-left: none;
+    border-right: none;
+}
+.productImg {
+    width: 70px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f5f5f5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.productQuantity {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    justify-content: space-between;
+    border: 1px solid black;
+    /* border-top-right-radius: 15px;
+    
+    border-bottom-left-radius: 15px; */
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.viewTableProductTd {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    width: 450px;
+
+}
+.viewInfoProduct>p {
+    font-size: 15px;
+    width: 250px;
+}
+
+.container .viewTableProductTd>[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    /* Ẩn giao diện mặc định của checkbox */
+    border: 2px solid #000;
+    border-radius: 3px;
+}
+
+.container .viewTableProductTd>[type="checkbox"]:checked {
+    background-color: #000;
+}

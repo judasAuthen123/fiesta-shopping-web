@@ -6,7 +6,7 @@ export default function InfoUser() {
   const changeMode = () => {
     setModelInput(!modelInput)
   }
-  const imgUrl = 'http://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-1/250994442_869319317289922_2551880571191379996_n.jpg?stp=dst-jpg_p200x200&_nc_cat=110&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=uY56iNhsJWQQ7kNvgEu2aNY&_nc_ht=scontent.fsgn8-3.fna&gid=ARKFolf-NPpNeGgI_iiTuHh&oh=00_AYClQ83dCfjK6P9RhP6F1BzkpIC9OdpP5YgOuNfYl4zwyA&oe=668ACE0A'
+  const imgUrl = 'https://scontent.fsgn8-1.fna.fbcdn.net/v/t39.30808-6/250994442_869319317289922_2551880571191379996_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGFSfwq0EAqWxr2NYGofnwRNwS7zghzlYI3BLvOCHOVgqkq93Kazbd2Dl2mwf-rJB34UzILbJow3Oz4APMIW2gx&_nc_ohc=_gckPQlK5noQ7kNvgFtOPOd&_nc_ht=scontent.fsgn8-1.fna&oh=00_AYDiqVq3Ag9uFqTeoyp4rt5KZwg93qavii8y5PGChv4KPA&oe=66DC7DD0'
   return (
     <div className={styles.container}>
       <div className={`${styles.view} ${styles.view1}`}>

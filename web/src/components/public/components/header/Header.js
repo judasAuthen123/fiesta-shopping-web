@@ -6,9 +6,10 @@ import { AiOutlineClose } from "react-icons/ai";
 import MenuDrop from './menudrop/MenuDrop';
 import { useDispatch } from 'react-redux';
 import filtersSlice from '../../../screens/shop/filters/filtersSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function Header() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [isShowSearchView, setisShowSearchView] = useState(false);
   const openSearchView = () => {
     setisShowSearchView(!isShowSearchView);
@@ -37,11 +38,11 @@ function Header() {
             <div>
               <CiHeart className={styles.icon} />
             </div>
-            <div >
+            <Link to='/cart'>
               <PiBagThin className={styles.icon} />
-            </div>
+            </Link>
           </div>
-          <button>Login</button>
+          <button onClick={() => navigate(`/login`)}>Login</button>
         </div>
       </div>
       <div className={styles.viewSearch} style={isShowSearchView ? { top: 80 } : { top: 0 }}>

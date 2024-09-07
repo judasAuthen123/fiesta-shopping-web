@@ -1,27 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { currentMainCategoryFilterSelected } from '../../../redux/selector';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import filtersSlice from '../filters/filtersSlice';
 
 function ItemSubCategory({ id, name }) {
-    const currentMainCategory = useSelector(currentMainCategoryFilterSelected)
-    const [isChecked, setIsChecked] = useState(currentMainCategory === id);
+    const [isChecked, setIsChecked] = useState(false);
+    const navigate = useNavigate();
     const dispatch = useDispatch()
-    useEffect(() => {
-        setIsChecked(currentMainCategory === id)
-    }, [currentMainCategory, id])
-
-    const handleCheckboxChange = useCallback(() => {
-        setIsChecked(prevChecked => !prevChecked);
+    const toggleChecked = () => {
+        setIsChecked(!isChecked);
         if (!isChecked) {
-            dispatch(filtersSlice.actions.onMainCategoryCurrentChange(id));
-        } else {
-            dispatch(filtersSlice.actions.onMainCategoryCurrentChange(""));
+            dispatch(filtersSlice.actions.resetFilters(id))
+            navigate(`/shop/${id}`);
         }
-    }, [dispatch, isChecked, id]);
+    };
     return (
-        <div style={{display: 'flex', alignItems: 'center'}}>
-            <input type='checkbox' checked={isChecked} onChange={handleCheckboxChange}/> <label>{name}</label>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+            <input type='checkbox' checked={isChecked} onChange={toggleChecked} /> <label>{name}</label>
         </div>
     )
 }

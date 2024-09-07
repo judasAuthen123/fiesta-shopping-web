@@ -2,11 +2,15 @@
   display: flex;
   width: 100%;
   align-items: center;
-  padding-bottom: 20px;
   justify-content: center;
   flex-direction: column;
   position: relative;
   user-select: none;
+  border-bottom: 1px solid rgba(94, 94, 94, 0.133);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: white;
 }
 
 .boxContent {
@@ -24,7 +28,6 @@
 .boxHeader {
   display: flex;
   align-items: center;
-  padding-left: 150px;
 }
 
 .boxHeader>a {

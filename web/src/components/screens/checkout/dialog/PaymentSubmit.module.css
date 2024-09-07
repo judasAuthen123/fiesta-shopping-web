@@ -1,0 +1,137 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(177, 175, 175, 0.345);
+    z-index: 800;
+    user-select: none;
+}
+@keyframes scale {
+    from {
+        transform: scale(0.6);
+        opacity: 0.5;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.body {
+    width: 440px;
+    height: auto;
+    background: #ffffff;
+    padding-bottom: 10px;
+    column-gap: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.579);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    animation: scale 0.3s forwards;
+    padding: 25px;
+}
+.body>label {
+    font-size: 19px;
+    font-weight: 550;
+    letter-spacing: 1px;
+}
+.body>p {
+    font-size: 14px;
+    letter-spacing: 0.6px;
+}
+.detail{
+    margin-top: 45px;
+    margin-bottom: 45px;
+    border-radius: 4px;
+    padding: 14px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+.iconVisa {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+.masterCardView {
+    width: 50px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.masterCardView>div {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+}
+
+.masterCardView .masterCard1 {
+    background-color: #ED0006;
+}
+
+.masterCardView .masterCard2 {
+    background: #f9a200be;
+    margin-left: -7.3px;
+}
+.detail>p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.detailTitle {
+    display: flex;
+    justify-content: space-between;
+}
+.viewTotal {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(132, 132, 132, 0.327);
+    padding-top: 20px;
+}
+.viewButton {
+    width: 100%;
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-between;
+}
+.viewButton>button {
+    font-size: 15.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+}
+.viewButton>button:nth-child(1) {
+    width: 45%;
+    padding: 8px;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out, color 0.2s ease-in-out;
+}
+.viewButton>button:nth-child(1):hover {
+    background-color: black;
+    color: white;
+}
+.viewButton>button:nth-child(2) {
+    width: 45%;
+    padding: 8px;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: 3px;
+}
