@@ -1,0 +1,18 @@
+.container {
+    content: '';
+}
+.signOutButton {
+    width: 250px;
+    padding: 6px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: black;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out, color 0.2s ease-in-out;
+    margin-top: 20px;
+}
+.signOutButton:hover {
+    background-color: black;
+    color: white;
+}

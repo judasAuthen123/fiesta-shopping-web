@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styles from './ItemSubCategory.module.css'
 export default function ItemSubCategory({name}) {
   return (

@@ -1,0 +1,94 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00000028;
+    z-index: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+.form {
+    width: 400px;
+    background-color: white;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 2px 8px rgba(30, 30, 30, 0.577);
+    border-radius: 5px;
+    height: 400px;
+    flex-direction: column;
+    animation: scale 0.4s forwards;
+}
+@keyframes scale {
+    from {
+        transform: scale(0.7);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+.form>input {
+    display: none;
+}
+.viewImg {
+    width: max-content;
+    position: relative;
+    height: max-content;
+}
+.viewImg>img {
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.iconView {
+    position: absolute;
+    bottom: 7.7px;
+    right: 7.7px;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    box-shadow: 0px 4px 8px rgba(30, 30, 30, 0.755);
+    border:none;
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    justify-content: center;
+    cursor: pointer;
+}
+.iconView:hover {
+    opacity: 0.8;
+}
+.viewButton {
+    margin-top: auto;
+}
+.viewButton {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.viewButton>button {
+    font-size: 16px;
+    padding: 7px;
+    width: 48%;
+    border: none;
+    border-radius: 4px;
+    justify-content: space-between;
+}
+.viewButton>button:nth-child(1) {
+    background-color: black;
+    color: white;
+}
+.viewButton>button:nth-child(2) {
+    background-color: cyan;
+}
+.noteImg {
+    margin-top: 20px;
+    color: rgba(71, 71, 71, 0.512);
+}

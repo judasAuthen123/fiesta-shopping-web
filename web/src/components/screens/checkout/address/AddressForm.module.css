@@ -92,9 +92,9 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    transition: 0.3s;
     color: rgba(61, 55, 55, 0.399);
     left: 18px;
+    transition: 0.3s;
     pointer-events: none;
     cursor: text;
     background-color: white;

@@ -7,24 +7,32 @@ export default function MyCheckout({ data, stepSubmit }) {
     const [checkoutList, setCheckoutList] = useState([])
     // const [cartInfor, setCartInfo] = useState([])
     // const [cartMap, setCartMap] = useState([])
-    
+
     const [subTotalPrice, setSubTotalPrice] = useState(0)
     useEffect(() => {
-        const getCartByIds = async () => {
-            const response = await AxiosInstance.get('/cart/getCartByIds', {
-                params: {
-                    userId: '662b71f75c040536cfe27d65',
-                    getFields: data
-                }
-            })
+        try {
+            if (data) {
+                const getCartByIds = async () => {
+                    const response = await AxiosInstance.get('/cart/getCartByIds', {
+                        params: {
+                            userId: '662b71f75c040536cfe27d65',
+                            getFields: data
+                        }
+                    })
 
-            if (response.result === true && response.statusCode === 200) {
-                if (response.data) {
-                    setCheckoutList(response.data)
+                    if (response.result === true && response.statusCode === 200) {
+                        if (response.data) {
+                            setCheckoutList(response.data)
+                        }
+                    }
                 }
+                getCartByIds()
             }
+        } catch (error) {
+            console.log(error);
+
         }
-        getCartByIds()
+
     }, [data])
     useEffect(() => {
         if (checkoutList && checkoutList.length > 0) {
@@ -68,7 +76,7 @@ export default function MyCheckout({ data, stepSubmit }) {
 
             <div className={styles.productsView}>
                 {
-                    checkoutList && data.length > 0 ?
+                    checkoutList && data?.length > 0 ?
                         checkoutList.map(item => {
                             const priceInfo = totalPrice(item)
                             return (

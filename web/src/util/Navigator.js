@@ -12,26 +12,36 @@ import Checkout from "../components/screens/checkout/Checkout";
 import { AppContext } from "./AppContext";
 function AppNavigator() {
     return (
-            <Routes>
-                <Route path="/" element={<Navigate to="/home" />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/productDetail/:id" element={<ProductDetail />} />
-                <Route path="/cart" element={<AuthRoute><Cart /></AuthRoute>} />
-                <Route path="/checkout" element={<AuthRoute><Checkout /></AuthRoute>} />
-                <Route path="/profile" element={<AuthRoute><Profile /></AuthRoute>} />
-                <Route path="/shop/:id" element={<ShopByCategories />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-            </Routes>
+        <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/productDetail/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<AuthRoute><Cart /></AuthRoute>} />
+            <Route path="/checkout" element={<AuthRoute><Checkout /></AuthRoute>} />
+            <Route path="/profile" element={<AuthRoute><Profile /></AuthRoute>} />
+            <Route path="/shop/:id" element={<ShopByCategories />} />
+            <Route path="/login" element={<AuthLogin><Login /></AuthLogin>} />
+            <Route path="/register" element={<AuthLogin><Register /></AuthLogin>} />
+        </Routes>
     )
 }
 function AuthRoute({ children }) {
-    const { isLogin } = useContext(AppContext)
+    const { dataUser, token } = useContext(AppContext)
     return (
         <>
             {
-                isLogin === true ? children : <Navigate to={'/login'} />
+                dataUser && token ? children : <Navigate to={'/login'} />
+            }
+        </>
+    )
+}
+function AuthLogin({ children }) {
+    const { dataUser, token } = useContext(AppContext)
+    return (
+        <>
+            {
+                !dataUser && !token ? children : <Navigate to={'/'} />
             }
         </>
     )

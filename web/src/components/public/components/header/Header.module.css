@@ -15,12 +15,12 @@
 
 .boxContent {
   display: grid;
-  grid-template-columns: 25% 55% 20%;
+  grid-template-columns: auto auto auto;
   z-index: 2;
   width: 89%;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
+  height: 80px;
   z-index: 1;
   background-color: white;
 }
@@ -76,79 +76,7 @@
   cursor: pointer;
 }
 
-.boxOption button {
-  font-weight: 400;
-  width: 80px;
-  height: 35px;
-  border-radius: 7px;
-  background: black;
-  color: rgb(220, 220, 220);
-  border: none;
-  outline: none;
-  font-size: 14px;
-  /* Fix typo */
-  margin-left: 15px;
-  cursor: pointer;
-}
 
-.boxOption button:hover {
-  font-size: 16px;
-}
 
-.viewSearch {
-  background: rgb(231, 231, 231);
-  width: 75%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: 15px;
-  position: absolute;
-  top: 0px;
-  transition: top 0.25s ease-in-out;
-}
-
-.viewSearch>input {
-  width: 80%;
-  padding-left: 30px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  outline: none;
-  border-radius: 2px;
-  border: none;
-}
-
-.viewSearch>input:focus {
-  border-color: #000000;
-  /* Màu viền khi input được focus */
-  box-shadow: 0 0 5px rgba(63, 63, 63, 0.5);
-  /* Hiệu ứng bóng khi input được focus */
-}
-
-.viewSearch>button {
-  background: black;
-  color: white;
-  width: 10%;
-  padding: 8px;
-  text-align: center;
-  border-radius: 3px;
-  font-weight: bold;
-  border: none;
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-}
-
-.viewSearch .icon {
-  font-size: 16px;
-  color: white;
-  font-weight: bold;
-}
-
-.viewSearch .viewClose {
-  position: absolute;
-  top: 2px;
-  right: 5px;
-}
 
 @media (max-width: 480px) {}

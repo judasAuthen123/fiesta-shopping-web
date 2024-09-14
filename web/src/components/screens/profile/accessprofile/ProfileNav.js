@@ -7,6 +7,7 @@ import { PiMapPin } from 'react-icons/pi';
 import { IoCardOutline } from 'react-icons/io5'
 import { PiBellRingingLight } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
+import { RxExit } from "react-icons/rx";
 export default function ProfileNav({onChange, keyRender}) {
     const onChangeId = (id) => {
         onChange(id)
@@ -46,6 +47,11 @@ export default function ProfileNav({onChange, keyRender}) {
             id: 7,
             name: 'Settings',
             icon: IoSettingsOutline
+        },
+        {
+            id: 8,
+            name: 'Sign out',
+            icon: RxExit
         }
     ]
     return (

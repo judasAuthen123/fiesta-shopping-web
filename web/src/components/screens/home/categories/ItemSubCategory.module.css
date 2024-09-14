@@ -3,6 +3,10 @@
     height: 320px;
     display: flex;
     justify-content: center;
+    background: url('../../../assets/images/Untitled\ design.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #f0f0f0;
 }
 
 .title {

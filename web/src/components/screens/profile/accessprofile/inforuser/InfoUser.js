@@ -1,17 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './InfoUser.module.css'
 import { TbEdit } from 'react-icons/tb'
+import ImageForm from './uploadimage/ImageForm'
+import { AppContext } from '../../../../../util/AppContext'
+import { defaultAvt } from '../../../../public/components/image/DefaultIAvt'
 export default function InfoUser() {
   const [modelInput, setModelInput] = useState(true)
+  const [imgFromVisible, setImgFormVisible] = useState(false)
+  const {dataUser} = useContext(AppContext)
+
   const changeMode = () => {
     setModelInput(!modelInput)
   }
-  const imgUrl = 'https://scontent.fsgn8-1.fna.fbcdn.net/v/t39.30808-6/250994442_869319317289922_2551880571191379996_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGFSfwq0EAqWxr2NYGofnwRNwS7zghzlYI3BLvOCHOVgqkq93Kazbd2Dl2mwf-rJB34UzILbJow3Oz4APMIW2gx&_nc_ohc=_gckPQlK5noQ7kNvgFtOPOd&_nc_ht=scontent.fsgn8-1.fna&oh=00_AYDiqVq3Ag9uFqTeoyp4rt5KZwg93qavii8y5PGChv4KPA&oe=66DC7DD0'
   return (
     <div className={styles.container}>
+      <ImageForm isVisible={imgFromVisible} onClose={setImgFormVisible}/>
       <div className={`${styles.view} ${styles.view1}`}>
-        <div className={styles.viewImg}>
-          <img alt='' src={imgUrl} />
+        <div className={styles.viewImg} onClick={() => setImgFormVisible(true)}>
+          <img alt='' src={dataUser.image?.id ? dataUser.image.url : defaultAvt} />
           <TbEdit className={styles.icon} />
         </div>
         <button onClick={changeMode}><TbEdit className={styles.icon} />Edit Profile</button>

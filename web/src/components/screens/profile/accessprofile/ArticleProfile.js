@@ -6,6 +6,7 @@ import ManageAddress from './address/ManageAddress';
 import SavedCards from './card/SavedCards';
 import Notifications from './notifications/Notifications';
 import Settings from './settings/Settings';
+import Exit from './logout/Exit';
 export default function ArticleProfile({ keyRender }) {
     let renderComponent;
     switch (keyRender) {
@@ -29,6 +30,9 @@ export default function ArticleProfile({ keyRender }) {
             break;
         case 7:
             renderComponent = <Settings />
+            break;
+        case 8:
+            renderComponent = <Exit />
             break;
         default:
             renderComponent = null;

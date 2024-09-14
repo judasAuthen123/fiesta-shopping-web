@@ -1,22 +1,11 @@
-import React, { useState } from 'react'
+import React, { } from 'react'
 import styles from './Header.module.css'
-import { CiSearch, CiHeart } from "react-icons/ci";
-import { PiBagThin } from "react-icons/pi";
+import { CiSearch } from "react-icons/ci";
 import { AiOutlineClose } from "react-icons/ai";
 import MenuDrop from './menudrop/MenuDrop';
-import { useDispatch } from 'react-redux';
-import filtersSlice from '../../../screens/shop/filters/filtersSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import LoginAccess from './useroption/LoginAccess';
 function Header() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [isShowSearchView, setisShowSearchView] = useState(false);
-  const openSearchView = () => {
-    setisShowSearchView(!isShowSearchView);
-  }
-  const searchNameHandler = (e) => {
-    dispatch(filtersSlice.actions.onChangeName(e.target.value))
-  }
   return (
     <header className={styles.container}>
       <div className={styles.boxContent}>
@@ -31,7 +20,8 @@ function Header() {
           <Link href='#'>Contact Us</Link>
         </nav>
         <div className={styles.boxOption}>
-          <div className={styles.boxIcon}>
+          <LoginAccess />
+          {/* <div className={styles.boxIcon}>
             <div>
               <CiSearch className={styles.icon} onClick={openSearchView} />
             </div>
@@ -42,13 +32,8 @@ function Header() {
               <PiBagThin className={styles.icon} />
             </Link>
           </div>
-          <button onClick={() => navigate(`/login`)}>Login</button>
+          <button onClick={() => navigate(`/login`)}>Login</button> */}
         </div>
-      </div>
-      <div className={styles.viewSearch} style={isShowSearchView ? { top: 80 } : { top: 0 }}>
-        <input className={styles.inputSearchName} placeholder='Search in store...' onChange={searchNameHandler} />
-        <button><CiSearch className={styles.icon} />Tìm kiếm</button>
-        <div className={styles.viewClose}><AiOutlineClose /></div>
       </div>
     </header>
   )
