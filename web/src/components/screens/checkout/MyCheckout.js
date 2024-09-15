@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './MyCheckout.module.css'
 import image from '../../assets/images/th.png'
 import AxiosInstance from '../../../util/AxiosInstance'
 import { GrFormNext } from "react-icons/gr";
+import { AppContext } from '../../../util/AppContext';
 export default function MyCheckout({ data, stepSubmit }) {
     const [checkoutList, setCheckoutList] = useState([])
     // const [cartInfor, setCartInfo] = useState([])
     // const [cartMap, setCartMap] = useState([])
-
+    const { dataUser } = useContext(AppContext)
     const [subTotalPrice, setSubTotalPrice] = useState(0)
     useEffect(() => {
         try {
@@ -15,7 +16,7 @@ export default function MyCheckout({ data, stepSubmit }) {
                 const getCartByIds = async () => {
                     const response = await AxiosInstance.get('/cart/getCartByIds', {
                         params: {
-                            userId: '662b71f75c040536cfe27d65',
+                            userId: dataUser?._id,
                             getFields: data
                         }
                     })

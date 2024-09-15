@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './ProductDetail.module.css'
 import Header from '../../public/components/header/Header'
 import Footer from '../../public/components/footer/Footer'
@@ -11,6 +11,7 @@ import image from '../../assets/images/th.png'
 import { CiHeart } from 'react-icons/ci'
 import Dialog from '../../public/components/dialog/Dialog'
 import PlusAndMinus from './service/plusminus/PlusAndMinus'
+import { AppContext } from '../../../util/AppContext'
 export default function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState({})
@@ -22,6 +23,7 @@ export default function ProductDetail() {
     const [variationStock, setVariationStock] = useState(null)
     const [variationId, setVariationId] = useState('')
     const [countBuy, setCountBuy] = useState(null)
+    const {dataUser} = useContext(AppContext)
 
 
     const onChangeQuantity = (count) => {
@@ -82,7 +84,7 @@ export default function ProductDetail() {
                 if (id, variationId) {
                     const response = await AxiosInstance.post('/cart/add', {
                         addFields: {
-                            userId: '662b71f75c040536cfe27d65',
+                            userId: dataUser?._id,
                             productId: id,
                             variationId: variationId,
                             quantity: countBuy

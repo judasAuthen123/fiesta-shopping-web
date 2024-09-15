@@ -5,14 +5,20 @@ import { defaultAvt } from '../../../../../public/components/image/DefaultIAvt';
 import CircleLoading from './../../../../../public/components/loading/CircleLoading';
 import AxiosInstance from '../../../../../../util/AxiosInstance';
 import { AppContext } from '../../../../../../util/AppContext';
-export default function ImageForm({ isVisible, onClose }) {
+import Dialog from './../../../../../public/components/dialog/Dialog';
+export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
     const [selectedFiles, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [loading, setLoading] = useState(false)
-    const { dataUser } = useContext(AppContext)
+    const { dataUser, setDataUser } = useContext(AppContext)
     const isImageFile = (file) => {
         return file && file['type'].split('/')[0] === 'image';
     };
+    const selectedImg = () => {
+        if (preview)
+            return preview
+        return dataUser?.image?.url ? dataUser.image.url : defaultAvt
+    }
     useEffect(() => {
         if (!isVisible) {
             setSelectedFile(null);
@@ -20,10 +26,10 @@ export default function ImageForm({ isVisible, onClose }) {
 
         }
     }, [isVisible]);
+
+    // chọn ảnh từ thiết bị
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        console.log(file);
-
         const size = event.target.files[0]?.size
         const sizeMB = (size / (1024 * 1024)).toFixed(2)
         if (sizeMB > 5) {
@@ -44,6 +50,8 @@ export default function ImageForm({ isVisible, onClose }) {
         }
     };
 
+
+    // upload ảnh mới
     const handleFileInput = () => {
         document.getElementById('fileInput').click()
     }
@@ -61,34 +69,34 @@ export default function ImageForm({ isVisible, onClose }) {
         if (selectedFiles !== null) {
             data.append('images', selectedFiles);
             updateData = { ...updateData, image: { url: selectedFiles.name, id: dataUser.image ? dataUser.image.id : "" } }
-
         }
-
         data.append("updateFields", JSON.stringify(updateData));
-        console.log(data.get('images'));
-        
         try {
+            setLoading(true)
             const response = await AxiosInstance.post(`userApi/updateUser/${dataUser?._id}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
                 },
             })
-            if (response.result)
-                console.log("UPDATE SUCCESSFUL");
-
-
+            if (response.result) {
+                const user = JSON.parse(localStorage.getItem('user'))
+                user.image = response.data.image
+                localStorage.setItem('user', JSON.stringify(user))
+                setDataUser(user)
+                onClose(false)
+                setLoading(false)
+                onOpenSuccessDialog(true)
+            }
         } catch (error) {
             console.log("UPDATE ERROR: ", error);
-
         }
-
     }
     return (
         <div className={styles.container}>
             <form className={styles.form} onSubmit={updateUser}>
                 <div className={styles.viewImg}>
-                    <img src={preview ? preview : defaultAvt} alt={`Preview`} />
+                    <img src={selectedImg()} alt={`Preview`} />
                     <div className={styles.iconView} onClick={handleFileInput}>
                         <RiUpload2Fill />
                     </div>
@@ -107,7 +115,9 @@ export default function ImageForm({ isVisible, onClose }) {
                         Cancel
                     </button>
                     <button type='submit'>
-                        Save
+                        {
+                            loading ? <CircleLoading boderColor={'black'} /> : 'Save'
+                        }
                     </button>
                 </div>
 

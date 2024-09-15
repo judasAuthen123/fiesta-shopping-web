@@ -3,7 +3,7 @@ import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 import styles from './Selection.module.css'
 import { MdOutlineDone } from "react-icons/md";
 export default function Selection({ optionsData, typeData }) {
-    const [selectedOption, setselectedOption] = useState(localStorage.getItem(typeData) ? localStorage.getItem(typeData) : 'Vietnamese')
+    const [selectedOption, setselectedOption] = useState(localStorage.getItem(typeData) ? localStorage.getItem(typeData) : optionsData[0])
     const [isOpen, setisOpen] = useState(false);
     const heightRef = useRef();
     const boderRef = useRef();

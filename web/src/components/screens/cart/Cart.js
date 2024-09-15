@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Header from '../../public/components/header/Header'
 import Footer from '../../public/components/footer/Footer'
 import styles from './Cart.module.css'
@@ -7,6 +7,7 @@ import AxiosInstance from './../../../util/AxiosInstance';
 import Dialog from '../../public/components/dialog/Dialog';
 import { useNavigate } from 'react-router-dom';
 import ErrorDialog from './ErrorDialog';
+import { AppContext } from '../../../util/AppContext';
 export default function Cart() {
     const [cartList, setCartList] = useState([])
     const [updateCart, setUpdateCart] = useState(false)
@@ -15,13 +16,14 @@ export default function Cart() {
     const [selectedAll, setSelectedAll] = useState(false)
     const [total, setTotal] = useState(0)
     const [totalItem, setTotalItem] = useState(0)
+    const {dataUser} = useContext(AppContext)
     const navigate = useNavigate()
     const [errorDialogVisible, setErrorDialogVisible] = useState(false)
 
 
     useEffect(() => {
         const getCart = async () => {
-            const response = await AxiosInstance.get('/cart/getBypage/1/662b71f75c040536cfe27d65')
+            const response = await AxiosInstance.get(`/cart/getBypage/1/${dataUser?._id}`)
             if (response.result) {
                 if (response.data) {
                     setCartList(response.data.result)

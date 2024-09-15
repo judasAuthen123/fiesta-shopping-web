@@ -87,6 +87,9 @@
 }
 .viewButton>button:nth-child(2) {
     background-color: cyan;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 .noteImg {
     margin-top: 20px;

@@ -81,11 +81,11 @@ export default function Checkout() {
             }
         }
     }
+
     return (
         <div>
             <Header />
             <PaymentSubmit
-                loading={false}
                 isVisible={paymentSubmitVisible}
                 onCancel={setPaymentSubmitVisible}
                 userId={dataUser?._id}

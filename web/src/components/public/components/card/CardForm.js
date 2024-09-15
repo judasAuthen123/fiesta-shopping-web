@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './CardForm.module.css'
 import { SiVisa } from "react-icons/si";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import AxiosInstance from './../../../../util/AxiosInstance';
+import { AppContext } from '../../../../util/AppContext';
 
 
 const elementOptions = {
@@ -23,6 +24,7 @@ const elementOptions = {
 export default function CardForm({ isVisible, onClose }) {
   const stripe = useStripe()
   const elements = useElements()
+  const {dataUser} = useContext(AppContext)
   const [cardType, setCardType] = useState('')
   const [name, setName] = useState('')
   const onChangeName = (e) => {
@@ -51,7 +53,7 @@ export default function CardForm({ isVisible, onClose }) {
     if (error) {
       console.log('error stripe: ' + error);
     } else {
-      await AxiosInstance.post(`/payment/save-card?userId=662b71f75c040536cfe27d65&token=${token.id}&isDefault=${true}`)
+      await AxiosInstance.post(`/payment/save-card?userId=${dataUser?._id}&token=${token.id}&isDefault=${true}`)
     }
   }
 

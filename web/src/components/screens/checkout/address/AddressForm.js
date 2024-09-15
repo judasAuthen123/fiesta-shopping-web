@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './AddressForm.module.css'
 import DropDownAdress from './DropDownAdress'
 import { RxTriangleDown } from "react-icons/rx";
 import AxiosInstance from '../../../../util/AxiosInstance';
 import { _valid_Address } from './Validate';
 import CircleLoading from '../../../public/components/loading/CircleLoading';
+import { AppContext } from '../../../../util/AppContext';
 const dislayCityDistrictWard = (data) => {
     if (Array.isArray(data) && data.length > 0) {
         const validValues = data.filter(item => item);
@@ -13,6 +14,7 @@ const dislayCityDistrictWard = (data) => {
     return '';
 }
 export default function AddressForm({ isVisible, onClose }) {
+    const {dataUser} = useContext(AppContext)
     const [provinceData, setProvinceData] = useState(null);
     const [districtData, setDistrictData] = useState(null);
     const [wardData, setWardData] = useState(null);
@@ -33,7 +35,7 @@ export default function AddressForm({ isVisible, onClose }) {
             if (_valid_Address(name, phone, provinceData?.ProvinceName, districtData?.DistrictName, wardData?.WardName, street)) {
                 setLoading(true);
                 const request = await AxiosInstance.post('/userApi/addNewAddress', {
-                    userId: '662b71f75c040536cfe27d65',
+                    userId: dataUser?._id,
                     addFields: {
                         name: name,
                         phoneNumber: phone,
