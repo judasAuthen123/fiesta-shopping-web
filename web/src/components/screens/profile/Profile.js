@@ -36,7 +36,7 @@ export default function Profile() {
                 <div className={styles.viewHello}>
                   <div className={`${styles.item2} ${styles.item}`}>Hello</div> <PiHandWavingFill color='#f4b01e' />
                 </div>
-                <div className={`${styles.item3} ${styles.item}`}>Tin Nguyễn</div>
+                <div className={`${styles.item3} ${styles.item}`}>{dataUser?.name}</div>
               </div>
             </div>
             <ProfileNav onChange={onChangeId} keyRender={selectedId} />

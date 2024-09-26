@@ -5,7 +5,6 @@ import { defaultAvt } from '../../../../../public/components/image/DefaultIAvt';
 import CircleLoading from './../../../../../public/components/loading/CircleLoading';
 import AxiosInstance from '../../../../../../util/AxiosInstance';
 import { AppContext } from '../../../../../../util/AppContext';
-import Dialog from './../../../../../public/components/dialog/Dialog';
 export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
     const [selectedFiles, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);

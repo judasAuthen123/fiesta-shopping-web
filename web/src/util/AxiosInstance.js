@@ -32,7 +32,7 @@ AxiosInstance.interceptors.response.use(
   
         
   
-        } else if (error.response.status == 400) {
+        } else if (error.response.status === 400) {
   
           // Loi 400 tử server
   

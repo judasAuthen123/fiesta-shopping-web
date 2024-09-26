@@ -25,7 +25,7 @@ export default function SizeList({ data, onChange }) {
                                             height: 30,
                                             background: isSelected ? "black" : "white",
                                             color: isSelected ? "white" : "black",
-                                            borderRadius: 5,
+                                            borderRadius: 3,
                                         }}
                                     > {item} </div>
                                 );

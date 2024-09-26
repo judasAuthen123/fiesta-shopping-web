@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './ItemProduct.module.css'
 import { CiStar } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
 import { BsArrowsMove } from "react-icons/bs";
-import image from '../../../assets/images/th.png'
 import { Link } from 'react-router-dom';
-export default function ItemProduct({ name, brand, price, id }) {
+export default function ItemProduct({ name, brand, price, id, images }) {
+    const [avatarProduct, setAvatarProduct] = useState(images && Array.isArray(images) ? images[0]?.url : null)
     return (
         <div className={styles.container}>
             <Link to={`/productDetail/${id}`} className={styles.productImg}>
-                <img alt='' src={image} loading='lazy' />
+                <img alt='' src={avatarProduct} loading='lazy' />
                 <div className={styles.accessOptions}>
                     <div className={styles.iconView}>
                         <div className={styles.itemIconView}>

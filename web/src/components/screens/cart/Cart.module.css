@@ -27,7 +27,6 @@ button {
 .box .layoutContent {
     width: 75%;
     display: grid;
-    min-height: 100vh;
     position: relative;
 }
 .layoutContent>table {

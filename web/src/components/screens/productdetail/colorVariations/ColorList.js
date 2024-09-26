@@ -11,7 +11,7 @@ export default function ColorList({ data, onChange }) {
             {
                 data && data.length > 0 ?
                     <div className={styles.container}>
-                        <h5>Size</h5>
+                        <h5>Color</h5>
                         <div className={styles.viewColor}>
 
                             {data.map(item => {

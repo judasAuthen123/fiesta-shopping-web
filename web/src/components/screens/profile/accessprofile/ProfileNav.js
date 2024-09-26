@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styles from './ProfileNav.module.css'
 import { HiOutlineUser } from "react-icons/hi2";
 import { PiCubeLight } from "react-icons/pi";
-import { CiHeart } from "react-icons/ci";
 import { PiMapPin } from 'react-icons/pi';
 import { IoCardOutline } from 'react-icons/io5'
 import { PiBellRingingLight } from "react-icons/pi";
@@ -15,7 +14,7 @@ export default function ProfileNav({onChange, keyRender}) {
     const navList = [
         {
             id: 1,
-            name: 'Presonal Information',
+            name: 'Information',
             icon: HiOutlineUser
         },
         {
@@ -25,31 +24,26 @@ export default function ProfileNav({onChange, keyRender}) {
         },
         {
             id: 3,
-            name: 'My Wishlists',
-            icon: CiHeart
-        },
-        {
-            id: 4,
-            name: 'Manage Addresses',
+            name: 'Addresses',
             icon: PiMapPin
         },
         {
-            id: 5,
+            id: 4,
             name: 'Saved Cards',
             icon: IoCardOutline
         },
         {
-            id: 6,
+            id: 5,
             name: 'Notifications',
             icon: PiBellRingingLight
         },
         {
-            id: 7,
+            id: 6,
             name: 'Settings',
             icon: IoSettingsOutline
         },
         {
-            id: 8,
+            id: 7,
             name: 'Sign out',
             icon: RxExit
         }

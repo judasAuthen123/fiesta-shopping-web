@@ -7,11 +7,11 @@ import ColorList from './colorVariations/ColorList'
 import SizeList from './sizeVaritations/SizeList'
 import { useParams } from 'react-router-dom'
 import AxiosInstance from './../../../util/AxiosInstance';
-import image from '../../assets/images/th.png'
 import { CiHeart } from 'react-icons/ci'
 import Dialog from '../../public/components/dialog/Dialog'
 import PlusAndMinus from './service/plusminus/PlusAndMinus'
 import { AppContext } from '../../../util/AppContext'
+import PolicyFooter from './../../public/components/footer/PolicyFooter';
 export default function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState({})
@@ -21,10 +21,11 @@ export default function ProductDetail() {
     const [colorSelected, setColorSelected] = useState(null);
     const [sizeSelected, setSizeSelected] = useState(null)
     const [variationStock, setVariationStock] = useState(null)
-    const [variationId, setVariationId] = useState('')
+    const [variationId, setVariationId] = useState(null)
     const [countBuy, setCountBuy] = useState(null)
-    const {dataUser} = useContext(AppContext)
-
+    const { dataUser } = useContext(AppContext)
+    const [imagesProduct, setImagesProduct] = useState([])
+    const [avatarProduct, setAvatarProduct] = useState(null)
 
     const onChangeQuantity = (count) => {
         setCountBuy(count)
@@ -34,12 +35,11 @@ export default function ProductDetail() {
         if (sizeSelected || colorSelected) {
             const checkVariattionStock = async () => {
                 const response = await AxiosInstance.get('/productApi/checkVaritationProductStock', { params: { id: id, size: sizeSelected, color: colorSelected } })
-                console.log(response);
+                console.log(response.data);
+
                 if (response.result === true) {
-                    if (response.data) {
-                        setVariationId(response.data._id)
-                        setVariationStock(response.data.stock)
-                    }
+                    setVariationId(response.data._id)
+                    setVariationStock(response.data.stock)
                 }
             }
             checkVariattionStock()
@@ -95,7 +95,7 @@ export default function ProductDetail() {
                     } else {
                         alert("Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.");
                     }
-                }else {
+                } else {
                     alert("Thiếu thông tin sản phẩm");
                 }
             } catch (error) {
@@ -126,16 +126,18 @@ export default function ProductDetail() {
             if (response.result === true) {
                 if (response.data)
                     setProduct(response.data)
+                setImagesProduct(response.data.images)
+                setAvatarProduct(response.data.images[0].url)
                 if (response.data.variations?.length > 0) {
                     response.data.variations.forEach(variation => {
                         const color = variation.dimension.color;
                         const size = variation.dimension.size;
 
-                        if (!colorArray.includes(color) && color != null) {
+                        if (!colorArray.includes(color) && color !== null && color !== "") {
                             colorArray.push(color);
                         }
 
-                        if (!sizeArray.includes(size) && size != null) {
+                        if (!sizeArray.includes(size) && size !== null && size !== "") {
                             sizeArray.push(size);
                         }
                     });
@@ -151,19 +153,30 @@ export default function ProductDetail() {
     return (
         <div className={styles.container}>
             <Header />
-            <Dialog isVisible={isModalVisible} status={'Sản phẩm đã được thêm vào giỏ hàng'}/>
+            <Dialog isVisible={isModalVisible} status={'Sản phẩm đã được thêm vào giỏ hàng'} />
             <div className={styles.box}>
                 <div className={styles.layoutContent}>
                     <div className={styles.imgProduct}>
-                        <div style={{ backgroundColor: '#f9f9f9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <img style={{ width: 280, height: 400 }} src={image} alt='' />
+                        <div className={styles.viewAvatarProduct}>
+                            <img src={avatarProduct} alt='' />
                         </div>
-                        <div>
+                        <div className={styles.viewListImg}
+                            onMouseLeave={() => setAvatarProduct(imagesProduct[0].url)}>
+                            {
+                                imagesProduct && imagesProduct.length > 0 ?
+                                    imagesProduct.slice(1).map((item) =>
+                                        <div
+                                            key={item.id}
+                                            onMouseEnter={() => setAvatarProduct(item.url)}
+                                            className={styles.itemImg}>
+                                            <img src={item.url} />
+                                        </div>) : null
+                            }
                         </div>
                     </div>
                     <div className={styles.productDetail}>
                         <div>
-                            <p style={{ fontSize: 20, fontWeight: 600 }}>YK Disney</p>
+                            <p style={{ fontSize: 20, fontWeight: 600 }}>{product.Brand}</p>
                             <div className={styles.viewStatus}>
                                 {
                                     product.stock && product.stock > 0 ?
@@ -171,7 +184,7 @@ export default function ProductDetail() {
                                             <div>In Stock</div>
                                         </div> :
                                         <div className={`${styles.viewStatus} ${styles.outStock}`}>
-                                            <div>Inprocess</div>
+                                            <div>Out of Stock</div>
                                         </div>
                                 }
                             </div>
@@ -207,14 +220,53 @@ export default function ProductDetail() {
                             </div>
                             <div>
                                 {
-                                    variationStock ?
-                                        <div style={{ fontSize: 14, textAlign: 'center' }}>Stock: {variationStock} </div> : null
+                                    variationStock !== null ?
+                                        <div style={{ fontSize: 14, textAlign: 'end' }}>Stock: {variationStock} </div> : null
                                 }
                             </div>
                         </div>
                     </div>
                 </div>
+                <div className={styles.details}>
+                    <div>
+                        <p>
+                            Descriptions
+                        </p>
+                        <p>
+                            its a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                            The point of using Lorem Lpsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here",
+                            making it look like readable English. Many deskop publishing packages and web page editors now use Lorem Ipsum as their default model text,
+                            and a search for "lorem ipsum" will uncover many web sites  still in their infancy
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            Additional Information
+                        </p>
+                        <div>
+                            {
+                                colorList.length > 0 ?
+                                    <div style={{ display: 'flex', columnGap: 15, fontSize: 13 }}>
+                                        Color:
+                                        {
+                                            colorList.map(item => <div key={item}>{item}</div>)
+                                        }
+                                    </div> : null
+                            }
+                            {
+                                sizeList.length > 0 ?
+                                    <div style={{ display: 'flex', columnGap: 15, fontSize: 13 }}>
+                                        Size:
+                                        {
+                                            sizeList.map(item => <div key={item}>{item}</div>)
+                                        }
+                                    </div> : null
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
+            <PolicyFooter />
             <Footer />
         </div>
     )

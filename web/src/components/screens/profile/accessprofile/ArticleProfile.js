@@ -1,7 +1,6 @@
 import React from 'react'
 import InfoUser from './inforuser/InfoUser';
 import MyOrders from './order/MyOrders';
-import MyWishlists from './wistlist/MyWishlists';
 import ManageAddress from './address/ManageAddress';
 import SavedCards from './card/SavedCards';
 import Notifications from './notifications/Notifications';
@@ -17,21 +16,18 @@ export default function ArticleProfile({ keyRender }) {
             renderComponent = <MyOrders />
             break;
         case 3:
-            renderComponent = <MyWishlists />
-            break;
-        case 4:
             renderComponent = <ManageAddress />
             break;
-        case 5:
+        case 4:
             renderComponent = <SavedCards />
             break;
-        case 6:
+        case 5:
             renderComponent = <Notifications />
             break;
-        case 7:
+        case 6:
             renderComponent = <Settings />
             break;
-        case 8:
+        case 7:
             renderComponent = <Exit />
             break;
         default:

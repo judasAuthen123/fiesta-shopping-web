@@ -91,7 +91,8 @@ function Shop() {
                                                 key={item._id}
                                                 id={item._id}
                                                 name={item.name}
-                                                brand={item.Description}
+                                                images={item.images}
+                                                brand={item.Brand}
                                                 price={item.price}
                                             />
                                         ) : null

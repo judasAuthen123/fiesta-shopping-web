@@ -29,6 +29,7 @@ button {
     display: grid;
     grid-template-columns: 25% 70%;
     column-gap: 5%; 
+    transition: width 0.3s ease-in-out;
 }
 .boxUser {
     display: flex;
@@ -65,4 +66,9 @@ button {
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
+}
+@media (max-width: 1200px) {
+    .boxAccess {
+        width: 98%;
+    }
 }

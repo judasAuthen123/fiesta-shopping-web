@@ -28,9 +28,11 @@ export default function Login() {
                     userName: userName,
                     cpassword: password
                 })
+                console.log(request);
+                
                 if (request.statusCode === 200) {
-                    const user = request.data.user
-                    const token = request.data.accessToken           
+                    const user = request.user
+                    const token = request.token         
                     if (user && token) {
                         localStorage.setItem('token', JSON.stringify(token));
                         localStorage.setItem('user', JSON.stringify(user));

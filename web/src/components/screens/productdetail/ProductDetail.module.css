@@ -8,10 +8,10 @@
 .box {
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
     margin-top: 70px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .box .title {
@@ -24,9 +24,18 @@
     font-size: 15px;
 }
 
+.viewAvatarProduct {
+    background-color: #f9f9f9;
+    height: 420px;
+}
+
+.viewAvatarProduct>img {
+    width: 100%;
+    height: 100%;
+}
+
 .box .layoutContent {
     width: 75%;
-    height: 300px;
     display: grid;
     grid-template-columns: 40% 57%;
     column-gap: 3%;
@@ -41,7 +50,7 @@
     flex-direction: column;
     row-gap: 8px;
     position: relative;
-    min-height: 400px;
+    height: 420px;
 }
 
 .box .layoutContent .productDetail>p {
@@ -78,6 +87,7 @@
     display: flex;
     column-gap: 20px;
     margin-top: auto;
+    align-items: end;
 }
 
 .viewBuy>button {
@@ -85,9 +95,9 @@
     background-color: black;
     border: none;
     color: white;
-    padding: 5px;
     width: 240px;
     user-select: none;
+    padding: 10px;
 }
 
 .viewBuy .viewIcon {
@@ -97,6 +107,7 @@
     justify-content: center;
     align-items: center;
     width: 40px;
+    height: 35px;
 }
 
 .viewIcon .icon {
@@ -127,7 +138,45 @@
     align-items: center;
     justify-content: center;
 }
+
 .productDetail>div:nth-child(1) {
     display: flex;
     justify-content: space-between;
+}
+
+.viewListImg {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    margin-top: 10px;
+}
+.itemImg {
+    background-color: #f9f9f9;
+}
+.itemImg>img {
+    width: 100%;
+    cursor: pointer;
+    height: 100%;
+}
+.itemImg>img:hover {
+    background-color: #dad9d99f;
+}
+.details {
+    margin-top: 50px;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+.details>div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.details>div>p:nth-child(1) {
+    font-size: 15px;
+    font-weight: 550;
+}
+.details>div>p:nth-child(2) {
+    font-size: 13px;
 }

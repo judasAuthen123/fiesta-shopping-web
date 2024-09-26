@@ -8,6 +8,7 @@ import Dialog from '../../public/components/dialog/Dialog';
 import { useNavigate } from 'react-router-dom';
 import ErrorDialog from './ErrorDialog';
 import { AppContext } from '../../../util/AppContext';
+import PolicyFooter from '../../public/components/footer/PolicyFooter';
 export default function Cart() {
     const [cartList, setCartList] = useState([])
     const [updateCart, setUpdateCart] = useState(false)
@@ -160,6 +161,7 @@ export default function Cart() {
                     </div>
                 </div>
             </div>
+            <PolicyFooter />
             <Footer />
         </div>
     )

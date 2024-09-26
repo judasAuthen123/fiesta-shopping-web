@@ -1,9 +1,12 @@
 .view1 {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    column-gap: 20px;
 }
-
+.view1>div:nth-child(2) {
+    margin-top: auto;
+    font-size: 12px;
+    opacity: 0.75;
+}
 .viewImg>img {
     width: 70px;
     height: 70px;
@@ -52,22 +55,58 @@
     font-size: 12px;
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+.viewEdit {
+    position: absolute;
+    top: 38%;
+    right: 8px;
+}
+.viewEdit>button {
+    border-radius: 4px;
+    border: none;
+    padding: 7px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 3px;
+}
+.buttonSave {
+    animation: scale 0.3s forwards;
+}
+@keyframes scale {
+    from {
+        transform: scale(0.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+.viewEdit>button>label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 3px;
+    cursor: pointer;
+}
+.viewEdit>button:hover {
+    opacity: 0.7;
 }
 .viewInput>input {
     border: 1px solid black;
     border-radius: 8px;
     font-size: 15px;
     padding: 12px;
+    outline: none;
+    transition: border 0.3s ease-in-out;
 }
 .viewInput>label {
     font-size: 10px;
 }
-.container>form {
+.viewInformation {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     column-gap: 10px;
     row-gap: 20px;
-}
-.viewInput:nth-child(5) {
-    grid-column: span 2;
 }

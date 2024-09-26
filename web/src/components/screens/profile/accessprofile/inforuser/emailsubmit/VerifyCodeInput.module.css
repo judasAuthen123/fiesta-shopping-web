@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    margin-bottom: 10px;
+    column-gap: 10px;
+    justify-content: space-between;
+}
+
+.container>input {
+    outline: none;
+    border: none; 
+    width: 53px;
+    height: 45px;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 550;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+.container>input:not(:placeholder-shown), .container>input:focus {
+    background-color: #85ccd91e;
+}
+.container>input:placeholder-shown{
+    border: 2px solid rgba(93, 92, 92, 0.271);
+    background-color: white;
+}
