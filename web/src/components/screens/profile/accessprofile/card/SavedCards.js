@@ -1,9 +1,13 @@
 import React from 'react'
+import Card from '../../../checkout/credit_debit/Card'
 
 export default function SavedCards() {
   return (
     <div>
-      <h2>Saved Cards</h2>
+      <div>
+        <p style={{fontWeight:500}}>Credit/Debit Card</p>
+      </div>
+      <Card />
     </div>
   )
 }

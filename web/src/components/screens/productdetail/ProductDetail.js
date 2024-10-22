@@ -35,7 +35,6 @@ export default function ProductDetail() {
         if (sizeSelected || colorSelected) {
             const checkVariattionStock = async () => {
                 const response = await AxiosInstance.get('/productApi/checkVaritationProductStock', { params: { id: id, size: sizeSelected, color: colorSelected } })
-                console.log(response.data);
 
                 if (response.result === true) {
                     setVariationId(response.data._id)

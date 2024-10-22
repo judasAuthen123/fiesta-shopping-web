@@ -23,11 +23,11 @@ button {
 
 .boxAddress {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 30px;
-    row-gap: 10px;
+    grid-template-columns: 1fr 1fr ;
+    gap: 20px;
     border-bottom: 1px solid rgba(70, 70, 70, 0.1);
     padding-bottom: 20px;
+    margin-top: 20px;
 }
 
 .layoutContent>div>form {

@@ -1,10 +1,10 @@
 .viewCircleLoad {
     width: 20px;
     height: 20px;
-    border-top: 3px solid rgba(0, 0, 0, 0.764);
-    border-left: 3px solid rgba(0, 0, 0, 0.764);
+    border-left: 3px solid rgba(0, 0, 0, 1);
+    border-top: 3px solid rgba(0, 0, 0, 1);
     border-radius: 50%;
-    animation: spinner 1s linear infinite;
+    animation: spinner 1s ease-in-out infinite;
 }
 
 @keyframes spinner {

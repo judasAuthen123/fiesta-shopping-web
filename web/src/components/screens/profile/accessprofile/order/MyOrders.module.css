@@ -1,0 +1,58 @@
+.container {
+    height: inherit;
+}
+.viewTopTab {
+    display: flex;
+    box-shadow: 0px 0px 4px rgba(92, 92, 92, 0.145);
+    border-radius: 2px;
+    position: relative;
+}
+
+.itemTopTab {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    color: black;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selected {
+    color: rgb(25, 226, 226);
+    font-weight: 550;
+}
+.itemTopTab:hover {
+    color: rgb(25, 226, 226);
+}
+.bottomLine {
+    width: calc(100% /7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.586);
+    transition: left 0.2s ease-in-out;
+    border-color: cyan;
+
+}
+.listRender {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    flex: 0;
+    height: 403px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #1b1b1b #f3f3f3;
+    padding-left: 1.5px;
+    padding-right: 3px;
+    padding-top: 1.5px;
+    padding-bottom: 1.5px;
+
+}

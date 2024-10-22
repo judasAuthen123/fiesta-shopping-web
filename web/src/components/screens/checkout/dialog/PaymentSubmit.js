@@ -37,15 +37,18 @@ export default function PaymentSubmit({
             paymentMethod: cardData?.brand
         })
         if (request.statusCode === 200) {
+            const format = formatDate(date)
             const response = await AxiosInstance.post('order/createOrder', {
                 userId: userId,
                 payments: {
                     method: cardData?.brand,
                     amount: amount,
-                    TransactionId: request.paymentIntentId
+                    TransactionId: request.paymentIntentId,
+                    datePurchase: `${format.formattedDate}, ${format.formattedTime}`,
+                    paymentStatus: 'Delivered'
                 },
                 shipping: address,
-                products: products
+                products: products,
             })
             if(response.statusCode === 200) {
                 setLoading(false)

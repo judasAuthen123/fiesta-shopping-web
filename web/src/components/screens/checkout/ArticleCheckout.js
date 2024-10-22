@@ -7,50 +7,29 @@ import Done from './Done';
 
 export default function ArticleCheckout({ keyrender, data, nextStep, onChangeAddress, onChangeMethod }) {
 
-    let renderComponent;
+    const steps = {
+        orderSubmit: 'shipping',
+        shippingSubmit: 'payment',
+        backToOrderSubmit: 'order',
+        backToShipping: 'shipping'
+    };
+
     const onSubmit = (data) => {
-        let step;
-        switch (data) {
-            case 'orderSubmit':
-                step = 'shipping'
-                break;
-            case 'shippingSubmit':
-                step = 'payment'
-                break;
-            case 'backToOrderSubmit':
-                step = 'order'
-                break;
-            case 'backToShipping':
-                step = 'shipping'
-                break
-            default:
-                break
+        const step = steps[data];
+        if (step) {
+            nextStep(step);
         }
-        nextStep(step)
-    }
-
-
-    switch (keyrender) {
-        case 'order':
-            renderComponent = <MyCheckout data={data} stepSubmit={onSubmit} />
-            break;
-        case 'shipping':
-            renderComponent = <ShippingAddress stepSubmit={onSubmit} onChangeAddress={(data) => onChangeAddress(data)}/>
-            break;
-        case 'payment':
-            renderComponent = <Payment stepSubmit={onSubmit} onChangeMethod={(data) => onChangeMethod(data)}/>
-            break;
-        case 'done':
-            renderComponent = <Done />
-            break;
-        default:
-            renderComponent = null
-
-    }
+    };
+    const stepComponents = {
+        order: <MyCheckout data={data} stepSubmit={onSubmit} />,
+        shipping: <ShippingAddress stepSubmit={onSubmit} onChangeAddress={onChangeAddress} />,
+        payment: <Payment stepSubmit={onSubmit} onChangeMethod={onChangeMethod} />,
+        done: <Done />
+    };
     return (
-        <div>
-            {renderComponent}
-        </div>
+        <>
+            {stepComponents[keyrender] || null}
+        </>
         // <div>
         //     <TransitionGroup>
         //         <CSSTransition

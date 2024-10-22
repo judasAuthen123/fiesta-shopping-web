@@ -13,46 +13,73 @@ const dislayCityDistrictWard = (data) => {
     }
     return '';
 }
-export default function AddressForm({ isVisible, onClose, onOpenSuccessDialog }) {
-    const {dataUser, setDataUser} = useContext(AppContext)
+export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDialog, dataOldAddress }) {
+    const { name, phoneNumber, city, district, ward, street, houseNumber } = dataOldAddress
+    const { dataUser, setDataUser } = useContext(AppContext)
     const [provinceData, setProvinceData] = useState(null);
     const [districtData, setDistrictData] = useState(null);
     const [wardData, setWardData] = useState(null);
-    const [name, setName] = useState('')
-    const [phone, setPhone] = useState('')
-    const [street, setStreet] = useState('')
-    const [houseNo, setHouseNo] = useState('')
+    const [newName, setName] = useState(name)
+    const [phone, setPhone] = useState(phoneNumber)
+    const [newStreet, setStreet] = useState(street)
+    const [houseNo, setHouseNo] = useState(houseNumber)
     const [dropDownAddressVisible, setDropDownAddressVisible] = useState(false)
     const [loading, setLoading] = useState(false)
+    const arrAddressSelected = () => {
+        if (provinceData || districtData || wardData) {
+            return [provinceData?.ProvinceName, districtData?.DistrictName, wardData?.WardName]
+        } else {
+            return [city, district, ward]
+        }
+    }
     useEffect(() => {
-        if(wardData) {
+        if (wardData) {
             setDropDownAddressVisible(false)
         }
     }, [wardData])
     useEffect(() => {
-        setProvinceData(null)    
+        setProvinceData(null)
+        setName(name)
+        setPhone(phoneNumber)
+        setStreet(street)
+        setHouseNo(houseNumber)
     }, [isVisible])
-    const addNewAddress = async (event) => {
+
+    const updateAddress = async (event) => {
         event.preventDefault();
+        const newData = {
+            name: newName,
+            phoneNumber: phone,
+            city: provinceData ? provinceData.ProvinceName : city,
+            district: provinceData ? districtData?.DistrictName : district,
+            ward: provinceData ? wardData?.WardName : ward,
+            street: newStreet,
+            houseNumber: houseNo
+        }
         try {
-            if (_valid_Address(name, phone, provinceData?.ProvinceName, districtData?.DistrictName, wardData?.WardName, street)) {
+            if (_valid_Address(newName, phone,
+                provinceData ? provinceData : city,
+                provinceData ? districtData : district,
+                provinceData ? wardData : ward,
+                newStreet)) {
                 setLoading(true);
-                const request = await AxiosInstance.post('/userApi/addNewAddress', {
+                const request = await AxiosInstance.post('/userApi/updateAddress', {
                     userId: dataUser?._id,
-                    addFields: {
-                        name: name,
-                        phoneNumber: phone,
-                        city: provinceData.ProvinceName,
-                        district: districtData.DistrictName,
-                        ward: wardData.WardName,
-                        street: street,
-                        houseNumber: houseNo
-                    }
+                    addressId: dataOldAddress._id,
+                    updateFields: newData
                 });
                 if (request.statusCode === 200) {
                     const user = JSON.parse(localStorage.getItem('user'))
-                    if(Array.isArray(user.address)) {
-                        user.address.push(request.data)
+                    if (Array.isArray(user.address)) {
+                        user.address.map(item => {
+                            user.address = user.address.map(item => {
+                                if (item._id === request.data._id) {
+                                    return request.data;
+                                }
+                                return item;
+                            });
+                        }
+                        )
                         localStorage.setItem('user', JSON.stringify(user))
                         setDataUser(user)
                     }
@@ -82,18 +109,22 @@ export default function AddressForm({ isVisible, onClose, onOpenSuccessDialog })
     if (!isVisible) return null
     return (
         <div className={styles.container}>
-            <form onSubmit={addNewAddress}>
-                <p style={{ fontSize: 18, fontWeight: 500 }}>New Address</p>
+            <form onSubmit={updateAddress}>
+                <p style={{ fontSize: 18, fontWeight: 500 }}>Update Address</p>
                 <div className={styles.boxInput}>
                     <div className={styles.inputRow}>
                         <div className={styles.viewInput}>
-                            <input id='name' className={styles.inputField} placeholder=' ' onChange={onNameHandler} />
+                            <input
+                                value={newName}
+                                id='name' className={styles.inputField} placeholder=' ' onChange={onNameHandler} />
                             <label htmlFor='name' className={styles.labelField}>
                                 Name
                             </label>
                         </div>
                         <div className={styles.viewInput}>
-                            <input id='phone' className={styles.inputField} placeholder=' ' onChange={onPhoneHandler} />
+                            <input
+                                value={phone}
+                                id='phone' className={styles.inputField} placeholder=' ' onChange={onPhoneHandler} />
                             <label htmlFor='phone' className={styles.labelField}>
                                 Phone Number
                             </label>
@@ -108,7 +139,7 @@ export default function AddressForm({ isVisible, onClose, onOpenSuccessDialog })
                                     placeholder=' '
                                     readOnly={true}
                                     onFocus={() => setDropDownAddressVisible(true)}
-                                    value={dislayCityDistrictWard([provinceData?.ProvinceName, districtData?.DistrictName, wardData?.WardName])}
+                                    value={dislayCityDistrictWard(arrAddressSelected())}
                                 />
                                 <label htmlFor='detail' className={styles.labelField}>
                                     City, District, Ward
@@ -127,13 +158,17 @@ export default function AddressForm({ isVisible, onClose, onOpenSuccessDialog })
                         />
                     </div>
                     <div className={styles.viewInput}>
-                        <input id='street' className={styles.inputField} placeholder=' ' onChange={onStreetHandler} />
+                        <input
+                            value={newStreet}
+                            id='street' className={styles.inputField} placeholder=' ' onChange={onStreetHandler} />
                         <label htmlFor='street' className={styles.labelField}>
                             Street Name, Building
                         </label>
                     </div>
                     <div className={styles.viewInput}>
-                        <input id='detail' className={styles.inputField} placeholder=' ' onChange={onHouseNoHandler} />
+                        <input
+                            value={houseNo}
+                            id='detail' className={styles.inputField} placeholder=' ' onChange={onHouseNoHandler} />
                         <label htmlFor='detail' className={styles.labelField}>
                             House No. (if applicable)
                         </label>
@@ -144,7 +179,7 @@ export default function AddressForm({ isVisible, onClose, onOpenSuccessDialog })
                         </button>
                         <button type='submit'>
                             {
-                                loading ? <CircleLoading boderColor={'white'}/> : 'Submit'
+                                loading ? <CircleLoading boderColor={'white'}/> : 'Update'
                             }
                         </button>
                     </div>

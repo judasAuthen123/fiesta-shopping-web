@@ -46,7 +46,7 @@ export default function Checkout() {
         } catch (error) {
             console.log(error);
         }
-    }, [])
+    }, [selectedItems, dataUser?._id])
 
     useEffect(() => {
         if (cartData.length > 0) {
@@ -70,10 +70,11 @@ export default function Checkout() {
                 payments: {
                     method: paymentMethods.CASH_ON_DELIVERY,
                     amount: total,
-                    TransactionId: null
+                    TransactionId: null,
+                    paymentStatus: 'Awaiting Payment'
                 },
                 shipping: address,
-                products: formattedCartData
+                products: formattedCartData,
             })
             if (response.statusCode === 200) {
                 setLoading(false)

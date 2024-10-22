@@ -16,3 +16,16 @@
     column-gap: 7px;
     justify-content: center;
 }
+.listRender {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    height: 405px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #1b1b1b #f3f3f3;
+    padding-left: 1.5px;
+    padding-right: 3px;
+    padding-top: 1.5px;
+    padding-bottom: 1.5px;
+}

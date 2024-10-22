@@ -1,59 +1,48 @@
 import React, { useState } from 'react'
 import styles from './ItemOrder.module.css'
-import image from '../../../../assets/images/th.png'
-export default function ItemOrder({status}) {
+import { formatDate } from '../../../checkout/dialog/date'
+import { GrFormNext } from "react-icons/gr";
+import { useNavigate } from 'react-router-dom';
+import { MdOutlinePayments } from "react-icons/md";
+import { IoPricetagsOutline } from "react-icons/io5";
+import { HiOutlineStatusOnline } from "react-icons/hi";
+export default function ItemOrder({ status, data }) {
+    const navigate = useNavigate()
     return (
         <div className={styles.container}>
-
-            <div className={styles.boxOrder}>
-                <div className={styles.image}>
-                    <img alt='T-shirt' loading='lazy' src={image} />
-                </div>
-                <div className={styles.boxInfo}>
+            <div className={styles.viewDetails}>
+                <p>
+                    Order Date: {formatDate(data?.modifiedOn).formattedDate}
+                </p>
+                <p>
+                    To: {data.shipping.name}
+                </p>
+            </div>
+            <div style={{ rowGap: 10, display: 'flex', flexDirection: 'column' }}>
+                <div className={styles.viewContentOrder}>
                     <p>
-                        Girls Pink Moana Printed Dress
+                        Order ID: {data.orderId}
                     </p>
                     <p>
-                        Size: S
+                        <MdOutlinePayments /> Payment method: {data.payments.method}
                     </p>
                     <p>
-                        Count: 5
+                        <IoPricetagsOutline /> Amount: <span style={{ fontWeight: 550 }}>{data.payments.amount}$</span>
                     </p>
-                </div>
-                <div>
-                    <p>$80.00</p>
-                </div>
-                <div className={styles.viewBtn}>
-                    <button className={`${styles.btn} ${styles.btnViewOrder}`}>View Order</button>
+                    <p>
+                        <HiOutlineStatusOnline /> Status: {data.status}
+                    </p>
                     {
-                        status === 'delivered' ? <button className={`${styles.btn} ${styles.btnReview}`}>Write A Review</button> :
-                            <button className={`${styles.btn} ${styles.btnCancel}`}>Cancel Order</button>
+                        data.payments.TransactionId ?
+                            <p style={{marginTop:5}}>
+                                <span style={{ color: '#07f507b7' }}>Purchased</span>
+                            </p> : null
                     }
+
                 </div>
             </div>
-            <div>
-                {
-                    status === 'delivered' ?
-                        <div className={`${styles.viewStatus} ${styles.delivered}`}>
-                            <div>Delivered</div>
-                            <div>Your product has been delivered</div>
-                        </div> :
-                        <div className={`${styles.viewStatus} ${styles.inprocess}`}>
-                            <div>Inprocess</div>
-                            <div>Your product has been Inprocess</div>
-                        </div>
-                }
-            </div>
+            <button className={styles.buttonViewDetails} onClick={() => navigate('/order-detail', { state: { _id: data?._id } })}>Details <GrFormNext /></button>
         </div>
     )
 }
-export const orders = [
-    {
-        "id": 1,
-        "status": "delivered"
-    },
-    {
-        "id": 2,
-        "status": "inprocess"
-    }
-]
+

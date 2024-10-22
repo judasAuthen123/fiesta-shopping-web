@@ -139,7 +139,11 @@ export default function Cart() {
                         <tbody>
                             {cartList && cartList.length > 0 ?
                                 cartList.map(item =>
-                                    <ItemCart key={item._id} data={item} onDelete={deleteCartItem} onCheck={handleCheck} checkAll={selectedAll} />
+                                    <ItemCart key={item._id} 
+                                    data={item} 
+                                    onDelete={deleteCartItem} 
+                                    onCheck={handleCheck} 
+                                    checkAll={selectedAll} />
                                 ) : null
                             }
                         </tbody>

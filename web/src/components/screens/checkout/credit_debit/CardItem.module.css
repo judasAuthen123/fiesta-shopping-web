@@ -2,19 +2,20 @@
     display: flex;
     column-gap: 20px;
     align-items: center;
-    cursor: pointer;
     user-select: none;
     opacity: 1;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(188, 188, 188, 0.33);
 }
-
 .container2 {
     display: flex;
     column-gap: 20px;
     align-items: center;
     cursor: pointer;
     user-select: none;  
-    animation: opac 1s forwards;
-    
+    animation: opac 1s forwards;  
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(188, 188, 188, 0.33);
 }
 
 @keyframes opac {
@@ -76,4 +77,26 @@
     align-items: center;
     column-gap: 2px;
     letter-spacing: normal;
+}
+.buttonInfo {
+    margin-left: auto;
+    padding: 8px;
+    margin-right: 20px;
+    border-radius: 4px;
+    width: 120px;  
+    display: none;
+    border: none;
+    font-weight: 500;
+    background-color: rgba(53, 53, 242, 0.158);
+    transition: transform 0.3s ease-in-out, background-color 0.2s ease-in-out;
+}
+.buttonInfo:hover {
+    transform: scale(1.05);
+    background-color: rgba(53, 53, 242, 0.278);
+}
+.container:hover .buttonInfo {
+    display: block;
+}
+.container:hover {
+    background-color: #7284df0e;
 }

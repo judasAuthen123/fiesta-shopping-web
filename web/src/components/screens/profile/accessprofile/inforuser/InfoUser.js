@@ -19,6 +19,7 @@ export default function InfoUser() {
   const [editNameStatus, setEditNameStatus] = useState(true)
   const [name, setName] = useState(null)
   useEffect(() => {
+    setName(dataUser?.name)
     const hash = SHA256(dataUser._id).toString()
     const numericHash = parseInt(hash.slice(0, 10), 16).toString();
     setHashId(numericHash)
@@ -92,7 +93,7 @@ export default function InfoUser() {
           <input
             readOnly={editNameStatus}
             id='inputName'
-            value={name ? name : dataUser.name}
+            value={name}
             style={{ border: editNameStatus ? '1px solid black' : '1px solid #00ffff' }}
             onChange={(e) => setName(e.target.value)} />
           <div className={styles.viewEdit}>

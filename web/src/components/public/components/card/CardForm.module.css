@@ -8,7 +8,6 @@
     right: 0;
     bottom: 0;
     z-index: 800;
-    box-sizing: unset;
     display: flex;
     user-select: none;
     justify-content: center;
@@ -17,7 +16,6 @@
 
 .container>form {
     width: 500px;
-    position: absolute;
     background-color: white;
     padding: 25px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.579);
@@ -96,7 +94,7 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    row-gap: 40px;
+    row-gap: 25px;
 }
 
 .viewDefault {

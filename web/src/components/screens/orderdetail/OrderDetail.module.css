@@ -1,0 +1,128 @@
+.container {
+    content: '';
+}
+
+.box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.box .title {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.layoutContent {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+}
+
+.itemLayout {
+    content: '';
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.headerDetail {
+    background-color: rgba(230, 230, 230, 0.11);
+    display: flex;
+    flex-direction: column;
+}
+
+.headerDetail>div {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(205, 205, 205, 0.251);
+}
+
+.headerDetail>div>p {
+    font-size: 14px;
+}
+
+.headerDetail>div:last-child {
+    border-bottom: none;
+}
+
+.headerDetail>div>button {
+    width: 200px;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 3px;
+    border: 1px solid black;
+}
+
+.headerDetail>div:nth-child(1)>button {
+    background-color: black;
+    color: white;
+}
+
+.headerDetail>div:nth-child(2)>button {
+    background-color: white;
+}
+
+.viewAddress {
+    background-color: rgba(230, 230, 230, 0.11);
+    padding: 10px;
+    position: relative;
+}
+
+.viewAddress>div {
+    display: flex;
+    column-gap: 20px;
+}
+
+.viewAddress>p {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.detailAddress>p:nth-child(1) {
+    font-size: 15px;
+    font-weight: 400;
+    color: black;
+}
+
+.detailAddress>p {
+    color: rgba(74, 74, 74, 0.863);
+}
+
+.detailAddress {
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 400px;
+    border-right: 1px solid rgba(181, 181, 181, 0.263);
+}
+
+@media (max-width: 1200px) {
+    .layoutContent {
+        width: 98%;
+    }
+}
+
+@media (max-width: 850px) {
+    .products {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

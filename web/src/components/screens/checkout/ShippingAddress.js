@@ -4,22 +4,30 @@ import ItemAddress from './address/ItemAddress'
 import AddressForm from './address/AddressForm'
 import { AppContext } from '../../../util/AppContext'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
+import Dialog from './../../public/components/dialog/Dialog';
 export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
     const { dataUser } = useContext(AppContext)
 
     const [addressFormVisible, setAddressFormVisible] = useState(false)
     const [address, setAddress] = useState([])
     const [selectedAddress, setSelectedAddress] = useState(null)
-
-    
+    const [visible, setIsVisible] = useState(false)
     const onCallbackAddressFormClose = (state) => {
         setAddressFormVisible(state)
     }
     useEffect(() => {
         if (dataUser) {
-            setAddress(dataUser.address)
+            setAddress(dataUser.address?.reverse())
         }
-    }, [])
+    }, [dataUser])
+    useEffect(() => {
+        if (visible) {
+            const timer = setTimeout(() => {
+                setIsVisible(false)
+            }, 1800)
+            return () => clearTimeout(timer)
+        }
+    }, [visible])
     return (
         <div className={styles.layoutContent}>
             <div className={styles.viewTitle}>
@@ -44,9 +52,12 @@ export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
                     {
                         address && address.length > 0 ?
                             address.map(item =>
-                                <ItemAddress data={item} key={item._id} onChange={(data) => {
+                                <ItemAddress data={item} key={item._id} 
+                                onOpenSuccessDialog={setIsVisible}
+                                onChange={(data) => {
                                     setSelectedAddress(data)
                                     onChangeAddress(data)
+                                    
                                 }
                                 } selected={item?._id === selectedAddress?._id} />
                             ) : null
@@ -57,7 +68,8 @@ export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
                     style={{ padding: 10, backgroundColor: 'black', color: 'white', marginTop: 10, border: 'none', borderRadius: 3 }}>
                     + New Address
                 </button>
-                <AddressForm isVisible={addressFormVisible} onClose={onCallbackAddressFormClose} />
+                <AddressForm isVisible={addressFormVisible} onClose={onCallbackAddressFormClose} onOpenSuccessDialog={setIsVisible} />
+                <Dialog status={'Update Address Successful!'} isVisible={visible} />
             </div>
         </div>
     )

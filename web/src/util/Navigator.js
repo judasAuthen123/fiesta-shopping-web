@@ -9,6 +9,7 @@ import ShopByCategories from "../components/screens/shop/ShopByCategories";
 import Login from '../components/screens/login/Login';
 import Register from '../components/screens/register/Register';
 import Checkout from "../components/screens/checkout/Checkout";
+import OrderDetail from "../components/screens/orderdetail/OrderDetail";
 import { AppContext } from "./AppContext";
 function AppNavigator() {
     return (
@@ -20,6 +21,7 @@ function AppNavigator() {
             <Route path="/cart" element={<AuthRoute><Cart /></AuthRoute>} />
             <Route path="/checkout" element={<AuthRoute><Checkout /></AuthRoute>} />
             <Route path="/profile" element={<AuthRoute><Profile /></AuthRoute>} />
+            <Route path="/order-detail" element={<AuthRoute><OrderDetail /></AuthRoute>} />
             <Route path="/shop/:id" element={<ShopByCategories />} />
             <Route path="/login" element={<AuthLogin><Login /></AuthLogin>} />
             <Route path="/register" element={<AuthLogin><Register /></AuthLogin>} />
@@ -41,7 +43,7 @@ function AuthLogin({ children }) {
     return (
         <>
             {
-                !dataUser && !token ? children : <Navigate to={'/'} />
+                !dataUser || !token ? children : <Navigate to={'/'} />
             }
         </>
     )

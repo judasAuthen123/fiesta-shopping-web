@@ -2,27 +2,15 @@ import React, { useEffect, useState } from 'react'
 import styles from './CardItem.module.css'
 import { SiVisa } from "react-icons/si";
 import { BsCheckCircleFill } from "react-icons/bs";
+import CardDetail from '../../../public/components/card/CardDetail';
 const numOnCardDisplay = (num) => {
     return `•••• ${num}`
 }
-export default function CardItem({ data, isDefault, onOpen, onCardIdHandler }) {
-    const [backgroundStyle, setBackgroundStyle] = useState(false)
-    const onOpenConfrimModal = (state) => onOpen(state)
-    useEffect(() => {
-        if (backgroundStyle) {
-            const timer = setTimeout(() => {
-                setBackgroundStyle(false)
-            }, 1000)
-            return () => clearTimeout(timer)
-        }
-    }, [backgroundStyle])
+export default function CardItem({ data, isDefault }) {
+    const [cardDetailVisible, setCardDetailVisible] = useState(false)
+
     return (
-        <div className={backgroundStyle ? styles.container2 : styles.container} onClick={() => {
-            setBackgroundStyle(true)
-            onOpenConfrimModal(true)
-            onCardIdHandler(data.id)
-        }
-        }>
+        <div className={styles.container}>
             {
                 data.brand && data.brand === 'MasterCard' ?
                     <div className={styles.masterCardView}>
@@ -41,6 +29,13 @@ export default function CardItem({ data, isDefault, onOpen, onCardIdHandler }) {
                     {data.name ? data.name : null}
                 </div>
             </div>
+            <button className={styles.buttonInfo} onClick={() => setCardDetailVisible(true)}>
+                Request
+            </button>
+            <CardDetail 
+            isVisble={cardDetailVisible} 
+            onClose={setCardDetailVisible} 
+            data={data}/>
         </div>
     )
 }
