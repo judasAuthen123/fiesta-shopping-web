@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { FaUser, FaLock } from "react-icons/fa";
-import { FcGoogle } from 'react-icons/fc';
 import './Login.css'
-import FacebookLogin from 'react-facebook-login'
-import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import AxiosInstance from '../../../util/AxiosInstance';
 import { AppContext } from '../../../util/AppContext';
 import { useNavigate } from 'react-router-dom';
@@ -29,10 +26,10 @@ export default function Login() {
                     cpassword: password
                 })
                 console.log(request);
-                
+
                 if (request.statusCode === 200) {
                     const user = request.user
-                    const token = request.token         
+                    const token = request.token
                     if (user && token) {
                         localStorage.setItem('token', JSON.stringify(token));
                         localStorage.setItem('user', JSON.stringify(user));
@@ -103,7 +100,7 @@ export default function Login() {
                         <a href='#'>Forgot password?</a>
                     </div>
                     <button type='submit' className='buttonLogin' >Login</button>
-                    <button  className='buttonLogin' onClick={() => navigate('/home')}>Back To Home</button>
+                    <button className='buttonLogin' onClick={() => navigate('/home')}>Back To Home</button>
                     {/* <FacebookLogin
                         appId='3532223907038486'
                         autoLoad={false}
