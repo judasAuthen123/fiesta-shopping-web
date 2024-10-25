@@ -1,8 +1,6 @@
 import React, { } from 'react'
 import styles from './Header.module.css'
-import { CiSearch } from "react-icons/ci";
-import { AiOutlineClose } from "react-icons/ai";
-import MenuDrop from './menudrop/MenuDrop';
+
 import { Link } from 'react-router-dom';
 import LoginAccess from './useroption/LoginAccess';
 function Header() {
@@ -14,7 +12,7 @@ function Header() {
         </div>
         <nav className={styles.boxHeader}>
           <Link to='/home'>Home</Link>
-          <MenuDrop />
+          <Link to='/shop'>Shop</Link>
           <Link href='#'>Out Story</Link>
           <Link href='#'>Blog</Link>
           <Link href='#'>Contact Us</Link>

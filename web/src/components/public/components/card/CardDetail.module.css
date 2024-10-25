@@ -62,9 +62,31 @@
     border-radius: 4px;
     font-size: 15px;
     font-weight: 500;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
 
 }
 
+.btnDeleteCard:is(:hover, ::after) {
+    transform: rotateY(180deg);
+    z-index: 0;
+}
+.btnDeleteCard::before {
+    content: 'Sure? Click to delete';
+    border-radius: 4px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: black;
+    background-color: cyan;
+    height: 100%;
+   
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
 .iconVisa {
     opacity: 0.8;
     margin-top: -15px;
