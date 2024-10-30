@@ -45,7 +45,7 @@ export default function PaymentSubmit({
                     amount: amount,
                     TransactionId: request.paymentIntentId,
                     datePurchase: `${format.formattedDate}, ${format.formattedTime}`,
-                    paymentStatus: 'Delivered'
+                    paymentStatus: 'Purchased'
                 },
                 shipping: address,
                 products: products,

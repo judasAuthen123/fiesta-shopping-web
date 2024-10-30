@@ -18,7 +18,7 @@ export default function ItemAddress({ data, onOpenSuccessDialog }) {
             userId: dataUser?._id,
             addressId: data._id
         })
-        if (request.satusCode === 200) {
+        if (request.statusCode === 200) {
             const user = JSON.parse(localStorage.getItem('user'))
             if (Array.isArray(user.address)) {
                 user.address = user.address.filter(item => item._id !== data._id)

@@ -6,7 +6,7 @@ import CardDetail from '../../../public/components/card/CardDetail';
 const numOnCardDisplay = (num) => {
     return `•••• ${num}`
 }
-export default function CardItem({ data, isDefault }) {
+export default function CardItem({ data, isDefault, onChangeDefaultCard, loading, onOpenSuccessDialog, onRemoveCard }) {
     const [cardDetailVisible, setCardDetailVisible] = useState(false)
 
     return (
@@ -35,7 +35,13 @@ export default function CardItem({ data, isDefault }) {
             <CardDetail 
             isVisble={cardDetailVisible} 
             onClose={setCardDetailVisible} 
-            data={data}/>
+            data={data}
+            isDefault={isDefault}
+            onChangeDefaultCard={onChangeDefaultCard}
+            loading={loading}
+            onOpenSuccessDialog={onOpenSuccessDialog}
+            onRemoveCard={onRemoveCard}
+            />
         </div>
     )
 }

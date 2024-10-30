@@ -1,5 +1,6 @@
 import React, { } from 'react'
 import styles from './Header.module.css'
+import { HiOutlineMenu } from "react-icons/hi";
 
 import { Link } from 'react-router-dom';
 import LoginAccess from './useroption/LoginAccess';
@@ -31,6 +32,9 @@ function Header() {
             </Link>
           </div>
           <button onClick={() => navigate(`/login`)}>Login</button> */}
+        </div>
+        <div className={styles.boxCollapse}>
+          <HiOutlineMenu size={24} className={styles.iconMenu} />
         </div>
       </div>
     </header>

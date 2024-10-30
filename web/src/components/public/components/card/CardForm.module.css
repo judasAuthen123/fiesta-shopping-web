@@ -22,16 +22,19 @@
     border-radius: 5px;
     animation: fadeInScaleUp 0.5s forwards;
 }
+
 @keyframes fadeInScaleUp {
     from {
-      opacity: 0.6;
-      transform: scale(0.7);
+        opacity: 0.6;
+        transform: scale(0.7);
     }
+
     to {
-      opacity: 1;
-      transform: scale(1);
+        opacity: 1;
+        transform: scale(1);
     }
-  }
+}
+
 .viewInput {
     font-size: 12px;
     display: flex;
@@ -103,6 +106,10 @@
     column-gap: 15px;
 }
 
+.viewDefault>label {
+    font-size: 12px;
+}
+
 .viewForm1 {
     display: grid;
     grid-template-columns: 66% 30%;
@@ -112,6 +119,7 @@
 .visaIconActive {
     color: #1434CB;
 }
+
 .visaIconInActive {
     color: #5c5c5c;
 }
@@ -127,17 +135,20 @@
     border-radius: 50%;
 }
 
-.masterCardView .masterCard1Active{
+.masterCardView .masterCard1Active {
     background-color: #f91832;
 }
-.masterCardView .masterCard1InActive{
+
+.masterCardView .masterCard1InActive {
     background-color: rgba(58, 58, 58, 0.705);
 }
-.masterCardView .masterCard2Active{
+
+.masterCardView .masterCard2Active {
     background: rgba(250, 117, 0, 0.663);
     margin-left: -6px;
 }
-.masterCardView .masterCard2InActive{
+
+.masterCardView .masterCard2InActive {
     background: rgba(92, 92, 92, 0.592);
     margin-left: -6px;
 }
@@ -199,4 +210,7 @@
     padding: 10px;
     font-size: 16px;
     color: rgb(214, 214, 214);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

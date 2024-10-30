@@ -1,11 +1,10 @@
 .container2 {
-    width: 40px;
-    padding: 3px;
+    width: 28px;
+    padding: 2.5px;
     background-color: #d7d7d7;
     border-radius: 13px;
     display: flex;
     transition: all 0.3s ease-in-out;
-    cursor: pointer;
 }
 .container {
     width: 40px;
@@ -17,18 +16,19 @@
     cursor: pointer;
 }
 .dot {
-    width: 16px;
-    height: 16px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background-color: white;
 }
 
 .on {
-    padding-left: 20px;
-    background-color: rgb(74, 75, 75);
+    padding-left: 15px;
+    background-color: rgba(57, 229, 38, 0.695);
 }
 
 .off {
     padding-left: 3px;
     background-color: #d7d7d7;
+    cursor: pointer;
 }

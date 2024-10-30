@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './CardForm.module.css'
 import { SiVisa } from "react-icons/si";
+import { IoClose } from "react-icons/io5";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import AxiosInstance from '../../../../util/AxiosInstance';
 import { AppContext } from '../../../../util/AppContext';
-
+import CircleLoading from './../loading/CircleLoading';
 
 const elementOptions = {
   placeholder: ' ',
@@ -21,12 +22,13 @@ const elementOptions = {
 };
 
 
-export default function CardForm({ isVisible, onClose, onRefreshCardData }) {
+export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpenSuccessDialog }) {
   const stripe = useStripe()
   const elements = useElements()
   const { dataUser } = useContext(AppContext)
   const [cardType, setCardType] = useState('')
   const [name, setName] = useState('')
+  const [isDefault, setIsDefault] = useState(false)
   const [errorValid, setErrorValid] = useState(false)
   const [loading, setLoading] = useState(false)
   const onChangeName = (e) => {
@@ -45,7 +47,7 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData }) {
       }
     }
   }
-  
+
   const stripeSubmit = async (event) => {
     event.preventDefault()
     try {
@@ -53,32 +55,39 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData }) {
         if (!stripe || !elements) {
           return
         }
+        setErrorValid(false)
+        setLoading(true)
         const cardNumberElement = elements.getElement(CardNumberElement)
         const { token, error } = await stripe.createToken(cardNumberElement, { name })
         if (error) {
+          setLoading(false)
           setErrorValid(true)
           console.log('error stripe: ' + error.message);
         } else {
-          setLoading(true)
-          const response = await AxiosInstance.post(`/payment/save-card?userId=${dataUser?._id}&token=${token.id}&isDefault=${true}`)
-          if(response.statusCode === 200) {
-            onRefreshCardData()
+
+          const response = await AxiosInstance.post(`/payment/save-card?userId=${dataUser?._id}&token=${token.id}&isDefault=${isDefault}`)
+          if (response.statusCode === 200) {
+            onRefreshCardData(response.data)
             onChangeModalOpen()
+            onOpenSuccessDialog(true)
           }
         }
       } else {
+        setLoading(false)
         setErrorValid(true)
       }
     } catch (error) {
-      console.log(error);
-
+      if (error) {
+        setLoading(false)
+        setErrorValid(true)
+      }
     }
 
   }
 
-
   const onChangeModalOpen = () => {
     onClose(false)
+    setErrorValid(false)
     setLoading(false)
   }
   if (isVisible === false) return null
@@ -139,11 +148,14 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData }) {
               </label>
             </div>
           </div>
+          <div className={styles.viewDefault}>
+            <input type='checkbox' onChange={(e) => setIsDefault(e.target.checked)} /> <label>use as default card?</label>
+          </div>
           {
             errorValid && (
               <div style={{ fontSize: 13, color: '#ff0000c2' }}>
-                <p>
-                  !Something went wrong or card information doesn't valid
+                <p style={{ display: 'flex', alignItems: 'center', columnGap: 4 }}>
+                  <IoClose size={16} /> Something went wrong or card information doesn't valid.
                 </p>
                 <p>
                   Note: Only support Visa and MasterCard
@@ -153,7 +165,7 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData }) {
           }
           <div className={styles.viewButton}>
             <button onClick={onChangeModalOpen}>Cancel</button>
-            <button type='submit' disabled={!stripe}>Submit</button>
+            <button type='submit' disabled={!stripe}>{loading ? <CircleLoading boderColor={'white'} /> : 'Submit'}</button>
           </div>
         </div>
       </form>

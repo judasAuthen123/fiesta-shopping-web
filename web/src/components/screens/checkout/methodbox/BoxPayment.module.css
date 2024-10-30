@@ -12,7 +12,7 @@
     font-weight: 500;
 }
 .viewContent {
-    max-height: 0;
+    height: 0;
     transition: max-height 0.3s ease-in-out;
     overflow: hidden;
 }

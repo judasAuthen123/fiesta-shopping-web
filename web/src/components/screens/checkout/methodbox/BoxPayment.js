@@ -6,16 +6,16 @@ export default function BoxPayment({ name, value, checked, onChange, label, paym
     const boxPaymentRef = useRef(null)
     useEffect(() => {
         if (checked) {
-            const scrollHeight = boxPaymentRef.current.scrollHeight;
-            boxPaymentRef.current.style.maxHeight = `${scrollHeight}px`
+
+            boxPaymentRef.current.style.height = `max-content`
         } else {
-            boxPaymentRef.current.style.maxHeight = `0px`
+            boxPaymentRef.current.style.height = `0px`
         }
     }, [checked]);
     let paymentComponent;
     switch (paymentMethod) {
         case paymentMethods.DEBIT_CREDIT_CARD:
-            paymentComponent = <Card />;
+            paymentComponent = <Card isShowNote={true}/>;
             break;
         default:
             paymentComponent = null;

@@ -17,6 +17,7 @@ button {
     justify-content: center;
     margin-bottom: 50px;
     margin-top: 50px;
+    position: relative;
 }
 
 .box .title {
@@ -25,19 +26,26 @@ button {
     align-items: center;
     font-size: 25px;
     font-weight: 400;
+    column-gap: 10px;
 }
 .boxAccess {
     width: 75%;
     display: grid;
-    grid-template-columns: 25% 70%;
-    column-gap: 5%; 
-    transition: width 0.3s ease-in-out;
+    grid-template-columns: 25% 72.5%;
+    column-gap: 2.5%; 
+}
+.boxUser.show {
+    transform: translateX(-6%);
 }
 .boxUser {
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(221, 220, 220, 0.5);
     height: max-content;
+    background-color: white;
+    z-index: 2;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
 }
 .boxInfUser {
     display: flex;
@@ -69,8 +77,55 @@ button {
     object-fit: cover;
     border-radius: 50%;
 }
+.btnSidebar {
+    display: none;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+    box-sizing: unset;
+}
+.btnSidebarClose {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 23px;
+    border-radius: 50%;
+    padding: 5px;
+    box-sizing: unset;
+    cursor: pointer;
+    display: none;
+}
+.btnSidebarClose:hover {
+    background-color: rgba(191, 191, 191, 0.164);
+} 
+.btnSidebar:hover {
+    background-color: rgba(191, 191, 191, 0.164);
+} 
 @media (max-width: 1200px) {
     .boxAccess {
-        width: 98%;
+        width: 96%;
+    }
+    .box .title {
+        width: 96%;
+    }
+}
+@media (max-width: 850px) {
+    .boxAccess {
+        grid-template-columns: 1fr;
+    }
+    .btnSidebar {
+        display: block;
+    }
+    .btnSidebarClose {
+        display: block;
+    }
+    .boxUser {
+        position: absolute;
+        transform: translateX(-106%);
+        top: -220px;
+        width: 270px;
+        z-index: 101;
+        height: 100vh;
+
     }
 }
