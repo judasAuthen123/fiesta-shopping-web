@@ -1,56 +1,68 @@
 .container {
-    display: none;
+    visibility: hidden;
     width: 100%;
-    height: 0;
-    min-height: 0px;
     overflow: hidden;
-    transition: min-height 0.3s ease-in-out;
+    transition: height 0.3s ease-in-out;
     position: absolute;
     top: 80px;
     background-color: white;
-    border-bottom: 1px solid rgba(94, 94, 94, 0.133);
+    box-shadow: 0px 4px 8px rgba(189, 189, 189, 0.166);;
 }
 
 .body {
-    content: '';
     width: 100%;
-    background-color: rgba(137, 137, 137, 0.096);
     padding: 15px;
     box-sizing: border-box;
-
+    background-color: white;
+    margin-bottom: 20px;
 }
 
-.body .boxUser {
+
+.boxContent {
+    width: 100%;
+    transition: transform 0.42s ease-in-out;
+}
+
+.boxContent.in {
+    transform: translateY(0);
+}
+
+.boxContent.out {
+    transform: translateY(-100%);
+}
+
+.body .boxContent .boxUser {
     background-color: white;
     border-radius: 5px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     padding: 15px;
     display: flex;
     column-gap: 15px;
+    box-shadow: 0 0 8px rgba(128, 127, 127, 0.33);
 }
 
-.body .boxUser .info>p {
+.body .boxContent .boxUser .info>p {
     font-size: 14px;
 }
 
-.body .boxUser .info>p:nth-child(1) {
+.body .boxContent .boxUser .info>p:nth-child(1) {
     font-weight: 500;
 }
 
-.body .boxUser>img {
-    width: 38px;
-    height: 38px;
+.body .boxContent .boxUser>img {
+    width: 45px;
+    height: 45px;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.body>nav {
+.body .boxContent>nav {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
-.body>nav>a {
+.body .boxContent>nav>a {
     background-color: white;
     border-radius: 5px;
     text-decoration: none;
@@ -59,18 +71,18 @@
     font-size: 14px;
     width: 100%;
     padding: 12px;
-    box-shadow: 0px 2px 4px rgba(75, 75, 75, 0.077);
+    box-shadow: 0 0 8px rgba(128, 127, 127, 0.33);
     transition: background-color 0.1s ease-in-out, color 0.08s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.body>nav>a .iconAccess {
+.body .boxContent>nav>a .iconAccess {
     font-size: 14px;
 }
 
-.body>nav>a:hover {
+.body .boxContent>nav>a:hover {
     background-color: rgba(0, 0, 0, 0.799);
     color: white;
 }
@@ -79,6 +91,6 @@
 
 @media (max-width: 1050px) {
     .container {
-        display: block;
+        visibility: visible;
     }
 }

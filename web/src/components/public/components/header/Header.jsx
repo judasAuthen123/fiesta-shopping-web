@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Header.module.css'
 import { HiOutlineMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
@@ -6,10 +6,27 @@ import { Link } from 'react-router-dom';
 import LoginAccess from './useroption/LoginAccess';
 import AccessExCollapse from './AccessExCollapse';
 function Header() {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
+  function debounce(func, deley) {
+    let timer;
+    return function() {
+      clearTimeout(timer)
+      timer = setTimeout(() => func(), deley)
+    }
+  }
+  useEffect(() => {
+    const handlerExCollapse = debounce(() => {
+      if(window.innerWidth > 1050) {
+        setIsVisible(false)
+      }
+    }, 20)
+    window.addEventListener('resize', handlerExCollapse)
+    return () => window.removeEventListener('resize', handlerExCollapse)
+  }, [])
   return (
     <header className={styles.container}>
+      {isVisible ? <div className={styles.containerExpanded} onClick={() => setIsVisible(false)}> </div> : null}
       <div className={styles.boxContent}>
         <div className={styles.boxTitle}>
           <h3>Fashion Fiesta</h3>
@@ -37,12 +54,12 @@ function Header() {
           <button onClick={() => navigate(`/login`)}>Login</button> */}
         </div>
         <div className={styles.boxCollapse}>
-          {isExpanded ? <IoClose size={24} className={styles.iconMenu} onClick={() => setIsExpanded(prev => !prev)} /> :
-            <HiOutlineMenu size={24} className={styles.iconMenu} onClick={() => setIsExpanded(prev => !prev)} />}
+          {isVisible ? <IoClose size={24} className={styles.iconMenu} onClick={() => setIsVisible(prev => !prev)} /> :
+            <HiOutlineMenu size={24} className={styles.iconMenu} onClick={() => setIsVisible(prev => !prev)} />}
 
         </div>
       </div>
-      <AccessExCollapse isExpanded={isExpanded} />
+      <AccessExCollapse isExpanded={isVisible} />
     </header>
   )
 }
