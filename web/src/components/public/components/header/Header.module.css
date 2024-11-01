@@ -9,7 +9,7 @@
   border-bottom: 1px solid rgba(94, 94, 94, 0.133);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 99;
   background-color: white;
 }
 
@@ -115,7 +115,6 @@
   .boxCollapse {
     display: block;
   }
-
   .boxHeader,
   .boxOption {
     display: none;

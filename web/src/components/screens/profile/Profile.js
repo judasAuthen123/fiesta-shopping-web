@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Header from '../../public/components/header/Header'
-import Footer from '../../public/components/footer/Footer'
 import styles from './Profile.module.css'
 import { PiHandWavingFill } from "react-icons/pi";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
@@ -16,6 +15,33 @@ export default function Profile() {
   const type = queryParams.get('type')
   const [sideAction, setSideAction] = useState(false)
   const [selectedId, setSelectedId] = useState(type ? parseInt(type, 10) : 1);
+  const [sizeResponsive, setSizeResponsive] = useState(window.innerWidth <= 850)
+  function debounce(func, delay) {
+    let timer;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(() => func(), delay);
+    };
+  }
+  // function debounce(func, delay) {
+  //   let timer;
+  //   return function (...args) {
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => func.apply(this, args), delay);
+  //   };
+  // }
+  useEffect(() => {
+    const handlerSideAction = debounce(() => {
+      if (window.innerWidth > 850) {
+        setSideAction(false)
+        setSizeResponsive(false)
+      } else {
+        setSizeResponsive(true)
+      }
+    }, 20)
+    window.addEventListener('resize', handlerSideAction);
+    return () => window.removeEventListener('resize', handlerSideAction);
+  }, [])
   const onChangeId = (id) => {
     setSelectedId(id)
   }
@@ -34,6 +60,7 @@ export default function Profile() {
       </div>
       <div className={styles.box}>
         <div className={styles.boxAccess}>
+          {sideAction && sizeResponsive && <div className={styles.containerSidebar} onClick={() => setSideAction(false)}></div>}
           <div className={`${styles.boxUser} ${sideAction ? styles.show : ''}`}>
             <CgMenuRight
               className={styles.btnSidebarClose}

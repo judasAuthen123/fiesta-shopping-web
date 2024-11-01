@@ -25,7 +25,9 @@ export default function InfoUser() {
     setHashId(numericHash)
   }, [dataUser?._id])
 
-
+  useEffect(() => {
+    setName(dataUser?.name)
+  }, [editNameStatus, dataUser?.name])
   useEffect(() => {
     if (isVisbile) {
       const timer = setTimeout(() => {
@@ -52,7 +54,7 @@ export default function InfoUser() {
   const updateName = async () => {
     try {
       const data = new FormData()
-      data.append('updateFields', JSON.stringify({name: name}))
+      data.append('updateFields', JSON.stringify({ name: name }))
       const request = await AxiosInstance.post(`userApi/updateUser/${dataUser?._id}`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -75,7 +77,7 @@ export default function InfoUser() {
     <div className={styles.container}>
       <ImageForm isVisible={imgFromVisible} onClose={setImgFormVisible} onOpenSuccessDialog={setIsVisbile} />
       <Dialog isVisible={isVisbile} status={'Update profile successful!'} />
-      <EmailForm isVisible={emailFormVisible} onClose={setEmailFormVisible} onOpenSuccessDialog={setIsVisbile}/>
+      <EmailForm isVisible={emailFormVisible} onClose={setEmailFormVisible} onOpenSuccessDialog={setIsVisbile} />
       <div className={`${styles.view} ${styles.view1}`}>
         <div className={styles.viewImg} onClick={() => setImgFormVisible(true)}>
           <img alt='' src={dataUser.image?.id ? dataUser.image.url : defaultAvt} />
