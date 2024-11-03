@@ -17,7 +17,6 @@ export default function Home() {
             <p className={styles.text1}>Classic Exclusive</p>
             <p className={styles.text2}>Women's Collection</p>
             <p className={styles.text3}>UPTO 40% OFF</p>
-            <button>Shop now <GrLinkNext /></button>
           </div>
         </div>
       </div>
