@@ -6,7 +6,6 @@ const resources = {
     vi: { translation: translateVN },
     en: { translation: translateEN }
 }
-const currentLanguage = JSON.parse(localStorage.getItem('language'))
 i18next.use(initReactI18next).init({
     keySeparator:".",
     debug: true,
@@ -14,7 +13,7 @@ i18next.use(initReactI18next).init({
         escapeValue: false,
     },
     resources: resources,
-    lng: currentLanguage ? currentLanguage.value : 'en',
+    lng: 'en',
     fallbackLng: 'en'
 })
 export default i18next

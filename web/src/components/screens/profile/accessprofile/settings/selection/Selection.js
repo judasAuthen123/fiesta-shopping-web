@@ -2,11 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 import styles from './Selection.module.css'
 import { MdOutlineDone } from "react-icons/md";
-import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 export default function Selection({ optionsData, typeData }) {
     const [selectedOption, setselectedOption] = useState(null)
-    const { i18net } = useTranslation()
     const [isOpen, setisOpen] = useState(false);
     const heightRef = useRef();
     const boderRef = useRef();
@@ -15,11 +13,11 @@ export default function Selection({ optionsData, typeData }) {
     useEffect(() => {
         if (optionsData && Array.isArray(optionsData)) {
             const currentData = JSON.parse(localStorage.getItem(typeData))
-            console.log(currentData);
+
 
             const firstValue = optionsData[0]
             setselectedOption(() => {
-                return currentData && currentData.value && currentData.name ? currentData : firstValue
+                return currentData && currentData.name &&  currentData.value ? currentData : firstValue
             })
         }
     }, [])
