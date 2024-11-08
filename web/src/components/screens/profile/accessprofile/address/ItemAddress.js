@@ -6,7 +6,9 @@ import AxiosInstance from '../../../../../util/AxiosInstance'
 import AddressFormUpdate from '../../../checkout/address/AddressFormUpdate'
 import ConfirmDialog from '../../../../public/components/dialog/ConfirmDialog'
 import { AppContext } from '../../../../../util/AppContext'
+import { useTranslation } from 'react-i18next'
 export default function ItemAddress({ data, onOpenSuccessDialog }) {
+    const {t} = useTranslation()
     const { dataUser, setDataUser } = useContext(AppContext)
     const [addressFormUpdateVisible, setAddressFormUpdateVisible] = useState(false)
     const [isVisibleConfirm, setIsVisibleConfirm] = useState(false)
@@ -56,7 +58,7 @@ export default function ItemAddress({ data, onOpenSuccessDialog }) {
                 >
                     <FiEdit className={styles.icon} />
                     <div className={styles.text}>
-                        Edit
+                    {t('Profile.Article.Address.button.buttonEdit')}
                     </div>
                 </button>
                 <button className={styles.btnDelete}
@@ -64,7 +66,7 @@ export default function ItemAddress({ data, onOpenSuccessDialog }) {
                 >
                     <RiDeleteBin6Line className={styles.icon} />
                     <div className={styles.text}>
-                        Delete
+                    {t('Profile.Article.Address.button.buttonDelete')}
                     </div>
                 </button>
             </div>
@@ -73,7 +75,7 @@ export default function ItemAddress({ data, onOpenSuccessDialog }) {
                 onClose={setAddressFormUpdateVisible}
                 onOpenSuccessDialog={onOpenSuccessDialog}
                 dataOldAddress={data} />
-            <ConfirmDialog label={'Delete this addresss?'}
+            <ConfirmDialog label={t('Components.address.titleConfirmDelelte')}
                 isVisible={isVisibleConfirm}
                 onCancel={setIsVisibleConfirm}
                 loading={loading}

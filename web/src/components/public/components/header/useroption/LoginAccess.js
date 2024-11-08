@@ -7,8 +7,10 @@ import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import styles from './LoginAccess.module.css'
 import { useNavigate } from 'react-router-dom';
 import { defaultAvt } from '../../image/DefaultIAvt';
+import { useTranslation } from 'react-i18next';
 export default function LoginAccess() {
     const { dataUser } = useContext(AppContext)
+    const { t } = useTranslation()
     const navigate = useNavigate()
     return (
         <div>
@@ -16,10 +18,10 @@ export default function LoginAccess() {
                 <div className={styles.boxTrue}>
                     <div className={styles.title}>
                         <p>
-                            Seeking premium fashion?
+                            {t('Header.question')}
                         </p>
                         <p>
-                            Shop now <MdOutlineKeyboardDoubleArrowRight />
+                            {t('Header.shopnow')} <MdOutlineKeyboardDoubleArrowRight />
                         </p>
                     </div>
                     <div style={{ width: 0.5, height: 30, backgroundColor: '#85858556', marginRight: 15, marginLeft: 15 }} />
@@ -43,10 +45,10 @@ export default function LoginAccess() {
                     <div style={{ width: 0.5, height: 30, backgroundColor: '#85858556', marginRight: 15, marginLeft: 15 }} />
                     <div className={styles.boxFalse}>
                         <button onClick={() => navigate('/register')}>
-                            Sign up
+                            {t('Header.buttonSignup')}
                         </button>
                         <button onClick={() => navigate('/login')}>
-                            Login
+                        {t('Header.buttonLogin')}
                         </button>
                     </div>
                 </div>

@@ -13,12 +13,12 @@ button {
 }
 
 .boxText>h4 {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
 }
 
 .boxText>p {
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .boxAddress {
@@ -97,7 +97,8 @@ button {
     display: flex;
     align-items: center;
     padding: 6px;
-    width: 85px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: none;
     background-color: white;
     color: black;

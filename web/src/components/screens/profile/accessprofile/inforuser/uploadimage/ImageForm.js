@@ -5,7 +5,9 @@ import { defaultAvt } from '../../../../../public/components/image/DefaultIAvt';
 import CircleLoading from './../../../../../public/components/loading/CircleLoading';
 import AxiosInstance from '../../../../../../util/AxiosInstance';
 import { AppContext } from '../../../../../../util/AppContext';
+import { useTranslation } from 'react-i18next';
 export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
+    const { t } = useTranslation()
     const [selectedFiles, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [loading, setLoading] = useState(false)
@@ -102,20 +104,20 @@ export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
                 </div>
                 <div className={styles.noteImg}>
                     <p>
-                        File size: maximum 5 MB
+                    {t('Components.avatar.size')}
                     </p>
                     <p>
-                        File extension: .JPEG, .PNG
+                    {t('Components.avatar.extension')}
                     </p>
                 </div>
                 <input id='fileInput' type="file" onChange={handleFileChange} accept="image/*" multiple />
                 <div className={styles.viewButton}>
                     <button onClick={() => onClose(false)}>
-                        Cancel
+                    {t('Components.avatar.button.btnCancel')}
                     </button>
                     <button type='submit'>
                         {
-                            loading ? <CircleLoading boderColor={'black'} /> : 'Save'
+                            loading ? <CircleLoading boderColor={'black'} /> : t('Components.avatar.button.btnSubmit')
                         }
                     </button>
                 </div>

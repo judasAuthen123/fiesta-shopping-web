@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styles from './ColorList.module.css'
+import { useTranslation } from 'react-i18next'
 export default function ColorList({ data, onChange }) {
+    const {t} = useTranslation()
     const [selectedColor, setselectedColor] = useState(null)
     const onChangeColor = (color) => {
         setselectedColor(color)
@@ -11,7 +13,7 @@ export default function ColorList({ data, onChange }) {
             {
                 data && data.length > 0 ?
                     <div className={styles.container}>
-                        <h5>Color</h5>
+                        <h5>{t('ProductDetail.color')}</h5>
                         <div className={styles.viewColor}>
 
                             {data.map(item => {

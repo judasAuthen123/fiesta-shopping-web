@@ -4,10 +4,12 @@ import image from '../../assets/images/th.png'
 import AxiosInstance from '../../../util/AxiosInstance'
 import { GrFormNext } from "react-icons/gr";
 import { AppContext } from '../../../util/AppContext';
+import { useTranslation } from 'react-i18next';
 export default function MyCheckout({ data, stepSubmit }) {
     const [checkoutList, setCheckoutList] = useState([])
     // const [cartInfor, setCartInfo] = useState([])
     // const [cartMap, setCartMap] = useState([])
+    const { t } = useTranslation()
     const { dataUser } = useContext(AppContext)
     const [subTotalPrice, setSubTotalPrice] = useState(0)
     useEffect(() => {
@@ -68,10 +70,10 @@ export default function MyCheckout({ data, stepSubmit }) {
         <div className={styles.viewMyCheckout}>
             <div className={styles.viewTitle}>
                 <label>
-                    Your Orders
+                    {t('Checkout.myCheckout.title')}
                 </label>
                 <button onClick={() => stepSubmit('orderSubmit')}>
-                    Next <GrFormNext />
+                    {t('Checkout.accessBtn.next')} <GrFormNext />
                 </button>
             </div>
 
@@ -91,15 +93,15 @@ export default function MyCheckout({ data, stepSubmit }) {
                                             ${priceInfo.price}
                                         </p>
                                         <p>
-                                            variations: {priceInfo._size_color__}
+                                            {t('Checkout.myCheckout.variation')}: {priceInfo._size_color__}
                                         </p>
                                         <p>
-                                            count: {item.quantity}
+                                            {t('Checkout.myCheckout.count')}: {item.quantity}
                                         </p>
                                     </div>
                                     <div className={styles.viewTotal}>
                                         <p>
-                                            Total: ${priceInfo.totalPrice}
+                                            {t('Checkout.myCheckout.total')}: ${priceInfo.totalPrice}
                                         </p>
                                     </div>
                                 </div>
@@ -111,7 +113,7 @@ export default function MyCheckout({ data, stepSubmit }) {
             </div>
             <div className={styles.viewSubTotal}>
                 <p>
-                    Order Total ({checkoutList.length} items): ${subTotalPrice}
+                    {t('Checkout.myCheckout.orderTotal')} ({checkoutList.length} {t('Checkout.myCheckout.items')}): ${subTotalPrice}
                 </p>
             </div>
         </div>

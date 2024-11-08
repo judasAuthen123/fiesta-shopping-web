@@ -4,38 +4,47 @@ import AxiosInstance from './../../../../../util/AxiosInstance';
 import { AppContext } from './../../../../../util/AppContext';
 import styles from './MyOrders.module.css'
 import ListRender from '../../../../public/components/listRender/ListRender'
+import { useTranslation } from 'react-i18next';
 export default function MyOrders() {
+  const { t } = useTranslation()
   const { dataUser } = useContext(AppContext)
   const marginRef = useRef()
 
   const arrSatus = [
     {
       id: 0,
-      status: 'All'
+      status: 'All',
+      value: t('Profile.Article.Orders.toptab.all')
     },
     {
       id: 1,
-      status: 'Pending'
+      status: 'Pending',
+      value: t('Profile.Article.Orders.toptab.pending')
     },
     {
       id: 2,
-      status: 'Processing'
+      status: 'Processing',
+      value: t('Profile.Article.Orders.toptab.processing')
     },
     {
       id: 3,
-      status: 'Shipping'
+      status: 'Shipping',
+      value: t('Profile.Article.Orders.toptab.shipping')
     },
     {
       id: 4,
-      status: 'Delivered'
+      status: 'Delivered',
+      value: t('Profile.Article.Orders.toptab.delivered')
     },
     {
       id: 5,
-      status: 'Cancelled'
+      status: 'Cancelled',
+      value: t('Profile.Article.Orders.toptab.cancelled')
     },
     {
       id: 6,
-      status: 'Returned'
+      status: 'Returned',
+      value: t('Profile.Article.Orders.toptab.returned')
     }
   ]
 
@@ -81,14 +90,14 @@ export default function MyOrders() {
                   return item.status === 'All' ? '' : item.status
                 })
               }}
-              className={`${styles.itemTopTab} ${statusSelected === item.id ? styles.selected : ''}`}>{item.status}</div>
+              className={`${styles.itemTopTab} ${statusSelected === item.id ? styles.selected : ''}`}>{item.value}</div>
           )
         }
         <div className={styles.bottomLine} ref={marginRef} />
       </div>
       <ListRender
         isTrue={dataOrderSelected.length > 0}
-        label={'No orders yet'}
+        label={t('Profile.Article.Orders.listEmpty')}
         className={styles.listRender}
         isStartUp={statusFilter}>
         {

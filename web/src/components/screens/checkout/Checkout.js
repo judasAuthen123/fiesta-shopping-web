@@ -15,7 +15,9 @@ import { paymentMethods } from './methodbox/paymentmethod'
 import PaymentSubmit from './dialog/PaymentSubmit'
 import CircleLoading from '../../public/components/loading/CircleLoading'
 import OrderSuccess from './dialog/OrderSuccess'
+import { useTranslation } from 'react-i18next'
 export default function Checkout() {
+    const { t } = useTranslation()
     const location = useLocation()
     const { dataUser } = useContext(AppContext)
     const [stateCheckout, setStateCheckout] = useState('order')
@@ -82,7 +84,6 @@ export default function Checkout() {
             }
         }
     }
-
     return (
         <div>
             <Header />
@@ -91,17 +92,17 @@ export default function Checkout() {
                 onCancel={setPaymentSubmitVisible}
                 userId={dataUser?._id}
                 amount={total}
-                products={formattedCartData} 
+                products={formattedCartData}
                 address={address}
-                onOpenOrderSuccess={setOrderSuccessVisible}/>
-            <OrderSuccess 
-            isVisible={orderSuccessVisbilem} 
-            onClose={setOrderSuccessVisible} 
-            completeCheckout={setStateCheckout}
+                onOpenOrderSuccess={setOrderSuccessVisible} />
+            <OrderSuccess
+                isVisible={orderSuccessVisbilem}
+                onClose={setOrderSuccessVisible}
+                completeCheckout={setStateCheckout}
             />
             <div className={styles.box}>
                 <div className={styles.title}>
-                    Checkout
+                {t('Checkout.title')}
                 </div>
             </div>
             <div className={styles.box}>
@@ -118,12 +119,12 @@ export default function Checkout() {
                     <div className={styles.viewFromCheckout}>
                         <div className={styles.viewSubtotal}>
                             <p>
-                                Order Details
+                            {t('Checkout.checkoutDetails.title')}
                             </p>
                         </div>
                         <div className={styles.viewSubtotal}>
                             <p style={{ fontWeight: 400 }}>
-                                Products Quantity: {productTotal}
+                            {t('Checkout.checkoutDetails.productsQuantity')}: {productTotal}
                             </p>
                             <p style={{ fontWeight: 400 }}>
                                 Total item: {totalItem}

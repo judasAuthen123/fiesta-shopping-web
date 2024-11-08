@@ -46,8 +46,7 @@ button {
 .viewTitle>button {
     display: flex;
     align-items: center;
-    padding: 6px;
-    width: 85px;
+    padding: 6px 10px;
     border: none;
     background-color: white;
     color: black;

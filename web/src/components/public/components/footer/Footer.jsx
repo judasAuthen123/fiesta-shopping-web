@@ -4,7 +4,9 @@ import { CiMail } from "react-icons/ci";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import styles from './Footer.module.css'
+import { useTranslation } from 'react-i18next';
 function Footer() {
+    const {t} = useTranslation()
     return (
         <div className={styles.container}>
             <div className={styles.contentLayout}>
@@ -23,49 +25,49 @@ function Footer() {
                     </div>
                     <div className={styles.viewInfo1}>
                         <h4>
-                            Information
+                            {t('Footer.Information.title')}
                         </h4>
                         <p>
-                            <a href='#'>My Account</a>
+                            <a href='#'>{t('Footer.Information.account')}</a>
                         </p>
                         <p>
-                            <a href='#'>login</a>
+                            <a href='#'>{t('Footer.Information.login')}</a>
                         </p>
                         <p>
-                            <a href='#'>My Cart</a>
+                            <a href='#'>{t('Footer.Information.cart')}</a>
                         </p>
                         <p>
-                            <a href='#'>My Wishlist</a>
+                            <a href='#'>{t('Footer.Information.wishlist')}</a>
                         </p>
                         <p>
-                            <a href='#'>Checkout</a>
+                            <a href='#'>{t('Footer.Information.checkout')}</a>
                         </p>
                     </div>
                     <div className={styles.viewInfo1}>
                         <h4>
-                            Service
+                        {t('Footer.Service.title')}
                         </h4>
                         <p>
-                            <a href='#'>About Us</a>
+                            <a href='#'>{t('Footer.Service.aboutUs')}</a>
                         </p>
                         <p>
-                            <a href='#'>Careeer</a>
+                            <a href='#'>{t('Footer.Service.career')}</a>
                         </p>
                         <p>
-                            <a href='#'>Delivery Information</a>
+                            <a href='#'>{t('Footer.Service.deliveryInformation')}</a>
                         </p>
                         <p>
-                            <a href='#'>Privacy Policy</a>
+                            <a href='#'>{t('Footer.Service.privacyPolicy')}</a>
                         </p>
                         <p>
-                            <a href='#'>Termns & Conditions</a>
+                            <a href='#'>{t('Footer.Service.terms_conditions')}</a>
                         </p>
                     </div>
                     <div className={styles.viewSubEmail}>
                         <h4>
-                            Subscribe
+                        {t('Footer.Subrscribes.title')}
                         </h4>
-                        <p>Enter your email below to be the first to know about new collections and product launches.</p>
+                        <p>{t('Footer.Subrscribes.content')}</p>
                         <div className={styles.emailForm}>
                             <CiMail className={styles.icon} /> Your Email
                         </div>

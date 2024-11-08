@@ -5,25 +5,31 @@ import { IoClose } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import LoginAccess from './useroption/LoginAccess';
 import AccessExCollapse from './AccessExCollapse';
+import { useTranslation } from 'react-i18next';
 function Header() {
-  const [isVisible, setIsVisible] = useState(false)
 
+
+  const [isVisible, setIsVisible] = useState(false)
+  const { t } = useTranslation()
   function debounce(func, deley) {
     let timer;
-    return function() {
+    return function () {
       clearTimeout(timer)
       timer = setTimeout(() => func(), deley)
     }
   }
+
   useEffect(() => {
     const handlerExCollapse = debounce(() => {
-      if(window.innerWidth > 1050) {
+      if (window.innerWidth > 1050) {
         setIsVisible(false)
       }
     }, 20)
     window.addEventListener('resize', handlerExCollapse)
     return () => window.removeEventListener('resize', handlerExCollapse)
   }, [])
+
+
   return (
     <header className={styles.container}>
       {isVisible ? <div className={styles.containerExpanded} onClick={() => setIsVisible(false)}> </div> : null}
@@ -32,11 +38,11 @@ function Header() {
           <h3>Fashion Fiesta</h3>
         </div>
         <nav className={styles.boxHeader}>
-          <Link to='/home'>Home</Link>
-          <Link to='/shop'>Shop</Link>
-          <Link>Out Story</Link>
-          <Link>Blog</Link>
-          <Link>Contact Us</Link>
+          <Link to='/home'>{t('Header.home')}</Link>
+          <Link to='/shop'>{t('Header.shop')}</Link>
+          <Link>{t('Header.ourStory')}</Link>
+          <Link>{t('Header.blog')}</Link>
+          <Link>{t('Header.contactUs')}</Link>
         </nav>
         <div className={styles.boxOption}>
           <LoginAccess />
@@ -59,7 +65,7 @@ function Header() {
 
         </div>
       </div>
-      <AccessExCollapse isExpanded={isVisible} />
+      <AccessExCollapse isExpanded={isVisible} onCloseDrop={() => setIsVisible(false)} />
     </header>
   )
 }

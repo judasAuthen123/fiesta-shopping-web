@@ -70,7 +70,8 @@
     display: flex;
     align-items: center;
     padding: 6px;
-    width: 85px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: none;
     background-color: white;
     color: black;

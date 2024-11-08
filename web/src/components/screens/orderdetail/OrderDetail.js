@@ -8,9 +8,10 @@ import { SlLocationPin } from "react-icons/sl";
 import { MdOutlinePayments } from "react-icons/md";
 import AxiosInstance from '../../../util/AxiosInstance'
 import ItemProductOrder from './ItemProductOrder'
+import { useTranslation } from 'react-i18next'
 export default function OrderDetail() {
+    const  {t} = useTranslation()
     const location = useLocation()
-    const navigate = useNavigate()
     const { _id } = location.state || {}
     const [dataOrder, setDataOrder] = useState({})
     const [totalQuantity, setTotalQuantity] = useState(null)
@@ -36,7 +37,7 @@ export default function OrderDetail() {
             <Header />
             <div className={styles.box}>
                 <div className={styles.title}>
-                    Order Detail
+                {t('OrderDetail.title')}
                 </div>
             </div>
             <div className={styles.box}>
@@ -47,20 +48,20 @@ export default function OrderDetail() {
                                 Have a good day!
                             </p>
                             <button>
-                                Cancel
+                                {t('OrderDetail.button.btnCancel')}
                             </button>
                         </div>
                         <div>
                             <p>
-                                Status Order: {dataOrder.status}
+                            {t('OrderDetail.statusOrder')}: {dataOrder.status}
                             </p>
                             <button>
-                                Contact Supports
+                            {t('OrderDetail.button.btnContactSupport')}
                             </button>
                         </div>
                         <div>
                             <p>
-                                Order Total
+                            {t('OrderDetail.orderTotal')}
                             </p>
                             <p style={{ fontSize: 16 }}>
                                 {dataOrder.payments?.amount}$
@@ -68,7 +69,7 @@ export default function OrderDetail() {
                         </div>
                         <div>
                             <p>
-                                Type of Product
+                            {t('OrderDetail.typeOfProduct')}
                             </p>
                             <p style={{ fontSize: 16 }}>
                                 {dataOrder.products?.length}
@@ -76,7 +77,7 @@ export default function OrderDetail() {
                         </div>
                         <div>
                             <p>
-                                Total Quantity
+                            {t('OrderDetail.totalQuantity')}
                             </p>
                             <p style={{ fontSize: 16 }}>
                                 {totalQuantity}
@@ -93,7 +94,7 @@ export default function OrderDetail() {
                         </div>
                     </div>
                     <div className={styles.viewAddress}>
-                        <p><SlLocationPin /> Delivery Address</p>
+                        <p><SlLocationPin />{t('OrderDetail.deliveryAddress')}</p>
                         <div>
                             <div className={styles.detailAddress}>
                                 <p>
@@ -116,26 +117,26 @@ export default function OrderDetail() {
                     </div>
                     <div className={styles.viewAddress}>
                         <p>
-                            <MdOutlinePayments /> Payments
+                            <MdOutlinePayments /> {t('OrderDetail.payments.title')}
                         </p>
                         <div>
                             <div className={styles.detailAddress}>
                                 <p>
-                                    Method: {dataOrder.payments?.method}
+                                {t('OrderDetail.payments.method')}: {dataOrder.payments?.method}
                                 </p>
                                 {
                                     dataOrder.payments?.TransactionId ?
-                                        <p>Purchase At: {dataOrder.payments?.datePurchase} </p> : null
+                                        <p>{t('OrderDetail.payments.purchaseAt')}: {dataOrder.payments?.datePurchase} </p> : null
                                 }
                                 <p>
-                                    Payment Status: {dataOrder.payments?.paymentStatus}
+                                {t('OrderDetail.payments.paymentStatus')}: {dataOrder.payments?.paymentStatus}
                                 </p>
                             </div>
                             <div>
                                 {
                                     dataOrder.payments?.TransactionId ?
                                         <p style={{ fontSize: 15, fontWweight: 400 }}>
-                                            Transaction ID: {dataOrder.payments?.TransactionId}
+                                            {t('OrderDetail.payments.transactionId')}: {dataOrder.payments?.TransactionId}
                                         </p> : null
                                 }
 

@@ -9,6 +9,7 @@ import { SHA256 } from 'crypto-js'
 import { MdDone } from 'react-icons/md'
 import AxiosInstance from '../../../../../util/AxiosInstance'
 import EmailForm from './emailsubmit/EmailForm'
+import { useTranslation } from 'react-i18next'
 export default function InfoUser() {
   const [modelInput, setModelInput] = useState(true)
   const [imgFromVisible, setImgFormVisible] = useState(false)
@@ -18,6 +19,7 @@ export default function InfoUser() {
   const { dataUser, setDataUser } = useContext(AppContext)
   const [editNameStatus, setEditNameStatus] = useState(true)
   const [name, setName] = useState(null)
+  const {t} = useTranslation()
   useEffect(() => {
     setName(dataUser?.name)
     const hash = SHA256(dataUser._id).toString()
@@ -90,7 +92,7 @@ export default function InfoUser() {
       <div className={styles.viewInformation}>
         <div className={styles.viewInput} ref={viewInputRef}>
           <label>
-            Name
+            {t('Profile.Article.Information.name')}
           </label>
           <input
             readOnly={editNameStatus}
@@ -103,13 +105,13 @@ export default function InfoUser() {
               editNameStatus ? (
                 <button onClick={() => setEditNameStatus(false)}>
                   <label htmlFor='inputName'>
-                    <TbEdit /> Edit
+                    <TbEdit /> {t('Profile.Article.Information.edit')}
                   </label>
                 </button>
               ) : (
-                <button onClick={updateName} style={{ backgroundColor: 'cyan' }} className={styles.buttonSave}>
+                <button onClick={updateName} style={{ backgroundColor: 'cyan', width:80 }} className={styles.buttonSave}>
                   <label htmlFor='inputName'>
-                    <MdDone /> Save
+                    <MdDone /> {t('Profile.Article.Information.save')}
                   </label>
                 </button>
               )
@@ -118,34 +120,34 @@ export default function InfoUser() {
         </div>
         <div className={styles.viewInput}>
           <label>
-            Gender
+          {t('Profile.Article.Information.gender')}
           </label>
           <input readOnly={modelInput} value={dataUser?.gender} />
           <div className={styles.viewEdit}>
             <button>
-              <TbEdit /> Edit
+              <TbEdit /> {t('Profile.Article.Information.edit')}
             </button>
           </div>
         </div>
         <div className={styles.viewInput}>
           <label>
-            Phone Number
+          {t('Profile.Article.Information.phoneNumber')}
           </label>
           <input readOnly={modelInput} value={'+(84) 0358856753'} />
           <div className={styles.viewEdit}>
             <button>
-              <TbEdit /> Edit
+              <TbEdit /> {t('Profile.Article.Information.edit')}
             </button>
           </div>
         </div>
         <div className={styles.viewInput}>
           <label>
-            Email Address
+          {t('Profile.Article.Information.emailAddress')}
           </label>
           <input readOnly={modelInput} value={dataUser?.email} />
           <div className={styles.viewEdit}>
             <button onClick={() => setEmailFormVisible(true)}>
-              <TbEdit /> Edit
+              <TbEdit /> {t('Profile.Article.Information.edit')}
             </button>
           </div>
         </div>

@@ -1,0 +1,370 @@
+{
+    "Language": {
+        "en": "English",
+        "vi": "Vietnamese"
+    },
+    "Theme": {
+        "light": "Light",
+        "dark": "Dark",
+        "device": "Device"
+    },
+    "Header": {
+        "home": "Home",
+        "shop": "Shop",
+        "ourStory": "Our story",
+        "blog": "Blog",
+        "contactUs": "Contact us",
+        "cart": "Cart",
+        "question": "Seeking premium fashion?",
+        "shopnow": "Shopping now",
+        "button": {
+            "buttonLogin": "Login",
+            "buttonSignup": "Sign up"
+        },
+        "profile": "Profile",
+        "language": "Language",
+        "orders": "Orders",
+        "appearance": "Appearance"
+    },
+    "Footer": {
+        "Information": {
+            "title": "Information",
+            "account": "Account",
+            "login": "Login",
+            "cart": "Cart",
+            "wishlist": "Wishlist",
+            "checkout": "Checkout"
+        },
+        "Service": {
+            "title": "Service",
+            "aboutUs": "Our story",
+            "career": "Career",
+            "deliveryInformation": "Delivery information",
+            "privacyPolicy": "Privacy policy",
+            "terms_conditions": "terms & conditions"
+        },
+        "Subrscribes": {
+            "title": "Subrscribes",
+            "content": "Enter your email below to be the first to know about new product updates."
+        }
+    },
+    "PolicyFooter": {
+        "freeShipping": {
+            "title": "Free Shipping",
+            "holder": "Free shipping for order 150$ above"
+        },
+        "moneyGuarantee": {
+            "title": "Money Guarantee",
+            "holder": "Within 30 days for exchange"
+        },
+        "onlineSupport": {
+            "title": "Online Support",
+            "holder": "24 hours a day, 7 days a week"
+        },
+        "flexiblePayment": {
+            "title": "Flexible Payment",
+            "holder": "Pay with multiple credit card"
+        }
+    },
+    "Cart": {
+        "title": "Cart",
+        "products": "Products",
+        "unitPrice": "Unit price",
+        "quantity": "Quantity",
+        "subTotal": "Subtotal",
+        "checkout": "Checkout",
+        "variation": "Variation",
+        "total": "Total",
+        "items": "items"
+    },
+    "Profile": {
+        "title": "Account",
+        "Nav": {
+            "hello": "Hello",
+            "information": "Information",
+            "orders": "Orders",
+            "address": "Addresses",
+            "cards": "Cards",
+            "notifications": "Notifications",
+            "settings": "Settings",
+            "signOut": "Log out"
+        },
+        "Article": {
+            "Information": {
+                "title": "Personal information",
+                "name": "name",
+                "gender": "gender",
+                "phoneNumber": "phone number",
+                "emailAddress": "email address",
+                "edit": "Update",
+                "save": "Save"
+            },
+            "Orders": {
+                "title": "Orders",
+                "toptab": {
+                    "all": "All",
+                    "pending": "Pending",
+                    "processing": "Processing",
+                    "shipping": "Shipping",
+                    "delivered": "Delivered",
+                    "cancelled": "Cancelled",
+                    "returned": "Returned"
+                },
+                "orderItem": {
+                    "orderId": "Order ID.",
+                    "paymentMethod": "Payment method",
+                    "amount": "Amount",
+                    "status": "Status",
+                    "purchased": "Purchased",
+                    "orderDate": "Order date",
+                    "to": "To",
+                    "details": "details"
+                },
+                "listEmpty": "No order yet"
+            },
+            "Address": {
+                "title": "Shipping address",
+                "add": "add new address",
+                "button": {
+                    "buttonEdit": "Update",
+                    "buttonDelete": "Delete"
+                },
+                "listEmpty": "No address yet"
+            },
+            "Cards": {
+                "title": "Credit/Debit card",
+                "add": "add card",
+                "listEmpty": "No card yet",
+                "dialogUpdate": "Update card successfully!"
+            },
+            "Notifications": {
+                "title": "Notifications",
+                "listEmpty": "No notification yet"
+            },
+            "Settings": {
+                "title": "Settings",
+                "appearance": {
+                    "title": "Appearance",
+                    "holder": "Customize how your theme looks on your device"
+                },
+                "language": {
+                    "title": "Language",
+                    "holder": "Select your language"
+                },
+                "twoFactor": {
+                    "title": "Two-factor Authentication",
+                    "holder": "Keep your account secure by enabling 2FA via mail"
+                },
+                "pushNotifications": {
+                    "title": "Push Notifications",
+                    "holder": "Receive push notification"
+                },
+                "desktopNotifications": {
+                    "title": "Desktop Notification",
+                    "holder": "Receive push notification in desktop"
+                },
+                "emailNotifications": {
+                    "title": "Email Notifications",
+                    "holder": "Receive email notificaltion"
+                }
+            },
+            "SignOut": {
+                "title": "Logout",
+                "confirm": "Are you sure to log out?"
+            }
+        }
+    },
+    "Shop": {
+        "shop": "Shop",
+        "home": "Home",
+        "filter": {
+            "title": "Filter",
+            "categories": "Product categories",
+            "price": "By price",
+            "range": "range",
+            "color": "By color",
+            "size": "By size",
+            "apply": "Apply"
+        },
+        "listShow": {
+            "string1": "Showing",
+            "string2": "items of",
+            "string3": "result"
+        }
+    },
+    "ProductDetail": {
+        "size": "Size",
+        "color": "Color",
+        "variation": "Variation",
+        "stock": "stock",
+        "status": {
+            "inStock": "Còn hàng",
+            "outStock": "Hết hàng"
+        },
+        "buttonAddToCard": "Add to Cart",
+        "dialogAddToCard": "Add to cart successfully!",
+        "description": "Description",
+        "addtionalInfo": "Addtional information"
+    },
+    "OrderDetail": {
+        "title": "Order Detail",
+        "statusOrder": "Status order",
+        "orderTotal": "Order total",
+        "typeOfProduct": "Type of product",
+        "totalQuantity": "Total quantity",
+        "button": {
+            "btnCancel": "Cancel Order",
+            "btnContactSupport": "Contact Support"
+        },
+        "deliveryAddress": "Delivery address",
+        "payments": {
+            "title": "Payments",
+            "method": "Method",
+            "purchaseAt": "Purchase at",
+            "transactionId": "Transaction ID",
+            "paymentStatus": "Payment status"
+        }
+    },
+    "Home": {
+        "shopByCategories": "Shop by categories",
+        "bestsellers": "Our bestsellers",
+        "review": "What's our customer say?"
+    },
+    "Checkout": {
+        "title": "Checkout",
+        "accessBtn": {
+            "next": "Next",
+            "back": "Back"
+        },
+        "myCheckout": {
+            "title": "Products in Order",
+            "orderTotal": "Order total",
+            "items": "vật phẩm",
+            "unitPrice": "Unit price",
+            "variation": "Variation",
+            "count": "Quantity",
+            "total": "Total"
+        },
+        "shippingAddress": {
+            "title": "Shipping Add ress",
+            "string1": "Select your address",
+            "string2": "Is the address you like to use displayed below? If so, click the corresponding. Or you can enter a new delivery address.",
+            "listEmpty": "No address yet",
+            "add": "add new address"
+        },
+        "paymentMethod": {
+            "title": "Payment method",
+            "typeOf": {
+                "1": "Cash on delivery",
+                "2": "Credit/Debit card"
+            }
+        },
+        "checkoutDetails": {
+            "title": "Order details",
+            "address": "Shipping address",
+            "paymentMethod": "Payment method",
+            "productsQuantity": "Type of product",
+            "totalItems": "Total items",
+            "notfilled": "notfilled",
+            "grandTotal": "Grand total",
+            "placeOrder": "Place Order"
+        }
+    },
+    "Components": {
+        "email": {
+            "EmailForm": {
+                "title": "Update Email",
+                "question": "Why should you update Email?",
+                "string1": {
+                    "title": "Get product updates",
+                    "holder": "Receive notifications about new products."
+                },
+                "string2": {
+                    "title": "Special discount",
+                    "holder": "Don't miss out on discounts."
+                },
+                "string3": {
+                    "title": "Order tracking",
+                    "holder": "Update order status easily."
+                },
+                "verify": {
+                    "string1": "We have sent the code to",
+                    "string2": "Please check your inbox!"
+                },
+                "error": {
+                    "emailInvalid": "Invalid email",
+                    "emailEmpty": "Please fill in email!"
+                },
+                "button": {
+                    "buttonConfirm": "Confirm Email",
+                    "buttonVerify": "Verify",
+                    "buttonBack": "Back",
+                    "buttonResend": "Resend"
+                }
+            }
+        },
+        "address": {
+            "titleAdd": "New Address",
+            "titleUpdate": "Update Address",
+            "titleConfirmDelelte": "Are you sure to delete this address?",
+            "dialogTitleUpdate": "Update address successfully!",
+            "addressDetail": {
+                "city": "City",
+                "district": "District",
+                "ward": "Ward",
+                "street": "Street, building",
+                "houseNumber": "House  No. (if applicable)",
+                "name": "Name",
+                "phoneNumber": "Phone number",
+                "button": {
+                    "buttonCancel": "Cancel",
+                    "buttonSubmit": "Confirm",
+                    "buttonUpdate": "Save",
+                    "buttonDelete": "Delete",
+                    "buttonEdit": "Update"
+                }
+            }
+        },
+        "card": {
+            "title": "Add card",
+            "cardNumber": "Card number",
+            "cardName": "Card name",
+            "expiryDate": "Expiry date (MM/YY)",
+            "cvc": "Cvc",
+            "useAsDefault": "Use as default card?",
+            "requireDefault": "Bạn chưa có thẻ nào, đây sẽ là thẻ mặc định.",
+            "dialogTitleUpdate": "Update card successfully!",
+            "noteUsing": "Your default card will be used for payment!",
+            "isDefault": "Default",
+            "setAsDefault": "Set as default",
+            "object": "Object",
+            "funding": "Funding",
+            "expiry": "Expiry date",
+            "button": {
+                "buttonRequest": "Request",
+                "buttonCancel": "Cancel",
+                "buttonSubmit": "Send",
+                "buttonDelete": "Delete card",
+                "buttonConfirmDelete": "Confirm delete"
+            },
+            "policyTitle": {
+                "string1": "Your card details are protected.",
+                "string2": "We partner with the third party to ensure that your card details are kept safe and secure. Fashion Fiesta will not have access to your card info."
+            },
+            "titleAddNew": "New card detail",
+            "error": {
+                "string1": "Something went wrong or card information doesn't valid.",
+                "string2": "Note: only support Visa or MasterCard!"
+            }
+        },
+        "avatar": {
+            "size": "File size: maximum 5 MB",
+            "extension": "File extension: .JPEG, .PNG",
+            "button": {
+                "btnCancel": "Cancel",
+                "btnSubmit": "Save"
+            },
+            "error": "File size exceeds 5 MB"
+        }
+    }
+}

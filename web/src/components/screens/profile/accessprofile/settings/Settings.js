@@ -1,53 +1,79 @@
 import React from 'react'
 import Options from './options/Options'
 import styles from './Settings.module.css'
+import { useTranslation } from 'react-i18next'
 export default function Settings() {
+  const { t } = useTranslation()
+  const dataLanguage = [
+    {
+      "name": t('Language.en'),
+      "value": "en"
+    },
+    {
+      "name": t('Language.vi'),
+      "value": "vi"
+    }
+  ]
+  const dataTheme = [
+    {
+      "name": t('Theme.light'),
+      "value": "Light"
+    },
+    {
+      "name": t('Theme.dark'),
+      "value": "Dark"
+    },
+    {
+      "name": t('Theme.device'),
+      "value": "Device"
+    },
+  ]
   return (
     <div className={styles.container}>
       <div>
         <Options
-          label={'Appearance'}
-          contentHolder={'Customize how your theme looks on your device'}
+          label={t('Profile.Article.Settings.appearance.title')}
+          contentHolder={t('Profile.Article.Settings.appearance.holder')}
           typeOption={'selector'}
-          optionsData={["Light", "Dark", "Galaxy", "Cosmic"]}
+          optionsData={dataTheme}
           typeData={'mode'}
         />
       </div>
       <div>
         <Options
-          label={'Language'}
-          contentHolder={'Select your language'}
+          label={t('Profile.Article.Settings.language.title')}
+          contentHolder={t('Profile.Article.Settings.language.holder')}
           typeOption={'selector'}
-          optionsData={["English", "Vietnamese"]}
+          optionsData={dataLanguage}
           typeData={'language'} />
       </div>
       <div>
         <Options
-          label={'Two-factor Authentication'}
-          contentHolder={'Keep your account secure by 2 enabling 2FA via mal'} 
+          label={t('Profile.Article.Settings.twoFactor.title')}
+          contentHolder={t('Profile.Article.Settings.twoFactor.holder')}
           typeOption={'toggle'}
-          typeData={'secureAccount'}/>
+          typeData={'secureAccount'} />
       </div>
       <div>
         <Options
-          label={'Push Notifications'}
-          contentHolder={'Receive push notifications'}
-          typeOption={'toggle'} 
-          typeData={'pushNotifications'}/>
+          label={t('Profile.Article.Settings.pushNotifications.title')}
+          contentHolder={t('Profile.Article.Settings.pushNotifications.holder')}
+          typeOption={'toggle'}
+          typeData={'pushNotifications'} />
       </div>
       <div>
         <Options
-          label={'Desktop Notifications'}
-          contentHolder={'Receive push notifications in desktop'} 
+          label={t('Profile.Article.Settings.desktopNotifications.title')}
+          contentHolder={t('Profile.Article.Settings.desktopNotifications.holder')}
           typeOption={'toggle'}
-          typeData={'desktopNotifications'}/>
+          typeData={'desktopNotifications'} />
       </div>
       <div>
         <Options
-          label={'Email Notifications'}
-          contentHolder={'Receive email notifications'} 
+          label={t('Profile.Article.Settings.emailNotifications.title')}
+          contentHolder={t('Profile.Article.Settings.emailNotifications.holder')}
           typeOption={'toggle'}
-          typeData={'emailNotifications'}/>
+          typeData={'emailNotifications'} />
       </div>
     </div>
   )

@@ -1,14 +1,16 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 const variationsDisplay = (dimension) => {
     if (!dimension || Object.keys(dimension).length === 0) {
         return '';
     }
     const values = Object.values(dimension);
     const result = values.join(', ');
-    return `Variation: ${result}`;
+    return result;
 }
 export default function ItemProductOrder({ data }) {
     const { productInfo, quantity } = data
+    const {t} = useTranslation()
     const avatarProduct = productInfo.images && Array.isArray(productInfo.images) ? productInfo.images[0].url : null
     return (
         <div style={{ display: 'flex', columnGap: 30, border: '1px solid #8181815d', borderRadius: 5 }}>
@@ -21,16 +23,16 @@ export default function ItemProductOrder({ data }) {
                     {productInfo.name}
                 </p>
                 <p>
-                    Quantity: {quantity}
+                {t('Cart.quantity')}: {quantity}
                 </p>
                 <p>
-                    {variationsDisplay(productInfo.variation.dimension)}
+                {t('Cart.variation')}: {variationsDisplay(productInfo.variation.dimension)}
                 </p>
                 <p>
-                    Unit price: {productInfo.price}$
+                {t('Cart.unitPrice')}: {productInfo.price}$
                 </p>
                 <p>
-                    Total: {productInfo.price * quantity}$
+                {t('Cart.total')}: {productInfo.price * quantity}$
                 </p>
             </div>
         </div>

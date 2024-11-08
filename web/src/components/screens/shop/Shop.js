@@ -13,7 +13,9 @@ import filtersSlice from './filters/filtersSlice';
 import _ from 'lodash';
 import AxiosInstance from './../../../util/AxiosInstance';
 import PaginationsBar from './pagination/PaginationsBar';
+import { useTranslation } from 'react-i18next';
 function Shop() {
+    const {t} = useTranslation()
     const [documents, setDocuments] = useState(null)
     const [productList, setProductList] = useState([])
     const filters = useSelector(filterSelectedForShopByCategory)
@@ -45,26 +47,26 @@ function Shop() {
             <Header />
             <div className={styles.box}>
                 <div className={styles.title}>
-                    Home <GrNext className={styles.icon} /> Shop 
+                    {t('Shop.home')} <GrNext className={styles.icon} /> {t('Shop.shop')} 
                 </div>
             </div>
             <div className={styles.box}>
                 <div className={styles.layoutContent}>
                     <div className={styles.boxFilter}>
-                        <BoxFilter label={'Product Categories'} filterMethod={'categories'} />
+                        <BoxFilter label={t('Shop.filter.categories')} filterMethod={'categories'} />
                         <div className={styles.line} />
-                        <BoxFilter label={'Filter by Price'} filterMethod={'price'} />
+                        <BoxFilter label={t('Shop.filter.price')} filterMethod={'price'} />
                         <div className={styles.line} />
-                        <BoxFilter label={'Filter by Color'} />
+                        <BoxFilter label={t('Shop.filter.color')} />
                         <div className={styles.line} />
-                        <BoxFilter label={'Filter by Size'} />
+                        <BoxFilter label={t('Shop.filter.size')} />
                         <div className={styles.line} />
                         <button onClick={onChangeFilters} disabled={isFilterChange}
                             style={
                                 isFilterChange ?
                                     { background: 'grey' } :
                                     { background: 'black' }
-                            }>Apply
+                            }>{t('Shop.filter.apply')}
                         </button>
                     </div>
                     <div className={styles.boxProducts}>
@@ -76,7 +78,7 @@ function Shop() {
                                         <PiChartBarHorizontalThin className={styles.icon} />
                                     </div>
                                     <div>
-                                        Showing 16 items of {documents} results
+                                    {t('Shop.listShow.string1')} 16 {t('Shop.listShow.string2')} {documents} {t('Shop.listShow.string3')}
                                     </div>
                                 </div>
                                 <div className={styles.layoutShowing2}>

@@ -5,9 +5,11 @@ import AddressForm from './address/AddressForm'
 import { AppContext } from '../../../util/AppContext'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
 import Dialog from './../../public/components/dialog/Dialog';
+import { useTranslation } from 'react-i18next'
+const string2 = `Is the address you'd like to use displayed below? If so, click the crorresponding "Deliver to this address" button, or you can enter a new delivery address.`
 export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
     const { dataUser } = useContext(AppContext)
-
+    const { t } = useTranslation()
     const [addressFormVisible, setAddressFormVisible] = useState(false)
     const [address, setAddress] = useState([])
     const [selectedAddress, setSelectedAddress] = useState(null)
@@ -32,44 +34,43 @@ export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
         <div className={styles.layoutContent}>
             <div className={styles.viewTitle}>
                 <label>
-                    Shipping Address
+                {t('Checkout.shippingAddress.title')}
                 </label>
                 <div className={styles.boxButton}>
                     <button onClick={() => stepSubmit('backToOrderSubmit')}>
-                        <GrFormPrevious /> Back
+                        <GrFormPrevious /> {t('Checkout.accessBtn.back')}
                     </button>
                     <button onClick={() => stepSubmit('shippingSubmit')}>
-                        Next <GrFormNext />
+                    {t('Checkout.accessBtn.next')} <GrFormNext />
                     </button>
                 </div>
             </div>
             <div>
                 <div className={styles.boxText}>
-                    <h4>Select a delivery address</h4>
-                    <p>Is the address you'd like to use displayed below? If so, click the crorresponding "Deliver to this address" button, or you can enter a new delivery address.</p>
+                    <p>{t('Checkout.shippingAddress.string2')}</p>
                 </div>
                 <div className={styles.boxAddress}>
                     {
                         address && address.length > 0 ?
                             address.map(item =>
-                                <ItemAddress data={item} key={item._id} 
-                                onOpenSuccessDialog={setIsVisible}
-                                onChange={(data) => {
-                                    setSelectedAddress(data)
-                                    onChangeAddress(data)
-                                    
-                                }
-                                } selected={item?._id === selectedAddress?._id} />
+                                <ItemAddress data={item} key={item._id}
+                                    onOpenSuccessDialog={setIsVisible}
+                                    onChange={(data) => {
+                                        setSelectedAddress(data)
+                                        onChangeAddress(data)
+
+                                    }
+                                    } selected={item?._id === selectedAddress?._id} />
                             ) : null
                     }
                 </div>
                 <button
                     onClick={() => setAddressFormVisible(prev => !prev)}
                     style={{ padding: 10, backgroundColor: 'black', color: 'white', marginTop: 10, border: 'none', borderRadius: 3 }}>
-                    + New Address
+                    + {t('Components.address.titleAdd')}
                 </button>
                 <AddressForm isVisible={addressFormVisible} onClose={onCallbackAddressFormClose} onOpenSuccessDialog={setIsVisible} />
-                <Dialog status={'Update Address Successful!'} isVisible={visible} />
+                <Dialog status={t('Components.address.dialogTitleUpdate')} isVisible={visible} />
             </div>
         </div>
     )

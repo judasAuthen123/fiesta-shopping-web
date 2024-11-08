@@ -6,8 +6,10 @@ import { AppContext } from '../../../../../util/AppContext'
 import ListRender from './../../../../public/components/listRender/ListRender';
 import AddressForm from './../../../checkout/address/AddressForm';
 import Dialog from './../../../../public/components/dialog/Dialog';
+import { useTranslation } from 'react-i18next'
 
 export default function ManageAddress() {
+  const {t} = useTranslation()
   const { dataUser } = useContext(AppContext)
   const [address, setAddress] = useState([])
   const [addressFormVisible, setAddressFormVisible] = useState(false)
@@ -36,7 +38,7 @@ export default function ManageAddress() {
   return (
     <div className={styles.container}>
       <button onClick={() => setAddressFormVisible(true)}>
-        <TiPlus /> Add New Address
+        <TiPlus /> {t('Profile.Article.Address.add')}
       </button>
       <ListRender isTrue={address.length > 0} className={styles.listRender} >
         {

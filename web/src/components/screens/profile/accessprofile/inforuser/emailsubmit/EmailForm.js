@@ -9,11 +9,10 @@ import AxiosInstance from '../../../../../../util/AxiosInstance';
 import { AppContext } from '../../../../../../util/AppContext';
 import CircleLoading from './../../../../../public/components/loading/CircleLoading';
 import logoGmail from '../../../../../assets/images/logoGmail.png'
-const error = {
-    1: 'Please fill on email',
-    2: 'Email is not valid'
-}
+import { useTranslation } from 'react-i18next';
+
 export default function EmailForm({ isVisible, onClose, onOpenSuccessDialog }) {
+    const { t } = useTranslation()
     const [email, setEmail] = useState('')
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const [errorEmail, setErrorEmail] = useState('')
@@ -22,6 +21,10 @@ export default function EmailForm({ isVisible, onClose, onOpenSuccessDialog }) {
     const [loading, setLoading] = useState(false)
     const [verifyCode, setVerifyCode] = useState('')
     const [resetCode, setResetCode] = useState(false)
+    const error = {
+        1: t('Components.email.EmailForm.error.emailEmpty'),
+        2: t('Components.email.EmailForm.error.emailInvalid')
+    }
     useEffect(() => {
         setErrorEmail('')
     }, [email])
@@ -82,36 +85,36 @@ export default function EmailForm({ isVisible, onClose, onOpenSuccessDialog }) {
         <div className={styles.container}>
             <div className={styles.form}>
                 <div className={styles.viewHead}>
-                    <p><HiOutlineMail /> Update Email</p>
+                    <p><HiOutlineMail /> {t('Components.email.EmailForm.title')}</p>
                     <IoMdClose onClick={cancel} size={25} className={styles.closeIcon} />
                 </div>
 
                 <div className={styles.viewNote}>
                     <p>
-                        Why should you update your Email?
+                        {t('Components.email.EmailForm.question')}
                     </p>
                     <div className={styles.viewItemNone}>
                         <p>
-                            <MdDone color='#0ad60a' /> Get Product Updates
+                            <MdDone color='#0ad60a' /> {t('Components.email.EmailForm.string1.title')}
                         </p>
                         <p>
-                            Stay informed about our latest products.
-                        </p>
-                    </div>
-                    <div className={styles.viewItemNone}>
-                        <p>
-                            <MdDone color='#0ad60a' /> Receive Sale Notifications
-                        </p>
-                        <p>
-                            Don’t miss out on special discounts.
+                            {t('Components.email.EmailForm.string1.holder')}
                         </p>
                     </div>
                     <div className={styles.viewItemNone}>
                         <p>
-                            <MdDone color='#0ad60a' /> Track Your Orders
+                            <MdDone color='#0ad60a' /> {t('Components.email.EmailForm.string2.title')}
                         </p>
                         <p>
-                            Easily check your order status.
+                            {t('Components.email.EmailForm.string1.holder')}
+                        </p>
+                    </div>
+                    <div className={styles.viewItemNone}>
+                        <p>
+                            <MdDone color='#0ad60a' /> {t('Components.email.EmailForm.string3.title')}
+                        </p>
+                        <p>
+                            {t('Components.email.EmailForm.string3.holder')}
                         </p>
                     </div>
                     <div className={styles.viewSide}>
@@ -123,7 +126,7 @@ export default function EmailForm({ isVisible, onClose, onOpenSuccessDialog }) {
                             </div>
                             <button className={styles.btnSubmitEmail} onClick={submitEmail}>
                                 {
-                                    loading ? <CircleLoading boderColor={'white'} /> : 'Confirm Email'
+                                    loading ? <CircleLoading boderColor={'white'} /> : t('Components.email.EmailForm.button.buttonConfirm')
                                 }
                             </button>
 
@@ -131,15 +134,15 @@ export default function EmailForm({ isVisible, onClose, onOpenSuccessDialog }) {
                         <div className={`${styles.viewVerify} ${isVerify ? styles.viewVerifyEnter : ''}`}>
                             <VerifyCodeInput onChangeCode={setVerifyCode} onClearCode={resetCode} />
                             {
-                                verifyCode.length === 6 ? <button onClick={verifyEmail} className={styles.btnVerifyEmail}><img alt='' src={logoGmail} /> Verify Email</button> :
+                                verifyCode.length === 6 ? <button onClick={verifyEmail} className={styles.btnVerifyEmail}><img alt='' src={logoGmail} />{t('Components.email.EmailForm.button.buttonVerify')}</button> :
                                     <div>
-                                        <p style={{ fontSize: 13 }}>We have sent a verify code to {email}</p>
-                                        <p style={{ fontSize: 13 }}>Please check your inbox!</p>
+                                        <p style={{ fontSize: 13 }}>{t('Components.email.EmailForm.verify.string1')} <span style={{color:'red'}}>{email}</span></p>
+                                        <p style={{ fontSize: 13 }}>{t('Components.email.EmailForm.verify.string2')}</p>
                                     </div>
                             }
                             <div className={styles.viewButton}>
-                                <button className={styles.btnBack} onClick={back}><IoReturnUpBack /> Back</button>
-                                <button className={styles.btnSubmitEmail}>Resend Code</button>
+                                <button className={styles.btnBack} onClick={back}><IoReturnUpBack /> {t('Components.email.EmailForm.button.buttonBack')}</button>
+                                <button className={styles.btnSubmitEmail}>{t('Components.email.EmailForm.button.buttonResend')}</button>
                             </div>
                         </div>
                     </div>

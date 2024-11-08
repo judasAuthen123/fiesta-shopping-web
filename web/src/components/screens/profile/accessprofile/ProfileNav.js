@@ -7,44 +7,46 @@ import { IoCardOutline } from 'react-icons/io5'
 import { PiBellRingingLight } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RxExit } from "react-icons/rx";
+import { useTranslation } from 'react-i18next';
 export default function ProfileNav({onChange, keyRender}) {
+    const {t} = useTranslation()
     const onChangeId = (id) => {
         onChange(id)
     }
     const navList = [
         {
             id: 1,
-            name: 'Information',
+            name: t('Profile.Nav.information'),
             icon: HiOutlineUser
         },
         {
             id: 2,
-            name: 'My Orders',
+            name: t('Profile.Nav.orders'),
             icon: PiCubeLight
         },
         {
             id: 3,
-            name: 'Addresses',
+            name: t('Profile.Nav.address'),
             icon: PiMapPin
         },
         {
             id: 4,
-            name: 'Saved Cards',
+            name: t('Profile.Nav.cards'),
             icon: IoCardOutline
         },
         {
             id: 5,
-            name: 'Notifications',
+            name: t('Profile.Nav.notifications'),
             icon: PiBellRingingLight
         },
         {
             id: 6,
-            name: 'Settings',
+            name: t('Profile.Nav.settings'),
             icon: IoSettingsOutline
         },
         {
             id: 7,
-            name: 'Sign out',
+            name: t('Profile.Nav.signOut'),
             icon: RxExit
         }
     ]

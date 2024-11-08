@@ -7,7 +7,9 @@ import ItemProduct, { products } from '../../public/components/product/ItemProdu
 import ItemSubCategory from './categories/ItemSubCategory';
 import Footer from '../../public/components/footer/Footer';
 import BackToTopButton from '../../public/components/button/BackToTopButton';
+import { useTranslation } from 'react-i18next';
 export default function Home() {
+  const { t } = useTranslation()
   return (
     <div className={styles.container}>
       <Header />
@@ -23,7 +25,7 @@ export default function Home() {
       <div className={styles.box}>
         <div className={styles.categories}>
           <div className={styles.headCategories}>
-            <div className={styles.titleHeadCategories}>Shop by Categories</div>
+            <div className={styles.titleHeadCategories}>{t('Home.shopByCategories')}</div>
             <div className={styles.viewPagination}>
               <button>
                 <GrLinkPrevious />
@@ -47,14 +49,14 @@ export default function Home() {
         <div className={styles.products}>
           <div className={styles.headProducts}>
             <div className={styles.titleHeadProducts}>
-              Our Bestsellers
+            {t('Home.bestsellers')}
             </div>
           </div>
           <div className={styles.viewProducts}>
             {
               products ?
                 products.map(item =>
-                  <ItemProduct key={item.id} name={item.name} brand={item.brand} price={item.price} id={item.id}/>
+                  <ItemProduct key={item.id} name={item.name} brand={item.brand} price={item.price} id={item.id} />
                 ) : <div />
             }
           </div>
@@ -63,7 +65,7 @@ export default function Home() {
       <div className={styles.box}>
         <div className={styles.categories}>
           <div className={styles.headCategories}>
-            <div className={styles.titleHeadCategories}>What our Customer say's</div>
+            <div className={styles.titleHeadCategories}>{t('Home.review')}</div>
             <div className={styles.viewPagination}>
               <button>
                 <GrLinkPrevious />
@@ -75,7 +77,7 @@ export default function Home() {
           </div>
           <div className={styles.viewAppReviews}>
             {
-              
+
             }
           </div>
         </div>

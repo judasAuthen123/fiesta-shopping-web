@@ -8,9 +8,11 @@ import ArticleProfile from './accessprofile/ArticleProfile';
 import { useLocation } from 'react-router-dom';
 import { AppContext } from '../../../util/AppContext';
 import { defaultAvt } from '../../public/components/image/DefaultIAvt';
+import { useTranslation } from 'react-i18next';
 export default function Profile() {
   const { dataUser } = useContext(AppContext)
   const location = useLocation()
+  const {t} = useTranslation()
   const queryParams = new URLSearchParams(location.search)
   const type = queryParams.get('type')
   const [sideAction, setSideAction] = useState(false)
@@ -48,6 +50,13 @@ export default function Profile() {
   useEffect(() => {
     setSideAction(false)
   }, [selectedId])
+  useEffect(() => {
+    if(type && typeof parseInt(type, 10) === 'number' && parseInt(type, 10) <= 7 && parseInt(type, 10) >= 1) {
+      setSelectedId(parseInt(type, 10))
+    } else {
+      setSelectedId(1)
+    } 
+  }, [type])
   return (
     <div className={styles.container}>
       <Header />
@@ -55,7 +64,7 @@ export default function Profile() {
         <div className={styles.title}>
           <CgMenuLeft
             className={styles.btnSidebar}
-            onClick={() => setSideAction(prev => !prev)} /> My Profile
+            onClick={() => setSideAction(prev => !prev)} /> {t('Profile.title')}
         </div>
       </div>
       <div className={styles.box}>
@@ -71,7 +80,7 @@ export default function Profile() {
               </div>
               <div>
                 <div className={styles.viewHello}>
-                  <div className={`${styles.item2} ${styles.item}`}>Hello</div> <PiHandWavingFill color='#f4b01e' />
+                  <div className={`${styles.item2} ${styles.item}`}>{t('Profile.Nav.hello')}</div> <PiHandWavingFill color='#f4b01e' />
                 </div>
                 <div className={`${styles.item3} ${styles.item}`}>{dataUser?.name}</div>
               </div>

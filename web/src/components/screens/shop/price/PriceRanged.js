@@ -3,8 +3,10 @@ import ReactSlider from 'react-slider';
 import styles from './PriceRanged.module.css'
 import { useDispatch } from 'react-redux';
 import filtersSlice from '../filters/filtersSlice';
+import { useTranslation } from 'react-i18next';
 export default function PriceRanged() {
     const [range, setRange] = useState([0, 2000]);
+    const {t} = useTranslation()
     const [previousRange, setPreviousRange] = useState([0, 2000]); 
     const dispatch = useDispatch();
     const handleChange = (newRange) => {
@@ -19,7 +21,7 @@ export default function PriceRanged() {
     return (
         <div>
             <div className={styles.rangeValues}>
-                Price: ${range[0]} - ${range[1]}
+                {t('Shop.filter.range')}: ${range[0]} - ${range[1]}
             </div>
             <ReactSlider
                 className={styles.horizontalSlider}

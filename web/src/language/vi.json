@@ -1,0 +1,370 @@
+{
+    "Language": {
+        "en": "Tiếng Anh",
+        "vi": "Tiếng Việt"
+    },
+    "Theme": {
+        "light": "Sáng",
+        "dark": "Tối",
+        "device": "Thiết bị"
+    },
+    "Header": {
+        "home": "Trang chủ",
+        "shop": "Mua sắm",
+        "ourStory": "Giới thiệu",
+        "blog": "Blog",
+        "contactUs": "Liên hệ",
+        "cart": "Giỏ hàng",
+        "question": "Thời trang cao cấp?",
+        "shopnow": "Mua sắm ngay",
+        "button": {
+            "buttonLogin": "Đăng nhập",
+            "buttonSignup": "Đăng kí"
+        },
+        "profile": "Hồ sơ",
+        "language": "Ngôn ngữ",
+        "orders": "Đơn hàng",
+        "appearance": "Giao diện"
+    },
+    "Footer": {
+        "Information": {
+            "title": "Thông tin",
+            "account": "Tài khoản",
+            "login": "Đăng nhập",
+            "cart": "Giỏ hàng",
+            "wishlist": "Yêu thích",
+            "checkout": "Thanh toán"
+        },
+        "Service": {
+            "title": "Dịch vụ",
+            "aboutUs": "Về chúng tôi",
+            "career": "Sự nghiệp",
+            "deliveryInformation": "Thông tin vận chuyển",
+            "privacyPolicy": "Chính sách riêng tư",
+            "terms_conditions": "Điều khoản & Điều kiện"
+        },
+        "Subrscribes": {
+            "title": "Người đăng kí",
+            "content": "Nhập email của bạn bên dưới để là người đầu tiên nhận thông tin về các bộ sưu tập và sản phẩm mới."
+        }
+    },
+    "PolicyFooter": {
+        "freeShipping": {
+            "title": "Miễn phí vận chuyển",
+            "holder": "Miễn phí vận chuyển cho đơn hàng trên 150$"
+        },
+        "moneyGuarantee": {
+            "title": "Đảm bảo hoàn tiền",
+            "holder": "Đổi hàng trong vòng 30 ngày"
+        },
+        "onlineSupport": {
+            "title": "Hỗ trợ trực tuyến",
+            "holder": "24 giờ mỗi ngày, 7 ngày mỗi tuần"
+        },
+        "flexiblePayment": {
+            "title": "Thanh toán linh hoạt",
+            "holder": "Thanh toán với nhiều thẻ tín dụng"
+        }
+    },
+    "Cart": {
+        "title": "Giỏ hàng",
+        "products": "Sản phẩm",
+        "unitPrice": "Đơn giá",
+        "quantity": "Số lượng",
+        "subTotal": "Thành tiền",
+        "checkout": "Thanh toán",
+        "variation": "Phân loại hàng",
+        "total": "Tổng",
+        "items": "vật phẩm"
+    },
+    "Profile": {
+        "title": "Tài khoản",
+        "Nav": {
+            "hello": "Xin chào",
+            "information": "Thông tin",
+            "orders": "Đơn hàng",
+            "address": "Địa chỉ",
+            "cards": "Thẻ thanh toán",
+            "notifications": "Thông báo",
+            "settings": "Cài đặt",
+            "signOut": "Đăng xuất"
+        },
+        "Article": {
+            "Information": {
+                "title": "Thông tin cá nhân",
+                "name": "Tên người dùng",
+                "gender": "Giới tính",
+                "phoneNumber": "Số điện thoại",
+                "emailAddress": "Địa chỉ Email",
+                "edit": "Cập nhật",
+                "save": "Lưu"
+            },
+            "Orders": {
+                "title": "Đơn hàng",
+                "toptab": {
+                    "all": "Tất cả",
+                    "pending": "Chờ xử lí",
+                    "processing": "Đang xử lí",
+                    "shipping": "Vận chuyển",
+                    "delivered": "Đã nhận",
+                    "cancelled": "Đã hủy",
+                    "returned": "Hoàn trả"
+                },
+                "orderItem": {
+                    "orderId": "Mã đơn hàng.",
+                    "paymentMethod": "Phương thức thanh toán",
+                    "amount": "Số tiền",
+                    "status": "Trạng thái",
+                    "purchased": "Đã thanh toán",
+                    "orderDate": "Ngày đặt",
+                    "to": "Đến",
+                    "details": "chi tiết"
+                },
+                "listEmpty": "Chưa có đơn hàng nào"
+            },
+            "Address": {
+                "title": "Địa chỉ nhân hàng",
+                "add": "Thêm địa chỉ",
+                "button": {
+                    "buttonEdit": "Cập nhật",
+                    "buttonDelete": "Xóa"
+                },
+                "listEmpty": "Chưa có địa chỉ nào"
+            },
+            "Cards": {
+                "title": "Thẻ tín dụng/Thẻ nợ",
+                "add": "Thêm thẻ",
+                "listEmpty": "Chưa có thẻ nào",
+                "dialogUpdate": "Cập nhật thẻ thành công!"
+            },
+            "Notifications": {
+                "title": "Thông báo",
+                "listEmpty": "Không có thông báo nào"
+            },
+            "Settings": {
+                "title": "Cài đặt",
+                "appearance": {
+                    "title": "Giao diện",
+                    "holder": "Tùy chỉnh giao diện cho thiết bị của bạn"
+                },
+                "language": {
+                    "title": "Ngôn ngữ",
+                    "holder": "Hiển thị ngôn ngữ của bạn"
+                },
+                "twoFactor": {
+                    "title": "Xác thực 2 lớp",
+                    "holder": "Bảo mật tài khoản của bạn với xác thực hai yếu tố (2FA) qua email"
+                },
+                "pushNotifications": {
+                    "title": "Thông báo đẩy",
+                    "holder": "Thấy thông báo ngay khi đang trong website"
+                },
+                "desktopNotifications": {
+                    "title": "Thông báo trên máy tính",
+                    "holder": "Nhận được thông báo trên thiết bị máy tính"
+                },
+                "emailNotifications": {
+                    "title": "Thông báo email",
+                    "holder": "Nhận được thông báo qua email"
+                }
+            },
+            "SignOut": {
+                "title": "Đăng xuất",
+                "confirm": "Bạn có chắc chắn muốn đăng xuất?"
+            }
+        }
+    },
+    "Shop": {
+        "shop": "Mua sắm",
+        "home": "Trang chủ",
+        "filter": {
+            "title": "Bộ lọc",
+            "categories": "Danh mục sản phẩm",
+            "price": "Giá tiền",
+            "range": "Khoảng",
+            "color": "Lọc theo màu",
+            "size": "Lọc theo kích cỡ",
+            "apply": "Áp dụng"
+        },
+        "listShow": {
+            "string1": "Hiển thị",
+            "string2": "sản phẩm từ",
+            "string3": "kết quả"
+        }
+    },
+    "ProductDetail": {
+        "size": "Kích cỡ",
+        "color": "Màu sắc",
+        "variation": "Phân loại hàng",
+        "stock": "Kho",
+        "status": {
+            "inStock": "Còn hàng",
+            "outStock": "Hết hàng"
+        },
+        "buttonAddToCard": "Thêm vào giỏ hàng",
+        "dialogAddToCard": "Đã thêm sản phẩm vào giỏ hàng",
+        "description": "Mô tả sản phẩm",
+        "addtionalInfo": "Thông tin bổ sung"
+    },
+    "OrderDetail": {
+        "title": "Chi tiết đơn hàng",
+        "statusOrder": "Trạng thái đơn hàng",
+        "orderTotal": "Tổng hóa đơn",
+        "typeOfProduct": "Tổng loại sản phẩm",
+        "totalQuantity": "Tổng số vật phẩm",
+        "button": {
+            "btnCancel": "Hủy đơn hàng",
+            "btnContactSupport": "Cần hỗ trợ"
+        },
+        "deliveryAddress": "Địa chỉ nhận hàng",
+        "payments": {
+            "title": "Thanh toán",
+            "method": "Phương thức",
+            "purchaseAt": "Thanh toán lúc",
+            "transactionId": "Mã giao dịch",
+            "paymentStatus": "Trạng thái thanh toán"
+        }
+    },
+    "Home": {
+        "shopByCategories": "Mua sắm theo danh mục",
+        "bestsellers": "Sản phẩm bán chạy nhất",
+        "review": "Khách hàng của chúng tôi nói gì?"
+    },
+    "Checkout": {
+        "title": "Thanh toán",
+        "accessBtn": {
+            "next": "Tiếp tục",
+            "back": "Trở về"
+        },
+        "myCheckout": {
+            "title": "Vật phẩm đơn hàng",
+            "orderTotal": "Tổng loại",
+            "items": "Vật phẩm",
+            "unitPrice": "Đơn giá",
+            "variation": "Phân loại hàng",
+            "count": "Số lượng",
+            "total": "Tổng"
+        },
+        "shippingAddress": {
+            "title": "Địa chỉ nhận hàng",
+            "string1": "Chọn địa chỉ của bạn",
+            "string2": "Địa chỉ mà bạn muốn sử dụng có hiển thị bên dưới không? Nếu có, hãy nhấn tích. Nếu không, bạn có thể nhập một địa chỉ giao hàng mới.",
+            "listEmpty": "Chưa có địa chỉ nào",
+            "add": "Thêm địa chỉ"
+        },
+        "paymentMethod": {
+            "title": "Phương thức thanh toán",
+            "typeOf": {
+                "1": "Thanh toán khi nhận hàng",
+                "2": "Thẻ tín dụng/ Thẻ nợ"
+            }
+        },
+        "checkoutDetails": {
+            "title": "Chi tiết đơn hàng",
+            "address": "Địa chỉ nhận hàng",
+            "paymentMethod": "Phương thức thanh toán",
+            "productsQuantity": "Tổng loại",
+            "totalItems": "Tổng số lượng",
+            "notfilled": "Chưa có",
+            "grandTotal": "Tổng thanh toán",
+            "placeOrder": "Hoàn tất thanh toán"
+        }
+    },
+    "Components": {
+        "email": {
+            "EmailForm": {
+                "title": "Cập nhật Email",
+                "question": "Tại sao bạn nên cập nhật Email?",
+                "string1": {
+                    "title": "Sản phẩm mới",
+                    "holder": "Nhận được thông tin về sản phẩm mới nhất."
+                },
+                "string2": {
+                    "title": "Các đợt giảm giá",
+                    "holder": "Không bỏ lỡ chương trình khuyến mãi đặc biệt."
+                },
+                "string3": {
+                    "title": "Theo dõi đơn hàng",
+                    "holder": "Cập nhật thông tin đơn hàng một cách dễ dàng."
+                },
+                "verify": {
+                    "string1": "Chúng tôi đã gửi mã đến",
+                    "string2": "Hãy kiểm tra hộp thư của bạn!"
+                },
+                "error": {
+                    "emailInvalid": "Email không hợp lệ",
+                    "emailEmpty": "Vui lòng điền email!"
+                },
+                "button": {
+                    "buttonConfirm": "Xác nhận Email",
+                    "buttonVerify": "Xác thực",
+                    "buttonBack": "Quay lại",
+                    "buttonResend": "Gửi lại mã"
+                }
+            }
+        },
+        "address": {
+            "titleAdd": "Thêm địa chỉ",
+            "titleUpdate": "Cập nhật địa chỉ",
+            "titleConfirmDelelte": "Chắc chắn xóa địa chỉ này?",
+            "dialogTitleUpdate": "Cập nhật địa chỉ thành công!",
+            "addressDetail": {
+                "city": "Tỉnh/Thành",
+                "district": "Quận/Huyện",
+                "ward": "Phường/Xã",
+                "street": "Địa chỉ, tên đường",
+                "houseNumber": "Số nhà (nếu có)",
+                "name": "Tên người nhận",
+                "phoneNumber": "Số điện thoại",
+                "button": {
+                    "buttonCancel": "Hủy",
+                    "buttonSubmit": "Hoàn tất",
+                    "buttonUpdate": "Lưu mới",
+                    "buttonDelete": "Xóa",
+                    "buttonEdit": "Cập nhật"
+                }
+            }
+        },
+        "card": {
+            "title": "Thêm thẻ",
+            "cardNumber": "Số thẻ",
+            "cardName": "Tên chủ thẻ",
+            "expiryDate": "Hạn sử dụng (MM/YY)",
+            "cvc": "Mã CVC",
+            "useAsDefault": "Sử dụng làm thẻ mặc định?",
+            "requireDefault": "Bạn chưa có thẻ nào, đây sẽ là thẻ mặc định.",
+            "dialogTitleUpdate": "Cập nhật thẻ thành công!",
+            "noteUsing": "Thẻ mặc định sẽ được sử  dụng để thanh toán!",
+            "isDefault": "Mặc định",
+            "setAsDefault": "Đặt làm mặc định",
+            "object": "Đối tượng",
+            "funding": "Loại thẻ",
+            "expiry": "Hạn sử dụng",
+            "button": {
+                "buttonRequest": "Yêu cầu",
+                "buttonCancel": "Hủy",
+                "buttonSubmit": "Gửi",
+                "buttonDelete": "Xóa thẻ",
+                "buttonConfirmDelete": "Xác nhận xóa"
+            },
+            "policyTitle": {
+                "string1": "Thông tin thẻ của bạn sẽ được bảo mật.",
+                "string2": "Chúng tôi hợp tác với nhà cung cấp uy tín để bảo mật thông tin thẻ của bạn. Fashion Fiesta sẽ không có quyền truy cập vào thông tin thẻ của bạn."
+            },
+            "titleAddNew": "Chi tiết thẻ mới",
+            "error": {
+                "string1": "Có lỗi xảy ra hoặc thông tin thẻ không hợp lệ.",
+                "string2": "Lưu ý: chỉ hỗ trợ thẻ Visa và MasterCard!"
+            }
+        },
+        "avatar": {
+            "size": "Kích thước tệp: tối đa 5 MB",
+            "extension": "Tệp mở rộng: .JPEG, .PNG",
+            "button": {
+                "btnCancel": "Hủy",
+                "btnSubmit": "Cập nhật"
+            },
+            "error": "Kích thước tệp quá 5 MB"
+        }
+    }
+}

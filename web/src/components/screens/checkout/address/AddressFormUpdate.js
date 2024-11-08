@@ -6,6 +6,7 @@ import AxiosInstance from '../../../../util/AxiosInstance';
 import { _valid_Address } from './Validate';
 import CircleLoading from '../../../public/components/loading/CircleLoading';
 import { AppContext } from '../../../../util/AppContext';
+import { useTranslation } from 'react-i18next';
 const dislayCityDistrictWard = (data) => {
     if (Array.isArray(data) && data.length > 0) {
         const validValues = data.filter(item => item);
@@ -14,6 +15,7 @@ const dislayCityDistrictWard = (data) => {
     return '';
 }
 export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDialog, dataOldAddress }) {
+    const { t } = useTranslation()
     const { name, phoneNumber, city, district, ward, street, houseNumber } = dataOldAddress
     const { dataUser, setDataUser } = useContext(AppContext)
     const [provinceData, setProvinceData] = useState(null);
@@ -110,7 +112,7 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
     return (
         <div className={styles.container}>
             <form onSubmit={updateAddress}>
-                <p style={{ fontSize: 18, fontWeight: 500 }}>Update Address</p>
+                <p style={{ fontSize: 18, fontWeight: 500 }}>{t('Components.address.titleUpdate')}</p>
                 <div className={styles.boxInput}>
                     <div className={styles.inputRow}>
                         <div className={styles.viewInput}>
@@ -118,7 +120,7 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                                 value={newName}
                                 id='name' className={styles.inputField} placeholder=' ' onChange={onNameHandler} />
                             <label htmlFor='name' className={styles.labelField}>
-                                Name
+                                {t('Components.address.addressDetail.name')}
                             </label>
                         </div>
                         <div className={styles.viewInput}>
@@ -126,7 +128,7 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                                 value={phone}
                                 id='phone' className={styles.inputField} placeholder=' ' onChange={onPhoneHandler} />
                             <label htmlFor='phone' className={styles.labelField}>
-                                Phone Number
+                                {t('Components.address.addressDetail.phoneNumber')}
                             </label>
                         </div>
                     </div>
@@ -142,7 +144,7 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                                     value={dislayCityDistrictWard(arrAddressSelected())}
                                 />
                                 <label htmlFor='detail' className={styles.labelField}>
-                                    City, District, Ward
+                                    {t('Components.address.addressDetail.city')}, {t('Components.address.addressDetail.district')}, {t('Components.address.addressDetail.ward')}
                                 </label>
                             </div>
                             <RxTriangleDown
@@ -162,7 +164,7 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                             value={newStreet}
                             id='street' className={styles.inputField} placeholder=' ' onChange={onStreetHandler} />
                         <label htmlFor='street' className={styles.labelField}>
-                            Street Name, Building
+                            {t('Components.address.addressDetail.street')}
                         </label>
                     </div>
                     <div className={styles.viewInput}>
@@ -170,16 +172,16 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                             value={houseNo}
                             id='detail' className={styles.inputField} placeholder=' ' onChange={onHouseNoHandler} />
                         <label htmlFor='detail' className={styles.labelField}>
-                            House No. (if applicable)
+                            {t('Components.address.addressDetail.houseNumber')}
                         </label>
                     </div>
                     <div className={styles.viewButton}>
                         <button onClick={() => onClose(false)}>
-                            Cancel
+                            {t('Components.address.addressDetail.button.buttonCancel')}
                         </button>
                         <button type='submit'>
                             {
-                                loading ? <CircleLoading boderColor={'white'}/> : 'Update'
+                                loading ? <CircleLoading boderColor={'white'} /> : t('Components.address.addressDetail.button.buttonUpdate')
                             }
                         </button>
                     </div>

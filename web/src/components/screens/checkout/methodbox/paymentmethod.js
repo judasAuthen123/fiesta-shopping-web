@@ -1,4 +1,4 @@
 export const paymentMethods = {
-    CASH_ON_DELIVERY: 'Cash on Delivery',
-    DEBIT_CREDIT_CARD: 'Debit/Credit Card',
+    CASH_ON_DELIVERY: 'COD',
+    DEBIT_CREDIT_CARD: 'Card',
 }

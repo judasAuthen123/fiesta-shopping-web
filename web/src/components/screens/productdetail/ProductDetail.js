@@ -12,6 +12,7 @@ import Dialog from '../../public/components/dialog/Dialog'
 import PlusAndMinus from './service/plusminus/PlusAndMinus'
 import { AppContext } from '../../../util/AppContext'
 import PolicyFooter from './../../public/components/footer/PolicyFooter';
+import { useTranslation } from 'react-i18next'
 export default function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState({})
@@ -26,7 +27,7 @@ export default function ProductDetail() {
     const { dataUser } = useContext(AppContext)
     const [imagesProduct, setImagesProduct] = useState([])
     const [avatarProduct, setAvatarProduct] = useState(null)
-
+    const { t } = useTranslation()
     const onChangeQuantity = (count) => {
         setCountBuy(count)
     }
@@ -152,7 +153,7 @@ export default function ProductDetail() {
     return (
         <div className={styles.container}>
             <Header />
-            <Dialog isVisible={isModalVisible} status={'Sản phẩm đã được thêm vào giỏ hàng'} />
+            <Dialog isVisible={isModalVisible} status={t('ProductDetail.dialogAddToCard')} />
             <div className={styles.box}>
                 <div className={styles.layoutContent}>
                     <div className={styles.imgProduct}>
@@ -180,10 +181,10 @@ export default function ProductDetail() {
                                 {
                                     product.stock && product.stock > 0 ?
                                         <div className={`${styles.viewStatus} ${styles.inStock}`}>
-                                            <div>In Stock</div>
+                                            <div>{t('ProductDetail.status.inStock')}</div>
                                         </div> :
                                         <div className={`${styles.viewStatus} ${styles.outStock}`}>
-                                            <div>Out of Stock</div>
+                                            <div>{t('ProductDetail.status.outStock')}</div>
                                         </div>
                                 }
                             </div>
@@ -213,7 +214,7 @@ export default function ProductDetail() {
                         <SizeList data={sizeList} onChange={onChanSize} />
                         <div className={styles.viewBuy}>
                             <PlusAndMinus onChange={onChangeQuantity} />
-                            <button onClick={addToCart}>Add to Cart</button>
+                            <button onClick={addToCart}>{t('ProductDetail.buttonAddToCard')}</button>
                             <div className={styles.viewIcon}>
                                 <CiHeart className={styles.icon} />
                             </div>
@@ -229,18 +230,17 @@ export default function ProductDetail() {
                 <div className={styles.details}>
                     <div>
                         <p>
-                            Descriptions
+                            {t('ProductDetail.description')}
                         </p>
                         <p>
-                            its a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                            The point of using Lorem Lpsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here",
-                            making it look like readable English. Many deskop publishing packages and web page editors now use Lorem Ipsum as their default model text,
-                            and a search for "lorem ipsum" will uncover many web sites  still in their infancy
+                            Product descriptions help visitors understand why a product is a good choice for them. Ecommerce business owners often make the mistake of thinking that their visitors have a similar level of understanding of the product as they do, so they simply list the product features or specs.
+
+                            But most visitors don’t understand any of that, which means that it’s your job to package the product in a way that creates desire.
                         </p>
                     </div>
                     <div>
                         <p>
-                            Additional Information
+                            {t('ProductDetail.addtionalInfo')}
                         </p>
                         <div>
                             {

@@ -2,20 +2,33 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 import styles from './Selection.module.css'
 import { MdOutlineDone } from "react-icons/md";
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 export default function Selection({ optionsData, typeData }) {
-    const [selectedOption, setselectedOption] = useState(localStorage.getItem(typeData) ? localStorage.getItem(typeData) : optionsData[0])
+    const [selectedOption, setselectedOption] = useState(null)
+    const { i18net } = useTranslation()
     const [isOpen, setisOpen] = useState(false);
     const heightRef = useRef();
     const boderRef = useRef();
     const containerRef = useRef()
 
-    const onChangeOption = (data) => {
-        setselectedOption(data)
-    }
     useEffect(() => {
-        localStorage.setItem(typeData, selectedOption)
-    }, [selectedOption, typeData])
+        if (optionsData && Array.isArray(optionsData)) {
+            const currentData = JSON.parse(localStorage.getItem(typeData))
+            console.log(currentData);
 
+            const firstValue = optionsData[0]
+            setselectedOption(() => {
+                return currentData ? currentData : firstValue
+            })
+        }
+    }, [])
+    const onChangeLanguage = (data) => {
+        if (typeData === 'language') {
+            i18next.changeLanguage(data.value)
+        }
+        localStorage.setItem(typeData, JSON.stringify(data))
+    }
 
     const openSelection = () => {
         setisOpen(!isOpen)
@@ -50,7 +63,7 @@ export default function Selection({ optionsData, typeData }) {
             setisOpen(false);
         }
     };
-    
+
 
 
 
@@ -72,7 +85,7 @@ export default function Selection({ optionsData, typeData }) {
     return (
         <div className={styles.container} ref={containerRef}>
             <div className={styles.selection} onClick={openSelection} ref={boderRef}>
-                {selectedOption} {isOpen ? <MdKeyboardArrowDown /> : <MdKeyboardArrowUp />}
+                {selectedOption?.name} {isOpen ? <MdKeyboardArrowDown /> : <MdKeyboardArrowUp />}
             </div>
             <div className={styles.options} ref={heightRef}>
                 <div className={styles.listOption}>
@@ -80,12 +93,13 @@ export default function Selection({ optionsData, typeData }) {
                         optionsData && optionsData.length ?
                             optionsData.map(item =>
                                 <div
-                                    key={item}
+                                    key={item.value}
                                     onClick={() => {
                                         openSelection()
-                                        onChangeOption(item)
+                                        onChangeLanguage(item)
+                                        setselectedOption(item)
                                     }} >
-                                    {item} {selectedOption === item ? <MdOutlineDone className={styles.icon}/> : null}
+                                    {item.name} {selectedOption?.value === item.value ? <MdOutlineDone className={styles.icon} /> : null}
                                 </div>
                             ) : null
                     }

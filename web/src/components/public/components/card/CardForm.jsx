@@ -7,6 +7,7 @@ import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcEl
 import AxiosInstance from '../../../../util/AxiosInstance';
 import { AppContext } from '../../../../util/AppContext';
 import CircleLoading from './../loading/CircleLoading';
+import { useTranslation } from 'react-i18next';
 
 const elementOptions = {
   placeholder: ' ',
@@ -22,13 +23,14 @@ const elementOptions = {
 };
 
 
-export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpenSuccessDialog }) {
+export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpenSuccessDialog, isObligatory }) {
+  const { t } = useTranslation()
   const stripe = useStripe()
   const elements = useElements()
   const { dataUser } = useContext(AppContext)
   const [cardType, setCardType] = useState('')
   const [name, setName] = useState('')
-  const [isDefault, setIsDefault] = useState(false)
+  const [isDefault, setIsDefault] = useState(isObligatory ? true : false)
   const [errorValid, setErrorValid] = useState(false)
   const [loading, setLoading] = useState(false)
   const onChangeName = (e) => {
@@ -47,7 +49,10 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
       }
     }
   }
-
+  const errCardSubmit = {
+    1: t('Components.card.error.string1'),
+    2: t('Components.card.error.string2')
+  }
   const stripeSubmit = async (event) => {
     event.preventDefault()
     try {
@@ -96,22 +101,22 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
     <div className={styles.container}>
       <form onSubmit={stripeSubmit}>
         <p style={{ fontSize: 20, color: '#4c4c4c' }}>
-          Add Card
+          {t('Components.card.title')}
         </p>
         <div className={styles.viewProtect}>
           <IoShieldCheckmarkOutline className={styles.icon} size={45} />
           <div>
             <p>
-              Your card details are protected.
+              {t('Components.card.policyTitle.string1')}
             </p>
             <p>
-              We partner with the third party to ensure that your card details are kept safe and secure. Fashion Fiesta will not have access to your card info.
+              {t('Components.card.policyTitle.string2')}
             </p>
           </div>
         </div>
         <div className={styles.viewCardDetails}>
           <div style={{ color: '#828282' }}>
-            New Card Details
+            {t('Components.card.titleAddNew')}
           </div>
           <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center', columnGap: 15 }}>
             <SiVisa size={35} className={cardType === 'visa' ? styles.visaIconActive : styles.visaIconInActive} />
@@ -125,47 +130,51 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
           <div className={styles.viewInput}>
             <CardNumberElement id='numOnCard' className={styles.inputField} options={elementOptions} onChange={onChangeNumber} />
             <label htmlFor='numOnCard' className={styles.labelField}>
-              Card Number
+              {t('Components.card.cardNumber')}
             </label>
           </div>
           <div className={styles.viewInput}>
             <input id='name' className={styles.inputField} placeholder=' ' onChange={onChangeName} style={{ fontSize: 16, color: '#1b1b1bff' }} />
             <label htmlFor='name' className={styles.labelField}>
-              Name on Card
+              {t('Components.card.cardName')}
             </label>
           </div>
           <div className={styles.viewForm1}>
             <div className={styles.viewInput}>
               <CardExpiryElement id='exDta' className={styles.inputField} options={elementOptions} />
               <label htmlFor='exDta' className={styles.labelField}>
-                Expiry Date (MM/YY)
+                {t('Components.card.expiryDate')}
               </label>
             </div>
             <div className={styles.viewInput}>
               <CardCvcElement type='password' id='CCV' className={styles.inputField} options={elementOptions} />
               <label htmlFor='CCV' className={styles.labelField}>
-                CCV
+                {t('Components.card.cvc')}
               </label>
             </div>
           </div>
-          <div className={styles.viewDefault}>
-            <input type='checkbox' onChange={(e) => setIsDefault(e.target.checked)} /> <label>use as default card?</label>
-          </div>
+          {
+            !isObligatory &&
+            <div className={styles.viewDefault}>
+              <input type='checkbox' onChange={(e) => setIsDefault(e.target.checked)} /> <label>{t('Components.card.useAsDefault')}</label>
+            </div>
+          }
+
           {
             errorValid && (
               <div style={{ fontSize: 13, color: '#ff0000c2' }}>
                 <p style={{ display: 'flex', alignItems: 'center', columnGap: 4 }}>
-                  <IoClose size={16} /> Something went wrong or card information doesn't valid.
+                  <IoClose size={16} /> {errCardSubmit[1]}
                 </p>
                 <p>
-                  Note: Only support Visa and MasterCard
+                  {errCardSubmit[2]}
                 </p>
               </div>
             )
           }
           <div className={styles.viewButton}>
-            <button onClick={onChangeModalOpen}>Cancel</button>
-            <button type='submit' disabled={!stripe}>{loading ? <CircleLoading boderColor={'white'} /> : 'Submit'}</button>
+            <button onClick={onChangeModalOpen}>{t('Components.card.button.buttonCancel')}</button>
+            <button type='submit' disabled={!stripe}>{loading ? <CircleLoading boderColor={'white'} /> : t('Components.card.button.buttonSubmit')}</button>
           </div>
         </div>
       </form>

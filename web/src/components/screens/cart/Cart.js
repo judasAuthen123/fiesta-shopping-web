@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import ErrorDialog from './ErrorDialog';
 import { AppContext } from '../../../util/AppContext';
 import PolicyFooter from '../../public/components/footer/PolicyFooter';
+import { useTranslation } from 'react-i18next';
 export default function Cart() {
     const [cartList, setCartList] = useState([])
     const [updateCart, setUpdateCart] = useState(false)
@@ -20,7 +21,7 @@ export default function Cart() {
     const {dataUser} = useContext(AppContext)
     const navigate = useNavigate()
     const [errorDialogVisible, setErrorDialogVisible] = useState(false)
-
+    const {t} = useTranslation()
 
     useEffect(() => {
         const getCart = async () => {
@@ -122,7 +123,7 @@ export default function Cart() {
             <ErrorDialog isVisible={errorDialogVisible} onClose={setErrorDialogVisible}/>
             <div className={styles.box}>
                 <div className={styles.title}>
-                    Your Cart
+                    {t('Cart.title')}
                 </div>
             </div>
             <div className={styles.box}>
@@ -130,10 +131,10 @@ export default function Cart() {
                     <table cellPadding="5" cellSpacing="0" border="1">
                         <thead>
                             <tr>
-                                <th style={{ display: 'flex', alignItems: 'center', columnGap: 11 }}><input style={{ width: 15, height: 15 }} type='checkbox' onChange={checkAll} checked={selectedAll} /> Products</th>
-                                <th>Unit Price</th>
-                                <th>Quantity</th>
-                                <th>Subtotal</th>
+                                <th style={{ display: 'flex', alignItems: 'center', columnGap: 11 }}><input style={{ width: 15, height: 15 }} type='checkbox' onChange={checkAll} checked={selectedAll} /> {t('Cart.products')}</th>
+                                <th>{t('Cart.unitPrice')}</th>
+                                <th>{t('Cart.quantity')}</th>
+                                <th>{t('Cart.subTotal')}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -152,14 +153,14 @@ export default function Cart() {
                         <div style={{padding:10}}>
                             <div style={{ display: 'flex', alignItems: 'center', columnGap: 11 }}>
                                 <input style={{ width: 15, height: 15 }} type='checkbox' onChange={checkAll} checked={selectedAll} />
-                                Products</div>
+                                {t('Cart.products')}</div>
                         </div>
                         <div className={styles.boxBuy}>
                             <div>
-                                Total ({selectedItems.length} items): ${total}
+                            {t('Cart.total')} ({selectedItems.length} {t('Cart.items')}): ${total}
                             </div>
                             <button onClick={moveToCheckout}>
-                                Checkout
+                                {t('Cart.checkout')}
                             </button>
                         </div>
                     </div>

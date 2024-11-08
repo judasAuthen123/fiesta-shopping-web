@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import cardSlice from './cardSlice';
 import CircleLoading from '../../../public/components/loading/CircleLoading';
 import { defaultCardId } from '../../../redux/selector';
+import { useTranslation } from 'react-i18next';
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY}`)
 export default function Card({ isShowNote }) {
+  const {t} = useTranslation()
   const [cardFromVisible, setCardFromVisible] = useState(false)
   const [cardList, setCardList] = useState([])
   const [defaultCard, setDefaultCard] = useState('')
@@ -72,7 +74,7 @@ export default function Card({ isShowNote }) {
     if (defaultIdCardRedux !== defaultCard) {
       setDefaultCard(defaultIdCardRedux)
     }
-  }, [defaultIdCardRedux])
+  }, [defaultIdCardRedux, defaultCard])
 
 
   const chooseDefaultCard = async (idCardToChange) => {
@@ -93,7 +95,7 @@ export default function Card({ isShowNote }) {
 
   return (
     <Elements stripe={stripePromise}>
-      <Dialog isVisible={isVisible} status={'Update Card Successful!'} />
+      <Dialog isVisible={isVisible} status={t('Profile.Article.Cards.dialogUpdate')} />
       <div>
 
 
@@ -101,10 +103,11 @@ export default function Card({ isShowNote }) {
           isVisible={cardFromVisible}
           onClose={onCallbackCardFormClose}
           onRefreshCardData={addNewCardData}
-          onOpenSuccessDialog={setIsVisible} />
+          onOpenSuccessDialog={setIsVisible} 
+          isObligatory={cardList?.length === 0}/>
 
         {
-          isShowNote && <p style={{ fontSize: 12 }}>Your default card will be used for payment!</p>
+          isShowNote && <p style={{ fontSize: 13 }}>{t('Components.card.noteUsing')}</p>
         }
 
         {
@@ -131,7 +134,7 @@ export default function Card({ isShowNote }) {
         <div
           onClick={() => setCardFromVisible(prev => !prev)}
           className={styles.viewOpenFormCard}>
-          + add new card
+          + {t('Profile.Article.Cards.add')}
         </div>
       </div>
     </Elements>

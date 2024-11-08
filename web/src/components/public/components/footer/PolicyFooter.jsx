@@ -4,30 +4,32 @@ import { HiOutlineCubeTransparent } from "react-icons/hi2";
 import { CiDollar } from "react-icons/ci";
 import { GiHeadphones } from "react-icons/gi";
 import { GoCreditCard } from "react-icons/go";
+import { useTranslation } from 'react-i18next';
 export default function PolicyFooter() {
+    const {t} = useTranslation()
     const policyList = [
         {
             id: 1,
-            policyName: 'Free Shipping',
-            policyDetail: 'Free shipping for order above $150',
+            policyName: t('PolicyFooter.freeShipping.title'),
+            policyDetail: t('PolicyFooter.freeShipping.holder'),
             icon: HiOutlineCubeTransparent
         },
         {
             id: 2,
-            policyName: 'Money Guarantee',
-            policyDetail: 'Within 30 days for exchange',
+            policyName: t('PolicyFooter.moneyGuarantee.title'),
+            policyDetail: t('PolicyFooter.moneyGuarantee.holder'),
             icon: CiDollar
         },
         {
             id: 3,
-            policyName: 'Online Support',
-            policyDetail: '24 hours a day, 7 days a week',
+            policyName: t('PolicyFooter.onlineSupport.title'),
+            policyDetail: t('PolicyFooter.onlineSupport.holder'),
             icon: GiHeadphones
         },
         {
             id: 4,
-            policyName: 'Flexible Payment',
-            policyDetail: 'Pay with multiple credit cards',
+            policyName: t('PolicyFooter.flexiblePayment.title'),
+            policyDetail: t('PolicyFooter.flexiblePayment.holder'),
             icon: GoCreditCard
         }
     ]
