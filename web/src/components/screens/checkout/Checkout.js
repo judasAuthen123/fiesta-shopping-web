@@ -140,7 +140,7 @@ export default function Checkout() {
                                         <p>{address?.name} | (84+) {address.phoneNumber}</p>
                                         <p>{address?.street}</p>
                                         <p>{address?.ward}, {address?.district}, {address?.city}</p>
-                                    </div> : <div>(Not filled)</div>
+                                    </div> : <div>({t('Checkout.checkoutDetails.notfilled')})</div>
                                 }
                             </div>
                         </div>
@@ -150,7 +150,7 @@ export default function Checkout() {
                             </p>
                             <div style={{ fontWeight: 400 }}>
                                 {
-                                    paymentMethod ? <div> {paymentMethod} </div> : <div>(Not filled)</div>
+                                    paymentMethod ? <div> {paymentMethod} </div> : <div>({t('Checkout.checkoutDetails.notfilled')})</div>
                                 }
                             </div>
                         </div>

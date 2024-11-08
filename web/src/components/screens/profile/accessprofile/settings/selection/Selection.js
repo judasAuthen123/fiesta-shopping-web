@@ -19,7 +19,7 @@ export default function Selection({ optionsData, typeData }) {
 
             const firstValue = optionsData[0]
             setselectedOption(() => {
-                return currentData ? currentData : firstValue
+                return currentData && currentData.value && currentData.name ? currentData : firstValue
             })
         }
     }, [])

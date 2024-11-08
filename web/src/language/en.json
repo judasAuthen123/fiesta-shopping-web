@@ -265,7 +265,7 @@
             "paymentMethod": "Payment method",
             "productsQuantity": "Type of product",
             "totalItems": "Total items",
-            "notfilled": "notfilled",
+            "notfilled": "Not filled",
             "grandTotal": "Grand total",
             "placeOrder": "Place Order"
         }
