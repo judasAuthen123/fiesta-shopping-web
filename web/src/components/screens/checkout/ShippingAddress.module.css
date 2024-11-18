@@ -113,3 +113,8 @@ button {
     background-color: black;
     color: white
 }
+@media (max-width: 550px) {
+    .boxAddress {
+        grid-template-columns: 1fr;
+    }
+}

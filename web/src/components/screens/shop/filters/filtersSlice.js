@@ -1,129 +1,68 @@
 import { createSlice } from "@reduxjs/toolkit";
-const loadState = () => {
-    try {
-        const serializedState = localStorage.getItem('filters');
-        if (serializedState === null) {
-            return undefined;
-        } else if (serializedState.category?.mainCategory) {
-            return {
-                name: "",
-                priceRange: {
-                    min: "0", max: "2000"
-                },
-                category: {
-                    mainCategory: serializedState.category.mainCategory,
-                    subCategory: []
-                },
-                sortBy: "",
-                sortOrder: "",
-                page: 1,
-                limit: 3
-            }
-        } else {
-            return JSON.parse(serializedState)
-        }
-    } catch (err) {
-        console.error("Could not load state", err);
-        return undefined;
-    }
+
+const defaultFilters = {
+    name: "",
+    priceRange: { min: 0, max: 200 },
+    category: { mainCategory: "", subCategory: [] },
+    sortBy: "",
+    sortOrder: "",
+    page: 1,
+    limit: 12
 };
 
-// Hàm để lưu state vào localStorage
-const saveState = (state) => {
-    try {
-        const serializedState = JSON.stringify(state);
-        localStorage.setItem('filters', serializedState);
-    } catch (err) {
-        console.error("Could not save state", err);
-    }
+
+const initialState = {
+    isResetFilter: false,
+    searchFields: { ...defaultFilters },
+    currentSearchFields: { ...defaultFilters }
 };
-const initialState = loadState() || {
-    searchFields: {
-        name: "",
-        priceRange: {
-            min: "0", max: "2000"
-        },
-        category: {
-            mainCategory: "",
-            subCategory: []
-        },
-        sortBy: "",
-        sortOrder: "",
-        page: 1,
-        limit: 3
-    },
-    currentSearchFields: {
-        name: "",
-        priceRange: {
-            min: "0", max: "2000"
-        },
-        category: {
-            mainCategory: "",
-            subCategory: []
-        },
-        sortBy: "",
-        sortOrder: "",
-        page: 1,
-        limit: 3
-    }
-};
+
 export const filtersSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        onChangeName: (state, action) => {
-            state.searchFields.name = action.payload;
-            state.currentSearchFields.name = action.payload;
-        },
-        onPageChange: (state, action) => {
-            state.searchFields.page = action.payload;
-            state.currentSearchFields.page = action.payload;
-        },
-        onChangeCurrentName: (state, action) => {
-            state.currentSearchFields.name = action.payload;
-        },
-        onChangeCurrentPriceRange: (state, action) => {
-            state.currentSearchFields.priceRange = action.payload;
-        },
-        onMainCategoryCurrentChange: (state, action) => {
-            state.searchFields.category.mainCategory = action.payload;
-            state.currentSearchFields.category.mainCategory = action.payload;
-        },
-        onSubCategoryCurrentChange: (state, action) => {
-            const subCategoryId = action.payload;
-            const index = state.currentSearchFields.category.subCategory.indexOf(subCategoryId);
-            if (index === -1) {
-                // Nếu subCategory chưa có trong mảng, thêm nó vào
-                state.currentSearchFields.category.subCategory.push(subCategoryId);
-            } else {
-                // Nếu subCategory đã có trong mảng, loại bỏ nó
-                state.currentSearchFields.category.subCategory.splice(index, 1);
+        onChangeField: (state, { payload }) => {
+            const { field, value, isCurrent, reloadPage } = payload;
+            if (isCurrent) {
+                state.currentSearchFields[field] = value;
+                state.searchFields[field] = value;
             }
+            if (reloadPage) {
+                state.currentSearchFields.page = 1
+                state.searchFields.page = 1
+            }
+            else state.currentSearchFields[field] = value;
         },
-        onPageCurrentChange: (state, action) => {
-            state.currentSearchFields.page = action.payload;
+        onChangeCurrentPriceRange: (state, { payload }) => {
+            state.currentSearchFields.priceRange = payload;
+        },
+        onChangeSort: (state, { payload: { sortBy, sortOrder } }) => {
+            state.searchFields.sortBy = sortBy;
+            state.searchFields.sortOrder = sortOrder;
+            state.currentSearchFields.sortBy = sortBy;
+            state.currentSearchFields.sortOrder = sortOrder;
+            state.currentSearchFields.page = 1
+            state.searchFields.page = 1
+        },
+        toggleSubCategory: (state, { payload }) => {
+            const subCategory = state.currentSearchFields.category.subCategory;
+            const index = subCategory.indexOf(payload);
+            index === -1 ? subCategory.push(payload) : subCategory.splice(index, 1);
         },
         onApplySearchFields: (state) => {
-            state.searchFields = state.currentSearchFields;
+            state.searchFields = { ...state.currentSearchFields };
+            state.searchFields.page = 1
+            state.currentSearchFields.page = 1
         },
-        resetFilters: (state, action) => {
-            state.searchFields = {
-                name: "",
-                priceRange: {
-                    min: "0", max: "2000"
-                },
-                category: {
-                    mainCategory: action.payload,
-                    subCategory: []
-                },
-                sortBy: "",
-                sortOrder: "",
-                page: 1,
-                limit: 3
-            };
-            state.currentSearchFields = state.searchFields;
-            saveState(state)
+        resetFilters: (state, { payload: mainCategory }) => {
+            state.searchFields = { ...defaultFilters, category: { mainCategory, subCategory: [] } };
+            state.currentSearchFields = { ...state.searchFields };
+            state.isResetFilter = true;
+        },
+        completeResetFilters: (state) => {
+            state.isResetFilter = false;
         }
     }
-})
-export default filtersSlice
+});
+
+export default filtersSlice;

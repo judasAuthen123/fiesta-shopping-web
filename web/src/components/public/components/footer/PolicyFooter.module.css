@@ -3,17 +3,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 250px;
     background-color: rgba(182, 180, 180, 0.048);
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
 .layoutContent {
     width: 75%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 80px;
-
 }
 .itemPolicy {
     display: flex;
     flex-direction: column;
+}
+@media (max-width: 1200px) {
+    .layoutContent {
+        width: 98%;
+    }
+}
+@media (max-width: 900px) {
+    .layoutContent {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
 }

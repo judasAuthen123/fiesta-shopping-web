@@ -82,9 +82,15 @@ export default function MyCheckout({ data, stepSubmit }) {
                     checkoutList && data?.length > 0 ?
                         checkoutList.map(item => {
                             const priceInfo = totalPrice(item)
+                            let avatar;
+                            console.log(item);
+                            
+                            if(Array.isArray(item.products.images)) {
+                                avatar = item.products.images[0].url
+                            }
                             return (
                                 <div key={item._id} className={styles.productItem}>
-                                    <img alt='' src={image} />
+                                    <img alt='' src={avatar ? avatar : image} />
                                     <div className={styles.productInfo}>
                                         <p>
                                             {item.products.name}
@@ -113,7 +119,7 @@ export default function MyCheckout({ data, stepSubmit }) {
             </div>
             <div className={styles.viewSubTotal}>
                 <p>
-                    {t('Checkout.myCheckout.orderTotal')} ({checkoutList.length} {t('Checkout.myCheckout.items')}): ${subTotalPrice}
+                    {t('Checkout.myCheckout.orderTotal')} ({checkoutList.length}): ${subTotalPrice}
                 </p>
             </div>
         </div>

@@ -3,7 +3,9 @@ import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 import styles from './Selection.module.css'
 import { MdOutlineDone } from "react-icons/md";
 import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 export default function Selection({ optionsData, typeData }) {
+    const {t} = useTranslation()
     const [selectedOption, setselectedOption] = useState(null)
     const [isOpen, setisOpen] = useState(false);
     const heightRef = useRef();

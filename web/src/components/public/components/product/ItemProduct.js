@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ItemProduct.module.css'
 import { CiStar } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
 import { BsArrowsMove } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 export default function ItemProduct({ name, brand, price, id, images }) {
-    const [avatarProduct, setAvatarProduct] = useState(images && Array.isArray(images) ? images[0]?.url : null)
+    
+    const [avatarProduct, setAvatarProduct] = useState(null)
+
+    useEffect(() => {
+        if(Array.isArray(images)) {
+            const avatar = images[0].url
+            setAvatarProduct(avatar)
+        }
+    }, [])
     return (
         <div className={styles.container}>
             <Link to={`/productDetail/${id}`} className={styles.productImg}>
@@ -26,10 +34,7 @@ export default function ItemProduct({ name, brand, price, id, images }) {
                 </div>
             </Link>
             <div className={styles.infoProduct}>
-                <p className={styles.brand}>
-                    {brand}
-                </p>
-                <p className={styles.name}>
+                <p className={styles.name} style={{fontWeight: 550}}>
                     {name}
                 </p>
                 <p className={styles.price}>

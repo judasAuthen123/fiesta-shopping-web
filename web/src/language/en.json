@@ -8,6 +8,12 @@
         "dark": "Dark",
         "device": "Device"
     },
+    "Loading": {
+        "title": "loading data"
+    },
+    "MongoTranslator": {
+        "nameCtg": "enName"
+    },
     "Header": {
         "home": "Home",
         "shop": "Shop",
@@ -21,10 +27,13 @@
             "buttonLogin": "Login",
             "buttonSignup": "Sign up"
         },
-        "profile": "Profile",
+        "profile": "Account",
         "language": "Language",
         "orders": "Orders",
-        "appearance": "Appearance"
+        "appearance": "Appearance",
+        "requireLogin": "Log in for the best experience",
+        "signIn": "Sign in to your account",
+        "dontHaveAccount": "You dont have an account? Click"
     },
     "Footer": {
         "Information": {
@@ -75,7 +84,11 @@
         "checkout": "Checkout",
         "variation": "Variation",
         "total": "Total",
-        "items": "items"
+        "items": "items",
+        "listEmpty": "Your cart is empty",
+        "shoppingnow": "Fill it now",
+        "errorGoCheckout": "You have not selected any items for checkout!",
+        "refresh": "Refresh"
     },
     "Profile": {
         "title": "Account",
@@ -97,7 +110,8 @@
                 "phoneNumber": "phone number",
                 "emailAddress": "email address",
                 "edit": "Update",
-                "save": "Save"
+                "save": "Save",
+                "titleDialog": "Update profile successfully!"
             },
             "Orders": {
                 "title": "Orders",
@@ -118,7 +132,7 @@
                     "purchased": "Purchased",
                     "orderDate": "Order date",
                     "to": "To",
-                    "details": "details"
+                    "details": "Details"
                 },
                 "listEmpty": "No order yet"
             },
@@ -184,7 +198,10 @@
             "range": "range",
             "color": "By color",
             "size": "By size",
-            "apply": "Apply"
+            "apply": "Apply",
+            "titleSearchName": "Search by name product",
+            "search": "Search",
+            "sortBy": "Sort by"
         },
         "listShow": {
             "string1": "Showing",
@@ -198,8 +215,8 @@
         "variation": "Variation",
         "stock": "stock",
         "status": {
-            "inStock": "Còn hàng",
-            "outStock": "Hết hàng"
+            "inStock": "In stock",
+            "outStock": "Out stock"
         },
         "buttonAddToCard": "Add to Cart",
         "dialogAddToCard": "Add to cart successfully!",
@@ -268,6 +285,18 @@
             "notfilled": "Not filled",
             "grandTotal": "Grand total",
             "placeOrder": "Place Order"
+        },
+        "doneCheckout": {
+            "title": "Your order has been completed",
+            "thanks": "Thank you for choosing Fiesta!",
+            "provide": "We will do our best to provide you with an excellent shopping experience.",
+            "shipped": "Your order has been confirmed and will be shipped soon.",
+            "continue": "Continue to shop?",
+            "viewOrder": "View my order",
+            "dialogTitle": {
+                "string1": "Order successfully!",
+                "string2": "Track your order status in your profile."
+            }
         }
     },
     "Components": {
@@ -365,6 +394,20 @@
                 "btnSubmit": "Save"
             },
             "error": "File size exceeds 5 MB"
+        },
+        "confirmPayment": {
+            "title": "Confirm payment",
+            "quick": "Quickly and secure, free transactions",
+            "detail": "Detail",
+            "button": {
+                "buttonConfirm": "Confirm",
+                "buttonCancel": "Cancel"
+            },
+            "totalAmount": "Total amount",
+            "date": "Date",
+            "object": "Brand",
+            "cardNumber": "Card number",
+            "cardName": "Card name"
         }
     }
 }

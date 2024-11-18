@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import styles from './SizeList.module.css'
+import { useTranslation } from 'react-i18next'
 export default function SizeList({ data, onChange }) {
     const [selectedSize, setselectedSize] = useState(null)
+    const {t} = useTranslation()
     const onChangeSize = (size) => {
         onChange(size)
         setselectedSize(size)
@@ -11,7 +13,7 @@ export default function SizeList({ data, onChange }) {
             {
                 data.length > 0 ?
                     <div className={styles.container}>
-                        <h5>Size</h5>
+                        <h5>{t('ProductDetail.size')}</h5>
                         <div className={styles.viewSize}>
                             {data.map(item => {
                                 const isSelected = selectedSize === item;

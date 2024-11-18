@@ -5,35 +5,39 @@ import styles from './Cart.module.css'
 import ItemCart from './ItemCart';
 import AxiosInstance from './../../../util/AxiosInstance';
 import Dialog from '../../public/components/dialog/Dialog';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ErrorDialog from './ErrorDialog';
 import { AppContext } from '../../../util/AppContext';
 import PolicyFooter from '../../public/components/footer/PolicyFooter';
+import { PiSmileyXEyesBold } from "react-icons/pi";
 import { useTranslation } from 'react-i18next';
+import CircleLoading from './../../public/components/loading/CircleLoading';
 export default function Cart() {
     const [cartList, setCartList] = useState([])
-    const [updateCart, setUpdateCart] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
     const [selectedItems, setSelectedItems] = useState([])
     const [selectedAll, setSelectedAll] = useState(false)
     const [total, setTotal] = useState(0)
     const [totalItem, setTotalItem] = useState(0)
-    const {dataUser} = useContext(AppContext)
+    const [loading, setLoading] = useState(false)
+    const { dataUser } = useContext(AppContext)
     const navigate = useNavigate()
     const [errorDialogVisible, setErrorDialogVisible] = useState(false)
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     useEffect(() => {
         const getCart = async () => {
+            setLoading(true)
             const response = await AxiosInstance.get(`/cart/getBypage/1/${dataUser?._id}`)
             if (response.result) {
                 if (response.data) {
                     setCartList(response.data.result)
+                    setLoading(false)
                 }
             }
         }
         getCart()
-    }, [updateCart])
+    }, [])
 
 
     useEffect(() => {
@@ -50,8 +54,13 @@ export default function Cart() {
         const request = async () => {
             const response = await AxiosInstance.post('/cart/delete?cartID=' + _idCart);
             if (response.result) {
-                setUpdateCart(prev => !prev);
+                setCartList(prevCartList => {
+                    return prevCartList.filter(item => item._id !== _idCart)
+                })
                 setIsModalVisible(prev => !prev)
+                setSelectedItems(prevSelectedItems =>
+                    prevSelectedItems.filter(item => item !== _idCart)
+                );
             }
         };
         request();
@@ -70,7 +79,6 @@ export default function Cart() {
 
 
     useEffect(() => {
-
         if (cartList && cartList.length > 0) {
             const selectedProducts = cartList.filter(product => selectedItems.includes(product._id));
             setTotal(prevTotal => {
@@ -108,25 +116,32 @@ export default function Cart() {
     }
 
     const moveToCheckout = () => {
-        if(selectedItems.length > 0) {
+        if (selectedItems.length > 0) {
             navigate('/checkout', { state: { selectedItems, productTotal: selectedItems.length, total, totalItem } })
         } else {
             setErrorDialogVisible(true)
         }
-        
+
     }
+
+    const updateCheckoutData = (newQuantity, id) => {
+        const updatedCartList = cartList.map(item =>
+            item._id === id ? { ...item, quantity: newQuantity } : item
+        );
+        setCartList(updatedCartList);
+    };
 
     return (
         <div className={styles.container}>
             <Header />
             <Dialog isVisible={isModalVisible} status={'Đã xóa sản phẩm khỏi giỏ hàng'} />
-            <ErrorDialog isVisible={errorDialogVisible} onClose={setErrorDialogVisible}/>
-            <div className={styles.box}>
-                <div className={styles.title}>
+            <ErrorDialog isVisible={errorDialogVisible} onClose={setErrorDialogVisible} />
+            <div className={styles.box} style={{ marginTop: 80 }}>
+                <div className={styles.title} style={{ paddingBottom: 40 }}>
                     {t('Cart.title')}
                 </div>
             </div>
-            <div className={styles.box}>
+            <div className={styles.box} style={{ marginBottom: 120 }}>
                 <div className={styles.layoutContent}>
                     <table cellPadding="5" cellSpacing="0" border="1">
                         <thead>
@@ -138,26 +153,39 @@ export default function Cart() {
                             </tr>
                         </thead>
                         <tbody>
-                            {cartList && cartList.length > 0 ?
-                                cartList.map(item =>
-                                    <ItemCart key={item._id} 
-                                    data={item} 
-                                    onDelete={deleteCartItem} 
-                                    onCheck={handleCheck} 
-                                    checkAll={selectedAll} />
-                                ) : null
+                            {
+                                !loading ? (cartList && cartList.length > 0 ?
+                                    cartList.map(item =>
+                                        <ItemCart key={item._id}
+                                            data={item}
+                                            onDelete={deleteCartItem}
+                                            onCheck={handleCheck}
+                                            checkAll={selectedAll}
+                                            onRefreshDataCheckout={updateCheckoutData} />
+                                    ) : <div className={styles.viewNoneCart} style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
+                                            <PiSmileyXEyesBold size={40} /> {t('Cart.listEmpty')}
+                                        </div>
+                                        <Link to={'/shop'}>{t('Cart.shoppingnow')}</Link>
+                                    </div>
+                                ) :
+                                    <div className={styles.viewNoneCart}>
+                                        <CircleLoading width={20} height={20} /> {t('Loading.title')}
+                                    </div>
+
                             }
+
                         </tbody>
                     </table>
                     <div className={styles.barCheckout}>
-                        <div style={{padding:10}}>
+                        <div style={{ padding: 10 }}>
                             <div style={{ display: 'flex', alignItems: 'center', columnGap: 11 }}>
                                 <input style={{ width: 15, height: 15 }} type='checkbox' onChange={checkAll} checked={selectedAll} />
                                 {t('Cart.products')}</div>
                         </div>
                         <div className={styles.boxBuy}>
                             <div>
-                            {t('Cart.total')} ({selectedItems.length} {t('Cart.items')}): ${total}
+                                {t('Cart.total')} ({selectedItems.length}): ${total}
                             </div>
                             <button onClick={moveToCheckout}>
                                 {t('Cart.checkout')}

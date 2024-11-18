@@ -1,14 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { FaUser, FaLock } from "react-icons/fa";
-import './Login.css'
+import React, { useState, useContext } from 'react'
+import styles from './Login.module.css'
 import AxiosInstance from '../../../util/AxiosInstance';
 import { AppContext } from '../../../util/AppContext';
 import { useNavigate } from 'react-router-dom';
+import { FaStar } from "react-icons/fa";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import { TbDiamondFilled } from "react-icons/tb";
+import { FaCircleCheck } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
+import logo from '../../assets/images/fiestaLogo.png'
+import stripeLogo from '../../assets/images/stripeLogo.png'
+import ghnLogo from '../../assets/images/ghnLogo.png'
+import imagekitLogo from '../../assets/images/imagekitLogo.png'
+import ContainerLoading from '../../public/components/loading/ContainerLoading';
+import DoubleCircleLoading from './../../public/components/loading/doubleCircleLoading/DoubleCircleLoading';
 export default function Login() {
     // const [userData, setUserData] = useState([])
     // const [profile, setProfile] = useState([])
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [isShowPassword, setIsShowPassword] = useState(false)
     const { setDataUser, setToken } = useContext(AppContext)
     const navigate = useNavigate()
     const onUserNameHandler = (e) => {
@@ -17,10 +29,12 @@ export default function Login() {
     const onPasswordHandler = (e) => {
         setPassword(e.target.value)
     }
+    const changeIsShowPassword = () => setIsShowPassword(prev => !prev)
     const appLogin = (e) => {
         e.preventDefault()
         const dbLogin = async () => {
             try {
+                setLoading(true)
                 const request = await AxiosInstance.post('/userApi/login', {
                     userName: userName,
                     cpassword: password
@@ -36,13 +50,16 @@ export default function Login() {
                         setDataUser(user)
                         setToken(token)
                         navigate('/home')
+                        setLoading(false)
                     }
 
                 } else {
                     alert('Login failed!')
+                    setLoading(false)
                 }
             } catch (e) {
                 console.log(e);
+                setLoading(false)
             }
 
         }
@@ -83,53 +100,111 @@ export default function Login() {
     //     setProfile(null);
     // };
     return (
-        <div className='container'>
-            <div className='wrapper'>
-                <form action='' onSubmit={appLogin}>
-                    <h1>Login</h1>
-                    <div className='input-box'>
-                        <input type='text' placeholder='Username' onChange={onUserNameHandler} />
-                        <FaUser className='icon' />
+        <div className={styles.container}>
+            <div className={styles.containerLeft}>
+                <div className={styles.refrerencesBox}>
+                    <div className={styles.viewLogo}>
+                        <div className={styles.logo}>
+                            <img alt='' src={logo} />
+                        </div>
+                        <h3 style={{ fontSize: 30, fontWeight: 550 }}>Fashion Fiesta</h3>
                     </div>
-                    <div className='input-box'>
-                        <input type='password' placeholder='Password' onChange={onPasswordHandler} />
-                        <FaLock className='icon' />
+                    <div className={styles.viewText}>
+                        <div className={styles.itemText}>
+                            <p><FaCircleCheck className={styles.icon} /> Get started quickly</p>
+                            <p>Integrate with developer-friendly APIs or choose low-code.</p>
+                        </div>
+                        <div className={styles.itemText}>
+                            <p><FaCircleCheck className={styles.icon} /> Support any business model</p>
+                            <p>Host code that you don't want to share with the world in private.</p>
+                        </div>
+                        <div className={styles.itemText}>
+                            <p><FaCircleCheck className={styles.icon} /> Join millions of businesses</p>
+                            <p>Flowbite is trusted by ambitious startups and enterprises of every size.</p>
+                        </div>
+
                     </div>
-                    <div className='remember-forgot'>
-                        <label> <input type='checkbox' />Remember me</label>
-                        <a href='#'>Forgot password?</a>
+                    <div className={styles.footer}>
+                        <div className={styles.nav}>
+                            <Link to={'/home'}>
+                                Home
+                            </Link>
+                            <Link to={'/shop'}>
+                                Shop
+                            </Link>
+                            <Link>
+                                Term & Condition
+                            </Link>
+                        </div>
+                        <div className={styles.partner}>
+                            <img alt='' src={imagekitLogo} />
+                            <img alt='' src={stripeLogo} />
+                            <img alt='' src={ghnLogo} />
+                        </div>
                     </div>
-                    <button type='submit' className='buttonLogin' >Login</button>
-                    <button className='buttonLogin' onClick={() => navigate('/home')}>Back To Home</button>
-                    {/* <FacebookLogin
-                        appId='3532223907038486'
-                        autoLoad={false}
-                        fields="name,email,picture"
-                        callback={responseFacebook}
-                        icon="fa-facebook"
-                        buttonStyle={{
-                            backgroundColor: '#4267b2',
-                            borderRadius: '40px',
-                            padding: '10px 20px',
-                            border: 'none',
-                            cursor: 'pointer',
-                            width: '100%',
-                            height: 40,
-                            color: '#FFF',
-                            fontFamily: 'Poppins',
-                            marginTop: 15,
-                            justifyContent: 'center',
-                            fontWeight: 500,
-                            marginBottom: 15
-                        }}
-                        textButton='Login With Facebook'
-                    />
-                    <button type='submit' onClick={googleLogin} className='buttonGoogle'><FcGoogle className='icon' /> Login With Google</button> */}
-                    <div className='register-link'>
-                        <p>
-                            Dont have an account? <a href='#'>Register</a>
-                        </p>
+                </div>
+            </div>
+            <div className={styles.containerRight}>
+                <form className={styles.loginForm} onSubmit={appLogin}>
+                    {
+                        loading && <ContainerLoading background={'#ffffffd7'}>
+                            <DoubleCircleLoading
+                                spin1Color={'black'}
+                                spin2Color={'blueViolet'}
+                                width={60} height={60}
+                                spin1Height={35}
+                                spin1Width={35} />
+                        </ContainerLoading>
+                    }
+                    <div className={styles.viewWelcome}>
+                        <h2>
+                            Welcome back
+                        </h2>
+                        {/* <p className={styles.textW}>Enjoy Fiesta's exceptional shopping experience!</p> */}
+                        <div className={styles.suggest}>
+                            <div className={styles.view}>
+                                <FaStar className={styles.icon} /> Smart Shopping
+                            </div>
+                            <div className={styles.view}>
+                                <TbDiamondFilled className={styles.icon} /> Premium Fashion
+                            </div>
+                        </div>
+                        <div className={styles.viewLine}>
+                            <p className={styles.text}>Sign in</p>
+                            <div className={styles.line}></div>
+                        </div>
                     </div>
+                    <div className={styles.boxInput}>
+                        <div className={styles.viewInput}>
+                            <label>Username</label>
+                            <div className={styles.inputField}>
+                                <input placeholder={'Enter your username'} type={'text'} onChange={onUserNameHandler} />
+                            </div>
+                        </div>
+                        <div className={styles.viewInput}>
+                            <label>Password</label>
+                            <div className={styles.inputField}>
+                                <input placeholder={'Enter your password'} type={isShowPassword ? 'text' : 'password'} onChange={onPasswordHandler} />
+                                {
+                                    isShowPassword ?
+                                        <VscEye onClick={changeIsShowPassword} className={styles.eyePassword} /> :
+                                        <VscEyeClosed onClick={changeIsShowPassword} className={styles.eyePassword} />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.remember_forgotPass}>
+                        <div className={styles.remember}>
+                            <input type='checkbox' /> <label>Remember me</label>
+                        </div>
+                        <div className={styles.forgot}>
+                            <p>Forgot password?</p>
+                        </div>
+                    </div>
+                    <button
+                        type='submit'
+                        className={styles.buttonLogin}>Sign in to your account</button>
+                    <div className={styles.dontHaveAccount}>Dont have an account yet? <span style={{ color: 'blueViolet', cursor: 'pointer' }}>Sign up here</span></div>
                 </form>
             </div>
         </div>

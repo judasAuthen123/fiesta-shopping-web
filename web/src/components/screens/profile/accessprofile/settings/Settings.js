@@ -6,25 +6,25 @@ export default function Settings() {
   const { t } = useTranslation()
   const dataLanguage = [
     {
-      "name": t('Language.en'),
+      "name": "English",
       "value": "en"
     },
     {
-      "name": t('Language.vi'),
+      "name": "Vietnamese",
       "value": "vi"
     }
   ]
   const dataTheme = [
     {
-      "name": t('Theme.light'),
+      "name": "Light",
       "value": "Light"
     },
     {
-      "name": t('Theme.dark'),
+      "name": "Dark",
       "value": "Dark"
     },
     {
-      "name": t('Theme.device'),
+      "name": "Device",
       "value": "Device"
     },
   ]

@@ -6,11 +6,13 @@ import { formatDate } from './date'
 import { useSelector } from 'react-redux'
 import { defaultCardId } from '../../../redux/selector'
 import { SiVisa } from "react-icons/si";
+import { useTranslation } from 'react-i18next'
 const numOnCardDisplay = (num) => {
     return `•••• ${num}`
 }
 export default function PaymentSubmit({
     isVisible, onCancel, products, userId, amount, address, onOpenOrderSuccess }) {
+    const { t } = useTranslation()
     const [cardData, setCardData] = useState(null)
     const defaultId = useSelector(defaultCardId)
     const [loading, setLoading] = useState(false)
@@ -50,7 +52,7 @@ export default function PaymentSubmit({
                 shipping: address,
                 products: products,
             })
-            if(response.statusCode === 200) {
+            if (response.statusCode === 200) {
                 setLoading(false)
                 onOpenOrderSuccess(true)
                 onCancel(false)
@@ -61,8 +63,8 @@ export default function PaymentSubmit({
     return (
         <div className={styles.container}>
             <div className={styles.body}>
-                <label>Confirm Payment</label>
-                <p>Quickly and secure, free transactions</p>
+                <label>{t('Components.confirmPayment.title')}</label>
+                <p>{t('Components.confirmPayment.quick')}</p>
                 <div className={styles.detail} style={cardData && cardData?.brand === 'Visa' ? { backgroundColor: '#1032dc0c' } : { backgroundColor: '#0A2540', color: 'white' }}>
                     {
                         cardData && cardData?.brand === 'Visa' ? <SiVisa className={styles.iconVisa} size={45} color='#1434CB' /> :
@@ -76,7 +78,7 @@ export default function PaymentSubmit({
                     </p>
                     <div className={styles.detailTitle}>
                         <div>
-                            Date
+                        {t('Components.confirmPayment.date')}
                         </div>
                         <div>
                             {formatDate(date).formattedDate}
@@ -84,7 +86,7 @@ export default function PaymentSubmit({
                     </div>
                     <div className={styles.detailTitle}>
                         <div>
-                            Payment Method
+                        {t('Components.confirmPayment.object')}
                         </div>
                         <div>
                             {cardData?.brand}
@@ -92,15 +94,15 @@ export default function PaymentSubmit({
                     </div>
                     <div className={styles.detailTitle}>
                         <div>
-                            Card Number
+                        {t('Components.confirmPayment.cardNumber')}
                         </div>
-                        <div>
-                            {numOnCardDisplay(cardData.last4 ? cardData.last4 : null)}
+                        <div style={{letterSpacing: 1.3}}>
+                            {numOnCardDisplay(cardData?.last4 ? cardData?.last4 : null)}
                         </div>
                     </div>
                     <div className={styles.detailTitle}>
                         <div>
-                            Cardholder Name
+                        {t('Components.confirmPayment.cardName')}
                         </div>
                         <div>
                             {cardData?.name}
@@ -108,7 +110,7 @@ export default function PaymentSubmit({
                     </div>
                     <div className={styles.viewTotal}>
                         <div>
-                            Total amount
+                        {t('Components.confirmPayment.totalAmount')}
                         </div>
                         <div>
                             ${amount}
@@ -117,11 +119,11 @@ export default function PaymentSubmit({
                 </div>
                 <div className={styles.viewButton}>
                     <button onClick={() => onCancel(false)}>
-                        Cancel
+                    {t('Components.confirmPayment.button.buttonCancel')}
                     </button>
                     <button onClick={submit}>
                         {
-                            loading === true ? <CircleLoading boderColor={'white'}/> : 'Confirm'
+                            loading === true ? <CircleLoading boderColor={'white'} /> : t('Components.confirmPayment.button.buttonConfirm')
                         }
                     </button>
                 </div>

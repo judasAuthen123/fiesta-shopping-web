@@ -111,7 +111,7 @@ export default function Card({ isShowNote }) {
         }
 
         {
-          loadingDataCard ? <div style={{ display: 'flex', alignItems: 'center', columnGap: 8 }}><CircleLoading width={15} height={15} boderColor={'black'} /> loading data </div> :
+          loadingDataCard ? <div style={{ display: 'flex', alignItems: 'center', columnGap: 8 }}><CircleLoading width={15} height={15} boderColor={'black'} /> {t('Loading.title')} </div> :
             <div className={styles.viewListCard}>
               {
                 cardList.length > 0 ?
@@ -125,7 +125,7 @@ export default function Card({ isShowNote }) {
                       onRemoveCard={removeCardItem}
                       isDefault={card.id === defaultCard} />
                   ) : <div style={{ fontSize: 12 }}>
-                    Your card list is empty
+                    {t('Components.card.listEmpty')}
                   </div>
               }
             </div>

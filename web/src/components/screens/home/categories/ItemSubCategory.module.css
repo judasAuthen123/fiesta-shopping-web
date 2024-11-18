@@ -1,22 +1,38 @@
 .container {
-    background: linear-gradient(to bottom, #F3F3F3, #ebebeb);
     height: 320px;
-    display: flex;
+    display: block;
     justify-content: center;
-    background: url('../../../assets/images/Untitled\ design.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: #f0f0f0;
+    position: relative;
+    cursor: pointer;
 }
-
+.background {
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    opacity: 1;
+    border-radius: 5px;
+}
+.container:hover .background {
+    opacity: 1;
+    transform: scale(1.1);
+}
 .title {
     height: 40px;
     background: white;
-    width: 83%;
+    margin-left: 10%;
+    margin-right: 10%;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 250px;
     border-radius: 10px;
+    z-index: 1;
+    box-shadow: 0 0 8px rgba(78, 78, 78, 0.726);
+}
+.not_scrollTo {
+    transform: scale(0.7);
+    opacity: 0.5;
+}
+.scrollTo {
+    transform: scale(1);
+    opacity: 1;
 }

@@ -75,40 +75,26 @@
 }
 
 .boxFalse {
-    background-color: rgba(230, 230, 230, 0.93);
     display: flex;
     justify-content: space-between;
-    border-radius: 25px;
+    column-gap: 10px;
 }
 
 .boxFalse>button {
     box-sizing: unset;
-    border-radius: 25px;
-    padding: 9px;
+    border-radius: 6px;
     font-size: 17px;
     border: none;
+    padding: 6px 15px;
 }
 
-.boxFalse>button:nth-child(1) {
-    background-color: rgb(55, 55, 55);
-    width: 75px;
-    color: white;
-    margin-right: -33px;
-    z-index: 3;
-}
 
-.boxFalse>button:nth-child(2) {
-    border: none;
-    z-index: 2;
-    width: 90px;
-    background-color: unset;
-    color: black;
-    transition: background-color 0.3s ease-in-out, color 0.2s ease-in-out;
-    text-align: left;
-    text-indent: 35px;
+.boxFalse>button{
+    background-color: white;
+    border: 1px solid black;
+    transition: background-color 0.2s ease-in-out, color 0.15s ease-in-out;
 }
-
-.boxFalse>button:nth-child(2):hover {
+.boxFalse>button:hover {
     background-color: black;
     color: white;
 }

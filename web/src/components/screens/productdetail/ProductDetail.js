@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useCallback } from 'react'
 import styles from './ProductDetail.module.css'
 import Header from '../../public/components/header/Header'
 import Footer from '../../public/components/footer/Footer'
@@ -32,20 +32,24 @@ export default function ProductDetail() {
         setCountBuy(count)
     }
 
-    useEffect(() => {
-        if (sizeSelected || colorSelected) {
-            const checkVariattionStock = async () => {
-                const response = await AxiosInstance.get('/productApi/checkVaritationProductStock', { params: { id: id, size: sizeSelected, color: colorSelected } })
+    const checkVariationStock = useCallback(async () => {
+        console.log('variation checked');
 
-                if (response.result === true) {
-                    setVariationId(response.data._id)
-                    setVariationStock(response.data.stock)
-                }
-            }
-            checkVariattionStock()
+        const response = await AxiosInstance.get('/productApi/checkVaritationProductStock', {
+            params: { id: id, size: sizeSelected, color: colorSelected }
+        });
+
+        if (response.result === true) {
+            setVariationId(response.data._id);
+            setVariationStock(response.data.stock);
+        }
+    }, [id, sizeSelected, colorSelected]);
+
+    useEffect(() => {
+        if ((colorSelected || colorList.length === 0) && (sizeSelected || sizeList.length === 0)) {
+            checkVariationStock()
         }
     }, [sizeSelected, colorSelected, id])
-
 
     const onChangeColor = (color) => {
         setColorSelected(color)
@@ -105,6 +109,12 @@ export default function ProductDetail() {
         addProductToCart();
     };
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'auto'
+        })
+    }, [])
 
     useEffect(() => {
         if (isModalVisible) {
@@ -124,20 +134,21 @@ export default function ProductDetail() {
         const getProductByID = async () => {
             const response = await AxiosInstance.get('/productApi/getProductByID?id=' + id)
             if (response.result === true) {
-                if (response.data)
+                if (response.data) {
                     setProduct(response.data)
-                setImagesProduct(response.data.images)
-                setAvatarProduct(response.data.images[0].url)
+                    setImagesProduct(response.data.images)
+                    setAvatarProduct(response.data.images[0].url)
+                }
                 if (response.data.variations?.length > 0) {
                     response.data.variations.forEach(variation => {
                         const color = variation.dimension.color;
                         const size = variation.dimension.size;
 
-                        if (!colorArray.includes(color) && color !== null && color !== "") {
+                        if (!colorArray.includes(color) && color) {
                             colorArray.push(color);
                         }
 
-                        if (!sizeArray.includes(size) && size !== null && size !== "") {
+                        if (!sizeArray.includes(size) && size) {
                             sizeArray.push(size);
                         }
                     });
@@ -208,7 +219,9 @@ export default function ProductDetail() {
                             ${product.price}.00
                         </p>
                         <div className={styles.discription}>
-                            its a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Lpsum is that it has a more-or-less normal distribution of letters
+                            In this article, we’ll dive into the art of writing product descriptions for your online store. We’ll also go over 10 product description examples that can help get you started.
+
+                            Whether you’re just starting out or looking to revamp your current listings, these tips will help you create your own product descriptions that not only inform but also entice.
                         </div>
                         <ColorList data={colorList} onChange={onChangeColor} />
                         <SizeList data={sizeList} onChange={onChanSize} />

@@ -1,17 +1,49 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from './../../../../../util/AppContext';
 import { IoNotifications } from "react-icons/io5";
 import { SlArrowDown } from "react-icons/sl";
 import { FaBagShopping } from "react-icons/fa6";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import styles from './LoginAccess.module.css'
+import VietnamFlag from '../../../../assets/images/vn-circle-01.png'
+import UsFlag from '../../../../assets/images/us-circle-01.png'
 import { useNavigate } from 'react-router-dom';
 import { defaultAvt } from '../../image/DefaultIAvt';
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 export default function LoginAccess() {
     const { dataUser } = useContext(AppContext)
     const { t } = useTranslation()
     const navigate = useNavigate()
+    const [currentLanguage, setCurrentLanguage] = useState(null)
+
+    useEffect(() => {
+        const curLng = JSON.parse(localStorage.getItem('language'))
+        setCurrentLanguage(() => {
+            return curLng ? curLng?.value : null
+        })
+    }, [])
+
+    const dataLanguage = [
+        {
+            "name": "English",
+            "value": "en"
+        },
+        {
+            "name": "Vietnamese",
+            "value": "vi"
+        }
+    ]
+    const changeLngToEn = () => {
+        i18next.changeLanguage('en')
+        setCurrentLanguage('en')
+        localStorage.setItem('language', JSON.stringify(dataLanguage[0]))
+    }
+    const changeLngToVi = () => {
+        i18next.changeLanguage('vi')
+        setCurrentLanguage('vn')
+        localStorage.setItem('language', JSON.stringify(dataLanguage[1]))
+    }
     return (
         <div>
             {dataUser ?
@@ -34,21 +66,20 @@ export default function LoginAccess() {
                     </div>
                 </div> :
                 <div className={styles.boxTrue}>
-                    <div className={styles.title}>
-                        <p>
-                            Seeking premium fashion?
-                        </p>
-                        <p>
-                            Shop now <MdOutlineKeyboardDoubleArrowRight />
-                        </p>
-                    </div>
+                    {
+                        !currentLanguage ||  currentLanguage === 'en' ?
+                            <img src={UsFlag}
+                                onClick={changeLngToVi}
+                                style={{ width: 35, height: 35, borderRadius: '50%', objectFit: 'cover', cursor: 'pointer', border: '1px solid #f5f5f5' }} />
+                            : <img src={VietnamFlag}
+                                onClick={changeLngToEn}
+                                style={{ width: 35, height: 35, borderRadius: '50%', objectFit: 'cover', cursor: 'pointer', border: '1px solid #f5f5f5' }} />
+                    }
+
                     <div style={{ width: 0.5, height: 30, backgroundColor: '#85858556', marginRight: 15, marginLeft: 15 }} />
                     <div className={styles.boxFalse}>
-                        <button onClick={() => navigate('/register')}>
-                            {t('Header.buttonSignup')}
-                        </button>
                         <button onClick={() => navigate('/login')}>
-                        {t('Header.buttonLogin')}
+                            {t('Header.button.buttonLogin')} / {t('Header.button.buttonSignup')}
                         </button>
                     </div>
                 </div>

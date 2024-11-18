@@ -26,6 +26,9 @@
     height: 120px;
     width: 90px;
     background: #f5f5f5;
+    object-fit: cover;
+    user-select: none;
+    pointer-events: none;
 }
 
 .viewTotal {

@@ -10,9 +10,10 @@ export default function ItemCategory({ name, id }) {
 
     useEffect(() => {
         if (isChecked) {
-            dispatch(filtersSlice.actions.onSubCategoryCurrentChange(id));
+            
+            dispatch(filtersSlice.actions.toggleSubCategory(id));
         } else {
-            dispatch(filtersSlice.actions.onSubCategoryCurrentChange(id));
+            dispatch(filtersSlice.actions.toggleSubCategory(id));
         }
     }, [isChecked, dispatch, id]);
 
@@ -20,8 +21,8 @@ export default function ItemCategory({ name, id }) {
         setIsChecked(prevCheck => !prevCheck)
     }
     return (
-        <div style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
-            <input type='checkbox' checked={isChecked} onChange={toggleCheckox} style={{cursor: 'pointer'}}/> <label>{name}</label>
+        <div style={{ display: 'flex', alignItems: 'center', columnGap: 10, fontSize: 14.5 }}>
+            <input type='checkbox' checked={isChecked} onChange={toggleCheckox} style={{ cursor: 'pointer' }} /> <label>{name}</label>
         </div>
     )
 }

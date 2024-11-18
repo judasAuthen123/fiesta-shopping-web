@@ -111,6 +111,6 @@ button {
 @media (max-width: 900px) {
     .box .layoutContent {
         grid-template-columns: 1fr;
-        row-gap: 10px;
+        row-gap: 20px;
     }
 }

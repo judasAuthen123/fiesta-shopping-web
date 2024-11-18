@@ -6,6 +6,7 @@ import CircleLoading from './../../../../../public/components/loading/CircleLoad
 import AxiosInstance from '../../../../../../util/AxiosInstance';
 import { AppContext } from '../../../../../../util/AppContext';
 import { useTranslation } from 'react-i18next';
+import DoubleCircleLoading from '../../../../../public/components/loading/doubleCircleLoading/DoubleCircleLoading';
 export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
     const { t } = useTranslation()
     const [selectedFiles, setSelectedFile] = useState(null);
@@ -117,7 +118,13 @@ export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
                     </button>
                     <button type='submit'>
                         {
-                            loading ? <CircleLoading boderColor={'black'} /> : t('Components.avatar.button.btnSubmit')
+                            loading ? <DoubleCircleLoading 
+                            width={23} height={23} 
+                            spin1Color={'#333232'} 
+                            spin2Color={'black'}
+                            spin1Width={11}
+                            spin1Height={11}
+                            /> : t('Components.avatar.button.btnSubmit')
                         }
                     </button>
                 </div>

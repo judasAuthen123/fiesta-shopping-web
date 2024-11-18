@@ -7,6 +7,7 @@ import { SlLike } from "react-icons/sl";
 import { FaRegUser } from "react-icons/fa6";
 import { PiMoon } from "react-icons/pi";
 import { TbCube } from "react-icons/tb";
+import { LuPalette } from "react-icons/lu";
 import { GiWorld } from "react-icons/gi";
 import { useTranslation } from 'react-i18next'
 export default function LoginAccessExCollapse({ onCloseDrop }) {
@@ -29,17 +30,17 @@ export default function LoginAccessExCollapse({ onCloseDrop }) {
                             <Link to='/profile?type=1' onClick={onCloseDrop}><FaRegUser /> {t('Header.profile')}</Link>
                             <Link to='/profile?type=6' onClick={onCloseDrop}><GiWorld /> {t('Header.language')}</Link>
                             <Link to='/profile?type=2' onClick={onCloseDrop}><TbCube /> {t('Header.orders')}</Link>
-                            <Link to='/profile?type=6' onClick={onCloseDrop}><PiMoon /> {t('Header.appearance')}</Link>
+                            <Link to='/profile?type=6' onClick={onCloseDrop}><LuPalette /> {t('Header.appearance')}</Link>
                         </div>
                     </div> :
                     <div className={styles.boxLogin}>
                         <p>
-                            Log in for the best experience
+                            {t('Header.requireLogin')}
                             <SlLike />
                         </p>
                         <div className={styles.boxAccess}>
-                            <Link to='/login' className={styles.linkLogin}>Sign in</Link>
-                            <Link to='/register' className={styles.linkRegister}>You dont have an account? Click</Link>
+                            <Link to='/login' className={styles.linkLogin}>{t('Header.signIn')}</Link>
+                            <Link to='/register' className={styles.linkRegister}>{t('Header.dontHaveAccount')}</Link>
                         </div>
                     </div>
             }

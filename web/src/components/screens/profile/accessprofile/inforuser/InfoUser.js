@@ -78,7 +78,7 @@ export default function InfoUser() {
   return (
     <div className={styles.container}>
       <ImageForm isVisible={imgFromVisible} onClose={setImgFormVisible} onOpenSuccessDialog={setIsVisbile} />
-      <Dialog isVisible={isVisbile} status={'Update profile successful!'} />
+      <Dialog isVisible={isVisbile} status={t('Profile.Article.Information.titleDialog')} />
       <EmailForm isVisible={emailFormVisible} onClose={setEmailFormVisible} onOpenSuccessDialog={setIsVisbile} />
       <div className={`${styles.view} ${styles.view1}`}>
         <div className={styles.viewImg} onClick={() => setImgFormVisible(true)}>

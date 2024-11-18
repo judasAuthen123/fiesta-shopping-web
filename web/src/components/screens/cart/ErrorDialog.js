@@ -1,6 +1,8 @@
 import React, { } from 'react'
 import styles from './ErrorDialog.module.css'
+import { useTranslation } from 'react-i18next'
 export default function ErrorDialog({ isVisible, onClose }) {
+    const {t} = useTranslation()
     const closeModal = () => {
         onClose(false)
     }
@@ -8,7 +10,7 @@ export default function ErrorDialog({ isVisible, onClose }) {
     return (
         <div className={styles.container}>
             <div className={styles.body}>
-                <div className={styles.title}>You have not selected any items for checkout!</div>
+                <div className={styles.title}>{t('Cart.errorGoCheckout')}</div>
                 <div className={styles.viewButton}>
                     <button onClick={closeModal}>
                         OK

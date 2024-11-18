@@ -16,7 +16,7 @@
     width: 8px;
     background-color: black;
     cursor: grab;
-    border-radius: 50%;
+    border-radius: 3px;
     display: flex;
     justify-content: center;
     align-items: center;

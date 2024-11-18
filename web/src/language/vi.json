@@ -8,6 +8,12 @@
         "dark": "Tối",
         "device": "Thiết bị"
     },
+    "Loading": {
+        "title": "đang tải dữ liệu"
+    },
+    "MongoTranslator": {
+        "nameCtg": "viName"
+    },
     "Header": {
         "home": "Trang chủ",
         "shop": "Mua sắm",
@@ -21,10 +27,13 @@
             "buttonLogin": "Đăng nhập",
             "buttonSignup": "Đăng kí"
         },
-        "profile": "Hồ sơ",
+        "profile": "Tài khoản",
         "language": "Ngôn ngữ",
         "orders": "Đơn hàng",
-        "appearance": "Giao diện"
+        "appearance": "Giao diện",
+        "requireLogin": "Đăng nhập để trải nghiệm tốt hơn",
+        "signIn": "Đăng nhập với tài khoản của bạn",
+        "dontHaveAccount": "Bạn chưa có tài khoản?"
     },
     "Footer": {
         "Information": {
@@ -75,7 +84,11 @@
         "checkout": "Thanh toán",
         "variation": "Phân loại hàng",
         "total": "Tổng",
-        "items": "vật phẩm"
+        "items": "vật phẩm",
+        "listEmpty": "Giỏ hàng của bạn đang trống",
+        "shoppingnow": "Mua sắm ngay",
+        "errorGoCheckout": "Bạn chưa có sản phẩm nào để thanh toán!",
+        "refresh": "Làm mới"
     },
     "Profile": {
         "title": "Tài khoản",
@@ -97,7 +110,8 @@
                 "phoneNumber": "Số điện thoại",
                 "emailAddress": "Địa chỉ Email",
                 "edit": "Cập nhật",
-                "save": "Lưu"
+                "save": "Lưu",
+                "titleDialog": "Cập nhật hồ sơ thành công!"
             },
             "Orders": {
                 "title": "Đơn hàng",
@@ -118,7 +132,7 @@
                     "purchased": "Đã thanh toán",
                     "orderDate": "Ngày đặt",
                     "to": "Đến",
-                    "details": "chi tiết"
+                    "details": "Chi tiết"
                 },
                 "listEmpty": "Chưa có đơn hàng nào"
             },
@@ -184,7 +198,10 @@
             "range": "Khoảng",
             "color": "Lọc theo màu",
             "size": "Lọc theo kích cỡ",
-            "apply": "Áp dụng"
+            "apply": "Áp dụng",
+            "titleSearchName": "Tìm kiếm theo tên sản phẩm",
+            "search": "Tìm kiếm",
+            "sortBy": "Sắp xếp theo"
         },
         "listShow": {
             "string1": "Hiển thị",
@@ -194,7 +211,7 @@
     },
     "ProductDetail": {
         "size": "Kích cỡ",
-        "color": "Màu sắc",
+        "color": "Màu",
         "variation": "Phân loại hàng",
         "stock": "Kho",
         "status": {
@@ -237,7 +254,7 @@
             "back": "Trở về"
         },
         "myCheckout": {
-            "title": "Vật phẩm đơn hàng",
+            "title": "Sản phẩm đơn hàng",
             "orderTotal": "Tổng loại",
             "items": "Vật phẩm",
             "unitPrice": "Đơn giá",
@@ -268,6 +285,18 @@
             "notfilled": "Chưa có",
             "grandTotal": "Tổng thanh toán",
             "placeOrder": "Hoàn tất thanh toán"
+        },
+        "doneCheckout": {
+            "title": "Đơn hàng của bạn đã hoàn tất",
+            "thanks": "Cảm ơn bạn đã lựa chọn Fiesta!",
+            "provide": "Chúng tôi sẽ cố gắng hết sức để mang đến cho bạn trải nghiệm mua sắm tuyệt vời.",
+            "shipped": "Đơn hàng của bạn đã được xác nhận và sẽ sớm được chuyển đi.",
+            "continue": "Tiếptục mua sắm?",
+            "viewOrder": "Xem đơn hàng",
+            "dialogTitle": {
+                "string1": "Đặt hàng thành công!",
+                "string2": "Theo dõi đơn hàng của bạn trong giao diện tài khoản."
+            }
         }
     },
     "Components": {
@@ -348,7 +377,7 @@
                 "buttonConfirmDelete": "Xác nhận xóa"
             },
             "policyTitle": {
-                "string1": "Thông tin thẻ của bạn sẽ được bảo mật.",
+                "string1": "Thông tin thẻ của bạn luôn được bảo mật.",
                 "string2": "Chúng tôi hợp tác với nhà cung cấp uy tín để bảo mật thông tin thẻ của bạn. Fashion Fiesta sẽ không có quyền truy cập vào thông tin thẻ của bạn."
             },
             "titleAddNew": "Chi tiết thẻ mới",
@@ -365,6 +394,20 @@
                 "btnSubmit": "Cập nhật"
             },
             "error": "Kích thước tệp quá 5 MB"
+        },
+        "confirmPayment": {
+            "title": "Xác nhận thanh toán",
+            "quick": "Nhanh chóng và bảo mật, miễn phí giao dịch",
+            "detail": "Chi tiết",
+            "button": {
+                "buttonConfirm": "Xác nhận",
+                "buttonCancel": "Hủy"
+            },
+            "totalAmount": "Tổng số tiền",
+            "date": "Hôm nay",
+            "object": "Thương hiệu",
+            "cardNumber": "Số thẻ",
+            "cardName": "Tên chủ thẻ"
         }
     }
 }

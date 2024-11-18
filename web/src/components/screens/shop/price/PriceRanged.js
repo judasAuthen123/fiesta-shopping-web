@@ -1,23 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReactSlider from 'react-slider';
 import styles from './PriceRanged.module.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import filtersSlice from '../filters/filtersSlice';
 import { useTranslation } from 'react-i18next';
+import { priceRangeSelected } from '../../../redux/selector';
 export default function PriceRanged() {
-    const [range, setRange] = useState([0, 2000]);
-    const {t} = useTranslation()
-    const [previousRange, setPreviousRange] = useState([0, 2000]); 
+    const [range, setRange] = useState([]);
+    const { t } = useTranslation()
     const dispatch = useDispatch();
-    const handleChange = (newRange) => {
-        setRange(newRange);
-    };
-    useEffect(() => {
-        if (range[0] !== previousRange[0] || range[1] !== previousRange[1]) {
-            dispatch(filtersSlice.actions.onChangeCurrentPriceRange({ min: range[0], max: range[1] }));
-            setPreviousRange(range); 
+    const currentPriceRange = useSelector(priceRangeSelected)
+    function debounce(func, deley) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer)
+            timer = setTimeout(() => func(...args), deley)
         }
-    }, [range, dispatch, previousRange]);
+    }
+    useEffect(() => {
+        setRange([currentPriceRange?.min, currentPriceRange?.max])
+    }, [currentPriceRange])
+    const handleChange = debounce((newRange) => {
+        setRange(newRange)
+    }, 20)
+    // const handleChange = (newRange) => {
+    //     setRange(newRange)
+    // }
+    useEffect(() => {
+        dispatch(filtersSlice.actions.onChangeCurrentPriceRange({ min: range[0], max: range[1] }));
+    }, [range, dispatch]);
     return (
         <div>
             <div className={styles.rangeValues}>
@@ -27,13 +38,13 @@ export default function PriceRanged() {
                 className={styles.horizontalSlider}
                 thumbClassName={styles.thumb}
                 trackClassName={styles.track}
-                step={10}
+                step={5}
                 min={0}
-                max={2000}
+                max={200}
                 value={range}
                 onChange={handleChange}
                 withTracks={true}
-                renderThumb={(props, state) => <div {...props} key={state.index}/>}
+                renderThumb={(props, state) => <div {...props} key={state.index} />}
             />
         </div>
     );

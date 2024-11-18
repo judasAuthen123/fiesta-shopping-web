@@ -127,12 +127,12 @@ export default function Checkout() {
                             {t('Checkout.checkoutDetails.productsQuantity')}: {productTotal}
                             </p>
                             <p style={{ fontWeight: 400 }}>
-                                Total item: {totalItem}
+                            {t('Checkout.checkoutDetails.totalItems')}: {totalItem}
                             </p>
                         </div>
                         <div className={styles.viewSubtotal}>
                             <p style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
-                                <SlLocationPin size={15} /> Delivery Address
+                                <SlLocationPin size={15} /> {t('Checkout.checkoutDetails.address')}
                             </p>
                             <div style={{ fontWeight: 400 }}>
                                 {
@@ -146,7 +146,7 @@ export default function Checkout() {
                         </div>
                         <div className={styles.viewSubtotal}>
                             <p style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
-                                <MdOutlinePayments size={15} /> Payment Method
+                                <MdOutlinePayments size={15} /> {t('Checkout.checkoutDetails.paymentMethod')}
                             </p>
                             <div style={{ fontWeight: 400 }}>
                                 {
@@ -156,7 +156,7 @@ export default function Checkout() {
                         </div>
                         <div className={styles.viewSubtotal} style={{ borderBottomWidth: 0 }}>
                             <p>
-                                Grand Total
+                            {t('Checkout.checkoutDetails.grandTotal')}
                             </p>
                             <p style={{ fontWeight: 400, fontSize: 16 }}>
                                 ${total ? total : 'N/A'}
@@ -164,7 +164,7 @@ export default function Checkout() {
                         </div>
                         {
                             address && paymentMethod && stateCheckout !== 'done' ? <button onClick={placeOrder}>{
-                                loading ? <CircleLoading boderColor={'white'} /> : <>Place Order <FaGifts size={16} /></>
+                                loading ? <CircleLoading boderColor={'white'} /> : <>{t('Checkout.checkoutDetails.placeOrder')} <FaGifts size={16} /></>
                             }</button> : null
                         }
 

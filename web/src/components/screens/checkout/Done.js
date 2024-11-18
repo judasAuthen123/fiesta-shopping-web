@@ -3,24 +3,26 @@ import styles from './Done.module.css'
 import { MdOutlineDone } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { GrFormNextLink } from "react-icons/gr";
+import { useTranslation } from 'react-i18next';
 export default function Done() {
+    const {t} = useTranslation()
     return (
         <div className={styles.container}>
-            <label>Your order has been confirmed <MdOutlineDone size={20} color='#05d905'/> </label>
+            <label>{t('Checkout.doneCheckout.title')}<MdOutlineDone size={20} color='#05d905'/> </label>
             <div className={styles.layoutContent}>
                 <p>
-                    Thank you for choosing Fiesta!
+                    {t('Checkout.doneCheckout.thanks')}
                 </p>
                 <p>
-                    We will do our best to provide you with an excellent shopping experience.
+                {t('Checkout.doneCheckout.provide')}
                 </p>
                 <p>
-                    Your order has been confirmed and will be shipped soon.
+                {t('Checkout.doneCheckout.shipped')}
                 </p>
             </div>
             <div className={styles.doneAccess}>
-                <Link to='/shop'>Continue to shop?</Link>
-                <Link to='/profile?type=2'>View Your Order <GrFormNextLink/></Link>
+                <Link to='/shop'>{t('Checkout.doneCheckout.continue')}</Link>
+                <Link to='/profile?type=2'>{t('Checkout.doneCheckout.viewOrder')}<GrFormNextLink/></Link>
             </div>
         </div>
     )

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styles from './OrderSuccess.module.css'
+import { useTranslation } from 'react-i18next'
 export default function OrderSuccess({ isVisible, onClose, completeCheckout }) {
+    const { t } = useTranslation()
     const [seconds, setSeconds] = useState(5)
     useEffect(() => {
         let timer;
@@ -31,10 +33,10 @@ export default function OrderSuccess({ isVisible, onClose, completeCheckout }) {
             <div className={styles.body}>
                 <div className={styles.title}>
                     <p>
-                        Order Successfully!
+                        {t('Checkout.doneCheckout.dialogTitle.string1')}
                     </p>
                     <p>
-                        Track your order status in your profile.
+                        {t('Checkout.doneCheckout.dialogTitle.string2')}
                     </p>
                 </div>
                 <div className={styles.viewButton}>
@@ -43,7 +45,7 @@ export default function OrderSuccess({ isVisible, onClose, completeCheckout }) {
                         completeCheckout('done')
                     }
                     }>
-                        Confirm ({seconds}s)
+                        OK ({seconds}s)
                     </button>
                 </div>
             </div>

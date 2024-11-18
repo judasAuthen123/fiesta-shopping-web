@@ -22,7 +22,7 @@ function AppNavigator() {
             <Route path="/checkout" element={<AuthRoute><Checkout /></AuthRoute>} />
             <Route path="/profile" element={<AuthRoute><Profile /></AuthRoute>} />
             <Route path="/order-detail" element={<AuthRoute><OrderDetail /></AuthRoute>} />
-            <Route path="/shop/:id" element={<ShopByCategories />} />
+            <Route path="/shop-category" element={<ShopByCategories />} />
             <Route path="/login" element={<AuthLogin><Login /></AuthLogin>} />
             <Route path="/register" element={<AuthLogin><Register /></AuthLogin>} />
         </Routes>

@@ -1,7 +1,6 @@
 .container {
     display: block;
     width: 100%;
-    height: 100vh;
 }
 
 .box {
@@ -11,13 +10,15 @@
     justify-content: center;
     margin-bottom: 70px;
     margin-top: 70px;
+    min-width: 1100px;
 }
 
 .box .title {
     width: 75%;
     display: flex;
     align-items: center;
-    font-size: 15px;
+    font-size: 17px;
+    column-gap: 5px;
 }
 
 .box .title .icon {
@@ -44,31 +45,75 @@
 
 .box .layoutContent .boxProducts .viewProducts {
     display: grid;
-    grid-template-columns: 31% 31% 31%;
-    column-gap: 3.5%;
-    row-gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
 }
+
+.box .viewSearch {
+    display: grid;
+    width: 75%;
+    grid-template-columns: 20% 75%;
+    column-gap: 5%;
+    margin-bottom: 15px;
+    position: sticky;
+    top: 70px;
+}
+.box .viewSearch .filterTitle {
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    font-weight: 550;
+    column-gap: 5px;
+}
+
 
 .layoutContent .layoutShowing {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 23px;
+    margin-bottom: 15px;
+    background-color: rgba(240, 240, 240, 0.338);
+    padding: 10px;
+    border-radius: 5px;
 }
-
+.layoutContent .layoutShowing .layoutShowing1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
+}
+.layoutContent .layoutShowing .layoutShowing1 .viewDataSort{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+}
+.layoutContent .layoutShowing .layoutShowing1 .viewDataSort>div{
+    padding: 6px 15px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px rgba(168, 168, 168, 0.251);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.13s ease-in-out;
+}
+.sortIn {
+    background-color: black;
+    color: white;
+}
+.sortOut {
+    background-color: white;
+    color: black;
+}
 .layoutContent .layoutShowing>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
 }
 
-.layoutContent .layoutShowing .layoutShowing1 .iconView {
-    width: 65px;
+.layoutContent .layoutShowing .layoutShowing1>div{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-right: 20px;
+    column-gap: 5px;
 }
 
 .layoutContent .layoutShowing .layoutShowing1 .iconView .icon {
@@ -89,6 +134,9 @@
     display: flex;
     flex-direction: column;
     row-gap: 15px;
+    position: sticky;
+    top: 90px;
+    height: max-content;
 }
 
 .boxFilter>button {
@@ -113,8 +161,23 @@
     flex-direction: column;
     row-gap: 8px;
 }
+
 .boxSubCategory>p {
     font-size: 15px;
     font-weight: 600;
     margin-bottom: 7px;
+}
+
+@media (max-width: 1200px) {
+    .box .title {
+        width: 98%;
+    }
+
+    .box .viewSearch {
+        width: 98%;
+    }
+
+    .box .layoutContent {
+        width: 98%;
+    }
 }

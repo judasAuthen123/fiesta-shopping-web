@@ -99,3 +99,14 @@
 .bottomFooter .title {
     text-align: center;
 }
+@media (max-width: 1200px) {
+    .contentLayout {
+        width: 98%;
+    }
+}
+@media (max-width: 900px) {
+    .infoAndOptions {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
