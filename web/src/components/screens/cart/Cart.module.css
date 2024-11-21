@@ -94,4 +94,13 @@ button {
     color: cyan;
 }
 
+@media (max-width: 1200px) {
+    .box .layoutContent {
+        width: 98%;
+    }
+    .box .title {
+        width: 98%;
+    }
+}
+
 

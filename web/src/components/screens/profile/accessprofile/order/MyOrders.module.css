@@ -6,6 +6,7 @@
     box-shadow: 0px 0px 4px rgba(92, 92, 92, 0.145);
     border-radius: 2px;
     position: relative;
+    min-width: 650px;
 }
 
 .itemTopTab {

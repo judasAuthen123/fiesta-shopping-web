@@ -118,13 +118,7 @@ export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
                     </button>
                     <button type='submit'>
                         {
-                            loading ? <DoubleCircleLoading 
-                            width={23} height={23} 
-                            spin1Color={'#333232'} 
-                            spin2Color={'black'}
-                            spin1Width={11}
-                            spin1Height={11}
-                            /> : t('Components.avatar.button.btnSubmit')
+                            loading ? <CircleLoading /> : t('Components.avatar.button.btnSubmit')
                         }
                     </button>
                 </div>

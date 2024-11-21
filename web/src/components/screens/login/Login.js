@@ -14,9 +14,9 @@ import ghnLogo from '../../assets/images/ghnLogo.png'
 import imagekitLogo from '../../assets/images/imagekitLogo.png'
 import ContainerLoading from '../../public/components/loading/ContainerLoading';
 import DoubleCircleLoading from './../../public/components/loading/doubleCircleLoading/DoubleCircleLoading';
+import { useTranslation } from 'react-i18next';
 export default function Login() {
-    // const [userData, setUserData] = useState([])
-    // const [profile, setProfile] = useState([])
+    const { t } = useTranslation()
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
@@ -111,29 +111,26 @@ export default function Login() {
                     </div>
                     <div className={styles.viewText}>
                         <div className={styles.itemText}>
-                            <p><FaCircleCheck className={styles.icon} /> Get started quickly</p>
-                            <p>Integrate with developer-friendly APIs or choose low-code.</p>
+                            <p><FaCircleCheck className={styles.icon} /> {t('Login_Register.textSuggest.text1.string1')}</p>
+                            <p>{t('Login_Register.textSuggest.text1.string2')}</p>
                         </div>
                         <div className={styles.itemText}>
-                            <p><FaCircleCheck className={styles.icon} /> Support any business model</p>
-                            <p>Host code that you don't want to share with the world in private.</p>
+                            <p><FaCircleCheck className={styles.icon} />{t('Login_Register.textSuggest.text2.string1')}</p>
+                            <p>{t('Login_Register.textSuggest.text2.string2')}</p>
                         </div>
                         <div className={styles.itemText}>
-                            <p><FaCircleCheck className={styles.icon} /> Join millions of businesses</p>
-                            <p>Flowbite is trusted by ambitious startups and enterprises of every size.</p>
+                            <p><FaCircleCheck className={styles.icon} />{t('Login_Register.textSuggest.text3.string1')}</p>
+                            <p>{t('Login_Register.textSuggest.text3.string2')}</p>
                         </div>
 
                     </div>
                     <div className={styles.footer}>
                         <div className={styles.nav}>
                             <Link to={'/home'}>
-                                Home
+                                {t('Login_Register.home')}
                             </Link>
                             <Link to={'/shop'}>
-                                Shop
-                            </Link>
-                            <Link>
-                                Term & Condition
+                                {t('Login_Register.shop')}
                             </Link>
                         </div>
                         <div className={styles.partner}>
@@ -151,9 +148,9 @@ export default function Login() {
                             <DoubleCircleLoading
                                 spin1Color={'black'}
                                 spin2Color={'blueViolet'}
-                                width={60} height={60}
-                                spin1Height={35}
-                                spin1Width={35} />
+                                width={100} height={100}
+                                spin1Height={55}
+                                spin1Width={55} />
                         </ContainerLoading>
                     }
                     <div className={styles.viewWelcome}>
@@ -170,21 +167,21 @@ export default function Login() {
                             </div>
                         </div>
                         <div className={styles.viewLine}>
-                            <p className={styles.text}>Sign in</p>
+                            <p className={styles.text}>{t('Login_Register.titleSignin')}</p>
                             <div className={styles.line}></div>
                         </div>
                     </div>
                     <div className={styles.boxInput}>
                         <div className={styles.viewInput}>
-                            <label>Username</label>
+                            <label>{t('Login_Register.inputLabel.userName.label')}</label>
                             <div className={styles.inputField}>
-                                <input placeholder={'Enter your username'} type={'text'} onChange={onUserNameHandler} />
+                                <input placeholder={t('Login_Register.inputLabel.userName.placeholder')} type={'text'} onChange={onUserNameHandler} />
                             </div>
                         </div>
                         <div className={styles.viewInput}>
-                            <label>Password</label>
+                            <label>{t('Login_Register.inputLabel.password.label')}</label>
                             <div className={styles.inputField}>
-                                <input placeholder={'Enter your password'} type={isShowPassword ? 'text' : 'password'} onChange={onPasswordHandler} />
+                                <input placeholder={t('Login_Register.inputLabel.password.placeholder')} type={isShowPassword ? 'text' : 'password'} onChange={onPasswordHandler} />
                                 {
                                     isShowPassword ?
                                         <VscEye onClick={changeIsShowPassword} className={styles.eyePassword} /> :
@@ -195,16 +192,16 @@ export default function Login() {
                     </div>
                     <div className={styles.remember_forgotPass}>
                         <div className={styles.remember}>
-                            <input type='checkbox' /> <label>Remember me</label>
+                            <input type='checkbox' /> <label>{t('Login_Register.rememberMe')}</label>
                         </div>
                         <div className={styles.forgot}>
-                            <p>Forgot password?</p>
+                            <p>{t('Login_Register.forgotPassword')}</p>
                         </div>
                     </div>
                     <button
                         type='submit'
-                        className={styles.buttonLogin}>Sign in to your account</button>
-                    <div className={styles.dontHaveAccount}>Dont have an account yet? <span style={{ color: 'blueViolet', cursor: 'pointer' }}>Sign up here</span></div>
+                        className={styles.buttonLogin}>{t('Login_Register.button.buttonLogin')}</button>
+                    <div className={styles.dontHaveAccount}>{t('Login_Register.dontHaveAccount')}<span onClick={() => navigate('/register')} style={{ color: 'blueViolet', cursor: 'pointer' }}>{t('Login_Register.signUpHere')}</span></div>
                 </form>
             </div>
         </div>

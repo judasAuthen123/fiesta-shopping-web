@@ -30,9 +30,15 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
   const { dataUser } = useContext(AppContext)
   const [cardType, setCardType] = useState('')
   const [name, setName] = useState('')
-  const [isDefault, setIsDefault] = useState(isObligatory ? true : false)
+  const [isDefault, setIsDefault] = useState(false)
   const [errorValid, setErrorValid] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setCardType('')
+    setIsDefault(false)
+  }, [isVisible])
+
   const onChangeName = (e) => {
     setName(e.target.value)
   }
@@ -70,7 +76,8 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
           console.log('error stripe: ' + error.message);
         } else {
 
-          const response = await AxiosInstance.post(`/payment/save-card?userId=${dataUser?._id}&token=${token.id}&isDefault=${isDefault}`)
+          const response = await AxiosInstance
+          .post(`/payment/save-card?userId=${dataUser?._id}&token=${token.id}&isDefault=${isObligatory ? isObligatory : isDefault}`)
           if (response.statusCode === 200) {
             onRefreshCardData(response.data)
             onChangeModalOpen()

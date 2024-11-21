@@ -14,6 +14,62 @@
     "MongoTranslator": {
         "nameCtg": "enName"
     },
+    "Login_Register": {
+        "welcomeBack": "Welcome back",
+        "titleSignin": "Sign in",
+        "titleSignup": "Sign up",
+        "inputLabel": {
+            "userName": {
+                "label": "Username",
+                "placeholder": "Enter your username"
+            },
+            "password": {
+                "label": "Password",
+                "placeholder": "Enter your password"
+            },
+            "phoneNumber": {
+                "label": "Phone number",
+                "placeholder": "Enter phone number"
+            },
+            "name": {
+                "label": "Name select",
+                "placeholder": "What's your name?"
+            },
+            "confirmPassword": {
+                "label": "Confirm password",
+                "placeholder": "Enter password again"
+            }
+        },
+        "button": {
+            "buttonLogin": "Sign in to your account",
+            "buttonSignup": "Create an account"
+        },
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgor password?",
+        "dontHaveAccount": "You dont have an account yet?",
+        "signUpHere": "Sign up here",
+        "textSuggest": {
+            "text1": {
+                "string1": "Quick and easy shopping",
+                "string2": "Smart shopping features will save your time."
+            },
+            "text2": {
+                "string1": "Data security",
+                "string2": "Information such as credit cards will be absolutely secure."
+            },
+            "text3": {
+                "string1": "Support anytime",
+                "string2": "Website staff will provide technical and shopping support 24/7."
+            }
+        },
+        "home": "Home",
+        "shop": "Shop",
+        "dialog": {
+            "title": "Successfully!",
+            "note": "You can log in to shop immediately",
+            "back": "Back to login page"
+        }
+    },
     "Header": {
         "home": "Home",
         "shop": "Shop",

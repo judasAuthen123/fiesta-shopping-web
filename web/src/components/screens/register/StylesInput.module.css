@@ -1,0 +1,98 @@
+.viewInput {
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+    width: 100%;
+    position: relative;
+}
+.viewInput .viewErr {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    column-gap: 5px;
+    color: red;
+    align-items: center;
+    font-size: 13px;
+    animation: translateToTop 0.4s forwards;
+}
+@keyframes translateToTop {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.viewInput>label {
+    font-size: 14px;
+}
+.viewInputNamePhone {
+    display: flex;
+    column-gap: 10px;
+}
+
+.inputField {
+    width: 100%;
+    position: relative;
+    /* Để định vị pseudo-element */
+}
+
+.inputField {
+    width: 100%;
+    position: relative; /* Để định vị pseudo-element */
+    border: 1px solid rgba(134, 134, 134, 0.326);
+    border-radius: 7px;
+    transition: border-color 0.4s ease-in-out;
+}
+
+.inputField input {
+    width: 100%;
+    padding: 12px;
+    outline: none;
+    border: none;
+    border-radius: 9px;
+    background: rgb(252, 252, 252);
+    font-size: 16px;
+    position: relative; /* Đảm bảo input nằm trên */
+    z-index: 1; /* Đẩy input lên trên ::after */
+    letter-spacing: 1.3px;
+}
+.inputField input[type="password"] {
+    letter-spacing: 1.4;
+}
+.inputField input::placeholder {
+    color: rgba(70, 70, 70, 0.445); /* Màu placeholder */
+    font-size: 14px;
+}
+.eyePassword {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 17px;
+    z-index: 2;
+    font-size: 25px;
+    cursor: pointer;
+}
+.inputField::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 11px;
+    background: rgb(114, 18, 240); /* Hiệu ứng nền */
+    transform: scale(1.007, 1.08); /* Hiệu ứng nhẹ khi xuất hiện */
+    z-index: 0; /* Đảm bảo ::after nằm dưới input */
+    opacity: 0; /* Ẩn mặc định */
+    pointer-events: none; /* Không cho phép tương tác với ::after */
+    transition: opacity 0.2s ease-in-out;
+}
+
+.inputField:focus-within::after {
+    opacity: 1;
+    /* Hiển thị hiệu ứng khi focus */
+}

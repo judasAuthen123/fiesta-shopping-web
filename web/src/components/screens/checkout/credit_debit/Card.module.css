@@ -1,6 +1,7 @@
 .container {
     content: '';
     height: auto;
+    width: 100%;
 }
 
 .viewOpenFormCard {

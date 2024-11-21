@@ -12,9 +12,10 @@ import cardSlice from './cardSlice';
 import CircleLoading from '../../../public/components/loading/CircleLoading';
 import { defaultCardId } from '../../../redux/selector';
 import { useTranslation } from 'react-i18next';
+import ShineCardListLoading from '../../../public/components/loading/shineLoading/ShineCardListLoading';
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY}`)
 export default function Card({ isShowNote }) {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const [cardFromVisible, setCardFromVisible] = useState(false)
   const [cardList, setCardList] = useState([])
   const [defaultCard, setDefaultCard] = useState('')
@@ -30,10 +31,14 @@ export default function Card({ isShowNote }) {
 
 
   const getDefaultCard = async () => {
-    const response = await AxiosInstance.get(`/payment/get-default-card/${dataUser?._id}`)
-    if (response.data) {
-      setDefaultCard(response.data.defaultCard)
-      dispatch(cardSlice.actions.onChangeDefaultId(response.data.defaultCard))
+    try {
+      const response = await AxiosInstance.get(`/payment/get-default-card/${dataUser?._id}`)
+      if (response.data) {
+        setDefaultCard(response.data.defaultCard)
+        dispatch(cardSlice.actions.onChangeDefaultId(response.data.defaultCard))
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -48,10 +53,18 @@ export default function Card({ isShowNote }) {
   }
   const getCardList = async () => {
     setLoadingDataCard(true)
-    const response = await AxiosInstance.get(`/payment/get-card-list/${dataUser?._id}`)
-    if (response.statusCode === 200) {
-      setCardList(response.data)
-      setLoadingDataCard(false)
+    try {
+      const response = await AxiosInstance.get(`/payment/get-card-list/${dataUser?._id}`);
+      
+      if (response.statusCode === 200) {
+        setCardList(response.data)
+        setLoadingDataCard(false)
+      } else if (response.statusCode !== 200) {
+        setLoadingDataCard(false)
+      }
+    } catch (error) {
+      console.log(error);
+
     }
   }
 
@@ -76,7 +89,6 @@ export default function Card({ isShowNote }) {
     }
   }, [defaultIdCardRedux, defaultCard])
 
-
   const chooseDefaultCard = async (idCardToChange) => {
     setLoading(true)
     try {
@@ -96,22 +108,22 @@ export default function Card({ isShowNote }) {
   return (
     <Elements stripe={stripePromise}>
       <Dialog isVisible={isVisible} status={t('Profile.Article.Cards.dialogUpdate')} />
-      <div>
+      <div className={styles.container}>
 
 
         <CardForm
           isVisible={cardFromVisible}
           onClose={onCallbackCardFormClose}
           onRefreshCardData={addNewCardData}
-          onOpenSuccessDialog={setIsVisible} 
-          isObligatory={cardList?.length === 0}/>
+          onOpenSuccessDialog={setIsVisible}
+          isObligatory={cardList?.length === 0} />
 
         {
           isShowNote && <p style={{ fontSize: 13 }}>{t('Components.card.noteUsing')}</p>
         }
 
         {
-          loadingDataCard ? <div style={{ display: 'flex', alignItems: 'center', columnGap: 8 }}><CircleLoading width={15} height={15} boderColor={'black'} /> {t('Loading.title')} </div> :
+          loadingDataCard ? <ShineCardListLoading /> :
             <div className={styles.viewListCard}>
               {
                 cardList.length > 0 ?
@@ -125,7 +137,7 @@ export default function Card({ isShowNote }) {
                       onRemoveCard={removeCardItem}
                       isDefault={card.id === defaultCard} />
                   ) : <div style={{ fontSize: 12 }}>
-                    {t('Components.card.listEmpty')}
+                    {t('Profile.Article.Cards.listEmpty')}
                   </div>
               }
             </div>

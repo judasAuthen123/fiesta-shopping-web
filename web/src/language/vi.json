@@ -14,6 +14,62 @@
     "MongoTranslator": {
         "nameCtg": "viName"
     },
+    "Login_Register": {
+        "welcomeBack": "Welcome back",
+        "titleSignin": "Đăng nhập",
+        "titleSignup": "Đăng kí",
+        "inputLabel": {
+            "userName": {
+                "label": "Tên đăng nhập",
+                "placeholder": "Điền tên đăng nhập"
+            },
+            "password": {
+                "label": "Mật khẩu",
+                "placeholder": "Nhập mật khẩu"
+            },
+            "phoneNumber": {
+                "label": "Số điện thoại",
+                "placeholder": "Nhập số điện thoại"
+            },
+            "name": {
+                "label": "Tên hiển thị",
+                "placeholder": "Tên của bạn là gì?"
+            },
+            "confirmPassword": {
+                "label": "Xác nhận mật khẩu",
+                "placeholder": "Nhập lại mật khẩu"
+            }
+        },
+        "button": {
+            "buttonLogin": "Đăng nhập vào tài khoản",
+            "buttonSignup": "Tạo tài khoản"
+        },
+        "rememberMe": "Ghi nhớ tôi",
+        "forgotPassword": "Quên mật khẩu?",
+        "dontHaveAccount": "Bạn chưa có tài khoản?",
+        "signUpHere": "Đăng kí ở đây",
+        "textSuggest": {
+            "text1": {
+                "string1": "Mua sắm nhanh gọn",
+                "string2": "Chức năng mua sắm thông minh sẽ tiết kiệm thời gian của bạn."
+            },
+            "text2": {
+                "string1": "An toàn thông tin",
+                "string2": "Các thông tin như thẻ tín dụng sẽ được bảo mật tuyệt đối."
+            },
+            "text3": {
+                "string1": "Hỗ trợ mọi thời điểm",
+                "string2": "Nhân viên website sẽ hỗ trợ kỹ thuật cũng như mua sắm 24/7"
+            }
+        },
+        "home": "Trang chủ",
+        "shop": "Mua sắm",
+        "dialog": {
+            "title": "Thành công!",
+            "note": "Bạn có thể đăng nhập để mua sắm ngay",
+            "back": "Về trang đăng nhập"
+        }
+    },
     "Header": {
         "home": "Trang chủ",
         "shop": "Mua sắm",

@@ -120,25 +120,10 @@ export default function InfoUser() {
         </div>
         <div className={styles.viewInput}>
           <label>
-          {t('Profile.Article.Information.gender')}
-          </label>
-          <input readOnly={modelInput} value={dataUser?.gender} />
-          <div className={styles.viewEdit}>
-            <button>
-              <TbEdit /> {t('Profile.Article.Information.edit')}
-            </button>
-          </div>
-        </div>
-        <div className={styles.viewInput}>
-          <label>
           {t('Profile.Article.Information.phoneNumber')}
           </label>
-          <input readOnly={modelInput} value={'+(84) 0358856753'} />
-          <div className={styles.viewEdit}>
-            <button>
-              <TbEdit /> {t('Profile.Article.Information.edit')}
-            </button>
-          </div>
+          <input readOnly={modelInput} value={`+(84) ${dataUser.phoneNumber}`} />
+          
         </div>
         <div className={styles.viewInput}>
           <label>
