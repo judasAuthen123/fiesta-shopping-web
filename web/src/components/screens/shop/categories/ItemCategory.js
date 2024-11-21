@@ -11,9 +11,15 @@ export default function ItemCategory({ name, id }) {
     useEffect(() => {
         if (isChecked) {
             
-            dispatch(filtersSlice.actions.toggleSubCategory(id));
+            dispatch(filtersSlice.actions.toggleSubCategory({
+                request: true,
+                category: id
+            }));
         } else {
-            dispatch(filtersSlice.actions.toggleSubCategory(id));
+            dispatch(filtersSlice.actions.toggleSubCategory({
+                request: false,
+                category: id
+            }));
         }
     }, [isChecked, dispatch, id]);
 

@@ -46,8 +46,13 @@ export const filtersSlice = createSlice({
         },
         toggleSubCategory: (state, { payload }) => {
             const subCategory = state.currentSearchFields.category.subCategory;
-            const index = subCategory.indexOf(payload);
-            index === -1 ? subCategory.push(payload) : subCategory.splice(index, 1);
+            const { request, category } = payload
+            const index = subCategory.indexOf(category);
+            if (request) {
+                if (index === -1) subCategory.push(category)
+            } else {
+                subCategory.splice(index, 1)
+            }
         },
         onApplySearchFields: (state) => {
             state.searchFields = { ...state.currentSearchFields };
