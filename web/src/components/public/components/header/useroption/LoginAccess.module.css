@@ -98,3 +98,9 @@
     background-color: black;
     color: white;
 }
+
+@media (max-width: 1200px) {
+    .boxTrue .title {
+        visibility: hidden;
+    }
+}

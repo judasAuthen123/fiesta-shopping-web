@@ -13,9 +13,9 @@ export default function MyCheckout({ data, stepSubmit }) {
     const { dataUser } = useContext(AppContext)
     const [subTotalPrice, setSubTotalPrice] = useState(0)
     useEffect(() => {
-        try {
-            if (data) {
-                const getCartByIds = async () => {
+        const getCartByIds = async () => {
+            try {
+                if (data) {
                     const response = await AxiosInstance.get('/cart/getCartByIds', {
                         params: {
                             userId: dataUser?._id,
@@ -29,13 +29,11 @@ export default function MyCheckout({ data, stepSubmit }) {
                         }
                     }
                 }
-                getCartByIds()
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
-
         }
-
+        getCartByIds()
     }, [data])
     useEffect(() => {
         if (checkoutList && checkoutList.length > 0) {
@@ -83,9 +81,7 @@ export default function MyCheckout({ data, stepSubmit }) {
                         checkoutList.map(item => {
                             const priceInfo = totalPrice(item)
                             let avatar;
-                            console.log(item);
-                            
-                            if(Array.isArray(item.products.images)) {
+                            if (Array.isArray(item.products.images)) {
                                 avatar = item.products.images[0].url
                             }
                             return (

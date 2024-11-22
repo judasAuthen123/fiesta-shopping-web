@@ -60,7 +60,7 @@ export default function MyOrders() {
     }
     const newDataOrder = dataOrder.filter(item => statusFilter ? item.status === statusFilter : item)
     setDataOrderSelected(newDataOrder)
-  }, [statusSelected, statusFilter, dataOrder])
+  }, [statusSelected, statusFilter, dataOrder, arrSatus.length])
 
 
   useEffect(() => {

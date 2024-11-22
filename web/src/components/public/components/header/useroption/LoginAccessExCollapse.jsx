@@ -5,7 +5,6 @@ import { defaultAvt } from '../../image/DefaultIAvt'
 import { Link } from 'react-router-dom'
 import { SlLike } from "react-icons/sl";
 import { FaRegUser } from "react-icons/fa6";
-import { PiMoon } from "react-icons/pi";
 import { TbCube } from "react-icons/tb";
 import { LuPalette } from "react-icons/lu";
 import { GiWorld } from "react-icons/gi";

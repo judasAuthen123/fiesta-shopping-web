@@ -15,7 +15,7 @@
 
 .boxContent {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr auto 1fr;
   z-index: 2;
   width: 89%;
   align-items: center;
@@ -96,7 +96,7 @@
   background-color: rgba(191, 191, 191, 0.164);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
   .boxContent {
     width: 100%;
     padding-left: 16px;

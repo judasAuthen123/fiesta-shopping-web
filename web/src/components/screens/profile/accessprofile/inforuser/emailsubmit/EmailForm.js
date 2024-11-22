@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './EmailForm.module.css'
 import { MdDone } from "react-icons/md";
 import { HiOutlineMail } from "react-icons/hi";

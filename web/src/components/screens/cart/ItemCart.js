@@ -40,7 +40,7 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
                 return avatar ? avatar : image
             })
         }
-    }, [])
+    }, [data])
 
     useEffect(() => {
         if (quantity !== data?.quantity) {
@@ -63,7 +63,7 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
             }
             updateItemCart()
         }
-    }, [quantity])
+    }, [quantity, data._id, data?.quantity])
 
     useEffect(() => {
         setChecked(checkAll)

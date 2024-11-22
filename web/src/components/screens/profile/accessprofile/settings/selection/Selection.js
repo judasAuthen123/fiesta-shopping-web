@@ -3,9 +3,7 @@ import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 import styles from './Selection.module.css'
 import { MdOutlineDone } from "react-icons/md";
 import i18next from 'i18next';
-import { useTranslation } from 'react-i18next';
 export default function Selection({ optionsData, typeData }) {
-    const {t} = useTranslation()
     const [selectedOption, setselectedOption] = useState(null)
     const [isOpen, setisOpen] = useState(false);
     const heightRef = useRef();
@@ -22,7 +20,7 @@ export default function Selection({ optionsData, typeData }) {
                 return currentData && currentData.name &&  currentData.value ? currentData : firstValue
             })
         }
-    }, [])
+    }, [optionsData, typeData])
     const onChangeLanguage = (data) => {
         if (typeData === 'language') {
             i18next.changeLanguage(data.value)

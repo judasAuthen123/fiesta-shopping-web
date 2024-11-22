@@ -443,13 +443,13 @@
             }
         },
         "avatar": {
-            "size": "File size: maximum 5 MB",
+            "size": "File size: maximum 1 MB",
             "extension": "File extension: .JPEG, .PNG",
             "button": {
                 "btnCancel": "Cancel",
                 "btnSubmit": "Save"
             },
-            "error": "File size exceeds 5 MB"
+            "error": "File size exceeds 1 MB"
         },
         "confirmPayment": {
             "title": "Confirm payment",

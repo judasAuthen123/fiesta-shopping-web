@@ -3,7 +3,7 @@ import Header from '../../public/components/header/Header'
 import Footer from '../../public/components/footer/Footer'
 import PolicyFooter from '../../public/components/footer/PolicyFooter'
 import styles from './OrderDetail.module.css'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { SlLocationPin } from "react-icons/sl";
 import { MdOutlinePayments } from "react-icons/md";
 import AxiosInstance from '../../../util/AxiosInstance'

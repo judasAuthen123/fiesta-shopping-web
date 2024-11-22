@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Home.module.css'
 import Header from '../../public/components/header/Header'
-import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import { subCategory } from '../../public/components/header/menudrop/MenuDrop';
-import ItemProduct, { products } from '../../public/components/product/ItemProduct';
+import ItemProduct from '../../public/components/product/ItemProduct';
 import ItemSubCategory from './categories/ItemSubCategory';
 import Footer from '../../public/components/footer/Footer';
 import BackToTopButton from '../../public/components/button/BackToTopButton';

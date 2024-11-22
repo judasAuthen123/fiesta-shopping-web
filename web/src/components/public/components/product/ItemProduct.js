@@ -13,7 +13,7 @@ export default function ItemProduct({ name, brand, price, id, images }) {
             const avatar = images[0].url
             setAvatarProduct(avatar)
         }
-    }, [])
+    }, [images])
     return (
         <div className={styles.container}>
             <Link to={`/productDetail/${id}`} className={styles.productImg}>

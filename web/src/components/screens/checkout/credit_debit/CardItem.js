@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './CardItem.module.css'
 import { SiVisa } from "react-icons/si";
 import { BsCheckCircleFill } from "react-icons/bs";

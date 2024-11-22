@@ -9,7 +9,6 @@ import { AppContext } from '../../../../util/AppContext';
 import Dialog from './../../../public/components/dialog/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import cardSlice from './cardSlice';
-import CircleLoading from '../../../public/components/loading/CircleLoading';
 import { defaultCardId } from '../../../redux/selector';
 import { useTranslation } from 'react-i18next';
 import ShineCardListLoading from '../../../public/components/loading/shineLoading/ShineCardListLoading';

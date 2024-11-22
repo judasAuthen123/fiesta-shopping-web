@@ -6,7 +6,6 @@ import { AppContext } from '../../../util/AppContext'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
 import Dialog from './../../public/components/dialog/Dialog';
 import { useTranslation } from 'react-i18next'
-const string2 = `Is the address you'd like to use displayed below? If so, click the crorresponding "Deliver to this address" button, or you can enter a new delivery address.`
 export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
     const { dataUser } = useContext(AppContext)
     const { t } = useTranslation()

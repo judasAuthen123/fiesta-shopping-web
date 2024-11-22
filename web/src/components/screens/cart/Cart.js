@@ -27,17 +27,22 @@ export default function Cart() {
 
     useEffect(() => {
         const getCart = async () => {
-            setLoading(true)
-            const response = await AxiosInstance.get(`/cart/getBypage/1/${dataUser?._id}`)
-            if (response.result) {
-                if (response.data) {
-                    setCartList(response.data.result)
-                    setLoading(false)
+            try {
+                setLoading(true)
+                const response = await AxiosInstance.get(`/cart/getBypage/1/${dataUser?._id}`)
+                if (response.result) {
+                    if (response.data) {
+                        setCartList(response.data.result)
+                        setLoading(false)
+                    }
                 }
+            } catch (error) {
+                console.log(error);            
             }
+
         }
         getCart()
-    }, [])
+    }, [dataUser?._id])
 
 
     useEffect(() => {

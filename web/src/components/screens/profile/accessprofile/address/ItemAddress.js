@@ -8,27 +8,32 @@ import ConfirmDialog from '../../../../public/components/dialog/ConfirmDialog'
 import { AppContext } from '../../../../../util/AppContext'
 import { useTranslation } from 'react-i18next'
 export default function ItemAddress({ data, onOpenSuccessDialog }) {
-    const {t} = useTranslation()
+    const { t } = useTranslation()
     const { dataUser, setDataUser } = useContext(AppContext)
     const [addressFormUpdateVisible, setAddressFormUpdateVisible] = useState(false)
     const [isVisibleConfirm, setIsVisibleConfirm] = useState(false)
     const [isDelete, setIsDelete] = useState(false)
     const [loading, setLoading] = useState(false)
     const deleteAddress = async () => {
-        setLoading(true)
-        const request = await AxiosInstance.post('/userApi/deleteAddress', {
-            userId: dataUser?._id,
-            addressId: data._id
-        })
-        if (request.statusCode === 200) {
-            const user = JSON.parse(localStorage.getItem('user'))
-            if (Array.isArray(user.address)) {
-                user.address = user.address.filter(item => item._id !== data._id)
+        try {
+            setLoading(true)
+            const request = await AxiosInstance.post('/userApi/deleteAddress', {
+                userId: dataUser?._id,
+                addressId: data._id
+            })
+            if (request.statusCode === 200) {
+                const user = JSON.parse(localStorage.getItem('user'))
+                if (Array.isArray(user.address)) {
+                    user.address = user.address.filter(item => item._id !== data._id)
+                }
+                localStorage.setItem('user', JSON.stringify(user))
+                setDataUser(user)
+                setIsVisibleConfirm(false)
+                setIsDelete(false)
             }
-            localStorage.setItem('user', JSON.stringify(user))
-            setDataUser(user)
-            setIsVisibleConfirm(false)
-            setIsDelete(false)
+        } catch (error) {
+            console.log(error);
+
         }
     }
     useEffect(() => {
@@ -58,7 +63,7 @@ export default function ItemAddress({ data, onOpenSuccessDialog }) {
                 >
                     <FiEdit className={styles.icon} />
                     <div className={styles.text}>
-                    {t('Profile.Article.Address.button.buttonEdit')}
+                        {t('Profile.Article.Address.button.buttonEdit')}
                     </div>
                 </button>
                 <button className={styles.btnDelete}
@@ -66,7 +71,7 @@ export default function ItemAddress({ data, onOpenSuccessDialog }) {
                 >
                     <RiDeleteBin6Line className={styles.icon} />
                     <div className={styles.text}>
-                    {t('Profile.Article.Address.button.buttonDelete')}
+                        {t('Profile.Article.Address.button.buttonDelete')}
                     </div>
                 </button>
             </div>

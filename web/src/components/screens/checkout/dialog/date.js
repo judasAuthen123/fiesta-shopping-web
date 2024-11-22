@@ -11,7 +11,6 @@ export const formatDate = (timestamp) => {
     const day = newData.getDate();
     const hours = newData.getHours();
     const minutes = newData.getMinutes();
-    const seconds = newData.getSeconds();
     return {
         formattedDate: `${day < 10 ? '0' + day : day} ${monthArr[month]} ${year}`,
         formattedTime: `${hours < 12 ? hours : hours - 12}:${minutes < 10 ? '0' + minutes : minutes} ${hours < 12 ? 'AM' : 'PM'}`

@@ -443,13 +443,13 @@
             }
         },
         "avatar": {
-            "size": "Kích thước tệp: tối đa 5 MB",
+            "size": "Kích thước tệp: tối đa 1 MB",
             "extension": "Tệp mở rộng: .JPEG, .PNG",
             "button": {
                 "btnCancel": "Hủy",
                 "btnSubmit": "Cập nhật"
             },
-            "error": "Kích thước tệp quá 5 MB"
+            "error": "Kích thước tệp quá 1 MB"
         },
         "confirmPayment": {
             "title": "Xác nhận thanh toán",

@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+}
+
+.container>img {
+    width: 36.5px;
+    height: 36.5px;
+    object-fit: cover;
+}
+.viewDrop {
+    width: 145px;
+    height: 90px;
+    position: absolute;
+    top: 100%;
+    display: flex;
+    transform: translateX(-75%);
+    visibility: hidden;
+}
+.dropdown_menu {
+    width: inherit;
+    height: auto;
+    margin-top: auto;
+    border-radius: 3px;
+    background: white;
+    box-shadow: 0px 0px 8px rgba(139, 139, 139, 0.47);
+    position: relative;
+    overflow: hidden;
+}
+.dropdown_menu>div {
+    padding: 7px 10px;
+    font-size: 15px;
+}
+.dropdown_menu>div:hover {
+    background-color: black;
+    color: white;
+}
+.container:hover .viewDrop {
+    visibility: visible;
+}

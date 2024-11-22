@@ -33,15 +33,18 @@ export default function ProductDetail() {
     }
 
     const checkVariationStock = useCallback(async () => {
-        console.log('variation checked');
+        try {
+            const response = await AxiosInstance.get('/productApi/checkVaritationProductStock', {
+                params: { id: id, size: sizeSelected, color: colorSelected }
+            });
 
-        const response = await AxiosInstance.get('/productApi/checkVaritationProductStock', {
-            params: { id: id, size: sizeSelected, color: colorSelected }
-        });
-
-        if (response.result === true) {
-            setVariationId(response.data._id);
-            setVariationStock(response.data.stock);
+            if (response.result === true) {
+                setVariationId(response.data._id);
+                setVariationStock(response.data.stock);
+            }
+        } catch (error) {
+            console.log(error);
+            
         }
     }, [id, sizeSelected, colorSelected]);
 

@@ -11,24 +11,23 @@ import AxiosInstance from '../../../../../util/AxiosInstance'
 import EmailForm from './emailsubmit/EmailForm'
 import { useTranslation } from 'react-i18next'
 export default function InfoUser() {
-  const [modelInput, setModelInput] = useState(true)
   const [imgFromVisible, setImgFormVisible] = useState(false)
   const [isVisbile, setIsVisbile] = useState(false)
   const [emailFormVisible, setEmailFormVisible] = useState(false)
   const [hashId, setHashId] = useState(null)
   const { dataUser, setDataUser } = useContext(AppContext)
   const [editNameStatus, setEditNameStatus] = useState(true)
-  const [name, setName] = useState(null)
+  const [name, setName] = useState("")
   const {t} = useTranslation()
   useEffect(() => {
     setName(dataUser?.name)
     const hash = SHA256(dataUser._id).toString()
     const numericHash = parseInt(hash.slice(0, 10), 16).toString();
     setHashId(numericHash)
-  }, [dataUser?._id])
+  }, [dataUser?._id, dataUser?.name])
 
   useEffect(() => {
-    setName(dataUser?.name)
+    setName(dataUser?.name || "")
   }, [editNameStatus, dataUser?.name])
   useEffect(() => {
     if (isVisbile) {
@@ -45,13 +44,13 @@ export default function InfoUser() {
     const handleClickOutside = (event) => {
       if (viewInputRef.current && !viewInputRef.current.contains(event.target)) {
         setEditNameStatus(true); // Ngừng chỉnh sửa khi click ra ngoài
-        setName(null)
+        setName(dataUser.name || "")
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [dataUser.name]);
 
   const updateName = async () => {
     try {
@@ -122,14 +121,14 @@ export default function InfoUser() {
           <label>
           {t('Profile.Article.Information.phoneNumber')}
           </label>
-          <input readOnly={modelInput} value={`+(84) ${dataUser.phoneNumber}`} />
+          <input readOnly={true} value={`+(84) ${dataUser.phoneNumber}`} />
           
         </div>
         <div className={styles.viewInput}>
           <label>
           {t('Profile.Article.Information.emailAddress')}
           </label>
-          <input readOnly={modelInput} value={dataUser?.email} />
+          <input readOnly={true} value={dataUser?.email} />
           <div className={styles.viewEdit}>
             <button onClick={() => setEmailFormVisible(true)}>
               <TbEdit /> {t('Profile.Article.Information.edit')}

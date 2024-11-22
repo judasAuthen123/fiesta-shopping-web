@@ -45,7 +45,7 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
         setPhone(phoneNumber)
         setStreet(street)
         setHouseNo(houseNumber)
-    }, [isVisible])
+    }, [isVisible, name, phoneNumber, street, houseNumber])
 
     const updateAddress = async (event) => {
         event.preventDefault();
@@ -73,15 +73,12 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                 if (request.statusCode === 200) {
                     const user = JSON.parse(localStorage.getItem('user'))
                     if (Array.isArray(user.address)) {
-                        user.address.map(item => {
-                            user.address = user.address.map(item => {
-                                if (item._id === request.data._id) {
-                                    return request.data;
-                                }
-                                return item;
-                            });
-                        }
-                        )
+                        user.address = user.address.map(item => {
+                            if (item._id === request.data._id) {
+                                return request.data;
+                            }
+                            return item;
+                        });
                         localStorage.setItem('user', JSON.stringify(user))
                         setDataUser(user)
                     }

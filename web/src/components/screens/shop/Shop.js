@@ -19,7 +19,6 @@ import { sortArray } from './filters/sortData';
 import MovePageAccess from './pagination/MovePageAccess';
 import { useLocation } from 'react-router-dom';
 import { debounce } from 'lodash';
-import ProductListLoading from '../../public/components/loading/signingLoading/ProductListLoading';
 import ShineProductListLoading from '../../public/components/loading/shineLoading/ShineProductListLoading';
 import PolicyFooter from '../../public/components/footer/PolicyFooter';
 function Shop() {

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactSlider from 'react-slider';
 import styles from './PriceRanged.module.css'
 import { useDispatch, useSelector } from 'react-redux';

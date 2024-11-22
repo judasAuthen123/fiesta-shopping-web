@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { } from 'react'
 import Options from './options/Options'
 import styles from './Settings.module.css'
 import { useTranslation } from 'react-i18next'

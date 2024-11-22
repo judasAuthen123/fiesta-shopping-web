@@ -6,7 +6,6 @@ import CircleLoading from './../../../../../public/components/loading/CircleLoad
 import AxiosInstance from '../../../../../../util/AxiosInstance';
 import { AppContext } from '../../../../../../util/AppContext';
 import { useTranslation } from 'react-i18next';
-import DoubleCircleLoading from '../../../../../public/components/loading/doubleCircleLoading/DoubleCircleLoading';
 export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
     const { t } = useTranslation()
     const [selectedFiles, setSelectedFile] = useState(null);
@@ -34,8 +33,8 @@ export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
         const file = event.target.files[0];
         const size = event.target.files[0]?.size
         const sizeMB = (size / (1024 * 1024)).toFixed(2)
-        if (sizeMB > 5) {
-            alert('File size maximum is 5 MB')
+        if (sizeMB > 1) {
+            alert(t('Components.avatar.error'))
             return false
         }
         if (!file) {

@@ -18,18 +18,17 @@ export default function PaymentSubmit({
     const [loading, setLoading] = useState(false)
     const date = new Date()
     useEffect(() => {
-        try {
-            const getDefaultCard = async () => {
+        const getDefaultCard = async () => {
+            try {
                 const response = await AxiosInstance.get(`/payment/get-default-card/${userId}`)
                 if (response.statusCode === 200 && response.result) {
                     setCardData(response.data)
                 }
+            } catch (error) {
+                console.log(error);
             }
-            getDefaultCard()
-        } catch (error) {
-            console.log(error);
         }
-
+        getDefaultCard()
     }, [defaultId, userId])
     const submit = async () => {
         setLoading(true)
@@ -78,7 +77,7 @@ export default function PaymentSubmit({
                     </p>
                     <div className={styles.detailTitle}>
                         <div>
-                        {t('Components.confirmPayment.date')}
+                            {t('Components.confirmPayment.date')}
                         </div>
                         <div>
                             {formatDate(date).formattedDate}
@@ -86,7 +85,7 @@ export default function PaymentSubmit({
                     </div>
                     <div className={styles.detailTitle}>
                         <div>
-                        {t('Components.confirmPayment.object')}
+                            {t('Components.confirmPayment.object')}
                         </div>
                         <div>
                             {cardData?.brand}
@@ -94,15 +93,15 @@ export default function PaymentSubmit({
                     </div>
                     <div className={styles.detailTitle}>
                         <div>
-                        {t('Components.confirmPayment.cardNumber')}
+                            {t('Components.confirmPayment.cardNumber')}
                         </div>
-                        <div style={{letterSpacing: 1.3}}>
+                        <div style={{ letterSpacing: 1.3 }}>
                             {numOnCardDisplay(cardData?.last4 ? cardData?.last4 : null)}
                         </div>
                     </div>
                     <div className={styles.detailTitle}>
                         <div>
-                        {t('Components.confirmPayment.cardName')}
+                            {t('Components.confirmPayment.cardName')}
                         </div>
                         <div>
                             {cardData?.name}
@@ -110,7 +109,7 @@ export default function PaymentSubmit({
                     </div>
                     <div className={styles.viewTotal}>
                         <div>
-                        {t('Components.confirmPayment.totalAmount')}
+                            {t('Components.confirmPayment.totalAmount')}
                         </div>
                         <div>
                             ${amount}
@@ -119,7 +118,7 @@ export default function PaymentSubmit({
                 </div>
                 <div className={styles.viewButton}>
                     <button onClick={() => onCancel(false)}>
-                    {t('Components.confirmPayment.button.buttonCancel')}
+                        {t('Components.confirmPayment.button.buttonCancel')}
                     </button>
                     <button onClick={submit}>
                         {

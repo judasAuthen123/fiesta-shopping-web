@@ -30,25 +30,25 @@ export default function Checkout() {
     const [paymentSubmitVisible, setPaymentSubmitVisible] = useState(false)
     const [orderSuccessVisbilem, setOrderSuccessVisible] = useState(false)
     useEffect(() => {
-        try {
-            if (dataUser && selectedItems) {
-                const getCartByIds = async () => {
+        const getCartByIds = async () => {
+            try {
+                if (dataUser && selectedItems) {
                     const response = await AxiosInstance.get('/cart/getCartByIds', {
                         params: {
                             getFields: selectedItems,
                             userId: dataUser?._id
                         }
-                    })
+                    })                
                     if (response.statusCode === 200) {
                         setCartData(response.data)
                     }
                 }
-                getCartByIds()
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
         }
-    }, [selectedItems, dataUser?._id])
+        getCartByIds()
+    }, [selectedItems, dataUser?._id, dataUser])
 
     useEffect(() => {
         if (cartData.length > 0) {
@@ -60,7 +60,12 @@ export default function Checkout() {
             setFormattedCartDatta(newData)
         }
     }, [cartData])
-
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'auto'
+        })
+    }, [stateCheckout])
     const placeOrder = async () => {
         setLoading(true)
         if (paymentMethod === paymentMethods.DEBIT_CREDIT_CARD) {
@@ -102,7 +107,7 @@ export default function Checkout() {
             />
             <div className={styles.box}>
                 <div className={styles.title}>
-                {t('Checkout.title')}
+                    {t('Checkout.title')}
                 </div>
             </div>
             <div className={styles.box}>
@@ -119,15 +124,15 @@ export default function Checkout() {
                     <div className={styles.viewFromCheckout}>
                         <div className={styles.viewSubtotal}>
                             <p>
-                            {t('Checkout.checkoutDetails.title')}
+                                {t('Checkout.checkoutDetails.title')}
                             </p>
                         </div>
                         <div className={styles.viewSubtotal}>
                             <p style={{ fontWeight: 400 }}>
-                            {t('Checkout.checkoutDetails.productsQuantity')}: {productTotal}
+                                {t('Checkout.checkoutDetails.productsQuantity')}: {productTotal}
                             </p>
                             <p style={{ fontWeight: 400 }}>
-                            {t('Checkout.checkoutDetails.totalItems')}: {totalItem}
+                                {t('Checkout.checkoutDetails.totalItems')}: {totalItem}
                             </p>
                         </div>
                         <div className={styles.viewSubtotal}>
@@ -156,7 +161,7 @@ export default function Checkout() {
                         </div>
                         <div className={styles.viewSubtotal} style={{ borderBottomWidth: 0 }}>
                             <p>
-                            {t('Checkout.checkoutDetails.grandTotal')}
+                                {t('Checkout.checkoutDetails.grandTotal')}
                             </p>
                             <p style={{ fontWeight: 400, fontSize: 16 }}>
                                 ${total ? total : 'N/A'}
