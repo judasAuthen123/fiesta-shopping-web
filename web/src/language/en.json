@@ -269,7 +269,7 @@
         "size": "Size",
         "color": "Color",
         "variation": "Variation",
-        "stock": "stock",
+        "stock": "Stock",
         "status": {
             "inStock": "In stock",
             "outStock": "Out stock"

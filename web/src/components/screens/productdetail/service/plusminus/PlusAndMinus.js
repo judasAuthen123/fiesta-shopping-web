@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { LuMinus } from 'react-icons/lu'
 import { GoPlus } from 'react-icons/go'
 export default function PlusAndMinus({onChange}) {
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
     const calcQuantity = (calc) => {
         if (calc === 'sum') {
             if (quantity < 5) {

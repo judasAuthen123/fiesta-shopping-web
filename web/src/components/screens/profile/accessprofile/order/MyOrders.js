@@ -5,9 +5,11 @@ import { AppContext } from './../../../../../util/AppContext';
 import styles from './MyOrders.module.css'
 import ListRender from '../../../../public/components/listRender/ListRender'
 import { useTranslation } from 'react-i18next';
+import ShineOrderLoading from '../../../../public/components/loading/shineLoading/ShineOrderLoading';
 export default function MyOrders() {
   const { t } = useTranslation()
   const { dataUser } = useContext(AppContext)
+  const [loading, setLoading] = useState(false)
   const marginRef = useRef()
 
   const arrSatus = [
@@ -66,12 +68,15 @@ export default function MyOrders() {
   useEffect(() => {
     const getOrders = async () => {
       try {
+        setLoading(true)
         const response = await AxiosInstance.get(`/order/getOrderByUser?page=1&userId=${dataUser?._id}`)
         if (response.statusCode === 200) {
           setDataOrder(response.data)
+          setLoading(false)
         }
       } catch (error) {
         console.log(error);
+        setLoading(false)
       }
     }
     getOrders()
@@ -95,17 +100,21 @@ export default function MyOrders() {
         }
         <div className={styles.bottomLine} ref={marginRef} />
       </div>
-      <ListRender
-        isTrue={dataOrderSelected.length > 0}
-        label={t('Profile.Article.Orders.listEmpty')}
-        className={styles.listRender}
-        isStartUp={statusFilter}>
-        {
-          dataOrderSelected && dataOrderSelected.map(item =>
-            <ItemOrder key={item._id} data={item} status={item.status} />
-          )
-        }
-      </ListRender>
+      {
+        loading ? <ShineOrderLoading /> :
+          <ListRender
+            isTrue={dataOrderSelected.length > 0}
+            label={t('Profile.Article.Orders.listEmpty')}
+            className={styles.listRender}
+            isStartUp={statusFilter}>
+            {
+              dataOrderSelected && dataOrderSelected.map(item =>
+                <ItemOrder key={item._id} data={item} status={item.status} />
+              )
+            }
+          </ListRender>
+      }
+
     </div>
   )
 }

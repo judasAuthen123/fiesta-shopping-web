@@ -17,7 +17,7 @@ function AppNavigator() {
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
-            <Route path="/productDetail/:id" element={<ProductDetail />} />
+            <Route path="/product-detail" element={<ProductDetail />} />
             <Route path="/cart" element={<AuthRoute><Cart /></AuthRoute>} />
             <Route path="/checkout" element={<AuthRoute><Checkout /></AuthRoute>} />
             <Route path="/profile" element={<AuthRoute><Profile /></AuthRoute>} />

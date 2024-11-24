@@ -5,7 +5,7 @@ import Footer from '../../public/components/footer/Footer'
 import { FaStar } from 'react-icons/fa'
 import ColorList from './colorVariations/ColorList'
 import SizeList from './sizeVaritations/SizeList'
-import { useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import AxiosInstance from './../../../util/AxiosInstance';
 import { CiHeart } from 'react-icons/ci'
 import Dialog from '../../public/components/dialog/Dialog'
@@ -13,17 +13,19 @@ import PlusAndMinus from './service/plusminus/PlusAndMinus'
 import { AppContext } from '../../../util/AppContext'
 import PolicyFooter from './../../public/components/footer/PolicyFooter';
 import { useTranslation } from 'react-i18next'
+import { validateAddToCart } from './validation'
 export default function ProductDetail() {
-    const { id } = useParams();
+    const location = useLocation()
+    const { id, name } = location.state || {}
     const [product, setProduct] = useState({})
     const [colorList, setColorList] = useState([])
     const [sizeList, setSizeList] = useState([])
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [colorSelected, setColorSelected] = useState(null);
     const [sizeSelected, setSizeSelected] = useState(null)
-    const [variationStock, setVariationStock] = useState(null)
-    const [variationId, setVariationId] = useState(null)
+    const [selectedVariation, setSelectedVariation] = useState(null)
     const [countBuy, setCountBuy] = useState(null)
+    const [errors, setErros] = useState(null)
     const { dataUser } = useContext(AppContext)
     const [imagesProduct, setImagesProduct] = useState([])
     const [avatarProduct, setAvatarProduct] = useState(null)
@@ -31,88 +33,55 @@ export default function ProductDetail() {
     const onChangeQuantity = (count) => {
         setCountBuy(count)
     }
-
-    const checkVariationStock = useCallback(async () => {
-        try {
-            const response = await AxiosInstance.get('/productApi/checkVaritationProductStock', {
-                params: { id: id, size: sizeSelected, color: colorSelected }
-            });
-
-            if (response.result === true) {
-                setVariationId(response.data._id);
-                setVariationStock(response.data.stock);
-            }
-        } catch (error) {
-            console.log(error);
-            
-        }
-    }, [id, sizeSelected, colorSelected]);
-
+    const ctgName = t('MongoTranslator.nameCtg')
     useEffect(() => {
+        setErros(null)
         if ((colorSelected || colorList.length === 0) && (sizeSelected || sizeList.length === 0)) {
-            checkVariationStock()
+            if (product.variations && Array.isArray(product.variations)) {
+                const matchedVariation = product.variations.find(
+                    (item) => item.dimension.size === sizeSelected && item.dimension.color === colorSelected
+                );
+                setSelectedVariation(matchedVariation)
+            }
         }
     }, [sizeSelected, colorSelected, id])
 
-    const onChangeColor = (color) => {
-        setColorSelected(color)
-    }
-
-
-    const onChanSize = (size) => {
-        setSizeSelected(size)
-    }
-
     const addToCart = () => {
-        const hasColorVariation = product.variations?.dimension?.color;
-        const hasSizeVariation = product.variations?.dimension?.size;
-
-        if (variationStock === 0) {
-            alert("Sản phẩm đã hết hàng");
-            return false;
-        }
-
-        if (hasColorVariation && colorSelected === null) {
-            alert("Vui lòng chọn loại phân hàng");
-            return false;
-        }
-
-        if (hasSizeVariation && sizeSelected === null) {
-            alert("Vui lòng chọn loại phân hàng");
-            return false;
-        }
-
-        if (countBuy === 0) {
-            alert("Vui lòng chọn số lượng phù hợp");
-            return false
-        }
         const addProductToCart = async () => {
             try {
-                if (id, variationId) {
+                const validateFields = {
+                    sizeSelected, colorSelected, sizeList, colorList, selectedVariation
+                }
+                const err = validateAddToCart(validateFields)
+                if (!err) {
                     const response = await AxiosInstance.post('/cart/add', {
                         addFields: {
                             userId: dataUser?._id,
                             productId: id,
-                            variationId: variationId,
+                            variationId: selectedVariation._id,
                             quantity: countBuy
                         }
                     });
                     if (response.result === true) {
                         setIsModalVisible(true);
-                    } else {
-                        alert("Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.");
                     }
                 } else {
-                    alert("Thiếu thông tin sản phẩm");
+                    setErros(err)
                 }
             } catch (error) {
-                console.error("Error adding product to cart:", error);
+                console.error(error);
             }
         };
         addProductToCart();
     };
 
     useEffect(() => {
+        if(location.pathname === "/product-detail") {
+            document.title = name
+        } else {
+            document.title = "Fashion Fiesta"
+        }
+        
         window.scrollTo({
             top: 0,
             behavior: 'auto'
@@ -226,8 +195,14 @@ export default function ProductDetail() {
 
                             Whether you’re just starting out or looking to revamp your current listings, these tips will help you create your own product descriptions that not only inform but also entice.
                         </div>
-                        <ColorList data={colorList} onChange={onChangeColor} />
-                        <SizeList data={sizeList} onChange={onChanSize} />
+                        <div className={styles.viewVariations}>
+                            <ColorList data={colorList} onChange={setColorSelected} />
+                            <SizeList data={sizeList} onChange={setSizeSelected} />
+                            <div className={styles.viewError}></div>
+                            {
+                                errors?.selectedVariation && <p className={styles.txtErr}>{errors.selectedVariation.message[ctgName]}</p>
+                            }
+                        </div>
                         <div className={styles.viewBuy}>
                             <PlusAndMinus onChange={onChangeQuantity} />
                             <button onClick={addToCart}>{t('ProductDetail.buttonAddToCard')}</button>
@@ -236,8 +211,8 @@ export default function ProductDetail() {
                             </div>
                             <div>
                                 {
-                                    variationStock !== null ?
-                                        <div style={{ fontSize: 14, textAlign: 'end' }}>Stock: {variationStock} </div> : null
+                                    selectedVariation?.stock || selectedVariation?.stock == 0 ?
+                                        <div style={{ fontSize: 14, textAlign: 'end' }}>{t('ProductDetail.stock')}: {selectedVariation?.stock} </div> : null
                                 }
                             </div>
                         </div>
