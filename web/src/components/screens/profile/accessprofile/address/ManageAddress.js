@@ -40,7 +40,7 @@ export default function ManageAddress() {
       <button onClick={() => setAddressFormVisible(true)}>
         <TiPlus /> {t('Profile.Article.Address.add')}
       </button>
-      <ListRender isTrue={address.length > 0} className={styles.listRender} >
+      <ListRender isTrue={address.length > 0} className={styles.listRender} label={t('Profile.Article.Address.listEmpty')}>
         {
           address.map(item =>
             <ItemAddress key={item._id} data={item} onOpenSuccessDialog={setIsVisible}/>

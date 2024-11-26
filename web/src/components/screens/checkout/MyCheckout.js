@@ -110,7 +110,7 @@ export default function MyCheckout({ data, stepSubmit }) {
                             )
                         }
 
-                        ) : <div>there are not have product</div>
+                        ) : null
                 }
             </div>
             <div className={styles.viewSubTotal}>

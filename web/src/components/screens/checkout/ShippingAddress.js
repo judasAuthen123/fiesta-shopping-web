@@ -4,14 +4,14 @@ import ItemAddress from './address/ItemAddress'
 import AddressForm from './address/AddressForm'
 import { AppContext } from '../../../util/AppContext'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
+import { PiSmileyXEyesBold } from "react-icons/pi";
 import Dialog from './../../public/components/dialog/Dialog';
 import { useTranslation } from 'react-i18next'
-export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
+export default function ShippingAddress({ stepSubmit, onChangeAddress, currentAddress }) {
     const { dataUser } = useContext(AppContext)
     const { t } = useTranslation()
     const [addressFormVisible, setAddressFormVisible] = useState(false)
     const [address, setAddress] = useState([])
-    const [selectedAddress, setSelectedAddress] = useState(null)
     const [visible, setIsVisible] = useState(false)
     const onCallbackAddressFormClose = (state) => {
         setAddressFormVisible(state)
@@ -21,6 +21,7 @@ export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
             setAddress(dataUser.address?.reverse())
         }
     }, [dataUser])
+    
     useEffect(() => {
         if (visible) {
             const timer = setTimeout(() => {
@@ -55,12 +56,13 @@ export default function ShippingAddress({ stepSubmit, onChangeAddress }) {
                                 <ItemAddress data={item} key={item._id}
                                     onOpenSuccessDialog={setIsVisible}
                                     onChange={(data) => {
-                                        setSelectedAddress(data)
                                         onChangeAddress(data)
 
                                     }
-                                    } selected={item?._id === selectedAddress?._id} />
-                            ) : null
+                                    } selected={item?._id === currentAddress?._id} />
+                            ) : <div style={{
+                                marginLeft:40, display: 'flex', 
+                                columnGap:15, alignItems: 'center'}}><PiSmileyXEyesBold size={30}/> {t('Checkout.shippingAddress.listEmpty')}</div>
                     }
                 </div>
                 <button

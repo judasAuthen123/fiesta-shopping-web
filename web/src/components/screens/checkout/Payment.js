@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React, { } from 'react'
 import styles from './Payment.module.css'
 import BoxPayment from './methodbox/BoxPayment'
 import { GrFormPrevious } from 'react-icons/gr';
 import { paymentMethods } from './methodbox/paymentmethod';
 import { useTranslation } from 'react-i18next';
-export default function Payment({ stepSubmit, onChangeMethod }) {
-    const [selectedValue, setSelectedValue] = useState('');
+export default function Payment({ stepSubmit, onChangeMethod, currentPaymentMethod }) {
     const { t } = useTranslation()
     const handleChange = (event) => {
-        setSelectedValue(event.target.value);
         onChangeMethod(event.target.value);
     };
     return (
@@ -27,7 +25,7 @@ export default function Payment({ stepSubmit, onChangeMethod }) {
                     label={t('Checkout.paymentMethod.typeOf.1')}
                     name={'radioPayment'}
                     value={'COD'}
-                    checked={selectedValue === 'COD'}
+                    checked={currentPaymentMethod === 'COD'}
                     onChange={handleChange} />
                 <div className={styles.line} />
                 <BoxPayment
@@ -35,7 +33,7 @@ export default function Payment({ stepSubmit, onChangeMethod }) {
                     label={t('Checkout.paymentMethod.typeOf.2')}
                     name={'radioPayment'}
                     value={paymentMethods.DEBIT_CREDIT_CARD}
-                    checked={selectedValue === 'Card'}
+                    checked={currentPaymentMethod === 'Card'}
                     onChange={handleChange} />
                 {/* <BoxPayment
                     paymentMothod={''}

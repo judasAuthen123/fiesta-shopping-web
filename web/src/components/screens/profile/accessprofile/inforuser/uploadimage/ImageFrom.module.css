@@ -22,6 +22,7 @@
     height: 400px;
     flex-direction: column;
     animation: scale 0.4s forwards;
+    overflow: hidden;
 }
 @keyframes scale {
     from {

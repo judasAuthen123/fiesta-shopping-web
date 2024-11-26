@@ -2,16 +2,19 @@ import React, { useContext, useEffect, useState } from 'react'
 import styles from './ImageFrom.module.css'
 import { RiUpload2Fill } from "react-icons/ri";
 import { defaultAvt } from '../../../../../public/components/image/DefaultIAvt';
-import CircleLoading from './../../../../../public/components/loading/CircleLoading';
 import AxiosInstance from '../../../../../../util/AxiosInstance';
 import { AppContext } from '../../../../../../util/AppContext';
 import { useTranslation } from 'react-i18next';
+import FiestaAlert from '../../../../../public/components/dialog/FiestaAlert';
+import ContainerLoading from './../../../../../public/components/loading/ContainerLoading';
+import DoubleCircleLoading from './../../../../../public/components/loading/doubleCircleLoading/DoubleCircleLoading';
 export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
     const { t } = useTranslation()
     const [selectedFiles, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [loading, setLoading] = useState(false)
     const { dataUser, setDataUser } = useContext(AppContext)
+    const [isVisibleAlert, setIsVisibleAlert] = useState(false)
     const isImageFile = (file) => {
         return file && file['type'].split('/')[0] === 'image';
     };
@@ -34,7 +37,7 @@ export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
         const size = event.target.files[0]?.size
         const sizeMB = (size / (1024 * 1024)).toFixed(2)
         if (sizeMB > 1) {
-            alert(t('Components.avatar.error'))
+            setIsVisibleAlert(true)
             return false
         }
         if (!file) {
@@ -95,7 +98,14 @@ export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
     }
     return (
         <div className={styles.container}>
+            <FiestaAlert isVisible={isVisibleAlert} label={t('Components.alert.orverSizeImg')} onClose={setIsVisibleAlert} />
             <form className={styles.form} onSubmit={updateUser}>
+                {
+                    loading &&
+                        <ContainerLoading background={'#f1efef91'}>
+                            <DoubleCircleLoading width={100} height={100} spin1Height={60} spin1Width={60} spin1Color={'black'} spin2Color={'blueViolet'} />
+                        </ContainerLoading>
+                }
                 <div className={styles.viewImg}>
                     <img src={selectedImg()} alt={`Preview`} />
                     <div className={styles.iconView} onClick={handleFileInput}>
@@ -104,21 +114,19 @@ export default function ImageForm({ isVisible, onClose, onOpenSuccessDialog }) {
                 </div>
                 <div className={styles.noteImg}>
                     <p>
-                    {t('Components.avatar.size')}
+                        {t('Components.avatar.size')}
                     </p>
                     <p>
-                    {t('Components.avatar.extension')}
+                        {t('Components.avatar.extension')}
                     </p>
                 </div>
                 <input id='fileInput' type="file" onChange={handleFileChange} accept="image/*" multiple />
                 <div className={styles.viewButton}>
                     <button onClick={() => onClose(false)}>
-                    {t('Components.avatar.button.btnCancel')}
+                        {t('Components.avatar.button.btnCancel')}
                     </button>
                     <button type='submit'>
-                        {
-                            loading ? <CircleLoading /> : t('Components.avatar.button.btnSubmit')
-                        }
+                        {t('Components.avatar.button.btnSubmit')}
                     </button>
                 </div>
 

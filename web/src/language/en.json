@@ -18,6 +18,10 @@
         "welcomeBack": "Welcome back",
         "titleSignin": "Sign in",
         "titleSignup": "Sign up",
+        "failed": {
+            "register": "Username already exists",
+            "login": "Invalid username or password"
+        },
         "inputLabel": {
             "userName": {
                 "label": "Username",
@@ -78,7 +82,7 @@
         "contactUs": "Contact us",
         "cart": "Cart",
         "question": "Seeking premium fashion?",
-        "shopnow": "Shopping now",
+        "shopnow": "Shop now",
         "button": {
             "buttonLogin": "Login",
             "buttonSignup": "Sign up"
@@ -305,6 +309,11 @@
     },
     "Checkout": {
         "title": "Checkout",
+        "listEmpty": {
+            "string1": "Something went wrong!",
+            "string2": "Please follow the actions allowed by the website.",
+            "string3": "Back to Cart"
+        },
         "accessBtn": {
             "next": "Next",
             "back": "Back"
@@ -351,7 +360,7 @@
             "viewOrder": "View my order",
             "dialogTitle": {
                 "string1": "Order successfully!",
-                "string2": "Track your order status in your profile."
+                "string2": "Dont forget track your order status."
             }
         }
     },
@@ -425,6 +434,9 @@
             "object": "Object",
             "funding": "Funding",
             "expiry": "Expiry date",
+            "notDefault": "You not have any Credit/Debit card yet",
+            "pleaseAdd":"Please add a card to continue",
+            "understand": "I'm understand",
             "button": {
                 "buttonRequest": "Request",
                 "buttonCancel": "Cancel",
@@ -464,6 +476,11 @@
             "object": "Brand",
             "cardNumber": "Card number",
             "cardName": "Card name"
+        },
+        "alert": {
+            "needLogin": "- You need log in to shop",
+            "orverSizeImg": "- File size over 1 MB",
+            "alert": "Fiesta Alert !"
         }
     }
 }

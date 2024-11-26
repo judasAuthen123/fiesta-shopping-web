@@ -30,8 +30,16 @@ export default function UpdateCartButton({ quantity, onChange, loading }) {
         debouncedUpdateQuantity(newQuantity)
     }, [newQuantity, debouncedUpdateQuantity])
     return (
-        <div style={{ display: 'flex', alignItems: 'center', width: 80, justifyContent: 'space-between', border: '1px solid  black', borderRadius: 10, padding: 5, opacity: loading ? 0.4 : 1 }}>
-            <LuMinus onClick={() => calcQuantity('difference')} /> {newQuantity} <GoPlus onClick={() => calcQuantity('sum')} />
+        <div style={{
+            display: 'flex',
+            alignItems: 'center', width: 80,
+            justifyContent: 'space-between',
+            borderRadius: 5, padding: 5,
+            opacity: loading ? 0.4 : 1, boxShadow: '0 0 8px #c2c2c2bb'
+        }}>
+            <LuMinus style={{ cursor: 'pointer' }} onClick={() => calcQuantity('difference')} />
+            {newQuantity}
+            <GoPlus style={{ cursor: 'pointer' }} onClick={() => calcQuantity('sum')} />
         </div>
     )
 }

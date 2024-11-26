@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './ProductDetail.module.css'
 import Header from '../../public/components/header/Header'
 import Footer from '../../public/components/footer/Footer'
@@ -14,9 +14,10 @@ import { AppContext } from '../../../util/AppContext'
 import PolicyFooter from './../../public/components/footer/PolicyFooter';
 import { useTranslation } from 'react-i18next'
 import { validateAddToCart } from './validation'
+import FiestaAlert from '../../public/components/dialog/FiestaAlert'
 export default function ProductDetail() {
     const location = useLocation()
-    const { id, name } = location.state || {}
+    const { id } = location.state || {}
     const [product, setProduct] = useState({})
     const [colorList, setColorList] = useState([])
     const [sizeList, setSizeList] = useState([])
@@ -29,6 +30,7 @@ export default function ProductDetail() {
     const { dataUser } = useContext(AppContext)
     const [imagesProduct, setImagesProduct] = useState([])
     const [avatarProduct, setAvatarProduct] = useState(null)
+    const [isVisbileAlert, setIsVisibleAlert] = useState(false)
     const { t } = useTranslation()
     const onChangeQuantity = (count) => {
         setCountBuy(count)
@@ -44,44 +46,43 @@ export default function ProductDetail() {
                 setSelectedVariation(matchedVariation)
             }
         }
-    }, [sizeSelected, colorSelected, id])
+    }, [sizeSelected, colorSelected, id, sizeList.length, colorList.length, product?.variations])
 
     const addToCart = () => {
-        const addProductToCart = async () => {
-            try {
-                const validateFields = {
-                    sizeSelected, colorSelected, sizeList, colorList, selectedVariation
-                }
-                const err = validateAddToCart(validateFields)
-                if (!err) {
-                    const response = await AxiosInstance.post('/cart/add', {
-                        addFields: {
-                            userId: dataUser?._id,
-                            productId: id,
-                            variationId: selectedVariation._id,
-                            quantity: countBuy
-                        }
-                    });
-                    if (response.result === true) {
-                        setIsModalVisible(true);
+        if(dataUser) {
+            const addProductToCart = async () => {
+                try {
+                    const validateFields = {
+                        sizeSelected, colorSelected, sizeList, colorList, selectedVariation
                     }
-                } else {
-                    setErros(err)
+                    const err = validateAddToCart(validateFields)
+                    if (!err) {
+                        const response = await AxiosInstance.post('/cart/add', {
+                            addFields: {
+                                userId: dataUser?._id,
+                                productId: id,
+                                variationId: selectedVariation._id,
+                                quantity: countBuy
+                            }
+                        });
+                        if (response.result === true) {
+                            setIsModalVisible(true);
+                        }
+                    } else {
+                        setErros(err)
+                    }
+                } catch (error) {
+                    console.error(error);
                 }
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        addProductToCart();
-    };
-
-    useEffect(() => {
-        if(location.pathname === "/product-detail") {
-            document.title = name
+            };
+            addProductToCart();
         } else {
-            document.title = "Fashion Fiesta"
+            setIsVisibleAlert(true)
         }
         
+    };
+
+    useEffect(() => {     
         window.scrollTo({
             top: 0,
             behavior: 'auto'
@@ -135,6 +136,7 @@ export default function ProductDetail() {
     }, [id])
     return (
         <div className={styles.container}>
+            <FiestaAlert isVisible={isVisbileAlert} label={t('Components.alert.needLogin')} onClose={setIsVisibleAlert}/>
             <Header />
             <Dialog isVisible={isModalVisible} status={t('ProductDetail.dialogAddToCard')} />
             <div className={styles.box}>
@@ -152,7 +154,7 @@ export default function ProductDetail() {
                                             key={item.id}
                                             onMouseEnter={() => setAvatarProduct(item.url)}
                                             className={styles.itemImg}>
-                                            <img src={item.url} />
+                                            <img src={item.url} alt=''/>
                                         </div>) : null
                             }
                         </div>
@@ -211,7 +213,7 @@ export default function ProductDetail() {
                             </div>
                             <div>
                                 {
-                                    selectedVariation?.stock || selectedVariation?.stock == 0 ?
+                                    selectedVariation?.stock || selectedVariation?.stock === 0 ?
                                         <div style={{ fontSize: 14, textAlign: 'end' }}>{t('ProductDetail.stock')}: {selectedVariation?.stock} </div> : null
                                 }
                             </div>

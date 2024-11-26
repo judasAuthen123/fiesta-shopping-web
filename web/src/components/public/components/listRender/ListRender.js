@@ -13,7 +13,7 @@ export default function ListRender({ children, label, isTrue, className, isStart
         isTrue ? children : <div style={{
           display: 'flex', alignItems: 'center', 
           columnGap: 10, justifyContent: 'center', marginTop: 50,
-          width: '100%', fontSize: 20}}><PiSmileyXEyesBold size={35}/> {label}</div>
+          width: '100%', fontSize: 17}}><PiSmileyXEyesBold size={35}/> {label}</div>
       }
     </div>
   )

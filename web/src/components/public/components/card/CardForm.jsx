@@ -6,8 +6,9 @@ import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import AxiosInstance from '../../../../util/AxiosInstance';
 import { AppContext } from '../../../../util/AppContext';
-import CircleLoading from './../loading/CircleLoading';
 import { useTranslation } from 'react-i18next';
+import ContainerLoading from '../loading/ContainerLoading';
+import DottedLoading from '../loading/dottedLoading/DottedLoading';
 
 const elementOptions = {
   placeholder: ' ',
@@ -77,7 +78,7 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
         } else {
 
           const response = await AxiosInstance
-          .post(`/payment/save-card?userId=${dataUser?._id}&token=${token.id}&isDefault=${isObligatory ? isObligatory : isDefault}`)
+            .post(`/payment/save-card?userId=${dataUser?._id}&token=${token.id}&isDefault=${isObligatory ? isObligatory : isDefault}`)
           if (response.statusCode === 200) {
             onRefreshCardData(response.data)
             onChangeModalOpen()
@@ -107,6 +108,13 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
   return (
     <div className={styles.container}>
       <form onSubmit={stripeSubmit}>
+        {
+          loading &&
+          <ContainerLoading background={'#f1efef91'}>
+            <DottedLoading dotSize={31} dotColor={'blueViolet'} gap={7.5} />
+          </ContainerLoading>
+        }
+
         <p style={{ fontSize: 20, color: '#4c4c4c' }}>
           {t('Components.card.title')}
         </p>
@@ -181,7 +189,7 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
           }
           <div className={styles.viewButton}>
             <button onClick={onChangeModalOpen}>{t('Components.card.button.buttonCancel')}</button>
-            <button type='submit' disabled={!stripe}>{loading ? <CircleLoading boderColor={'white'} /> : t('Components.card.button.buttonSubmit')}</button>
+            <button type='submit' disabled={!stripe}>{t('Components.card.button.buttonSubmit')}</button>
           </div>
         </div>
       </form>

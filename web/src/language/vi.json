@@ -18,6 +18,10 @@
         "welcomeBack": "Welcome back",
         "titleSignin": "Đăng nhập",
         "titleSignup": "Đăng kí",
+        "failed": {
+            "register": "Tên đăng nhập đã tồn tại",
+            "login": "Thông tin đăng nhập không chính xác"
+        },
         "inputLabel": {
             "userName": {
                 "label": "Tên đăng nhập",
@@ -44,7 +48,7 @@
             "buttonLogin": "Đăng nhập vào tài khoản",
             "buttonSignup": "Tạo tài khoản"
         },
-        "rememberMe": "Ghi nhớ tôi",
+        "rememberMe": "Lưu mật khẩu",
         "forgotPassword": "Quên mật khẩu?",
         "dontHaveAccount": "Bạn chưa có tài khoản?",
         "signUpHere": "Đăng kí ở đây",
@@ -305,6 +309,11 @@
     },
     "Checkout": {
         "title": "Thanh toán",
+        "listEmpty": {
+            "string1": "Có gì đó không đúng!",
+            "string2": "Vui lòng thực hiện chính xác các thao tác",
+            "string3": "Quay lại Giỏ Hàng"
+        },
         "accessBtn": {
             "next": "Tiếp tục",
             "back": "Trở về"
@@ -351,7 +360,7 @@
             "viewOrder": "Xem đơn hàng",
             "dialogTitle": {
                 "string1": "Đặt hàng thành công!",
-                "string2": "Theo dõi đơn hàng của bạn trong giao diện tài khoản."
+                "string2": "Đừng quên theo dõi trạng thái đơn hàng."
             }
         }
     },
@@ -425,6 +434,9 @@
             "object": "Đối tượng",
             "funding": "Loại thẻ",
             "expiry": "Hạn sử dụng",
+            "notDefault": "Bạn chưa có thẻ tín dụng/thẻ nợ nào cả",
+            "pleaseAdd":"Vui lòng bổ sung thẻ để tiếp tục",
+            "understand": "Tôi đã hiểu",
             "button": {
                 "buttonRequest": "Yêu cầu",
                 "buttonCancel": "Hủy",
@@ -464,6 +476,11 @@
             "object": "Thương hiệu",
             "cardNumber": "Số thẻ",
             "cardName": "Tên chủ thẻ"
+        },
+        "alert": {
+            "needLogin": "- Bạn cần đăng nhập để mua hàng",
+            "orverSizeImg": "- Dung lượng tệp quá 1 MB",
+            "alert": "Fiesta thông báo !"
         }
     }
 }

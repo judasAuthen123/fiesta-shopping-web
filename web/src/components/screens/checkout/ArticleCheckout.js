@@ -5,7 +5,7 @@ import Payment from './Payment';
 import Done from './Done';
 
 
-export default function ArticleCheckout({ keyrender, data, nextStep, onChangeAddress, onChangeMethod }) {
+export default function ArticleCheckout({ keyrender, data, nextStep, onChangeAddress, onChangeMethod, currentPaymentMethod, currentAddress }) {
 
     const steps = {
         orderSubmit: 'shipping',
@@ -22,8 +22,8 @@ export default function ArticleCheckout({ keyrender, data, nextStep, onChangeAdd
     };
     const stepComponents = {
         order: <MyCheckout data={data} stepSubmit={onSubmit} />,
-        shipping: <ShippingAddress stepSubmit={onSubmit} onChangeAddress={onChangeAddress} />,
-        payment: <Payment stepSubmit={onSubmit} onChangeMethod={onChangeMethod} />,
+        shipping: <ShippingAddress stepSubmit={onSubmit} onChangeAddress={onChangeAddress} currentAddress={currentAddress}/>,
+        payment: <Payment stepSubmit={onSubmit} onChangeMethod={onChangeMethod} currentPaymentMethod={currentPaymentMethod}/>,
         done: <Done />
     };
     return (

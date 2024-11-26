@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './CardDetail.module.css'
 import { IoClose } from "react-icons/io5";
-import { SiTrueup, SiVisa } from 'react-icons/si';
+import { SiVisa } from 'react-icons/si';
 import ToggleDefault from './ToggleDefault';
 import { BsCheckCircleFill } from "react-icons/bs";
 import CircleLoading from '../loading/CircleLoading';
@@ -13,8 +13,16 @@ import { useTranslation } from 'react-i18next';
 const numOnCardDisplay = (num) => {
   return `•••• ${num}`
 }
-export default function CardDetail({ isVisble, onClose, data, isDefault, onChangeDefaultCard, loading, onOpenSuccessDialog, onRemoveCard }) {
-  const {t} = useTranslation()
+export default function CardDetail({
+  isVisble,
+  onClose,
+  data,
+  isDefault,
+  onChangeDefaultCard,
+  loading,
+  onOpenSuccessDialog,
+  onRemoveCard }) {
+  const { t } = useTranslation()
   const { name, brand, exp_month, exp_year, funding, id, object, last4 } = data
   const { dataUser } = useContext(AppContext)
   const [delLoading, setDelLoading] = useState(false)
@@ -35,6 +43,7 @@ export default function CardDetail({ isVisble, onClose, data, isDefault, onChang
     try {
       setDelLoading(true)
       const request = await AxiosInstance.post(`/payment/delete-card?userId=${dataUser?._id}&paymentMethodId=${id}`)
+
       if (request.result && request.statusCode === 200) {
         dispatch(cardSlice.actions.onChangeDefaultId(request.newDefaultId))
         setDelLoading(false)
@@ -122,7 +131,7 @@ export default function CardDetail({ isVisble, onClose, data, isDefault, onChang
             className={`${styles.btnDeleteCard} ${confirmDelete ? styles.confirm : ''}`}>
             {
               confirmDelete ? <div style={{ display: 'flex', alignItems: 'center', columnGap: 5, justifyContent: 'center' }}>
-                {delLoading ? <CircleLoading boderColor={'white'}/> : null} {t('Components.card.button.buttonConfirmDelete')}</div> : t('Components.card.button.buttonDelete')
+                {delLoading ? <CircleLoading boderColor={'white'} /> : null} {t('Components.card.button.buttonConfirmDelete')}</div> : t('Components.card.button.buttonDelete')
             }
           </button>
           <button

@@ -21,6 +21,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.579);
     border-radius: 5px;
     animation: fadeInScaleUp 0.5s forwards;
+    overflow: hidden;
 }
 
 @keyframes fadeInScaleUp {

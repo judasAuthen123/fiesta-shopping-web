@@ -4,63 +4,77 @@
     left: 0;
     right: 0;
     bottom: 0;
+    background-color: rgba(102, 102, 102, 0.174);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(177, 175, 175, 0.345);
-    z-index: 800;
-    user-select: none;
-}
-@keyframes scale {
-    from {
-        transform: scale(0.6);
-        opacity: 0.5;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+    z-index: 100;
 }
 .body {
-    width: 350px;
-    height: 175px;
-    background: #ffffff;
-    padding-bottom: 10px;
-    column-gap: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.579);
     border-radius: 5px;
-    position: relative;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(150, 150, 150, 0.271);
+    width: 400px;
+    height: 250px;
+    text-align: center;
+    padding: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation: scale 0.3s forwards;
+    animation: translateIn 0.2s forwards;
+    position: relative;
 }
-.title {
-    width: 270px;
-    text-align: center;
-    word-wrap: break-word;
-    margin-top: 26px;
+.body>p:nth-child(1) {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 21px;
 }
-.viewButton {
-    width: 100%;
+.body>p:nth-child(2) {
+    width: 250px;
+    margin-top: 10px;
+}
+.body .circleCheck {
+    font-size: 65px;
     position: absolute;
-    display: flex;
-    column-gap: 20px;
-    justify-content: center;
-    bottom: 20px;
+    top: 0;
+    transform: translateY(-50%);
+    background-color: white;
+    border-radius: 50px;
+    animation: scaleOut 0.3s forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
 }
-.viewButton>button {
-    font-size: 15.5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 35px;
+@keyframes scaleOut {
+    0% {
+        transform: scale(2.4) translateY(-50%);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(2.4) translateY(-50%);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(-50%);
+        opacity: 1;
+    }
 }
-.viewButton>button:nth-child(1) {
-    width: 80%;
+@keyframes translateIn {
+    from {
+        transform: translateY(-150%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.body>button {
+    margin-top: auto;
+    background-color: black;
+    color: white;
     padding: 8px;
-    background-color: rgba(13, 242, 219, 0.515);
+    border-radius: 5px;
     border: none;
-    color: black;
-    border-radius: 3px;
+    font-size: 17px;
+    width: 100%;
 }

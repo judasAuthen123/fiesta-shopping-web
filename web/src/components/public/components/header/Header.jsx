@@ -46,18 +46,6 @@ function Header() {
         </nav>
         <div className={styles.boxOption}>
           <LoginAccess />
-          {/* <div className={styles.boxIcon}>
-            <div>
-              <CiSearch className={styles.icon} onClick={openSearchView} />
-            </div>
-            <div>
-              <CiHeart className={styles.icon} />
-            </div>
-            <Link to='/cart'>
-              <PiBagThin className={styles.icon} />
-            </Link>
-          </div>
-          <button onClick={() => navigate(`/login`)}>Login</button> */}
         </div>
         <div className={styles.boxCollapse}>
           {isVisible ? <IoClose size={24} className={styles.iconMenu} onClick={() => setIsVisible(prev => !prev)} /> :

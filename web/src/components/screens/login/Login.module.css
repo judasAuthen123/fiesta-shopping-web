@@ -97,7 +97,7 @@
     object-fit: cover;
 }
 .containerRight {
-    padding: 100px;
+    padding: 90px;
     height: 100vh;
 }
 
@@ -136,8 +136,19 @@
     flex-direction: column;
     row-gap: 7px;
     width: 100%;
+    position: relative;
 }
-
+.viewInput .viewErr {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    column-gap: 5px;
+    color: red;
+    align-items: center;
+    font-size: 13px;
+    animation: translateToTop 0.4s forwards;
+}
 .viewInput>label {
     font-size: 14px;
 }

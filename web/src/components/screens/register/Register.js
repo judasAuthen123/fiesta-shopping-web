@@ -17,6 +17,7 @@ import InputText from './InputText';
 import InputPassword from './InputPassword';
 import AxiosInstance from '../../../util/AxiosInstance';
 import DialogSuccess from './DialogSuccess';
+import FiestaAlert from '../../public/components/dialog/FiestaAlert'
 
 export default function Register() {
   const { t } = useTranslation()
@@ -27,6 +28,7 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [isVisibleDialogSuccess, setIsVisbileDialogSuccess] = useState(false)
+  const [isVisibleAlert, setIsVisibleAlert] = useState(false)
   const [errors, setErrors] = useState(null)
   const ctgName = t('MongoTranslator.nameCtg')
 
@@ -41,7 +43,7 @@ export default function Register() {
 
   useEffect(() => {
     console.log(isVisibleDialogSuccess);
-    
+
   }, [isVisibleDialogSuccess])
   const signUp = async (e) => {
     e.preventDefault()
@@ -58,8 +60,8 @@ export default function Register() {
           setIsVisbileDialogSuccess(true)
         }
       } catch (error) {
-        console.log(error);
         setLoading(false)
+        setIsVisibleAlert(true)
       }
     } else {
       setErrors(err)
@@ -68,17 +70,18 @@ export default function Register() {
 
   return (
     <div className={styles.container}>
+      <FiestaAlert label={t('Login_Register.failed.register')} isVisible={isVisibleAlert} onClose={setIsVisibleAlert}/>
       <DialogSuccess isVisible={isVisibleDialogSuccess} onClose={setIsVisbileDialogSuccess} />
       <div className={styles.containerRight}>
         <form className={styles.loginForm} onSubmit={signUp}>
           {
             loading && <ContainerLoading background={'#ffffffd7'}>
-              <DottedLoading />
+              <DottedLoading dotSize={31} dotColor={'blueViolet'} gap={7.5} />
             </ContainerLoading>
           }
           <div className={styles.viewWelcome}>
             <h2>
-            {t('Login_Register.titleSignup')}
+              {t('Login_Register.titleSignup')}
             </h2>
             {/* <p className={styles.textW}>Enjoy Fiesta's exceptional shopping experience!</p> */}
 
@@ -86,13 +89,13 @@ export default function Register() {
           <div className={styles.boxInput}>
 
 
-            <InputText label={t('Login_Register.inputLabel.name.label')} placeholder={t('Login_Register.inputLabel.name.placeholder')} 
+            <InputText label={t('Login_Register.inputLabel.name.label')} placeholder={t('Login_Register.inputLabel.name.placeholder')}
               error={errors?.name} onChange={setName}
               onClearErr={() => clearErr({ errName: 'name' })}
               ctgName={ctgName} />
 
 
-            <InputText label={t('Login_Register.inputLabel.phoneNumber.label')}  placeholder={t('Login_Register.inputLabel.phoneNumber.placeholder')} 
+            <InputText label={t('Login_Register.inputLabel.phoneNumber.label')} placeholder={t('Login_Register.inputLabel.phoneNumber.placeholder')}
               error={errors?.phoneNumber} onChange={setPhoneNumber}
               onClearErr={() => clearErr({ errName: 'phoneNumber' })}
               ctgName={ctgName} />
@@ -124,45 +127,45 @@ export default function Register() {
         </form>
       </div>
       <div className={styles.containerLeft}>
-                <div className={styles.refrerencesBox}>
-                    <div className={styles.viewLogo}>
-                        <div className={styles.logo}>
-                            <img alt='' src={logo} />
-                        </div>
-                        <h3 style={{ fontSize: 30, fontWeight: 550 }}>Fashion Fiesta</h3>
-                    </div>
-                    <div className={styles.viewText}>
-                    <div className={styles.itemText}>
-                            <p><FaCircleCheck className={styles.icon} /> {t('Login_Register.textSuggest.text1.string1')}</p>
-                            <p>{t('Login_Register.textSuggest.text1.string2')}</p>
-                        </div>
-                        <div className={styles.itemText}>
-                            <p><FaCircleCheck className={styles.icon} />{t('Login_Register.textSuggest.text2.string1')}</p>
-                            <p>{t('Login_Register.textSuggest.text2.string2')}</p>
-                        </div>
-                        <div className={styles.itemText}>
-                            <p><FaCircleCheck className={styles.icon} />{t('Login_Register.textSuggest.text3.string1')}</p>
-                            <p>{t('Login_Register.textSuggest.text3.string2')}</p>
-                        </div>
-
-                    </div>
-                    <div className={styles.footer}>
-                        <div className={styles.nav}>
-                            <Link to={'/home'}>
-                            {t('Login_Register.home')}
-                            </Link>
-                            <Link to={'/shop'}>
-                            {t('Login_Register.shop')}
-                            </Link>
-                        </div>
-                        <div className={styles.partner}>
-                            <img alt='' src={imagekitLogo} />
-                            <img alt='' src={stripeLogo} />
-                            <img alt='' src={ghnLogo} />
-                        </div>
-                    </div>
-                </div>
+        <div className={styles.refrerencesBox}>
+          <div className={styles.viewLogo}>
+            <div className={styles.logo}>
+              <img alt='' src={logo} />
             </div>
+            <h3 style={{ fontSize: 30, fontWeight: 550 }}>Fashion Fiesta</h3>
+          </div>
+          <div className={styles.viewText}>
+            <div className={styles.itemText}>
+              <p><FaCircleCheck className={styles.icon} /> {t('Login_Register.textSuggest.text1.string1')}</p>
+              <p>{t('Login_Register.textSuggest.text1.string2')}</p>
+            </div>
+            <div className={styles.itemText}>
+              <p><FaCircleCheck className={styles.icon} />{t('Login_Register.textSuggest.text2.string1')}</p>
+              <p>{t('Login_Register.textSuggest.text2.string2')}</p>
+            </div>
+            <div className={styles.itemText}>
+              <p><FaCircleCheck className={styles.icon} />{t('Login_Register.textSuggest.text3.string1')}</p>
+              <p>{t('Login_Register.textSuggest.text3.string2')}</p>
+            </div>
+
+          </div>
+          <div className={styles.footer}>
+            <div className={styles.nav}>
+              <Link to={'/home'}>
+                {t('Login_Register.home')}
+              </Link>
+              <Link to={'/shop'}>
+                {t('Login_Register.shop')}
+              </Link>
+            </div>
+            <div className={styles.partner}>
+              <img alt='' src={imagekitLogo} />
+              <img alt='' src={stripeLogo} />
+              <img alt='' src={ghnLogo} />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

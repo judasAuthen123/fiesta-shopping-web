@@ -21,8 +21,11 @@ export default function PaymentSubmit({
         const getDefaultCard = async () => {
             try {
                 const response = await AxiosInstance.get(`/payment/get-default-card/${userId}`)
+
                 if (response.statusCode === 200 && response.result) {
                     setCardData(response.data)
+                } else {
+                    setCardData(null)
                 }
             } catch (error) {
                 console.log(error);
@@ -61,7 +64,19 @@ export default function PaymentSubmit({
     if (isVisible === false) return null
     return (
         <div className={styles.container}>
+
             <div className={styles.body}>
+                {
+                    !defaultId && <div className={styles.viewInvisible}> 
+                        <p>
+                            {t('Components.card.notDefault')}
+                        </p>
+                        <p>
+                        {t('Components.card.pleaseAdd')}
+                        </p>
+                        <button onClick={() => onCancel(false)}>{t('Components.card.understand')}</button>
+                    </div>
+                }
                 <label>{t('Components.confirmPayment.title')}</label>
                 <p>{t('Components.confirmPayment.quick')}</p>
                 <div className={styles.detail} style={cardData && cardData?.brand === 'Visa' ? { backgroundColor: '#1032dc0c' } : { backgroundColor: '#0A2540', color: 'white' }}>

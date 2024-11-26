@@ -26,7 +26,14 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
     const [checked, setChecked] = useState(false)
     const [quantity, setQuantity] = useState(data?.quantity)
     const [loading, setLoading] = useState(false)
-
+    const [total, setTotal] = useState(0)
+    useEffect(() => {
+        if(data.products.variations) {
+            setTotal(data.products.variations[0].price * data.quantity)
+        } else {
+            setTotal(data.products.price * data.quantity)
+        }
+    }, [data])
     const deleteCart = (cartID) => {
         onDelete(cartID)
     }
@@ -95,9 +102,9 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
                 {
                     loading ?
                         <div style={{ display: 'flex', alignItems: 'center', columnGap: 5 }}>
-                            <CircleLoading height={14.5} width={14.5} />{t('Cart.refresh')}
+                            <CircleLoading height={19} width={19} />
                         </div> :
-                        <>${(data.products.variations[0].price * data.quantity)}</>
+                        <>${total}</>
                 }
             </td>
             <td>

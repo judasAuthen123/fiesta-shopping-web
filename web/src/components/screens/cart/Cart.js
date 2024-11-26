@@ -175,7 +175,7 @@ export default function Cart() {
                                     </div>
                                 ) :
                                     <div className={styles.viewNoneCart}>
-                                        <CircleLoading width={20} height={20} /> {t('Loading.title')}
+                                        <CircleLoading width={30} height={30} /> {t('Loading.title')}
                                     </div>
 
                             }

@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styles from './Login.module.css'
 import AxiosInstance from '../../../util/AxiosInstance';
 import { AppContext } from '../../../util/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import { IoClose } from 'react-icons/io5';
 import { TbDiamondFilled } from "react-icons/tb";
 import { FaCircleCheck } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
@@ -15,13 +16,18 @@ import imagekitLogo from '../../assets/images/imagekitLogo.png'
 import ContainerLoading from '../../public/components/loading/ContainerLoading';
 import DoubleCircleLoading from './../../public/components/loading/doubleCircleLoading/DoubleCircleLoading';
 import { useTranslation } from 'react-i18next';
+import { validateLogin } from './validate';
+import FiestaAlert from '../../public/components/dialog/FiestaAlert';
 export default function Login() {
     const { t } = useTranslation()
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
+    const [errors, setErrors] = useState(null)
     const [isShowPassword, setIsShowPassword] = useState(false)
     const { setDataUser, setToken } = useContext(AppContext)
+    const [isVisibleAlert, setIsVisibleAlert] = useState(false)
+    const ctgName = t('MongoTranslator.nameCtg')
     const navigate = useNavigate()
     const onUserNameHandler = (e) => {
         setUserName(e.target.value)
@@ -33,35 +39,36 @@ export default function Login() {
     const appLogin = (e) => {
         e.preventDefault()
         const dbLogin = async () => {
-            try {
-                setLoading(true)
-                const request = await AxiosInstance.post('/userApi/login', {
-                    userName: userName,
-                    cpassword: password
-                })
-                console.log(request);
+            const err = validateLogin({ userName, password })
+            if (!err) {
+                try {
+                    setErrors(null)
+                    setLoading(true)
+                    const request = await AxiosInstance.post('/userApi/login', {
+                        userName: userName,
+                        cpassword: password
+                    })
+                    console.log(request);
 
-                if (request.statusCode === 200) {
-                    const user = request.user
-                    const token = request.token
-                    if (user && token) {
-                        localStorage.setItem('token', JSON.stringify(token));
-                        localStorage.setItem('user', JSON.stringify(user));
-                        setDataUser(user)
-                        setToken(token)
-                        navigate('/home')
-                        setLoading(false)
+                    if (request.statusCode === 200) {
+                        const user = request.user
+                        const token = request.token
+                        if (user && token) {
+                            localStorage.setItem('token', JSON.stringify(token));
+                            localStorage.setItem('user', JSON.stringify(user));
+                            setDataUser(user)
+                            setToken(token)
+                            navigate('/home')
+                            setLoading(false)
+                        }
                     }
-
-                } else {
-                    alert('Login failed!')
+                } catch (e) {
                     setLoading(false)
+                    setIsVisibleAlert(true)
                 }
-            } catch (e) {
-                console.log(e);
-                setLoading(false)
+            } else {
+                setErrors(err)
             }
-
         }
         dbLogin()
     }
@@ -101,6 +108,7 @@ export default function Login() {
     // };
     return (
         <div className={styles.container}>
+            <FiestaAlert label={t('Login_Register.failed.login')} isVisible={isVisibleAlert} onClose={setIsVisibleAlert}/>
             <div className={styles.containerLeft}>
                 <div className={styles.refrerencesBox}>
                     <div className={styles.viewLogo}>
@@ -177,6 +185,11 @@ export default function Login() {
                             <div className={styles.inputField}>
                                 <input placeholder={t('Login_Register.inputLabel.userName.placeholder')} type={'text'} onChange={onUserNameHandler} />
                             </div>
+                            {
+                                errors?.userName && <div className={styles.viewErr}>
+                                    {errors.userName.message[ctgName]} <IoClose />
+                                </div>
+                            }
                         </div>
                         <div className={styles.viewInput}>
                             <label>{t('Login_Register.inputLabel.password.label')}</label>
@@ -188,6 +201,11 @@ export default function Login() {
                                         <VscEyeClosed onClick={changeIsShowPassword} className={styles.eyePassword} />
                                 }
                             </div>
+                            {
+                                errors?.password && <div className={styles.viewErr}>
+                                    {errors.password.message[ctgName]} <IoClose />
+                                </div>
+                            }
                         </div>
                     </div>
                     <div className={styles.remember_forgotPass}>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './ItemProduct.module.css'
 import { CiStar } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
-import { BsArrowsMove } from "react-icons/bs";
+import { MdOutlineZoomOutMap } from "react-icons/md";
 import { Link } from 'react-router-dom';
 export default function ItemProduct({ name, brand, price, id, images }) {
     const [avatarProduct, setAvatarProduct] = useState(null)
@@ -25,7 +25,7 @@ export default function ItemProduct({ name, brand, price, id, images }) {
                             <CiStar className={styles.icon} />
                         </div >
                         <div className={styles.itemIconView}>
-                            <BsArrowsMove className={styles.icon} />
+                            <MdOutlineZoomOutMap className={styles.icon} />
                         </div >
                         <div className={styles.itemIconView}>
                             <IoEyeOutline className={styles.icon} />

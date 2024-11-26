@@ -16,6 +16,7 @@ import PaymentSubmit from './dialog/PaymentSubmit'
 import CircleLoading from '../../public/components/loading/CircleLoading'
 import OrderSuccess from './dialog/OrderSuccess'
 import { useTranslation } from 'react-i18next'
+import EmptyCheckoutDialog from '../../public/components/dialog/EmptyCheckoutDialog'
 export default function Checkout() {
     const { t } = useTranslation()
     const location = useLocation()
@@ -29,6 +30,9 @@ export default function Checkout() {
     const [loading, setLoading] = useState(false)
     const [paymentSubmitVisible, setPaymentSubmitVisible] = useState(false)
     const [orderSuccessVisbilem, setOrderSuccessVisible] = useState(false)
+    const [isVisbileCheckout, setIsVisbleCheckout] = useState(false)
+
+
     useEffect(() => {
         const getCartByIds = async () => {
             try {
@@ -51,6 +55,12 @@ export default function Checkout() {
     }, [selectedItems, dataUser?._id, dataUser])
 
     useEffect(() => {
+        if(!selectedItems || selectedItems.length === 0) {
+            setIsVisbleCheckout(true)
+        }
+    }, [selectedItems])
+
+    useEffect(() => {
         if (cartData.length > 0) {
             const newData = cartData.map(item => {
                 let newItem = { ...item, productId: item.products._id }
@@ -60,12 +70,14 @@ export default function Checkout() {
             setFormattedCartDatta(newData)
         }
     }, [cartData])
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: 'auto'
         })
     }, [stateCheckout])
+
     const placeOrder = async () => {
         setLoading(true)
         if (paymentMethod === paymentMethods.DEBIT_CREDIT_CARD) {
@@ -91,6 +103,7 @@ export default function Checkout() {
     }
     return (
         <div>
+            <EmptyCheckoutDialog isVisible={isVisbileCheckout}/>
             <Header />
             <PaymentSubmit
                 isVisible={paymentSubmitVisible}
@@ -119,7 +132,9 @@ export default function Checkout() {
                             data={selectedItems}
                             nextStep={setStateCheckout}
                             onChangeAddress={setAddress}
-                            onChangeMethod={setPaymentMethod} />
+                            onChangeMethod={setPaymentMethod} 
+                            currentAddress={address}
+                            currentPaymentMethod={paymentMethod}/>
                     </div>
                     <div className={styles.viewFromCheckout}>
                         <div className={styles.viewSubtotal}>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './OrderSuccess.module.css'
 import { useTranslation } from 'react-i18next'
+import { FaCircleCheck } from 'react-icons/fa6'
 export default function OrderSuccess({ isVisible, onClose, completeCheckout }) {
     const { t } = useTranslation()
     const [seconds, setSeconds] = useState(5)
@@ -31,23 +32,16 @@ export default function OrderSuccess({ isVisible, onClose, completeCheckout }) {
     return (
         <div className={styles.container}>
             <div className={styles.body}>
-                <div className={styles.title}>
-                    <p>
-                        {t('Checkout.doneCheckout.dialogTitle.string1')}
-                    </p>
-                    <p>
-                        {t('Checkout.doneCheckout.dialogTitle.string2')}
-                    </p>
-                </div>
-                <div className={styles.viewButton}>
-                    <button onClick={() => {
-                        onClose(false)
-                        completeCheckout('done')
-                    }
-                    }>
-                        OK ({seconds}s)
-                    </button>
-                </div>
+                <p>{t('Checkout.doneCheckout.dialogTitle.string1')}</p>
+                <p>{t('Checkout.doneCheckout.dialogTitle.string2')}</p>
+                <button onClick={() => {
+                    onClose(false)
+                    completeCheckout('done')
+                }
+                }>
+                    OK ({seconds}s)
+                </button>
+                <FaCircleCheck className={styles.circleCheck} />
             </div>
         </div>
     )
