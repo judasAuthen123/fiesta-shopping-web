@@ -18,6 +18,7 @@ import InputSearch from './filters/InputSearch';
 import { sortArray } from './filters/sortData';
 import MovePageAccess from './pagination/MovePageAccess';
 import { useLocation } from 'react-router-dom';
+import { PiSmileyXEyesBold } from "react-icons/pi";
 import { debounce } from 'lodash';
 import ShineProductListLoading from '../../public/components/loading/shineLoading/ShineProductListLoading';
 import PolicyFooter from '../../public/components/footer/PolicyFooter';
@@ -169,7 +170,9 @@ function Shop() {
                                                         brand={item.Brand}
                                                         price={item.price}
                                                     />
-                                                ) : null
+                                                ) : <div className={styles.viewNoResult}> 
+                                                    <PiSmileyXEyesBold size={25}/> {t('Shop.noResult')}
+                                                </div>
                                         }
                                     </div>
                             }

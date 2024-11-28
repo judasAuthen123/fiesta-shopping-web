@@ -22,6 +22,7 @@ import MovePageAccess from './pagination/MovePageAccess';
 import ShineProductListLoading from '../../public/components/loading/shineLoading/ShineProductListLoading';
 import { debounce } from 'lodash';
 import PolicyFooter from '../../public/components/footer/PolicyFooter';
+import { PiSmileyXEyesBold } from 'react-icons/pi';
 function ShopByCategories() {
     const { t } = useTranslation()
     const location = useLocation()
@@ -182,7 +183,9 @@ function ShopByCategories() {
                                                         brand={item.Brand}
                                                         price={item.price}
                                                     />
-                                                ) : null
+                                                ) : <div className={styles.viewNoResult}> 
+                                                <PiSmileyXEyesBold size={25}/> {t('Shop.noResult')}
+                                            </div>
                                         }
                                     </div>
                             }

@@ -251,6 +251,7 @@
     "Shop": {
         "shop": "Shop",
         "home": "Home",
+        "noResult": "No result",
         "filter": {
             "title": "Filter",
             "categories": "Product categories",

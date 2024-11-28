@@ -40,20 +40,27 @@ export default function ProductDetail() {
         setErros(null)
         if ((colorSelected || colorList.length === 0) && (sizeSelected || sizeList.length === 0)) {
             if (product.variations && Array.isArray(product.variations)) {
-                const matchedVariation = product.variations.find(
-                    (item) => item.dimension.size === sizeSelected && item.dimension.color === colorSelected
-                );
+                const matchedVariation = product.variations.find((item) => {
+                    const isSizeMatch = !sizeSelected || item.dimension.size === sizeSelected;
+                    const isColorMatch = !colorSelected || item.dimension.color === colorSelected;
+                    return isSizeMatch && isColorMatch;
+                });
                 setSelectedVariation(matchedVariation)
             }
         }
     }, [sizeSelected, colorSelected, id, sizeList.length, colorList.length, product?.variations])
 
     const addToCart = () => {
-        if(dataUser) {
+        if (dataUser) {
             const addProductToCart = async () => {
                 try {
                     const validateFields = {
-                        sizeSelected, colorSelected, sizeList, colorList, selectedVariation
+                        sizeSelected: sizeSelected, 
+                        colorSelected: colorSelected, 
+                        sizeList: sizeList, 
+                        colorList: colorList, 
+                        selectedVariation: selectedVariation, 
+                        variation: product?.variations.length > 0
                     }
                     const err = validateAddToCart(validateFields)
                     if (!err) {
@@ -61,7 +68,7 @@ export default function ProductDetail() {
                             addFields: {
                                 userId: dataUser?._id,
                                 productId: id,
-                                variationId: selectedVariation._id,
+                                variationId: selectedVariation?._id,
                                 quantity: countBuy
                             }
                         });
@@ -70,6 +77,8 @@ export default function ProductDetail() {
                         }
                     } else {
                         setErros(err)
+                        console.log(err);
+                        
                     }
                 } catch (error) {
                     console.error(error);
@@ -79,10 +88,10 @@ export default function ProductDetail() {
         } else {
             setIsVisibleAlert(true)
         }
-        
+
     };
 
-    useEffect(() => {     
+    useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: 'auto'
@@ -136,7 +145,7 @@ export default function ProductDetail() {
     }, [id])
     return (
         <div className={styles.container}>
-            <FiestaAlert isVisible={isVisbileAlert} label={t('Components.alert.needLogin')} onClose={setIsVisibleAlert}/>
+            <FiestaAlert isVisible={isVisbileAlert} label={t('Components.alert.needLogin')} onClose={setIsVisibleAlert} />
             <Header />
             <Dialog isVisible={isModalVisible} status={t('ProductDetail.dialogAddToCard')} />
             <div className={styles.box}>
@@ -154,7 +163,7 @@ export default function ProductDetail() {
                                             key={item.id}
                                             onMouseEnter={() => setAvatarProduct(item.url)}
                                             className={styles.itemImg}>
-                                            <img src={item.url} alt=''/>
+                                            <img src={item.url} alt='' />
                                         </div>) : null
                             }
                         </div>

@@ -251,6 +251,7 @@
     "Shop": {
         "shop": "Mua sắm",
         "home": "Trang chủ",
+        "noResult": "Không có kết quả",
         "filter": {
             "title": "Bộ lọc",
             "categories": "Danh mục sản phẩm",

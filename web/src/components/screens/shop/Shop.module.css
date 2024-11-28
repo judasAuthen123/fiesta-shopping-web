@@ -115,7 +115,12 @@
     align-items: center;
     column-gap: 5px;
 }
-
+.viewNoResult {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
 .layoutContent .layoutShowing .layoutShowing1 .iconView .icon {
     font-size: 25px;
 }
