@@ -438,6 +438,16 @@
             "notDefault": "Bạn chưa có thẻ tín dụng/thẻ nợ nào cả",
             "pleaseAdd":"Vui lòng bổ sung thẻ để tiếp tục",
             "understand": "Tôi đã hiểu",
+            "howToGetCardNumber": {
+                "question": "Bạn đang cố gắng sử dụng tính năng này?",
+                "link": {
+                    "string1": "Vui lòng truy cập",
+                    "string2": "để tiếp tục"
+                },
+                "step1": "- Bước 1: nhấn Stripe để mở trang",
+                "step2": "- Bước 2: cuộn xuống phần thông tin thẻ",
+                "step3": "- Bước 3: sao chép số thẻ dán vào đây"
+            },
             "button": {
                 "buttonRequest": "Yêu cầu",
                 "buttonCancel": "Hủy",

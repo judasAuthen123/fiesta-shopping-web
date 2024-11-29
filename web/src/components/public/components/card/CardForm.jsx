@@ -9,7 +9,7 @@ import { AppContext } from '../../../../util/AppContext';
 import { useTranslation } from 'react-i18next';
 import ContainerLoading from '../loading/ContainerLoading';
 import DottedLoading from '../loading/dottedLoading/DottedLoading';
-
+import { BsQuestionLg } from "react-icons/bs";
 const elementOptions = {
   placeholder: ' ',
   style: {
@@ -56,6 +56,11 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
       }
     }
   }
+
+  const openStripeCardTest = () => {
+    window.open("https://docs.stripe.com/testing")
+  }
+
   const errCardSubmit = {
     1: t('Components.card.error.string1'),
     2: t('Components.card.error.string2')
@@ -111,7 +116,7 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
         {
           loading &&
           <ContainerLoading background={'#f1efef91'}>
-            <DottedLoading dotSize={31} dotColor={'blueViolet'} gap={7.5} />
+            <DottedLoading dotSize={31} dot1Color={'blueViolet'} dot2Color={'blueViolet'} dot3Color={'blueViolet'} gap={7.5} />
           </ContainerLoading>
         }
 
@@ -147,6 +152,16 @@ export default function CardForm({ isVisible, onClose, onRefreshCardData, onOpen
             <label htmlFor='numOnCard' className={styles.labelField}>
               {t('Components.card.cardNumber')}
             </label>
+            <div className={styles.noteUsing}>
+            <BsQuestionLg className={styles.icon}/>
+            <div className={styles.viewLink}>
+              <p>{t('Components.card.howToGetCardNumber.question')}</p>
+              <p>{t('Components.card.howToGetCardNumber.link.string1')} <span onClick={openStripeCardTest} className={styles.linkToStripe}>Stripe</span> {t('Components.card.howToGetCardNumber.link.string2')}</p>
+              <p>{t('Components.card.howToGetCardNumber.step1')}</p>
+              <p>{t('Components.card.howToGetCardNumber.step2')}</p>
+              <p>{t('Components.card.howToGetCardNumber.step3')}</p>
+            </div>
+            </div>       
           </div>
           <div className={styles.viewInput}>
             <input id='name' className={styles.inputField} placeholder=' ' onChange={onChangeName} style={{ fontSize: 16, color: '#1b1b1bff' }} />

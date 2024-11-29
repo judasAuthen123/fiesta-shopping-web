@@ -76,7 +76,7 @@ export default function Register() {
         <form className={styles.loginForm} onSubmit={signUp}>
           {
             loading && <ContainerLoading background={'#ffffffd7'}>
-              <DottedLoading dotSize={31} dotColor={'blueViolet'} gap={7.5} />
+              <DottedLoading dotSize={31} dot1Color={'blueViolet'} dot2Color={'blueViolet'} dot3Color={'blueViolet'} gap={7.5} />
             </ContainerLoading>
           }
           <div className={styles.viewWelcome}>

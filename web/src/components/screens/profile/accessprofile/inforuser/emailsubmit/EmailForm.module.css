@@ -235,19 +235,27 @@
     width: 100%;
     border-radius: 4px;
     font-size: 15px;
-    height: 38px;
     display: flex;
     border: none;
-    background-color: #85ccd91e;
+    background-color: #85ccd939;
     align-items: center;
     justify-content: center;
     column-gap: 10px;
     animation: fadeIn 0.5s forwards;
     font-weight: 500;
     opacity: 1;
+    padding: 10px;
 }
-.btnVerifyEmail:hover {
-    opacity: 0.6;
+.btnVerifyEmail .notLoading {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 17px;
+}
+.btnVerifyEmail .notLoading>img {
+    width: 17px;
+    height: 17px;
+    transform: translateY(-10%);
 }
 @keyframes fadeIn {
     from {

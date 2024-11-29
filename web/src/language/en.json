@@ -438,6 +438,16 @@
             "notDefault": "You not have any Credit/Debit card yet",
             "pleaseAdd":"Please add a card to continue",
             "understand": "I'm understand",
+            "howToGetCardNumber": {
+                "question": "Are you trying to use this feature?",
+                "link": {
+                    "string1": "Please visit",
+                    "string2": "to continue"
+                },
+                "step1": "- Step 1: Click on Stripe to open the page",
+                "step2": "- Step 2: Scroll down to the card information section",
+                "step3": "- Step 3: Copy the card number and paste it here"
+            },
             "button": {
                 "buttonRequest": "Request",
                 "buttonCancel": "Cancel",
