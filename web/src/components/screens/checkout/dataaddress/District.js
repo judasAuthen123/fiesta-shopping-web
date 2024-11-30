@@ -37,7 +37,7 @@ export default function District({ getData, provinceID }) {
         getData(item)
     }
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', rowGap: 2, height: 200, overflowY: 'scroll', paddingTop: 5 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', rowGap: 2, height: 208.5, overflowY: 'scroll', paddingTop: 5 }}>
             {
                 dataDistrict && dataDistrict.length > 0 ?
                     dataDistrict.map(item =>

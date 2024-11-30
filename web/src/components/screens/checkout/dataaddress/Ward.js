@@ -35,7 +35,7 @@ export default function Ward({ getData, districtID }) {
         getData(item)
     }
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', rowGap: 2, height: 200, overflowY: 'scroll', paddingTop: 5 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', rowGap: 2, height: 208.5, overflowY: 'scroll', paddingTop: 5 }}>
             {
                 dataWard && dataWard.length > 0 ?
                     dataWard.map(item =>

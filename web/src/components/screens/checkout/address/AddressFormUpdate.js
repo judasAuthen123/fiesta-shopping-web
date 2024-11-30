@@ -3,10 +3,12 @@ import styles from './AddressForm.module.css'
 import DropDownAdress from './DropDownAdress'
 import { RxTriangleDown } from "react-icons/rx";
 import AxiosInstance from '../../../../util/AxiosInstance';
-import { _valid_Address } from './Validate';
 import CircleLoading from '../../../public/components/loading/CircleLoading';
 import { AppContext } from '../../../../util/AppContext';
 import { useTranslation } from 'react-i18next';
+import { validationAddress } from './validation';
+import TextInput from './textInput/TextInput';
+import { IoClose } from 'react-icons/io5';
 const dislayCityDistrictWard = (data) => {
     if (Array.isArray(data) && data.length > 0) {
         const validValues = data.filter(item => item);
@@ -27,6 +29,7 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
     const [houseNo, setHouseNo] = useState(houseNumber)
     const [dropDownAddressVisible, setDropDownAddressVisible] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [errors, setErrors] = useState(null)
     const arrAddressSelected = () => {
         if (provinceData || districtData || wardData) {
             return [provinceData?.ProvinceName, districtData?.DistrictName, wardData?.WardName]
@@ -39,13 +42,37 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
             setDropDownAddressVisible(false)
         }
     }, [wardData])
+
+
     useEffect(() => {
         setProvinceData(null)
+        setLoading(false)
+        setErrors(null)
         setName(name)
         setPhone(phoneNumber)
         setStreet(street)
         setHouseNo(houseNumber)
     }, [isVisible, name, phoneNumber, street, houseNumber])
+
+    useEffect(() => {
+        clearErr('detailAddress')
+    }, [wardData, districtData, provinceData])
+
+
+    function clearErr(errName) {
+        if (errors?.[errName]) {
+            setErrors(prev => {
+                if (prev) {
+                    const { [errName]: _, ...newErr } = prev
+                    return newErr
+                }
+                return null
+            })
+        }
+    }
+    const ctgName = t('MongoTranslator.nameCtg')
+
+
 
     const updateAddress = async (event) => {
         event.preventDefault();
@@ -58,12 +85,11 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
             street: newStreet,
             houseNumber: houseNo
         }
+        const err = validationAddress(newData)
+        console.log(err);
+
         try {
-            if (_valid_Address(newName, phone,
-                provinceData ? provinceData : city,
-                provinceData ? districtData : district,
-                provinceData ? wardData : ward,
-                newStreet)) {
+            if (!err) {
                 setLoading(true);
                 const request = await AxiosInstance.post('/userApi/updateAddress', {
                     userId: dataUser?._id,
@@ -87,7 +113,7 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                     onOpenSuccessDialog(true)
                 }
             } else {
-                alert('Please fill informations as valid!');
+                setErrors(err)
             }
         } catch (error) {
             console.log('error add new address: ' + error);
@@ -95,12 +121,15 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
     };
     const onNameHandler = (e) => {
         setName(e.target.value)
+        clearErr('name')
     }
     const onPhoneHandler = (e) => {
         setPhone(e.target.value)
+        clearErr('phone')
     }
     const onStreetHandler = (e) => {
         setStreet(e.target.value)
+        clearErr('street')
     }
     const onHouseNoHandler = (e) => {
         setHouseNo(e.target.value)
@@ -109,30 +138,17 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
     return (
         <div className={styles.container}>
             <form onSubmit={updateAddress}>
-                <p style={{ fontSize: 18, fontWeight: 500 }}>{t('Components.address.titleUpdate')}</p>
+                <p style={{ fontSize: 18, fontWeight: 500, marginBottom: 40 }}>{t('Components.address.titleUpdate')}</p>
                 <div className={styles.boxInput}>
                     <div className={styles.inputRow}>
-                        <div className={styles.viewInput}>
-                            <input
-                                value={newName}
-                                id='name' className={styles.inputField} placeholder=' ' onChange={onNameHandler} />
-                            <label htmlFor='name' className={styles.labelField}>
-                                {t('Components.address.addressDetail.name')}
-                            </label>
-                        </div>
-                        <div className={styles.viewInput}>
-                            <input
-                                value={phone}
-                                id='phone' className={styles.inputField} placeholder=' ' onChange={onPhoneHandler} />
-                            <label htmlFor='phone' className={styles.labelField}>
-                                {t('Components.address.addressDetail.phoneNumber')}
-                            </label>
-                        </div>
+                        <TextInput label={t('Components.address.addressDetail.name')} onChange={onNameHandler} isError={errors?.name} ctg={ctgName} value={newName} />
+                        <TextInput label={t('Components.address.addressDetail.phoneNumber')} onChange={onPhoneHandler} isError={errors?.phone} ctg={ctgName} value={phone} />
                     </div>
                     <div>
                         <div className={styles.containerDropDown}>
                             <div className={styles.viewInput}>
                                 <input
+                                    style={errors?.detailAddress ? {borderColor: 'red'} : {}}
                                     id='detail'
                                     className={styles.inputField}
                                     placeholder=' '
@@ -140,9 +156,15 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                                     onFocus={() => setDropDownAddressVisible(true)}
                                     value={dislayCityDistrictWard(arrAddressSelected())}
                                 />
-                                <label htmlFor='detail' className={styles.labelField}>
+                                <label htmlFor='detail' className={styles.labelField} style={errors?.detailAddress ? {color: 'red'} : {}}>
                                     {t('Components.address.addressDetail.city')}, {t('Components.address.addressDetail.district')}, {t('Components.address.addressDetail.ward')}
                                 </label>
+                                {
+                                    errors?.detailAddress &&
+                                    <div className={styles.viewErr}>
+                                        {errors.detailAddress.message[ctgName]} <IoClose />
+                                    </div>
+                                }
                             </div>
                             <RxTriangleDown
                                 onClick={() => setDropDownAddressVisible(prev => !prev)}
@@ -156,22 +178,8 @@ export default function AddressFormUpdate({ isVisible, onClose, onOpenSuccessDia
                             onClose={dropDownAddressVisible}
                         />
                     </div>
-                    <div className={styles.viewInput}>
-                        <input
-                            value={newStreet}
-                            id='street' className={styles.inputField} placeholder=' ' onChange={onStreetHandler} />
-                        <label htmlFor='street' className={styles.labelField}>
-                            {t('Components.address.addressDetail.street')}
-                        </label>
-                    </div>
-                    <div className={styles.viewInput}>
-                        <input
-                            value={houseNo}
-                            id='detail' className={styles.inputField} placeholder=' ' onChange={onHouseNoHandler} />
-                        <label htmlFor='detail' className={styles.labelField}>
-                            {t('Components.address.addressDetail.houseNumber')}
-                        </label>
-                    </div>
+                    <TextInput label={t('Components.address.addressDetail.street')} onChange={onStreetHandler} isError={errors?.street} ctg={ctgName} value={newStreet} />
+                    <TextInput label={t('Components.address.addressDetail.houseNumber')} onChange={onHouseNoHandler} ctg={ctgName} value={houseNo} />
                     <div className={styles.viewButton}>
                         <button onClick={() => onClose(false)}>
                             {t('Components.address.addressDetail.button.buttonCancel')}

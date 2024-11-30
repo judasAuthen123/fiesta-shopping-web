@@ -13,13 +13,13 @@
 }
 .inputRow {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 15px;
+    grid-template-columns: 48.5% 48.5%;
+    gap: 3%;
 }
 .container>form {
     margin-top: 20px;
     background-color: white;
-    width: auto;
+    width: 520px;
     padding: 25px;
     border-radius: 5px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.533);
@@ -41,7 +41,26 @@
     flex-direction: column;
     position: relative;
 }
-
+.viewInput .viewErr {
+    position: absolute;
+    right: 0;
+    top: -50%;
+    color: red;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    animation: translateToTop 0.3s ease-in-out;
+}
+@keyframes translateToTop {
+    from {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 .inputField:focus {
     appearance: none;
     border: 1px solid rgba(8, 8, 8, 0.701);
@@ -104,7 +123,7 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    row-gap: 35px;
+    row-gap: 42px;
 }
 
 .viewDefault {
@@ -119,14 +138,14 @@
 
 .viewButton {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     column-gap: 15px;
 }
 .viewButton>button:nth-child(1) {
     background-color: aqua;
     padding: 9px;
     font-size: 15px;
-    width: 140px;
+    width: 45%;
     border-radius: 3px;
     border: none;
     height: 37px;
@@ -135,7 +154,7 @@
     background-color: black;
     padding: 9px;
     font-size: 15px;
-    width: 180px;
+    width: 45%;
     color: white;
     border-radius: 3px;
     border: none;
@@ -162,4 +181,9 @@
 }
 .rotated {
     transform: rotate(180deg);
+}
+@media (max-width: 600px) {
+    .container>form {
+        width: 97%;
+    }
 }
