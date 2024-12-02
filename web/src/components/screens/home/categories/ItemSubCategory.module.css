@@ -1,6 +1,7 @@
 .container {
     height: 320px;
-    display: block;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     position: relative;
     cursor: pointer;
@@ -23,7 +24,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 250px;
+    margin-top: auto;
+    margin-bottom: 10%;
     border-radius: 10px;
     z-index: 1;
     box-shadow: 0 0 8px rgba(78, 78, 78, 0.726);

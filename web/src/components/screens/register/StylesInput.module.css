@@ -4,6 +4,7 @@
     row-gap: 7px;
     width: 100%;
     position: relative;
+    box-sizing: border-box;
 }
 .viewInput .viewErr {
     position: absolute;
@@ -84,15 +85,20 @@
     height: 100%;
     width: 100%;
     border-radius: 11px;
-    background: rgb(114, 18, 240); /* Hiệu ứng nền */
-    transform: scale(1.007, 1.08); /* Hiệu ứng nhẹ khi xuất hiện */
-    z-index: 0; /* Đảm bảo ::after nằm dưới input */
-    opacity: 0; /* Ẩn mặc định */
-    pointer-events: none; /* Không cho phép tương tác với ::after */
+    background: rgb(114, 18, 240); 
+    transform: scale(1.007, 1.08); 
+    z-index: 0; 
+    opacity: 0; 
+    pointer-events: none;
     transition: opacity 0.2s ease-in-out;
 }
 
 .inputField:focus-within::after {
     opacity: 1;
     /* Hiển thị hiệu ứng khi focus */
+}
+@media (max-width: 600px) {
+    .inputField::after {
+        transform: scale(1.01, 1.09);
+    }
 }

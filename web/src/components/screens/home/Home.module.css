@@ -24,7 +24,6 @@
   background-color: #f2f2f2;
   margin-top: 30px;
   border-radius: 5px;
-  min-width: 1100px;
 }
 
 .boxText {
@@ -74,14 +73,13 @@
   display: block;
   width: 75%;
   margin-bottom: 70px;
-  min-width: 1100px;
+  margin-top: 30px;
 }
 
 .headCategories {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 30px;
+  justify-content: center;
 }
 
 .headCategories .titleHeadCategories {
@@ -110,14 +108,13 @@
 }
 .viewCategories {
   display: grid;
-  grid-template-columns: 23% 23% 23% 23%;
-  column-gap: 3%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
   margin-top: 30px;
 }
 .products {
   width: 75%;
   margin-bottom: 70px;
-  min-width: 1100px;
 }
 .headProducts {
   display: flex;
@@ -129,9 +126,8 @@
 }
 .viewProducts {
   display: grid;
-  grid-template-columns: 22% 22% 22% 22%;
-  column-gap: 4%;
-  row-gap: 30px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
   margin-top: 30px;
 }
 .viewAppReviews {
@@ -147,5 +143,21 @@
   }
   .products {
     width: 98%;
+  }
+}
+@media (max-width: 800px) {
+  .viewCategories {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 15px;
+  }
+  .boxText {
+    display: none;
+  }
+  .viewCategories>div {
+    height: 250px;
+  }
+  .viewProducts {
+    grid-template-columns: 1fr 1fr;
   }
 }
