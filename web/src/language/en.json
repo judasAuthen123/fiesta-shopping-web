@@ -252,6 +252,7 @@
         "shop": "Shop",
         "home": "Home",
         "noResult": "No result",
+        "select": "Select",
         "filter": {
             "title": "Filter",
             "categories": "Product categories",

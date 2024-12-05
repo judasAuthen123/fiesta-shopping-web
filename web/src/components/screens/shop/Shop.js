@@ -15,13 +15,14 @@ import AxiosInstance from './../../../util/AxiosInstance';
 import PaginationsBar from './pagination/PaginationsBar';
 import { useTranslation } from 'react-i18next';
 import InputSearch from './filters/InputSearch';
-import { sortArray } from './filters/sortData';
 import MovePageAccess from './pagination/MovePageAccess';
 import { useLocation } from 'react-router-dom';
 import { PiSmileyXEyesBold } from "react-icons/pi";
 import { debounce } from 'lodash';
 import ShineProductListLoading from '../../public/components/loading/shineLoading/ShineProductListLoading';
 import PolicyFooter from '../../public/components/footer/PolicyFooter';
+import SortList from './sort/SortList';
+import BackToTopButton from './../../public/components/button/BackToTopButton';
 function Shop() {
     const location = useLocation()
     const { t } = useTranslation()
@@ -31,7 +32,8 @@ function Shop() {
     const currentFilters = useSelector(currentFilterSelectedForShopByCategory)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-
+    const [sideAction, setSideAction] = useState(false)
+    const [sizeResponsive, setSizeResponsive] = useState(window.innerWidth <= 800)
     useEffect(() => {
         /* 
         Check if the user navigated back to /shop from /shop-category.
@@ -46,145 +48,146 @@ function Shop() {
     }, [location, dispatch])
 
     useEffect(() => {
+        setSideAction(false)
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         })
     }, [filters])
 
-    const searchProduct = async () => {
-        try {
-            console.log('searched');
 
-            setLoading(true)
-            const { category, ...destroyCategory } = filters;
-            const response = await AxiosInstance.get(`/productApi/searchProducts`, {
-                params: destroyCategory
-            });
-            if (response.data) {
-                setProductList(response.data);
-                setDocuments(response.documents);
-                setLoading(false)
+    useEffect(() => {
+        const handlerSideAction = debounce(() => {
+            if (window.innerWidth > 800) {
+                setSideAction(false)
+                setSizeResponsive(false)
+            } else {
+                setSizeResponsive(true)
             }
-        } catch (error) {
-            console.log(error);
+        }, 20)
+        window.addEventListener('resize', handlerSideAction)
+        return () => window.removeEventListener('resize', handlerSideAction)
+    }, [])
+
+const searchProduct = async () => {
+    try {
+        console.log('searched');
+
+        setLoading(true)
+        const { category, ...destroyCategory } = filters;
+        const response = await AxiosInstance.get(`/productApi/searchProducts`, {
+            params: destroyCategory
+        });
+        if (response.data) {
+            setProductList(response.data);
+            setDocuments(response.documents);
             setLoading(false)
         }
+    } catch (error) {
+        console.log(error);
+        setLoading(false)
     }
+}
 
 
-    const debounceSearchProduct = useMemo(() => debounce(searchProduct, 20), [filters])
+const debounceSearchProduct = useMemo(() => debounce(searchProduct, 20), [filters])
 
 
-    const sortNameLabel = t('MongoTranslator.nameCtg')
-    const pages = (Math.ceil(documents / filters?.limit));
+const pages = (Math.ceil(documents / filters?.limit));
 
 
 
-    const onChangeFilters = useCallback(async () => {
-        dispatch(filtersSlice.actions.onApplySearchFields())
-    }, [dispatch])
+const onChangeFilters = useCallback(async () => {
+    dispatch(filtersSlice.actions.onApplySearchFields())
+}, [dispatch])
 
 
-    // main searchProduct fuction here
-    useEffect(() => {
-        debounceSearchProduct()
-    }, [debounceSearchProduct]);
+// main searchProduct fuction here
+useEffect(() => {
+    debounceSearchProduct()
+}, [debounceSearchProduct]);
 
 
-    const onChangeSortBy = debounce((data) => {
-        const { sortBy, sortOrder } = data
-        const sortData = { sortBy, sortOrder }
-        dispatch(filtersSlice.actions.onChangeSort(sortData))
-    }, 300)
 
 
-    const isFilterChange = _.isEqual(filters, currentFilters)
+
+const isFilterChange = _.isEqual(filters, currentFilters)
 
 
-    return (
-        <div className={styles.container}>
-            <Header />
-            <div className={styles.box} style={{ marginTop: 50, marginBottom: 30 }}>
-                <div className={styles.title}>
-                    {t('Shop.home')} <GrNext className={styles.icon} /> {t('Shop.shop')}
+return (
+    <div className={`${styles.container} ${sideAction ? styles.containerOverflow : ''}`}>
+        <BackToTopButton />
+        <Header />
+        {sideAction && sizeResponsive && <div className={styles.containerSidebar} onClick={() => setSideAction(false)}></div>}
+        <div className={styles.box} style={{ marginTop: 50, marginBottom: 30 }}>
+            <div className={styles.title}>
+                {t('Shop.home')} <GrNext className={styles.icon} /> {t('Shop.shop')}
+                <div className={styles.boxFilterDisplayButton} onClick={() => setSideAction(true)}>
+                    <LuFilter size={20} /> {t('Shop.filter.title')}
                 </div>
             </div>
-            <div className={styles.box} style={{ marginTop: 0, marginBottom: 0 }}>
-                <div className={styles.viewSearch}>
-                    <div className={styles.filterTitle}>
+        </div>
+        <div className={styles.box} style={{ marginTop: 0 }}>
+            <div className={styles.layoutContent}>
+                <div className={`${styles.boxFilter} ${sideAction ? styles.show : ''}`}>
+                    <div className={styles.filterTitle} onClick={() => setSideAction(false)}>
                         {t('Shop.filter.title')} <LuFilter size={20} />
                     </div>
-                    <InputSearch />
+                    <BoxFilter label={t('Shop.filter.categories')} filterMethod={'categories'} />
+                    <div className={styles.line} />
+                    <BoxFilter label={t('Shop.filter.price')} filterMethod={'price'} />
+                    <div className={styles.line} />
+                    <button onClick={onChangeFilters} disabled={isFilterChange}
+                        style={
+                            isFilterChange ?
+                                { background: 'grey' } :
+                                { background: 'black' }
+                        }>{t('Shop.filter.apply')}
+                    </button>
                 </div>
-            </div>
-            <div className={styles.box} style={{ marginTop: 0 }}>
-                <div className={styles.layoutContent}>
-                    <div className={styles.boxFilter}>
-                        <BoxFilter label={t('Shop.filter.categories')} filterMethod={'categories'} />
-                        <div className={styles.line} />
-                        <BoxFilter label={t('Shop.filter.price')} filterMethod={'price'} />
-                        <div className={styles.line} />
-                        <button onClick={onChangeFilters} disabled={isFilterChange}
-                            style={
-                                isFilterChange ?
-                                    { background: 'grey' } :
-                                    { background: 'black' }
-                            }>{t('Shop.filter.apply')}
-                        </button>
-                    </div>
-                    <div className={styles.boxProducts}>
-                        <div className={styles.headBoxProducts}>
-                            <div className={styles.layoutShowing}>
-                                <div className={styles.layoutShowing1}>
-                                    <div>
-                                        <RxCaretSort size={20} /> {t('Shop.filter.sortBy')}
-                                    </div>
-                                    <div className={styles.viewDataSort}>
-                                        {
-                                            sortArray && sortArray.map(item =>
-                                                <div
-                                                    key={item.name.viName}
-                                                    className={`${currentFilters?.sortBy === item.formattedObject.value &&
-                                                        currentFilters?.sortOrder === item.formattedObject.order ? styles.sortIn : styles.sortOut}`}
-                                                    onClick={() => onChangeSortBy(item, 400)}> {item.name[sortNameLabel]} </div>
-                                            )
-                                        }
-                                    </div>
+                <div className={styles.boxProducts}>
+                    <div className={styles.headBoxProducts}>
+                        <InputSearch />
+                        <div className={styles.layoutShowing}>
+                            <div className={styles.layoutShowing1}>
+                                <div className={styles.viewTitleSort}>
+                                    <RxCaretSort size={20} /> {t('Shop.filter.sortBy')}
                                 </div>
-                                <div className={styles.layoutShowing2}>
-                                    <MovePageAccess pages={pages} loading={loading} />
-                                </div>
+                                <SortList />
                             </div>
-                            {
-                                loading ? <ShineProductListLoading /> :
-                                    <div className={styles.viewProducts}>
-                                        {
-                                            productList && productList.length > 0 ?
-                                                productList.map(item =>
-                                                    <ItemProduct
-                                                        key={item._id}
-                                                        id={item._id}
-                                                        name={item.name}
-                                                        images={item.images}
-                                                        brand={item.Brand}
-                                                        price={item.price}
-                                                    />
-                                                ) : <div className={styles.viewNoResult}> 
-                                                    <PiSmileyXEyesBold size={25}/> {t('Shop.noResult')}
-                                                </div>
-                                        }
-                                    </div>
-                            }
-
-                            <PaginationsBar pages={pages} />
+                            <div className={styles.layoutShowing2}>
+                                <MovePageAccess pages={pages} loading={loading} />
+                            </div>
                         </div>
+                        {
+                            loading ? <ShineProductListLoading /> :
+                                <div className={styles.viewProducts}>
+                                    {
+                                        productList && productList.length > 0 ?
+                                            productList.map(item =>
+                                                <ItemProduct
+                                                    key={item._id}
+                                                    id={item._id}
+                                                    name={item.name}
+                                                    images={item.images}
+                                                    brand={item.Brand}
+                                                    price={item.price}
+                                                />
+                                            ) : <div className={styles.viewNoResult}>
+                                                <PiSmileyXEyesBold size={25} /> {t('Shop.noResult')}
+                                            </div>
+                                    }
+                                </div>
+                        }
+
+                        <PaginationsBar pages={pages} />
                     </div>
                 </div>
             </div>
-            <PolicyFooter />
-            <Footer />
         </div>
-    )
+        <PolicyFooter />
+        <Footer />
+    </div>
+)
 }
 export default React.memo(Shop)

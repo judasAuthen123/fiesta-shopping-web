@@ -2,7 +2,10 @@
     display: block;
     width: 100%;
 }
-
+.container.containerOverflow {
+    height: 100vh;
+    overflow: hidden;
+}
 .box {
     width: 100%;
     display: flex;
@@ -10,7 +13,6 @@
     justify-content: center;
     margin-bottom: 70px;
     margin-top: 70px;
-    min-width: 1100px;
 }
 
 .box .title {
@@ -20,7 +22,17 @@
     font-size: 17px;
     column-gap: 5px;
 }
-
+.box .title .boxFilterDisplayButton {
+    display: none;
+    margin-left: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    column-gap: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(166, 166, 166, 0.292);
+    cursor: pointer;
+}
 .box .title .icon {
     font-size: 11px;
 }
@@ -31,6 +43,7 @@
     grid-template-columns: 20% 75%;
     column-gap: 5%;
     user-select: none;
+    position: relative;
 }
 
 .line {
@@ -58,7 +71,7 @@
     position: sticky;
     top: 70px;
 }
-.box .viewSearch .filterTitle {
+.filterTitle {
     display: flex;
     align-items: center;
     font-size: 19px;
@@ -75,6 +88,7 @@
     background-color: rgba(240, 240, 240, 0.338);
     padding: 10px;
     border-radius: 5px;
+    margin-top: 17px;
 }
 .layoutContent .layoutShowing .layoutShowing1{
     display: flex;
@@ -82,27 +96,7 @@
     align-items: center;
     column-gap: 20px;
 }
-.layoutContent .layoutShowing .layoutShowing1 .viewDataSort{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    column-gap: 10px;
-}
-.layoutContent .layoutShowing .layoutShowing1 .viewDataSort>div{
-    padding: 6px 15px;
-    border-radius: 3px;
-    box-shadow: 0px 0px 4px rgba(168, 168, 168, 0.251);
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out, color 0.13s ease-in-out;
-}
-.sortIn {
-    background-color: black;
-    color: white;
-}
-.sortOut {
-    background-color: white;
-    color: black;
-}
+
 .layoutContent .layoutShowing>div {
     display: flex;
     justify-content: space-between;
@@ -110,7 +104,7 @@
     font-size: 14px;
 }
 
-.layoutContent .layoutShowing .layoutShowing1>div{
+.viewTitleSort{
     display: flex;
     align-items: center;
     column-gap: 5px;
@@ -142,8 +136,11 @@
     position: sticky;
     top: 90px;
     height: max-content;
+    transition: transform 0.3s ease-in-out;
 }
-
+.box .layoutContent .boxFilter.show {
+    transform: translateX(-2%);
+}
 .boxFilter>button {
     background: black;
     color: white;
@@ -172,7 +169,15 @@
     font-weight: 600;
     margin-bottom: 7px;
 }
-
+.containerSidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(200, 200, 200, 0.363);
+    z-index: 100;
+}
 @media (max-width: 1200px) {
     .box .title {
         width: 98%;
@@ -184,5 +189,29 @@
 
     .box .layoutContent {
         width: 98%;
+    }
+}
+@media (max-width: 800px) {
+    .box .layoutContent {
+        grid-template-columns: 1fr;
+    }
+    .box .layoutContent .boxFilter {
+        position: absolute; 
+        z-index: 101;
+        transform: translateX(-106%);
+        background-color: white;
+        top: -200px;
+        width: 230px;
+        height: 100vh;
+        padding: 10px;
+    }
+    .box .viewSearch {
+        grid-template-columns: 1fr;
+    }
+    .box .layoutContent .boxProducts .viewProducts {
+        grid-template-columns: 1fr 1fr;
+    }
+    .box .title .boxFilterDisplayButton {
+        display: flex;
     }
 }

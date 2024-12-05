@@ -41,10 +41,6 @@ export default function Register() {
     }
   }
 
-  useEffect(() => {
-    console.log(isVisibleDialogSuccess);
-
-  }, [isVisibleDialogSuccess])
   const signUp = async (e) => {
     e.preventDefault()
     const signUpFileds = {

@@ -55,11 +55,11 @@ export default function ProductDetail() {
             const addProductToCart = async () => {
                 try {
                     const validateFields = {
-                        sizeSelected: sizeSelected, 
-                        colorSelected: colorSelected, 
-                        sizeList: sizeList, 
-                        colorList: colorList, 
-                        selectedVariation: selectedVariation, 
+                        sizeSelected: sizeSelected,
+                        colorSelected: colorSelected,
+                        sizeList: sizeList,
+                        colorList: colorList,
+                        selectedVariation: selectedVariation,
                         variation: product?.variations.length > 0
                     }
                     const err = validateAddToCart(validateFields)
@@ -78,7 +78,7 @@ export default function ProductDetail() {
                     } else {
                         setErros(err)
                         console.log(err);
-                        
+
                     }
                 } catch (error) {
                     console.error(error);
@@ -204,7 +204,7 @@ export default function ProductDetail() {
                         <div className={styles.discription}>
                             In this article, we’ll dive into the art of writing product descriptions for your online store. We’ll also go over 10 product description examples that can help get you started.
 
-                            Whether you’re just starting out or looking to revamp your current listings, these tips will help you create your own product descriptions that not only inform but also entice.
+                            Whether you’re just starting out or looking to revamp your current listings.
                         </div>
                         <div className={styles.viewVariations}>
                             <ColorList data={colorList} onChange={setColorSelected} />
@@ -213,18 +213,16 @@ export default function ProductDetail() {
                             {
                                 errors?.selectedVariation && <p className={styles.txtErr}>{errors.selectedVariation.message[ctgName]}</p>
                             }
+                            {
+                                selectedVariation?.stock || selectedVariation?.stock === 0 ?
+                                    <div className={styles.viewStockVar}>{t('ProductDetail.stock')}: {selectedVariation?.stock} </div> : null
+                            }
                         </div>
                         <div className={styles.viewBuy}>
                             <PlusAndMinus onChange={onChangeQuantity} />
                             <button onClick={addToCart}>{t('ProductDetail.buttonAddToCard')}</button>
                             <div className={styles.viewIcon}>
                                 <CiHeart className={styles.icon} />
-                            </div>
-                            <div>
-                                {
-                                    selectedVariation?.stock || selectedVariation?.stock === 0 ?
-                                        <div style={{ fontSize: 14, textAlign: 'end' }}>{t('ProductDetail.stock')}: {selectedVariation?.stock} </div> : null
-                                }
                             </div>
                         </div>
                     </div>

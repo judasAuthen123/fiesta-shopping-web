@@ -1,0 +1,76 @@
+.viewDataSort{
+    display: block;
+    align-items: center;
+    position: relative;
+}
+.viewDataSort .sortList {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.viewDataSort .sortList>div{
+    padding: 6px 15px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px rgba(168, 168, 168, 0.251);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.13s ease-in-out;
+}
+.viewDataSort .sortDrop {
+    content: '';
+    display: none;
+    box-shadow: 0px 0px 4px rgba(168, 168, 168, 0.251);
+    border-radius: 5px;
+    background-color: white;
+    width: 170px;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+}
+.viewDataSort .sortDrop .viewSortIn {
+    padding: 6px 10px;
+}
+.viewDataSort .sortDrop .icon {
+    position: absolute;
+    right: 5px;
+    transition: transform 0.15s ease-in-out;
+}
+.viewDataSort .sortDrop .icon.rotate {
+    transform: rotate(180deg);
+}
+.viewDataSort .sortDrop .dropDataSort {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    row-gap: 5px;
+    width: 100%;
+    top: 110%;
+    background-color: white;
+    box-shadow: 0px 0px 4px rgba(168, 168, 168, 0.251);
+    z-index: 99;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.viewDataSort .sortDrop .dropDataSort.hide {
+    display: flex;
+}
+.viewDataSort .sortDrop .dropDataSort>div {
+    padding: 6px 10px;
+    cursor: pointer;
+    
+}
+.sortIn {
+    background-color: black;
+    color: white;
+}
+.sortOut {
+    background-color: white;
+    color: black;
+}
+@media (max-width: 600px) {
+    .viewDataSort .sortList {
+        display: none;
+    }
+    .viewDataSort .sortDrop {
+        display: flex;
+    }
+}

@@ -16,13 +16,14 @@ import ItemCategory from './categories/ItemCategory';
 import PaginationsBar from './pagination/PaginationsBar';
 import { useTranslation } from 'react-i18next';
 import InputSearch from './filters/InputSearch';
-import { sortArray } from './filters/sortData';
 import { RxCaretSort } from 'react-icons/rx';
 import MovePageAccess from './pagination/MovePageAccess';
 import ShineProductListLoading from '../../public/components/loading/shineLoading/ShineProductListLoading';
 import { debounce } from 'lodash';
 import PolicyFooter from '../../public/components/footer/PolicyFooter';
 import { PiSmileyXEyesBold } from 'react-icons/pi';
+import SortList from './sort/SortList';
+import BackToTopButton from '../../public/components/button/BackToTopButton';
 function ShopByCategories() {
     const { t } = useTranslation()
     const location = useLocation()
@@ -34,8 +35,15 @@ function ShopByCategories() {
     const [categoryName, setCategoryName] = useState({})
     const [subCategoryList, setSubCategoryList] = useState([])
     const [loading, setLoading] = useState(false)
+    const [sideAction, setSideAction] = useState(false)
+    const [sizeResponsive, setSizeResponsive] = useState(window.innerWidth <= 800)
     const ctgName = t('MongoTranslator.nameCtg')
     const dispatch = useDispatch()
+
+
+
+
+
     const searchProduct = async () => {
         try {
             setLoading(true)
@@ -66,6 +74,7 @@ function ShopByCategories() {
 
 
     useEffect(() => {
+        setSideAction(false)
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -97,35 +106,41 @@ function ShopByCategories() {
     }, [debounceSearchProduct]);
 
 
-    const onChangeSortBy = debounce((data) => {
-        const { sortBy, sortOrder } = data
-        const sortData = { sortBy, sortOrder }
-        dispatch(filtersSlice.actions.onChangeSort(sortData))
-    }, 300)
+    useEffect(() => {
+        const handlerSideAction = debounce(() => {
+            if (window.innerWidth > 800) {
+                setSideAction(false)
+                setSizeResponsive(false)
+            } else {
+                setSizeResponsive(true)
+            }
+        }, 20)
+        window.addEventListener('resize', handlerSideAction)
+        return () => window.removeEventListener('resize', handlerSideAction)
+    }, [])
 
-
-    const sortNameLabel = t('MongoTranslator.nameCtg')
     const isFilterChange = _.isEqual(filters, currentFilters)
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${sideAction ? styles.containerOverflow : ''}`}>
+            <BackToTopButton />
             <Header />
+            {sideAction && sizeResponsive && <div className={styles.containerSidebar} onClick={() => setSideAction(false)}></div>}
             <div className={styles.box} style={{ marginTop: 50, marginBottom: 30 }}>
                 <div className={styles.title}>
                     {t('Shop.home')} <GrNext className={styles.icon} /> {t('Shop.shop')} <GrNext className={styles.icon} /> {categoryName?.[ctgName]}
-                </div>
-            </div>
-            <div className={styles.box} style={{ marginTop: 0, marginBottom: 0 }}>
-                <div className={styles.viewSearch}>
-                    <div className={styles.filterTitle}>
-                        {t('Shop.filter.title')} <LuFilter size={20} />
+                    <div className={styles.boxFilterDisplayButton} onClick={() => setSideAction(true)}>
+                        <LuFilter size={20} /> {t('Shop.filter.title')}
                     </div>
-                    <InputSearch />
                 </div>
+
             </div>
             <div className={styles.box} style={{ marginTop: 0 }}>
                 <div className={styles.layoutContent}>
-                    <div className={styles.boxFilter}>
+                    <div className={`${styles.boxFilter} ${sideAction ? styles.show : ''}`}>
+                        <div className={styles.filterTitle}>
+                            {t('Shop.filter.title')} <LuFilter size={20} />
+                        </div>
                         <div className={styles.boxSubCategory}>
                             <p>{t('Shop.filter.categories')}</p>
                             {
@@ -148,25 +163,16 @@ function ShopByCategories() {
                     </div>
                     <div className={styles.boxProducts}>
                         <div className={styles.headBoxProducts}>
+                            <InputSearch />
                             <div className={styles.layoutShowing}>
                                 <div className={styles.layoutShowing1}>
-                                    <div>
+                                    <div className={styles.viewTitleSort}>
                                         <RxCaretSort size={20} /> {t('Shop.filter.sortBy')}
                                     </div>
-                                    <div className={styles.viewDataSort}>
-                                        {
-                                            sortArray && sortArray.map(item =>
-                                                <div
-                                                    key={item.name.viName}
-                                                    className={`${currentFilters.sortBy === item.formattedObject.value &&
-                                                        currentFilters.sortOrder === item.formattedObject.order ? styles.sortIn : styles.sortOut}`}
-                                                    onClick={() => onChangeSortBy(item)}> {item.name[sortNameLabel]} </div>
-                                            )
-                                        }
-                                    </div>
+                                    <SortList />
                                 </div>
                                 <div className={styles.layoutShowing2}>
-                                    <MovePageAccess pages={pages} loading={loading}/>
+                                    <MovePageAccess pages={pages} loading={loading} />
                                 </div>
                             </div>
                             {
@@ -183,9 +189,9 @@ function ShopByCategories() {
                                                         brand={item.Brand}
                                                         price={item.price}
                                                     />
-                                                ) : <div className={styles.viewNoResult}> 
-                                                <PiSmileyXEyesBold size={25}/> {t('Shop.noResult')}
-                                            </div>
+                                                ) : <div className={styles.viewNoResult}>
+                                                    <PiSmileyXEyesBold size={25} /> {t('Shop.noResult')}
+                                                </div>
                                         }
                                     </div>
                             }

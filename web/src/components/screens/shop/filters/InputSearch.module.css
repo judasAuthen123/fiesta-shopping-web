@@ -4,6 +4,7 @@
     border-radius: 5px;
     align-items: center;
     padding-left: 10px;
+    box-sizing: border-box;
 }
 
 .inputSearchView .viewInputField>input {
@@ -29,8 +30,8 @@
     background-color: rgba(0, 0, 0, 0.87);
     color: white;
     width: 130px;
-    scale: 1.05;
     height: 37.4px;
+    transform: scaleY(1.05);
 }
 .inputSearchView .viewInputField>button:hover {
     font-weight: bold;
