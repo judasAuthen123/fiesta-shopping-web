@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import LoginAccess from './useroption/LoginAccess';
 import AccessExCollapse from './AccessExCollapse';
 import { useTranslation } from 'react-i18next';
+import CartDrop from './cartdrop/CartDrop';
 function Header() {
 
 
@@ -48,6 +49,7 @@ function Header() {
           <LoginAccess />
         </div>
         <div className={styles.boxCollapse}>
+          <CartDrop />
           {isVisible ? <IoClose size={24} className={styles.iconMenu} onClick={() => setIsVisible(prev => !prev)} /> :
             <HiOutlineMenu size={24} className={styles.iconMenu} onClick={() => setIsVisible(prev => !prev)} />}
 

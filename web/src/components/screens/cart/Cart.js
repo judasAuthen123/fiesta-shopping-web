@@ -12,6 +12,8 @@ import PolicyFooter from '../../public/components/footer/PolicyFooter';
 import { PiSmileyXEyesBold } from "react-icons/pi";
 import { useTranslation } from 'react-i18next';
 import CircleLoading from './../../public/components/loading/CircleLoading';
+import { useDispatch } from 'react-redux';
+import { cartSlice } from '../../public/components/header/cartdrop/cartSlice';
 export default function Cart() {
     const [cartList, setCartList] = useState([])
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -22,6 +24,7 @@ export default function Cart() {
     const [loading, setLoading] = useState(false)
     const { dataUser } = useContext(AppContext)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [errorDialogVisible, setErrorDialogVisible] = useState(false)
     const { t } = useTranslation()
 
@@ -66,6 +69,10 @@ export default function Cart() {
                 setSelectedItems(prevSelectedItems =>
                     prevSelectedItems.filter(item => item !== _idCart)
                 );
+                dispatch(cartSlice.actions.onChangeDataCart({
+                    updateType: "remove",
+                    _id: _idCart
+                }))
             }
         };
         request();

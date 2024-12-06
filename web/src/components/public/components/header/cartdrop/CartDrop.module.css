@@ -1,0 +1,29 @@
+.iconView {
+    background-color: rgba(237, 237, 237, 0.693);
+    border-radius: 50%;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.viewCount {
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    color: white;
+    background-color: rgba(253, 14, 14, 0.811);
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 500;
+}
+.iconView:hover {
+    opacity: 0.8;
+}

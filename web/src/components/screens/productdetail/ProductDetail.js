@@ -15,6 +15,9 @@ import PolicyFooter from './../../public/components/footer/PolicyFooter';
 import { useTranslation } from 'react-i18next'
 import { validateAddToCart } from './validation'
 import FiestaAlert from '../../public/components/dialog/FiestaAlert'
+import { useDispatch } from 'react-redux'
+import { cartSlice } from '../../public/components/header/cartdrop/cartSlice'
+import BackToTopButton from '../../public/components/button/BackToTopButton'
 export default function ProductDetail() {
     const location = useLocation()
     const { id } = location.state || {}
@@ -31,6 +34,7 @@ export default function ProductDetail() {
     const [imagesProduct, setImagesProduct] = useState([])
     const [avatarProduct, setAvatarProduct] = useState(null)
     const [isVisbileAlert, setIsVisibleAlert] = useState(false)
+    const dispatch = useDispatch()
     const { t } = useTranslation()
     const onChangeQuantity = (count) => {
         setCountBuy(count)
@@ -62,7 +66,7 @@ export default function ProductDetail() {
                         selectedVariation: selectedVariation,
                         variation: product?.variations.length > 0
                     }
-                    const err = validateAddToCart(validateFields)
+                    const err = validateAddToCart(validateFields)       
                     if (!err) {
                         const response = await AxiosInstance.post('/cart/add', {
                             addFields: {
@@ -71,14 +75,17 @@ export default function ProductDetail() {
                                 variationId: selectedVariation?._id,
                                 quantity: countBuy
                             }
-                        });
+                        });                      
                         if (response.result === true) {
                             setIsModalVisible(true);
+                            dispatch(cartSlice.actions.onChangeDataCart({
+                                updateType: "add",
+                                _id: response.data._id,
+                                variationId: response.data.variationId
+                            }))
                         }
                     } else {
                         setErros(err)
-                        console.log(err);
-
                     }
                 } catch (error) {
                     console.error(error);
@@ -145,6 +152,7 @@ export default function ProductDetail() {
     }, [id])
     return (
         <div className={styles.container}>
+            <BackToTopButton />
             <FiestaAlert isVisible={isVisbileAlert} label={t('Components.alert.needLogin')} onClose={setIsVisibleAlert} />
             <Header />
             <Dialog isVisible={isModalVisible} status={t('ProductDetail.dialogAddToCard')} />
@@ -209,7 +217,6 @@ export default function ProductDetail() {
                         <div className={styles.viewVariations}>
                             <ColorList data={colorList} onChange={setColorSelected} />
                             <SizeList data={sizeList} onChange={setSizeSelected} />
-                            <div className={styles.viewError}></div>
                             {
                                 errors?.selectedVariation && <p className={styles.txtErr}>{errors.selectedVariation.message[ctgName]}</p>
                             }

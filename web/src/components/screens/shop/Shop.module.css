@@ -210,6 +210,8 @@
     }
     .box .layoutContent .boxProducts .viewProducts {
         grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        padding: 0px 5px;
     }
     .box .title .boxFilterDisplayButton {
         display: flex;

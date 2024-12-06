@@ -14,7 +14,7 @@ export default function BackToTopButton() {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: 'auto'
         });
     };
 
@@ -29,6 +29,7 @@ export default function BackToTopButton() {
             position: 'fixed',
             right: 50,
             bottom: 50,
+            zIndex: 50
         }}>
             {isVisible &&
                 <button onClick={scrollToTop} style={{width:35, height:35, borderRadius: '50%', backgroundColor:'#000000d9', border:'none'}}>

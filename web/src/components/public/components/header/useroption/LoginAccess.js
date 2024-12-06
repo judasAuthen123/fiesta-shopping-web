@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import { AppContext } from './../../../../../util/AppContext';
-import { IoNotifications } from "react-icons/io5";
 import { SlArrowDown } from "react-icons/sl";
-import { FaBagShopping } from "react-icons/fa6";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import styles from './LoginAccess.module.css'
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +8,7 @@ import { defaultAvt } from '../../image/DefaultIAvt';
 import { useTranslation } from 'react-i18next';
 import FlagDrop from '../flagdrop/FlagDrop';
 import LoginDrop from '../logindrop/LoginDrop';
+import CartDrop from '../cartdrop/CartDrop';
 export default function LoginAccess() {
     const { dataUser } = useContext(AppContext)
     const navigate = useNavigate()
@@ -30,7 +29,7 @@ export default function LoginAccess() {
                     <div className={styles.boxOption}>
                         <FlagDrop />
 
-                        <div onClick={() => navigate('/cart')} className={styles.iconView}><FaBagShopping className={styles.icon} /> </div>
+                        <CartDrop />
 
                         <div onClick={() => navigate('/profile')} className={styles.userView}> <img alt='' src={dataUser.image?.id ? dataUser.image.url : defaultAvt} />  < SlArrowDown className={styles.icon} /> </div>
                     </div>

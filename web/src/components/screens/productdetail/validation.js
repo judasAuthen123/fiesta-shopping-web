@@ -1,8 +1,8 @@
 export const validateAddToCart = (fields) => {
-    const { sizeSelected, colorSelected, sizeList, colorList, selectedVariation, variations } = fields;
+    const { sizeSelected, colorSelected, sizeList, colorList, selectedVariation, variation } = fields;
 
     let errors = {};
-    if (variations) {
+    if (variation) {
         if ((sizeList.length > 0 && (!sizeSelected || sizeSelected.trim() === "")) ||
             (colorList.length > 0 && (!colorSelected || colorSelected.trim() === ""))) {
             errors.selectedVariation = {
@@ -25,6 +25,6 @@ export const validateAddToCart = (fields) => {
         }
     }
 
-
+    console.log(errors);   
     return Object.keys(errors).length > 0 ? errors : null;
 }
