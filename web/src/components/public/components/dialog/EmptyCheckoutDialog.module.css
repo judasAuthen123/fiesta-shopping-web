@@ -22,7 +22,7 @@
     }
 }
 .body {
-    width: 60%;
+    width: 70%;
     height: 400px;
     background: #ffffff;
     padding-bottom: 10px;
@@ -51,4 +51,9 @@
 
 .body>button:hover {
     opacity: 0.8;
+}
+@media (max-width: 1000px) {
+    .body {
+        width: 90%;
+    }
 }

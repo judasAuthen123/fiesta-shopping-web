@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/images/fiestaLogo.png'
 import stripeLogo from '../../assets/images/stripeLogo.png'
 import ghnLogo from '../../assets/images/ghnLogo.png'
+import { BiArrowBack } from "react-icons/bi";
 import imagekitLogo from '../../assets/images/imagekitLogo.png'
 import ContainerLoading from '../../public/components/loading/ContainerLoading';
 import DoubleCircleLoading from './../../public/components/loading/doubleCircleLoading/DoubleCircleLoading';
@@ -108,7 +109,7 @@ export default function Login() {
     // };
     return (
         <div className={styles.container}>
-            <FiestaAlert label={t('Login_Register.failed.login')} isVisible={isVisibleAlert} onClose={setIsVisibleAlert}/>
+            <FiestaAlert label={t('Login_Register.failed.login')} isVisible={isVisibleAlert} onClose={setIsVisibleAlert} />
             <div className={styles.containerLeft}>
                 <div className={styles.refrerencesBox}>
                     <div className={styles.viewLogo}>
@@ -150,6 +151,7 @@ export default function Login() {
                 </div>
             </div>
             <div className={styles.containerRight}>
+                <Link to={'/home'} className={styles.backToHome}><BiArrowBack /> {t('Header.home')}</Link>
                 <form className={styles.loginForm} onSubmit={appLogin}>
                     {
                         loading && <ContainerLoading background={'#ffffffd7'}>

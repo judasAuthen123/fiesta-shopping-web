@@ -32,7 +32,7 @@ export default function UpdateCartButton({ quantity, onChange, loading }) {
     return (
         <div style={{
             display: 'flex',
-            alignItems: 'center', width: 100,
+            alignItems: 'center', width: 95,
             justifyContent: 'space-between',
             borderRadius: 5, padding: 5,
             opacity: loading ? 0.4 : 1, boxShadow: '0 0 8px #c2c2c2bb'

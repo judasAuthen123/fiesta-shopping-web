@@ -18,6 +18,7 @@ import InputPassword from './InputPassword';
 import AxiosInstance from '../../../util/AxiosInstance';
 import DialogSuccess from './DialogSuccess';
 import FiestaAlert from '../../public/components/dialog/FiestaAlert'
+import { BiArrowBack } from 'react-icons/bi'
 
 export default function Register() {
   const { t } = useTranslation()
@@ -69,6 +70,7 @@ export default function Register() {
       <FiestaAlert label={t('Login_Register.failed.register')} isVisible={isVisibleAlert} onClose={setIsVisibleAlert}/>
       <DialogSuccess isVisible={isVisibleDialogSuccess} onClose={setIsVisbileDialogSuccess} />
       <div className={styles.containerRight}>
+      <Link to={'/home'} className={styles.backToHome}><BiArrowBack /> {t('Header.home')}</Link>
         <form className={styles.loginForm} onSubmit={signUp}>
           {
             loading && <ContainerLoading background={'#ffffffd7'}>

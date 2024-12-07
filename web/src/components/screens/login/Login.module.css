@@ -116,7 +116,18 @@
     overflow: hidden;
     min-height: max-content;
 }
-
+.backToHome {
+    position: absolute;
+    top: 20px;
+    right: left;
+    display: none;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+.backToHome:hover {
+    color: blueviolet;
+}
 @keyframes scaleIn {
     from {
         opacity: 0.3;
@@ -312,6 +323,11 @@
     }
     .containerLeft {
         display: none;
+    }
+    .backToHome {
+        display: flex;
+        align-items: center;
+        column-gap: 15px;
     }
     .containerRight {
         padding: 70px 300px;

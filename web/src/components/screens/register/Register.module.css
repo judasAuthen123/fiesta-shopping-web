@@ -30,7 +30,18 @@
     animation: scaleIn 1s forwards;
     overflow: hidden;
 }
-
+.backToHome {
+    position: absolute;
+    top: 20px;
+    right: left;
+    display: none;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+.backToHome:hover {
+    color: blueviolet;
+}
 @keyframes scaleIn {
     from {
         opacity: 0.3;
@@ -228,7 +239,12 @@
 @media (max-width: 1050px) {
     .containerLeft {
         display: none;
-        }
+    }
+    .backToHome {
+        display: flex;
+        align-items: center;
+        column-gap: 15px;
+    }
 }
 @media (max-width: 800px) {
     .containerRight {
