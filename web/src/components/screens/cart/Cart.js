@@ -14,6 +14,10 @@ import { useTranslation } from 'react-i18next';
 import CircleLoading from './../../public/components/loading/CircleLoading';
 import { useDispatch } from 'react-redux';
 import { cartSlice } from '../../public/components/header/cartdrop/cartSlice';
+const stl = {
+    width: '100%',
+    textAlign: 'center',
+}
 export default function Cart() {
     const [cartList, setCartList] = useState([])
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -162,15 +166,15 @@ export default function Cart() {
                                 {t('Cart.products')}</div>
                         </div>
                         <div>
-                        {t('Cart.unitPrice')}
+                            <span style={stl}>{t('Cart.unitPrice')}</span>
                         </div>
                         <div>
-                        {t('Cart.quantity')}
+                            <span style={stl}>{t('Cart.quantity')}</span>
                         </div>
                         <div>
-                        {t('Cart.subTotal')}
+                            <span style={stl}>{t('Cart.subTotal')}</span>
                         </div>
-                        <div/>
+                        <div />
                     </div>
                     <div className={styles.viewCartList}>
                         {

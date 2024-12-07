@@ -7,7 +7,7 @@ export const validateSignup = (fields) => {
     if (!name || name.trim() === "") {
         errors.name = {
             errorType: "emptyErr",
-            message: { viName: "Không được bỏ trống", enName: "Name is required" }
+            message: { viName: "Bắt buộc", enName: "Required" }
         };
     } else if (name.trim().length > 14) {
         errors.name = {
@@ -18,34 +18,34 @@ export const validateSignup = (fields) => {
 
 
     if (!phoneNumber || phoneNumber.trim() === "") {
-        errors.phoneNumber = { errorType: "emptyErr", message: { viName: "Không được bỏ trống", enName: "Phone number is required" } };
+        errors.phoneNumber = { errorType: "emptyErr", message: { viName: "Bắt buộc", enName: "Required" } };
     } else if (!/^\d{10}$/.test(phoneNumber)) {
-        errors.phoneNumber = { errorType: "formatErr", message: { viName: "Vui lòng nhập chính xác", enName: "Please enter the correct format" } };
+        errors.phoneNumber = { errorType: "formatErr", message: { viName: "Không chính xác", enName: "Incorrect format" } };
     }
 
 
     if (!userName || userName.trim() === "") {
-        errors.userName = { errorType: "emptyErr", message: { viName: "Không được bỏ trống", enName: "Username is required" } };
+        errors.userName = { errorType: "emptyErr", message: { viName: "Bắt buộc", enName: "Required" } };
     } else if (/[^a-zA-Z0-9]/.test(userName)) {
         errors.userName = {
-            errorType: "formatErr", message: { viName: "Tên đăng nhập không được chứa ký tự đặc biệt", enName: "Username must not contain special characters" }
+            errorType: "formatErr", message: { viName: "Không thể chứa kí tự", enName: "Must not contain characters" }
         };
     } else if (userName.length < 10) {
-        errors.userName = { errorType: "formatErr", message: { viName: "Tên đăng nhập phải ít nhất 10 kí tự", enName: "Username must be at least 10 characters" } };
+        errors.userName = { errorType: "formatErr", message: { viName: "Tối thiểu 10 kí tự", enName: "At least 10 characters" } };
     }
 
 
     if (!password || password.trim() === "") {
-        errors.password = { errorType: "emptyErr", message: { viName: "Không được bỏ trống", enName: "Password is required" } };
+        errors.password = { errorType: "emptyErr", message: { viName: "Bắt buộc", enName: "Required" } };
     } else if (password.length < 8) {
-        errors.password = { errorType: "formatErr", message: { viName: "Mật khẩu phải ít nhất 8 kí tự", enName: "Password must be at least 8 characters" } };
+        errors.password = { errorType: "formatErr", message: { viName: "Tối thiểu 8 kí tự", enName: "At least 8 characters" } };
     }
 
 
     if (!confirmPassword || confirmPassword.trim() === "") {
-        errors.confirmPassword = { errorType: "emptyErr", message: { viName: "Không được bỏ trống", enName: "Confirm password is required" } };
+        errors.confirmPassword = { errorType: "emptyErr", message: { viName: "Bắt buộc", enName: "Required" } };
     } else if (confirmPassword !== password) {
-        errors.confirmPassword = { errorType: "formatErr", message: { viName: "Mật khẩu xác nhận không khớp", enName: "Passwords do not match" } };
+        errors.confirmPassword = { errorType: "formatErr", message: { viName: "Mật khẩu không khớp", enName: "Passwords do not match" } };
     }
 
 

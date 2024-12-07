@@ -91,22 +91,24 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
                 </div>
     
             </div>
-            <div style={{ fontSize: 14}}>
+            <div style={{ fontSize: 14, textAlign: 'center'}}>
+                <div style={{width: '100%', textAlign: 'center'}}>
                 ${data.products.variations[0].price}
+                </div>
             </div>
-            <div style={{ fontSize: 14 }}>
+            <div style={{ fontSize: 14, display: 'flex', justifyContent: 'center' }}>
                 <UpdateCartButton quantity={quantity} onChange={setQuantity} loading={loading} />
             </div>
-            <div style={{ fontSize: 15.5, fontWeight:500 }}>
+            <div style={{ fontSize: 15.5, fontWeight:500, display: 'flex', justifyContent: 'center'}}>
                 {
                     loading ?
                         <div style={{ display: 'flex', alignItems: 'center', columnGap: 5 }}>
                             <CircleLoading height={19} width={19} />
                         </div> :
-                        <>${total}</>
+                        <div style={{textAlign: 'center', width: '100%'}}>${total}</div>
                 }
             </div>
-            <div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
                 <MdRemoveShoppingCart color='red' size={22} onClick={() => deleteCart(data._id)} style={{ cursor: 'pointer' }} />
             </div>
         </div>

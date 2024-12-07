@@ -12,8 +12,8 @@ export const validationAddress = (fields) => {
         err.detailAddress = {
             typeErr: "emptyErr",
             message: {
-                viName: "Vui lòng chọn đủ thông tin",
-                enName: "Please select complete information"
+                viName: "Thiếu thông tin",
+                enName: "Missing information"
             }
         }
     }
@@ -21,8 +21,8 @@ export const validationAddress = (fields) => {
         err.name = {
             typeErr: "emptyErr",
             message: {
-                viName: "Không được bỏ trống",
-                enName: "Name is required"
+                viName: "Bắt buộc",
+                enName: "Required"
             }
         }
     }
@@ -30,19 +30,19 @@ export const validationAddress = (fields) => {
         err.phone = {
             typeErr: "emptyErr",
             message: {
-                viName: "Không được bỏ trống",
-                enName: "Phone number is required"
+                viName: "Bắt buộc",
+                enName: "Required"
             }
         }
     } else if (!/^\d{10}$/.test(phoneNumber)) {
-        err.phone = { errorType: "formatErr", message: { viName: "Không hợp lệ", enName: "Invalid phone number" } };
+        err.phone = { errorType: "formatErr", message: { viName: "Không hợp lệ", enName: "Invalid" } };
     }
     if (!street) {
         err.street = {
             typeErr: "emptyErr",
             message: {
-                viName: "Không được bỏ trống",
-                enName: "Street is required"
+                viName: "Bắt buộc",
+                enName: "Required"
             }
         }
     }
