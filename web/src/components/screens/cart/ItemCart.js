@@ -97,7 +97,7 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
             <div style={{ fontSize: 14 }}>
                 <UpdateCartButton quantity={quantity} onChange={setQuantity} loading={loading} />
             </div>
-            <div style={{ fontSize: 14 }}>
+            <div style={{ fontSize: 15.5, fontWeight:500 }}>
                 {
                     loading ?
                         <div style={{ display: 'flex', alignItems: 'center', columnGap: 5 }}>
