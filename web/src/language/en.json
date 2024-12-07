@@ -148,7 +148,8 @@
         "listEmpty": "Your cart is empty",
         "shoppingnow": "Fill it now",
         "errorGoCheckout": "You have not selected any items for checkout!",
-        "refresh": "Refresh"
+        "refresh": "Refresh",
+        "titleDelete": "Product hass been removed!"
     },
     "Profile": {
         "title": "Account",

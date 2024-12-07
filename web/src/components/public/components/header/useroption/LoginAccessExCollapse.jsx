@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../../../../util/AppContext'
 import styles from './LoginAccessExCollapse.module.css'
-import { defaultAvt } from '../../image/DefaultIAvt'
+import defaultAvt from '../../../../assets/images/default-avatar-icon-of-social-media-user-vector.jpg'
 import { Link } from 'react-router-dom'
 import { SlLike } from "react-icons/sl";
 import { FaRegUser } from "react-icons/fa6";

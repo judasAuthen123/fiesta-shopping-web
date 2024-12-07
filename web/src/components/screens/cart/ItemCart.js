@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ItemCart.module.css'
-import { RiDeleteBin6Line } from 'react-icons/ri'
+import { MdRemoveShoppingCart } from "react-icons/md";
 import image from '../../assets/images/th.png'
 import { useTranslation } from 'react-i18next'
 import AxiosInstance from '../../../util/AxiosInstance'
 import UpdateCartButton from './UpdateCartButton'
 import CircleLoading from '../../public/components/loading/CircleLoading'
 const TextLimit = ({ text }) => {
-    if (text.length <= 28) {
+    if (text.length <= 26) {
         return text;
     } else {
         return text.substring(0, 28) + '...';
@@ -28,7 +28,7 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
     const [loading, setLoading] = useState(false)
     const [total, setTotal] = useState(0)
     useEffect(() => {
-        if(data.products.variations) {
+        if (data.products.variations) {
             setTotal(data.products.variations[0].price * data.quantity)
         } else {
             setTotal(data.products.price * data.quantity)
@@ -81,24 +81,23 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
         setChecked(prev => !prev)
     }
     return (
-        <tr className={styles.container}>
-            <td style={{ width: '45%' }}>
-                <div className={styles.viewTableProductTd}>
-                    <input type="checkbox" onChange={onCheckBuy} checked={checked} />
-                    <img className={styles.productImg} alt='' src={avatarCart} loading='lazy' />
-                    <div className={styles.viewInfoProduct}>
-                        <p style={{ fontWeight: 600, fontSize: 14 }}><TextLimit text={data.products.name} /></p>
-                    </div>
-                    <div style={{ width: 90, fontSize: 13 }}>{t('Cart.variation')}: {variationsDisplay(data.products.variations[0].dimension)}</div>
+        <div className={styles.container}>
+            <div className={styles.viewTableProductTd}>
+                <input type="checkbox" onChange={onCheckBuy} checked={checked} />
+                <img className={styles.productImg} alt='' src={avatarCart} loading='lazy' />
+                <div className={styles.viewInfoProduct}>
+                    <p style={{ fontWeight: 600, fontSize: 14 }}><TextLimit text={data.products.name} /></p>
+                    <div style={{ fontSize: 13}}>{t('Cart.variation')}: {variationsDisplay(data.products.variations[0].dimension)}</div>
                 </div>
-            </td>
-            <td style={{ fontSize: 14, width: 200 }}>
+    
+            </div>
+            <div style={{ fontSize: 14}}>
                 ${data.products.variations[0].price}
-            </td>
-            <td style={{ fontSize: 14 }}>
+            </div>
+            <div style={{ fontSize: 14 }}>
                 <UpdateCartButton quantity={quantity} onChange={setQuantity} loading={loading} />
-            </td>
-            <td style={{ fontSize: 14 }}>
+            </div>
+            <div style={{ fontSize: 14 }}>
                 {
                     loading ?
                         <div style={{ display: 'flex', alignItems: 'center', columnGap: 5 }}>
@@ -106,10 +105,10 @@ export default function ItemCart({ data, onDelete, onCheck, checkAll, onRefreshD
                         </div> :
                         <>${total}</>
                 }
-            </td>
-            <td>
-                <RiDeleteBin6Line color='red' onClick={() => deleteCart(data._id)} style={{ cursor: 'pointer' }} />
-            </td>
-        </tr>
+            </div>
+            <div>
+                <MdRemoveShoppingCart color='red' size={22} onClick={() => deleteCart(data._id)} style={{ cursor: 'pointer' }} />
+            </div>
+        </div>
     )
 }

@@ -19,3 +19,4 @@ export const productListSelected = (state) => state.productList.data
 export const currentSubCategorySelected = (state) => state.filter.currentSearchFields.category.subCategory
 export const defaultCardId = (state) => state.card.defaultId
 export const arrCart = (state) => state.cart.arrId
+export const isNeedGetCategory = (state) => state.cart.alreadyStart

@@ -7,7 +7,7 @@ import ProfileNav from './accessprofile/ProfileNav';
 import ArticleProfile from './accessprofile/ArticleProfile';
 import { useLocation } from 'react-router-dom';
 import { AppContext } from '../../../util/AppContext';
-import { defaultAvt } from '../../public/components/image/DefaultIAvt';
+import defaultAvt from '../../../components/assets/images/default-avatar-icon-of-social-media-user-vector.jpg';
 import { useTranslation } from 'react-i18next';
 export default function Profile() {
   const { dataUser } = useContext(AppContext)

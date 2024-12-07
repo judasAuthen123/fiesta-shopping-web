@@ -148,7 +148,8 @@
         "listEmpty": "Giỏ hàng của bạn đang trống",
         "shoppingnow": "Mua sắm ngay",
         "errorGoCheckout": "Bạn chưa có sản phẩm nào để thanh toán!",
-        "refresh": "Làm mới"
+        "refresh": "Làm mới",
+        "titleDelete": "Đã xóa sản phẩm khỏi giỏ hàng!"
     },
     "Profile": {
         "title": "Tài khoản",

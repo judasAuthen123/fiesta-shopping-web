@@ -40,7 +40,7 @@ export default function Cart() {
                     }
                 }
             } catch (error) {
-                console.log(error);            
+                console.log(error);
             }
 
         }
@@ -146,7 +146,7 @@ export default function Cart() {
     return (
         <div className={styles.container}>
             <Header />
-            <Dialog isVisible={isModalVisible} status={'Đã xóa sản phẩm khỏi giỏ hàng'} />
+            <Dialog isVisible={isModalVisible} status={t('Cart.titleDelete')} />
             <ErrorDialog isVisible={errorDialogVisible} onClose={setErrorDialogVisible} />
             <div className={styles.box} style={{ marginTop: 80 }}>
                 <div className={styles.title} style={{ paddingBottom: 40 }}>
@@ -155,40 +155,45 @@ export default function Cart() {
             </div>
             <div className={styles.box} style={{ marginBottom: 120 }}>
                 <div className={styles.layoutContent}>
-                    <table cellPadding="5" cellSpacing="0" border="1">
-                        <thead>
-                            <tr>
-                                <th style={{ display: 'flex', alignItems: 'center', columnGap: 11 }}><input style={{ width: 15, height: 15 }} type='checkbox' onChange={checkAll} checked={selectedAll} /> {t('Cart.products')}</th>
-                                <th>{t('Cart.unitPrice')}</th>
-                                <th>{t('Cart.quantity')}</th>
-                                <th>{t('Cart.subTotal')}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                !loading ? (cartList && cartList.length > 0 ?
-                                    cartList.map(item =>
-                                        <ItemCart key={item._id}
-                                            data={item}
-                                            onDelete={deleteCartItem}
-                                            onCheck={handleCheck}
-                                            checkAll={selectedAll}
-                                            onRefreshDataCheckout={updateCheckoutData} />
-                                    ) : <div className={styles.viewNoneCart} style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
-                                            <PiSmileyXEyesBold size={40} /> {t('Cart.listEmpty')}
-                                        </div>
-                                        <Link to={'/shop'}>{t('Cart.shoppingnow')}</Link>
+                    <div className={styles.titleBar}>
+                        <div>
+                            <div style={{ display: 'flex', alignItems: 'center', columnGap: 11 }}>
+                                <input style={{ width: 15, height: 15 }} type='checkbox' onChange={checkAll} checked={selectedAll} />
+                                {t('Cart.products')}</div>
+                        </div>
+                        <div>
+                        {t('Cart.unitPrice')}
+                        </div>
+                        <div>
+                        {t('Cart.quantity')}
+                        </div>
+                        <div>
+                        {t('Cart.subTotal')}
+                        </div>
+                        <div/>
+                    </div>
+                    <div className={styles.viewCartList}>
+                        {
+                            !loading ? (cartList && cartList.length > 0 ?
+                                cartList.map(item =>
+                                    <ItemCart key={item._id}
+                                        data={item}
+                                        onDelete={deleteCartItem}
+                                        onCheck={handleCheck}
+                                        checkAll={selectedAll}
+                                        onRefreshDataCheckout={updateCheckoutData} />
+                                ) : <div className={styles.viewNoneCart} style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
+                                        <PiSmileyXEyesBold size={40} /> {t('Cart.listEmpty')}
                                     </div>
-                                ) :
-                                    <div className={styles.viewNoneCart}>
-                                        <CircleLoading width={30} height={30} /> {t('Loading.title')}
-                                    </div>
-
-                            }
-
-                        </tbody>
-                    </table>
+                                    <Link to={'/shop'}>{t('Cart.shoppingnow')}</Link>
+                                </div>
+                            ) :
+                                <div className={styles.viewNoneCart}>
+                                    <CircleLoading width={30} height={30} /> {t('Loading.title')}
+                                </div>
+                        }
+                    </div>
                     <div className={styles.barCheckout}>
                         <div style={{ padding: 10 }}>
                             <div style={{ display: 'flex', alignItems: 'center', columnGap: 11 }}>

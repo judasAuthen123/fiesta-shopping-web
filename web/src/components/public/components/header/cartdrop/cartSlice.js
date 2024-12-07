@@ -2,12 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 export const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        arrId: []
+        arrId: [],
+        alreadyStart: false,
     },
     reducers: {
         onApplyDataCart: (state, action) => {
             const { arrId } = action.payload
             state.arrId = arrId
+            state.alreadyStart = true
         },
         onChangeDataCart: (state, action) => {
             const { updateType, _id, variationId } = action.payload
@@ -19,6 +21,10 @@ export const cartSlice = createSlice({
                     state.arrId.push({ _id, variationId });
                 }
             }
+        },
+        onResetDataCart: (state) => {
+            state.arrId = []
+            state.alreadyStart = false
         }
     }
 })

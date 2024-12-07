@@ -1,9 +1,15 @@
 .container{
     width: 100%;
+    display: grid;
+    grid-template-columns: 2.75fr 1fr 1fr 1fr 0.25fr;
+    align-items: center;
 }
-.container>td {
-    border-left: none;
-    border-right: none;
+.container>div {
+    display: flex;
+    align-items: center;
+}
+.container>div:nth-child(1) {
+    column-gap: 15px;
 }
 .productImg {
     width: 80px;
@@ -16,12 +22,12 @@
     object-fit: cover;
     user-select: none;
     pointer-events: none;
+
 }
 
 .productQuantity {
     display: flex;
     align-items: center;
-    width: 80px;
     justify-content: space-between;
     border: 1px solid black;
     /* border-top-right-radius: 15px;
@@ -30,17 +36,8 @@
     border-radius: 10px;
     padding: 5px;
 }
-
-.viewTableProductTd {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-    width: 450px;
-
-}
 .viewInfoProduct>p {
     font-size: 15px;
-    width: 250px;
 }
 
 .container .viewTableProductTd>[type="checkbox"] {
@@ -53,4 +50,18 @@
 
 .container .viewTableProductTd>[type="checkbox"]:checked {
     background-color: #000;
+}
+@media (max-width: 700px) {
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .container>div:nth-child(1) {
+        width: 100%;
+        padding: 0;
+    }
+    .container>div {
+        padding: 10px;
+        margin-right: 40px;
+    }
 }

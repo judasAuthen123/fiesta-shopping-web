@@ -30,24 +30,26 @@ button {
     position: relative;
     background-color: white;
 }
-.layoutContent>table {
-    border-collapse: collapse;
+.box .layoutContent .viewCartList {
     width: 100%;
-    user-select: none;
-    table-layout: auto;
+    display: flex;
+    flex-direction: column;
 }
-
-.layoutContent>table, th {
-    border-top: none;
-    border-bottom: none;
-    border-left: none;
-    border-right: none;
+.box .layoutContent .titleBar {
+    display: grid;
+    grid-template-columns: 2.75fr 1fr 1fr 1fr 0.25fr;
+    margin-bottom: 15px;
 }
-.layoutContent>table>thead>tr>th {
-    text-align: start;
-    height: 50px;
-    font-weight: 400;
-    font-size: 15px;
+.box .layoutContent .titleBar>div {
+    display: flex;
+    align-items: center;
+    font-size: 15.5px;
+}
+.box .layoutContent .viewCartList>div {
+    border-bottom: 1px solid rgba(195, 195, 195, 0.226);
+}
+.box .layoutContent .viewCartList>div:nth-child(1) {
+    border-top: 1px solid rgba(195, 195, 195, 0.226);
 }
 .barCheckout {
     background-color: white;
@@ -100,6 +102,14 @@ button {
     }
     .box .title {
         width: 98%;
+    }
+}
+@media (max-width: 700px) {
+    .box .layoutContent .titleBar>div {
+        display: none;
+    }
+    .box .layoutContent .titleBar>div:nth-child(1) {
+        display: flex;
     }
 }
 

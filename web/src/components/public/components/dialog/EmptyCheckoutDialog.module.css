@@ -22,8 +22,8 @@
     }
 }
 .body {
-    width: 550px;
-    height: 300px;
+    width: 60%;
+    height: 400px;
     background: #ffffff;
     padding-bottom: 10px;
     column-gap: 30px;

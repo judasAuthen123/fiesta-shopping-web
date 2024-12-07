@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Header.module.css'
 import { HiOutlineMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
@@ -7,8 +7,10 @@ import LoginAccess from './useroption/LoginAccess';
 import AccessExCollapse from './AccessExCollapse';
 import { useTranslation } from 'react-i18next';
 import CartDrop from './cartdrop/CartDrop';
+import { AppContext } from '../../../../util/AppContext';
+import FlagDrop from './flagdrop/FlagDrop';
 function Header() {
-
+  const {dataUser, token} = useContext(AppContext) 
 
   const [isVisible, setIsVisible] = useState(false)
   const { t } = useTranslation()
@@ -49,7 +51,10 @@ function Header() {
           <LoginAccess />
         </div>
         <div className={styles.boxCollapse}>
-          <CartDrop />
+          {
+            token && dataUser ? <CartDrop /> : <FlagDrop />
+          }
+          
           {isVisible ? <IoClose size={24} className={styles.iconMenu} onClick={() => setIsVisible(prev => !prev)} /> :
             <HiOutlineMenu size={24} className={styles.iconMenu} onClick={() => setIsVisible(prev => !prev)} />}
 
